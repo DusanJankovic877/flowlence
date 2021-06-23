@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <Navbar/>
     <router-view/>
   </div>
@@ -22,6 +21,8 @@ export default{
   text-align: center;
   color: #2c3e50;
 }
+
+
 
 
 </style>
