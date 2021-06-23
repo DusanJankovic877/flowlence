@@ -28,19 +28,19 @@
               <router-link  :class="this.$route.name == '/'  ? 'nav-link active' :  'nav-link' "  to="/">Početna</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/contact">Kontakt</router-link>
+              <router-link :class="this.$route.name == 'about'  ? 'nav-link active' :  'nav-link' " to="/about">O nama</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/blog">Blog</router-link>
+              <router-link :class="this.$route.name == 'services'  ? 'nav-link active' :  'nav-link' " to="/services">Usluge</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/price'list">Cenovnik</router-link>
+              <router-link :class="this.$route.name == 'price-list'  ? 'nav-link active' :  'nav-link' " to="/price-list">Cenovnik</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/services">Usluge</router-link>
+              <router-link :class="this.$route.name == 'blog'  ? 'nav-link active' :  'nav-link' " to="/blog">Blog</router-link>
             </li>
             <li  class="nav-item">
-              <router-link class="nav-link" to="/about">O name</router-link>
+              <router-link :class="this.$route.name == 'contact'  ? 'nav-link active' :  'nav-link' " to="/contact">Kontakt</router-link>
             </li>
           </ul>
         </div>
@@ -48,6 +48,9 @@
     </nav>
 </template>
 <style>
+.active{
+    text-decoration: underline;
+}
 nav {
   display: block !important;
 }
