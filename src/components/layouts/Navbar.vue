@@ -1,16 +1,16 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark  sticky-top">
                 <div class="col-lg-7 m-auto">
           <div class="row info-row">
             <div class="col-lg-2 info-mail">
               <p>
-              <img src="../../assets/svg/telephone-fill.svg" alt="phone">
+              <img src="../../assets/svg/telephone.svg" alt="phone">
                 &nbsp;flowlence@gmail.com
               </p>
             </div>
             <div class="info-phone col-lg-2 ">
               <p>
-                <img src="../../assets/svg/envelope-fill.svg" alt="phone"> 
+                <img src="../../assets/svg/envelope.svg" alt="phone"> 
                 &nbsp;+38163466371
                 </p>
             </div>
@@ -34,7 +34,7 @@
               <router-link :class="this.$route.name == 'services'  ? 'nav-link active' :  'nav-link' " to="/services">Usluge</router-link>
             </li>
             <li class="nav-item">
-              <router-link :class="this.$route.name == 'price-list'  ? 'nav-link active' :  'nav-link' " to="/price-list">Cenovnik</router-link>
+              <router-link :class="this.$route.name == 'price-list'  ? 'nav-link active' :  'nav-link' " to="/price-list">Procena cene usluga</router-link>
             </li>
             <li class="nav-item">
               <router-link :class="this.$route.name == 'blog'  ? 'nav-link active' :  'nav-link' " to="/blog">Blog</router-link>
@@ -53,6 +53,10 @@
 }
 nav {
   display: block !important;
+  background-color: #385663 !important;
+}
+nav p{
+  color: white;
 }
 .info-row{
   margin-right: 0;
@@ -64,6 +68,7 @@ nav {
 }
 .info-mail, .info-phone{
  text-align: left;
+ margin-right: 20px ;
 }
 .links-container{
   padding: 0;
