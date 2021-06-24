@@ -11,7 +11,9 @@
           <div class="carousel-caption  d-md-block">
             <h5>Zakažite konsultacije</h5>
             <p>Some representative placeholder content for the first slide.</p>
-            <button class="btn btn-secondary">Zakažite konsultacije</button>
+      
+            <router-link class="btn btn-secondary" to="/contact">Zakažite konsultacije</router-link>
+
           </div>
         </div>
         <div class="carousel-item">
@@ -37,6 +39,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
+
     </div> <!-- carousel end-->  
 </template>
 <style>
@@ -46,7 +49,7 @@
 .carousel-caption{
   right: 0;
   left: 0;
-  bottom: 40%;
+  bottom: 50%;
   background:rgba(0, 0, 0, 0.57) !important;
   width: 50%;
   margin:0  auto;
@@ -54,11 +57,32 @@
 .carousel-indicators{
   margin-bottom: 30px;
 }
-  .carousel-caption button{
- 
-border-radius: 0 !important;
+.carousel-caption a{
+  border-radius: 0 !important;
+}
+@media only screen and (max-width: 1024px){
+  .carousel-inner{
+  height: 40vh !important;
+  /* bottom: 150px; */
+}
+  .carousel-caption{
+    bottom: 10%;
+    right: 0;
+    left: 0;
+    background:rgba(0, 0, 0, 0.57) !important;
+    width: 60%;
+    padding: 15px;
   }
+
+}
 @media only screen and (max-width: 600px){
+    .carousel-inner{
+  height: 45vh !important;
+  /* bottom: 150px; */
+}
+
+  
+
   .carousel-caption{
     bottom: 0;
     right: 0;
@@ -73,12 +97,28 @@ border-radius: 0 !important;
   }
   .carousel-caption p{
     font-size: 10px;
+    
 
   }
-  .carousel-caption button{
+  .carousel-caption a{
       font-size: 10px;
       line-height: 6px;
       height: 20px;
+      margin-bottom: 15px;
   }
+  .carousel-indicators button{
+    /* margin: 0 215px ; */
+  margin-bottom:75px !important;
+
+  width: 15px !important;
+}
+.carousel-caption{
+  right: 0;
+  left: 0;
+  bottom: 10%;
+  background:rgba(0, 0, 0, 0.57) !important;
+  width: 70%;
+  margin:0  auto;
+}
 }
 </style>

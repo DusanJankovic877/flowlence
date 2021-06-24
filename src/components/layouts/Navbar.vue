@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
                 <div class="col-lg-7 m-auto">
           <div class="row info-row">
             <div class="col-lg-2 info-mail">
