@@ -26,3 +26,13 @@
     </div>
   </div>
 </template>
+<style >
+.blog{
+  margin-top: -100px !important; 
+}
+@media only screen and (max-width: 1024px){
+  .blog{
+    margin-top: 0 !important; 
+}
+}
+</style>

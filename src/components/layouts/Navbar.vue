@@ -53,7 +53,11 @@
 }
 nav {
   display: block !important;
-  background-color: #385663 !important;
+  background-color: #2B5877 !important;
+  border-bottom: 3px solid #fba822;
+}
+.nav-links, .navbar-brand{
+  padding-bottom: 20px;
 }
 nav p{
   color: white;

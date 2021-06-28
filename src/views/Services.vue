@@ -27,4 +27,14 @@
 .card{
   padding: 50px 10px !important;
 }
+
+.services{
+    margin-bottom: -100px !important; 
+}
+@media only screen and (max-width: 1024px){
+  .services{
+    margin-bottom: -50px !important; 
+}
+}
+
 </style>
