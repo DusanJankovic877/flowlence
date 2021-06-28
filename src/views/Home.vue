@@ -14,7 +14,7 @@
         <div class="row">
             <div class="krug">
           <router-link class="prices-link" to="/price-list">
-              <div class="card-body">
+              <div class="price-card-body">
               <h1>Preduzetnik</h1>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               </div>
@@ -23,7 +23,7 @@
             </div>
           <div class="krug">
           <router-link class=" prices-link" to="/price-list">
-              <div class="card-body">
+              <div class="price-card-body">
               <h1>DOO</h1>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               </div>
@@ -31,7 +31,7 @@
           </div>
           <div class="krug">
           <router-link class="prices-link " to="/price-list">
-            <div class="card-body">
+            <div class="price-card-body">
             <h1>Udruženje</h1>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
@@ -107,7 +107,7 @@ export default {
   border-radius: 25em;
 
 }
-.card-body{
+.price-card-body{
   height: 320px;
   width: 320px;
   border-radius: 25em !important;
