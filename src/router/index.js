@@ -31,6 +31,12 @@ const routes = [
     component: PriceList
   },
   {
+    path: '/price-list/entrepreneur',
+    name: 'price-list',
+    component: PriceList
+  },
+  
+  {
     path: '/blog',
     name: 'blog',
     component: Blog

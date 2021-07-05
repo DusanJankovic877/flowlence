@@ -20,7 +20,7 @@ export default{
 @font-face {
   font-family: "RobotoSlab-Medium";
   src: local("RobotoSlab-Medium"),
-   url(./assets/fonts/Roboto_Slab/static/RobotoSlab-SemiBold.ttf) format("truetype");
+   url(./assets/fonts/Roboto_Slab/static/RobotoSlab-Regular.ttf) format("truetype");
 }
 @font-face {
   font-family: "RobotoSlab-Bold";
@@ -34,10 +34,10 @@ export default{
   text-align: center;
   color: #2c3e50;
 }
-p, a{
-  
+p, a, label{
+  font-family: 'RobotoSlab-Medium', sans-serif !important;
 }
-h1{
+h1, h2, h3, h4, h5{
   font-family: 'RobotoSlab-Bold', sans-serif !important;
 }
 

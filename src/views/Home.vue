@@ -13,7 +13,7 @@
         <p>Da saznate više o cenama kliknite na dugme više o cenama</p>
         <div class="row">
             <div class="krug">
-          <router-link class="prices-link" to="/price-list">
+              <router-link class="prices-link" to="/price-list/entrepreneur">
               <div class="price-card-body">
               <h1>Preduzetnik</h1>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -75,13 +75,12 @@ export default {
 }
 </script>
 <style>
-.price-list{
-  /* margin-top: -100px !important; */
-
+.home{
+  margin-bottom: -310px !important;
 }
 .price-info{
   background-color: #FBA922;
-  /* min-height: 419px; */
+
 }
 .prices-link{
   text-decoration: none;
@@ -128,6 +127,10 @@ export default {
 @media only screen and (max-width: 1024px){
 .contact{
   margin-top: -50px;
+  
+}
+.home{
+  margin-bottom: -90px !important;
 }
 }
 </style>

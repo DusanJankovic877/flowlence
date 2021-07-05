@@ -17,13 +17,12 @@
     </div>
 </template>
 <style>
-.footer{
-    margin-top: -310px;
-}
+
 .footer-content{
     padding-top: 100px;
     background-color: #2B5877;
     color: white;
     padding-bottom: 10px;
 }
+
 </style>
