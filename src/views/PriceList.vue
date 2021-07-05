@@ -3,7 +3,7 @@
 
         <h1>Procena cene Usluga</h1>
         <hr>
-        
+
         <h2 v-if="hide">Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h2>
         <h2 v-else>Izaberite ponuđene opcije kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h2>
 
@@ -31,8 +31,7 @@
         </div>
 
         <div class="entrepreneur">
-            <NewEntrepreneur :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'" />
-            <!-- <AlreadyEntrepreneur :class=" hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'" /> -->
+            <Entrepreneur :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'" />
         </div>
         <div :class="hide ? 'showButtons' : 'hide'">
             <button class="btn btn-secondary" @click="ShowButtons">Pokaži opcije</button>
@@ -40,12 +39,12 @@
     </div>
 </template>
 <script>
-import NewEntrepreneur from '../components/entrepreneur/NewEntrepreneur.vue'
-// import AlreadyEntrepreneur from '../components/entrepreneur/AlreadyEntrepreneur.vue'
+import Entrepreneur from '../components/entrepreneur/Entrepreneur.vue'
+
 export default {
     components:{
-        NewEntrepreneur,
-        // AlreadyEntrepreneur
+        Entrepreneur
+
     },
     data() {
         return{
