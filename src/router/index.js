@@ -6,6 +6,8 @@ import Services from '../views/Services.vue'
 import PriceList from '../views/PriceList.vue'
 import Blog from '../views/Blog.vue'
 import Contact from '../views/Contact.vue'
+import Entrepreneur from '../views/Entrepreneur.vue'
+
 
 Vue.use(VueRouter)
 
@@ -33,7 +35,7 @@ const routes = [
   {
     path: '/price-list/entrepreneur',
     name: 'price-list',
-    component: PriceList
+    component: Entrepreneur
   },
   
   {

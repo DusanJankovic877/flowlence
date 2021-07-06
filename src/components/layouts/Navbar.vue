@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark  sticky-top">
                 <div class="col-lg-7 m-auto">
-          <div class="row info-row">
+          <div class="info-row">
             <div class="col-lg-2 info-mail">
               <p>
               <img src="../../assets/svg/telephone.svg" alt="phone">

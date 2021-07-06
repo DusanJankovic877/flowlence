@@ -1,8 +1,11 @@
 <template>
-    <div class="col-lg-7 m-auto">
+<div class="col-lg-7 m-auto">
+
+      <hr>
+        <h2 v-if="hideNew">Novi preduzetnik</h2>
+        <h1 v-else>Postojeći preduzetnik</h1>
         <hr>
-        <h1>Novi Preduzetnik</h1>
-        <hr>
+     
         <form >
                 <h4 v-if="hideNew">Tek planiram da se registrujem kao preduzetnik</h4>
                 <h4 v-else>Već poslujem u formi preduzetnika</h4>
@@ -200,41 +203,36 @@
 
             </div>
         </form>
-    </div>
+</div>
 </template>
-<style>
-    form{
-        text-align: left;
-    }
-    input{
-        margin-right: 5px;
-    }
-</style>
 <script>
 export default {
     data() {
         return{
-          checkedNames: [],
-          people: '',
-          income: '',
-          pdv: '',
-          payment: '',
-          clients: '',
-          cashRegister: '',
-          eBanking: '',
-          comment: '',
-          email: ''
-        }
+            checkedNames: [],
+            people: '',
+            income: '',
+            pdv: '',
+            payment: '',
+            clients: '',
+            cashRegister: '',
+            eBanking: '',
+            comment: '',
+            email: ''
+        } 
     },
-    props: ['hideNew']
+    props: {hideNew: Boolean}
 }
 </script>
 <style>
 .red{
     color: red;
 }
+form{
+
+    text-align: left;
+}
 .form-people{
     display: block;
 }
-
 </style>
