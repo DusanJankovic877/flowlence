@@ -1,4 +1,5 @@
 <template>
+
     <nav class="navbar navbar-expand-lg navbar-dark  sticky-top">
                 <div class="col-lg-7 m-auto">
           <div class="info-row">
@@ -34,7 +35,16 @@
               <router-link :class="this.$route.name == 'services'  ? 'nav-link active' :  'nav-link' " to="/services">Usluge</router-link>
             </li>
             <li class="nav-item">
-              <router-link :class="this.$route.name == 'price-list'  ? 'nav-link active' :  'nav-link' " to="/price-list">Procena cene usluga</router-link>
+
+              <router-link :class="this.$route.name == 'price-list'  ? 'nav-link active' :  'nav-link' " to="/price-list">
+                Procena cena usluge   
+                <b-dropdown id="dropdown-1"  right class="m-2">
+                  <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">Preduzetnik</router-link></b-dropdown-item>
+                  <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">DOO</router-link></b-dropdown-item>
+                  <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">Udruženje</router-link></b-dropdown-item>
+                </b-dropdown> 
+                </router-link>
+
             </li>
 
             <li class="nav-item">
@@ -43,6 +53,7 @@
             <li  class="nav-item">
               <router-link :class="this.$route.name == 'contact'  ? 'nav-link active' :  'nav-link' " to="/contact">Kontakt</router-link>
             </li>
+
             
           </ul>
         </div>
@@ -50,7 +61,21 @@
     </nav>
     
 </template>
+<script>
+export default {
+  data() {
+      return{
+         
+      }
+  },
+  methods:{
+
+    }
+  }
+
+</script>
 <style>
+
 .active{
     text-decoration: underline;
 }
@@ -62,8 +87,8 @@ nav {
 .nav-links, .navbar-brand{
   padding-bottom: 20px;
 }
-nav p{
-  color: white;
+nav p, a{
+  color: #98B4C2;
 }
 .info-row{
   margin-right: 0;
@@ -86,6 +111,33 @@ nav p{
 .navbar-toggler{
     border: none;
     box-shadow: none !important;
+}
+.text, .option{
+  font-family: 'RobotoSlab-Medium', sans-serif !important;
+  font-size:16px !important;
+
+}
+.expand, .dropdown-label{
+  background-color: #2B5877 ;
+}
+#dropdown-1{
+  margin: 0 !important;
+}
+.dropdown-item:hover{
+  background-color: #2B5877;
+}
+
+#dropdown-1__BV_toggle_:hover{
+  background-color: #FBA922;
+  color: #2B5877
+}
+#dropdown-1__BV_toggle_{
+  background-color: #2B5877;
+  margin: 0 !important;
+  padding: 0 7px;
+  border: none;
+  box-shadow: none !important;
+  color: #72A5C2;
 }
 @media only screen and (max-width: 1024px){
     nav{
