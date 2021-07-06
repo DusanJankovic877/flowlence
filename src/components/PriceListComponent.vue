@@ -5,7 +5,7 @@
         <div class="col-lg-7 m-auto">
           <h1>Procena cene usluga</h1>
           <p>Da saznate više o cenama kliknite na dugme više o cenama</p>
-          <div class="row">
+          <div class="price-row">
               <div class="krug">
                 <router-link class="prices-link" to="/price-list/entrepreneur">
                 <div class="price-card-body">
@@ -48,6 +48,9 @@
 .prices-link:hover{
   color: white !important;
 }
+.price-row{
+  display: flex;
+}
 
 .krug{
     background-color: white;
@@ -75,5 +78,13 @@
 
 .price-list a, .contact a{
   border-radius: 0;
+}
+@media only screen and (max-width: 1024px){
+  .price-row{
+  display: inherit;
+}
+.price-info{
+  padding-bottom: 50px;
+}
 }
 </style>

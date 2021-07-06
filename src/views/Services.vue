@@ -1,7 +1,7 @@
 <template>
         <div class="services col-lg-7 m-auto">
           <h1>Usluge</h1>
-    <div class="row">
+    <div class="services-row">
       <div class="card col-lg-3">
         <h1>glyphicon</h1>
         <div class="card-body">
@@ -31,9 +31,15 @@
 .services{
     margin-bottom: -100px !important; 
 }
+.services-row{
+  display: flex;
+}
 @media only screen and (max-width: 1024px){
   .services{
-    margin-bottom: -50px !important; 
+    margin-bottom: -70px !important; 
+}
+.services-row{
+  display: inherit;
 }
 }
 

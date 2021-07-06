@@ -36,16 +36,19 @@
             <li class="nav-item">
               <router-link :class="this.$route.name == 'price-list'  ? 'nav-link active' :  'nav-link' " to="/price-list">Procena cene usluga</router-link>
             </li>
+
             <li class="nav-item">
               <router-link :class="this.$route.name == 'blog'  ? 'nav-link active' :  'nav-link' " to="/blog">Blog</router-link>
             </li>
             <li  class="nav-item">
               <router-link :class="this.$route.name == 'contact'  ? 'nav-link active' :  'nav-link' " to="/contact">Kontakt</router-link>
             </li>
+            
           </ul>
         </div>
       </div>
     </nav>
+    
 </template>
 <style>
 .active{

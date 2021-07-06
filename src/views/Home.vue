@@ -23,8 +23,8 @@
 import Carousel from '../components/Carousel.vue'
 import About from '../views/About.vue'
 import Services from '../views/Services.vue'
-import Blog from '../views/Blog.vue'
 import PriceListComponent from '../components/PriceListComponent.vue'
+import Blog from '../views/Blog.vue'
 
 export default {
   name: 'Home',

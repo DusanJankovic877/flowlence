@@ -1,7 +1,7 @@
 <template>
       <div class="blog col-lg-7 m-auto">
       <h1>Blog</h1>
-        <div class="row">
+        <div class="blog-row">
       <div class="card col-lg-3">
         <h4>post title</h4>
         <img src="../assets/racunovodja.jpg" alt="">
@@ -30,9 +30,15 @@
 .blog{
   margin-top: -100px !important; 
 }
+.blog-row{
+  display: flex;
+}
 @media only screen and (max-width: 1024px){
   .blog{
     margin-top: 0 !important; 
+}
+.blog-row{
+  display: inherit;
 }
 }
 </style>
