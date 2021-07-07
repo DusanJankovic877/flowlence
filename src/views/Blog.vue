@@ -36,9 +36,21 @@
 @media only screen and (max-width: 1024px){
   .blog{
     margin-top: 0 !important; 
+  }
+  .blog-row{
+    display: flex;
+  }
 }
-.blog-row{
-  display: inherit;
+@media only screen and (max-width: 768px){
+  .blog-row{
+  display: flex;
 }
 }
+@media only screen and (max-width: 600px){
+  /* .blog-row{
+  display: inline;
+} */
+}
+
+
 </style>

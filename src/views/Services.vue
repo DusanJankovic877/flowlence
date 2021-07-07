@@ -39,7 +39,17 @@
     margin-bottom: -70px !important; 
 }
 .services-row{
-  display: inherit;
+  display: flex;
+}
+}
+@media only screen and (max-width: 768px){
+  .services-row{
+  display: flex;
+}
+@media only screen and (max-width: 600px){
+  .services-row{
+  display: inline;
+}
 }
 }
 

@@ -44,7 +44,6 @@
                   <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">Udruženje</router-link></b-dropdown-item>
                 </b-dropdown> 
                 </router-link>
-
             </li>
 
             <li class="nav-item">
