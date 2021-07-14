@@ -65,7 +65,8 @@
                         <input class="form-check-input" v-model="people" type="radio" id="pepople-20" name="pepople-20" value="20 i više">
                         <label class="form-check-label" for="pepople-20">20 i više 200e</label>
                      </div>
-                </div> <!--end of form-people -->
+                </div>
+            </div> <!--end of form-people -->
                 <hr>
                 <div class="income">
 
@@ -73,7 +74,7 @@
                     <h5 v-else>Prihod koje ostvarujete na godišnjem nivou (od prodaje proizvoda, usluga...):</h5>
 
                     <div class="form-check">
-                        <input class="form-check-input" v-model="income" type="radio" id="150" name="150" value="do 1500000 rsd">
+                        <input class="form-check-input 150" v-model="income" type="radio" id="150" name="150" value="do 1500000 rsd" @click="check">
                         <label class="form-check-label" for="150">do 1500000 rsd 0e</label>
                     </div>
                     <div class="form-check">
@@ -92,6 +93,25 @@
                         <input class="form-check-input" v-model="income" type="radio" id="1000" name="1000" value="preko 10000000 rsd">
                         <label class="form-check-label" for="1000">preko 10000000 rsd 50e</label>
                     </div>
+            
+                    <div v-if="income === 'do 1500000 rsd' || income === '1500000-4000000 rsd' || income === '4000000-6000000 rsd'"> 
+                        <h5 v-if="hideNew">Da li želite da budete paušalno oporezovani?</h5>
+                        <h5 v-else>Da li ste paušalno oporezovani?</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="da" name="prihod da" value="true">
+                            <label class="form-check-label" for="da">da</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="ne" name="prihod ne" value="false">
+                            <label class="form-check-label" for="ne">ne</label>
+                        </div>
+                        <div class="form-check" v-if="hideNew">
+                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="nisam-siguran/na" name="nisam siguran" value="nisam-siguran/na">
+                            <label class="form-check-label" for="nisam siguran">nisam siguran/na</label>
+                        </div>
+                    </div> <!--end of the extra content -->
+
+            
                 </div> <!--end of form-income -->
                 <hr>
                 <div class="pdv">
@@ -201,7 +221,7 @@
 
                 </div> <!--end of form-email -->
 
-            </div>
+           
         </form>
 </div>
 </template>
@@ -218,10 +238,17 @@ export default {
             cashRegister: '',
             eBanking: '',
             comment: '',
-            email: ''
+            email: '',
+            incomeExtra: ''
         } 
     },
-    props: {hideNew: Boolean}
+    props: {hideNew: Boolean},
+    methods:{
+        check(){
+            console.log(this.income);
+        }
+    }
+    
 }
 </script>
 <style>

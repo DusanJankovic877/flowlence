@@ -56,10 +56,24 @@ export default {
             this.hide = true
         },
         handleAlreadyEntrepreneur(){
-           this.hideAlready = true
+            this.hideAlready = true
             this.hide = true
         },
         showButtons(){
+            this.$children.forEach(child => {
+                console.log(child.income);
+                child.income = ""
+                child.checkedNames = [],
+                child.people = '',
+                child.income = '',
+                child.pdv = '',
+                child.payment = '',
+                child.clients = '',
+                child.cashRegister = '',
+                child.eBanking = '',
+                child.comment = '',
+                child.email = ''
+            });
             if(this.hideNew)this.hideNew = false
             if(this.hideAlready)this.hideAlready = false
             this.hide = false;
