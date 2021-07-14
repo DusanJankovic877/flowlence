@@ -61,7 +61,6 @@ export default {
         },
         showButtons(){
             this.$children.forEach(child => {
-                console.log(child.income);
                 child.income = ""
                 child.checkedNames = [],
                 child.people = '',
@@ -77,7 +76,6 @@ export default {
             if(this.hideNew)this.hideNew = false
             if(this.hideAlready)this.hideAlready = false
             this.hide = false;
-            
         }
     }
 
