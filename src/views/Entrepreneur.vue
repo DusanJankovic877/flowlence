@@ -62,7 +62,7 @@ export default {
         showButtons(){
             this.$children.forEach(child => {
                 child.income = ""
-                child.checkedNames = [],
+                child.checkedServices = [],
                 child.people = '',
                 child.income = '',
                 child.pdv = '',
