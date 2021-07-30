@@ -226,6 +226,7 @@
 </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 
 export default {
 
@@ -248,6 +249,9 @@ export default {
     },
     props: {hideNew: Boolean, hide: Boolean, hideAlready: Boolean},
     methods:{
+        ...mapActions([
+            'getEntrepreneurFormData'
+        ]),
         showButtons(){
             this.entrepreneurForm.checkedServices = []
             this.entrepreneurForm.people = ''
@@ -263,8 +267,9 @@ export default {
 
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
-        submitEntrepreneurForm(){
-           console.log(this.entrepreneurForm);
+        async submitEntrepreneurForm(){
+        //    console.log(this.entrepreneurForm);
+           await this.getEntrepreneurFormData(this.entrepreneurForm);
         }
     }
 
