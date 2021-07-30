@@ -226,28 +226,9 @@
 </div>
 </template>
 <script>
-// import FormServices from './formComponents/FormServices.vue'
-// import FormPeople from './formComponents/FormPeople.vue'
-// import FormPdv from './formComponents/FormPdv.vue'
-// import FormPayments from './formComponents/FormPayments.vue'
-// import FormClients from './formComponents/FormClients.vue'
-// import FormCashRegister from './formComponents/FormCashRegister.vue'
-// import FormEBanking from './formComponents/FormEBanking.vue'
-// import FormComment from './formComponents/FormComment.vue'
-// import FormEmail from './formComponents/FormEmail.vue'
+
 export default {
-    components:{
-        // FormServices,
-        // FormPeople,
-        // FormPdv,
-        // FormPayments,
-        // FormClients,
-        // FormCashRegister,
-        // FormEBanking,
-        // FormComment,
-        // FormEmail
-        
-    },
+
     data() {
         return{
             entrepreneurForm:{
