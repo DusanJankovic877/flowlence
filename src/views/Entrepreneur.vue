@@ -30,7 +30,7 @@
         </div>
 
         <div class="entrepreneur">
-            <Form @handle-show-buttons="handleShowButtons"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
+            <Form @handle-submit-entrepreneur-form="hadleSubmitEntrepreneurForm" @handle-show-buttons="handleShowButtons"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
         </div>
         <!-- <div :class="hide ? 'showButtons row ' : 'hide row '">
             <button class="go-back-button col-lg-3 btn btn-danger" @click="showButtons">Idi nazad</button>
@@ -51,19 +51,6 @@ export default {
             hide: false,
             hideNew: false,
             hideAlready: false,
-            // entrepreneurForm:{
-            //     checkedServices: [],
-            //     people: '',
-            //     income: '',
-            //     incomeExtra: '',
-            //     pdv: '',
-            //     payment: '',
-            //     clients: '',
-            //     cashRegister: '',
-            //     eBanking: '',
-            //     comment: '',
-            //     email: ''
-            // }
        } 
     },
     methods:{
@@ -76,26 +63,9 @@ export default {
             this.hide = true
         },
         handleShowButtons(){
-            // console.log(this.$children);
-            // this.$children.forEach(child => {
-            //     child.income = ""
-            //     child.checkedServices = [],
-            //     child.people = '',
-            //     child.income = '',
-            //     child.pdv = '',
-            //     child.payment = '',
-            //     child.clients = '',
-            //     child.cashRegister = '',
-            //     child.eBanking = '',
-            //     child.comment = '',
-            //     child.email = ''
-            // });
             if(this.hideNew)this.hideNew = false
             if(this.hideAlready)this.hideAlready = false
             this.hide = false;
-        },
-        hadleSubmitEntrepreneurForm(){
-            console.log('click', this.entrepreneurForm);
         }
     }
 

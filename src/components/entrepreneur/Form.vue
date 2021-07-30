@@ -283,9 +283,7 @@ export default {
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
         submitEntrepreneurForm(){
-           
-            console.log(this.entrepreneurForm);
-
+           console.log(this.entrepreneurForm);
         }
     }
 
