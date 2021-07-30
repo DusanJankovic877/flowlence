@@ -32,8 +32,10 @@
         <div class="entrepreneur">
             <Form :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
         </div>
-        <div :class="hide ? 'showButtons' : 'hide'">
-            <button class="btn btn-secondary" @click="showButtons">Idi nazad</button>
+        <div :class="hide ? 'showButtons row ' : 'hide row '">
+            <button class="go-back-button col-lg-3 btn btn-danger" @click="showButtons">Idi nazad</button>
+
+             <button class="submit-button col-lg-3 btn btn-success" @click="submitEntrepreneurForm">Pošalji</button>
         </div>
     </div>
 </template>
@@ -82,7 +84,13 @@ export default {
 }
 </script>
 <style>
+.go-back-button{
+    margin: 10px auto;
+}
+.submit-button{
+    margin: 10px auto;
 
+}
 .hide{
     display: none !important;
 }

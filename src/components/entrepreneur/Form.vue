@@ -29,8 +29,8 @@
             <FormComment :hideNew="hideNew" :comment="entrepreneurForm.comment"/> 
             <hr>
             <FormEmail :email="entrepreneurForm.email"/>
-            
-            <button class="btn btn-secondary">Pošalji</button>
+
+           
         </form>
 </div>
 </template>
