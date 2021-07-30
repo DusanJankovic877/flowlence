@@ -23,6 +23,7 @@
                         <input class="form-check-input" v-model="income" type="radio" id="1000" name="1000" value="preko 10000000 rsd">
                         <label class="form-check-label" for="1000">preko 10000000 rsd 50e</label>
                     </div>
+                   
                     <FormIncomeExtra :incomeExtra="incomeExtra" :income="income" :hideNew="hideNew"/>
                 </div> <!--end of form-income -->
 </template>
@@ -32,8 +33,13 @@ export default {
     components:{
         FormIncomeExtra
     },
+    data(){
+        return{
+            income: '',
+        }
+    },
     props:{
-        income:String,
+       
         hideNew: Boolean,
         incomeExtra: String
     },

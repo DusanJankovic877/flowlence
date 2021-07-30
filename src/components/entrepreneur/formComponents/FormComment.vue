@@ -16,3 +16,8 @@ export default {
     },
 }
 </script>
+<style>
+    .comment textarea{
+        border: none !important;
+    }
+</style>

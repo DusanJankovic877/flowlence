@@ -149,8 +149,10 @@ export default {
     background-color: #C9C9C9;
     border: none !important;
     color:#5E5E5E;
+    margin-top: 25px;
     margin-bottom: 25px;
     margin-left: auto;
+    border-radius: 0;
   }
   .contact-form-button:hover {
     background-color: black;

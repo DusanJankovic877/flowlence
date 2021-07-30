@@ -34,6 +34,6 @@ export default {
 
        } 
     },
-    props:{checkedServices:String, hideNew:Boolean}
+    props:{checkedServices:Array, hideNew:Boolean}
 }
 </script>

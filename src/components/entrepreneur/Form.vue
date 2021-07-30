@@ -10,25 +10,27 @@
             <h4 v-if="hideNew">Tek planiram da se registrujem kao preduzetnik</h4>
             <h4 v-else>Već poslujem u formi preduzetnika</h4>
             <hr>
-            <FormServices :hideNew="hideNew" :checkedServices="checkedServices"/>
+             <FormServices :hideNew="hideNew" :checkedServices="entrepreneurForm.checkedServices"/> 
             <hr>
-            <FormPeople :hideNew="hideNew" :people="people" />
+            <FormPeople :hideNew="hideNew" :people="entrepreneurForm.people" />
             <hr>
-            <FormIncome :hideNew="hideNew" :income="income" :incomeExtra="incomeExtra" />
+            <FormIncome :hideNew="hideNew" :incomeExtra="entrepreneurForm.incomeExtra" />
             <hr>
-            <FormPdv :hideNew="hideNew" :pdv="pdv"/>
+            <FormPdv :hideNew="hideNew" :pdv="entrepreneurForm.pdv"/>
             <hr>
-            <FormPayments :hideNew="hideNew" :payment="payment"/>
+            <FormPayments :hideNew="hideNew" :payment="entrepreneurForm.payment"/>
             <hr>
-            <FormClients :hideNew="hideNew" :clients="clients"/>
+            <FormClients :hideNew="hideNew" :clients="entrepreneurForm.clients"/>
             <hr>
-            <FormCashRegister :hideNew="hideNew" :cashRegister="cashRegister"/>
+            <FormCashRegister :hideNew="hideNew" :cashRegister="entrepreneurForm.cashRegister"/>
             <hr>
-            <FormEBanking :hideNew="hideNew" :eBanking="eBanking"/>
+            <FormEBanking :hideNew="hideNew" :eBanking="entrepreneurForm.eBanking"/>
             <hr>
-            <FormComment :hideNew="hideNew" :comment="comment"/>
+            <FormComment :hideNew="hideNew" :comment="entrepreneurForm.comment"/> 
             <hr>
-            <FormEmail :comment="comment"/>
+            <FormEmail :email="entrepreneurForm.email"/>
+            
+            <button class="btn btn-secondary">Pošalji</button>
         </form>
 </div>
 </template>
@@ -59,17 +61,19 @@ export default {
     },
     data() {
         return{
-            checkedServices: [],
-            people: '',
-            income: '',
-            pdv: '',
-            payment: '',
-            clients: '',
-            cashRegister: '',
-            eBanking: '',
-            comment: '',
-            email: '',
-            incomeExtra: ''
+            
+            entrepreneurForm:{
+                checkedServices: [],
+                people: '',
+                incomeExtra: '',
+                pdv: '',
+                payment: '',
+                clients: '',
+                cashRegister: '',
+                eBanking: '',
+                comment: '',
+                email: ''
+            }
         } 
     },
     props: {hideNew: Boolean},
