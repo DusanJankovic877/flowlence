@@ -31,9 +31,11 @@
 export default {
     data() {
        return{
-
+          
        } 
     },
-    props:{checkedServices:Array, hideNew:Boolean}
+    props:{checkedServices:Array, hideNew:Boolean},
+
+    }
 }
 </script>

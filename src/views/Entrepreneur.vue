@@ -30,13 +30,14 @@
         </div>
 
         <div class="entrepreneur">
-            <Form :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
+            <Form @handle-show-buttons="handleShowButtons"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
         </div>
-        <div :class="hide ? 'showButtons row ' : 'hide row '">
+        <!-- <div :class="hide ? 'showButtons row ' : 'hide row '">
             <button class="go-back-button col-lg-3 btn btn-danger" @click="showButtons">Idi nazad</button>
 
-             <button class="submit-button col-lg-3 btn btn-success" @click="submitEntrepreneurForm">Pošalji</button>
-        </div>
+            <button class="submit-button col-lg-3 btn btn-success" @click="submitEntrepreneurForm">Pošalji</button>
+        </div> -->
+   
     </div>
 </template>
 <script>
@@ -50,6 +51,19 @@ export default {
             hide: false,
             hideNew: false,
             hideAlready: false,
+            // entrepreneurForm:{
+            //     checkedServices: [],
+            //     people: '',
+            //     income: '',
+            //     incomeExtra: '',
+            //     pdv: '',
+            //     payment: '',
+            //     clients: '',
+            //     cashRegister: '',
+            //     eBanking: '',
+            //     comment: '',
+            //     email: ''
+            // }
        } 
     },
     methods:{
@@ -61,23 +75,27 @@ export default {
             this.hideAlready = true
             this.hide = true
         },
-        showButtons(){
-            this.$children.forEach(child => {
-                child.income = ""
-                child.checkedServices = [],
-                child.people = '',
-                child.income = '',
-                child.pdv = '',
-                child.payment = '',
-                child.clients = '',
-                child.cashRegister = '',
-                child.eBanking = '',
-                child.comment = '',
-                child.email = ''
-            });
+        handleShowButtons(){
+            // console.log(this.$children);
+            // this.$children.forEach(child => {
+            //     child.income = ""
+            //     child.checkedServices = [],
+            //     child.people = '',
+            //     child.income = '',
+            //     child.pdv = '',
+            //     child.payment = '',
+            //     child.clients = '',
+            //     child.cashRegister = '',
+            //     child.eBanking = '',
+            //     child.comment = '',
+            //     child.email = ''
+            // });
             if(this.hideNew)this.hideNew = false
             if(this.hideAlready)this.hideAlready = false
             this.hide = false;
+        },
+        hadleSubmitEntrepreneurForm(){
+            console.log('click', this.entrepreneurForm);
         }
     }
 

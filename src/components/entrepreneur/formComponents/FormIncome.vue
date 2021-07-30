@@ -33,13 +33,8 @@ export default {
     components:{
         FormIncomeExtra
     },
-    data(){
-        return{
-            income: '',
-        }
-    },
     props:{
-       
+        income: String,
         hideNew: Boolean,
         incomeExtra: String
     },
