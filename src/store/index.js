@@ -12,6 +12,7 @@ export default new Vuex.Store({
   },
   actions: {
     async getEntrepreneurFormData(state, payload){
+      console.log("vuex ",payload);
        await entrepreneurService.getEntrepreneurFormData(payload)
     },
     async getContactFormData(state, payload){

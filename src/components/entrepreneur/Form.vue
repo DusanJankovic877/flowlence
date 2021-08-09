@@ -19,20 +19,20 @@
                     </h5>
 
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="services" id="services" v-model="entrepreneurForm.checkedServices">
+                    <input class="form-check-input" type="checkbox" value="services" id="services" v-model="checkedServices">
                     <label class="form-check-label" for="services">
                         Uslugama  40e
                     </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="trading" id="trading" v-model="entrepreneurForm.checkedServices">
+                        <input class="form-check-input" type="checkbox" value="trading" id="trading" v-model="checkedServices">
                         <label class="form-check-label" for="trading">
                             Trgovinom  60e
                         </label>
                     </div>
     
                     <div class=" form-check">
-                        <input class="form-check-input" type="checkbox" value="production" id="production" v-model="entrepreneurForm.checkedServices">
+                        <input class="form-check-input" type="checkbox" value="production" id="production" v-model="checkedServices">
                         <label class="form-check-label" for="production">
                             Proizvodnjom  80e
                         </label>
@@ -46,23 +46,23 @@
 
                     <div class="input-group form-people">
                         <div class="form-check">
-                            <input class="form-check-input" v-model="entrepreneurForm.people" type="radio" id="pepople-3" name="pepople-3" value="do 3">
+                            <input class="form-check-input" v-model="people" type="radio" id="pepople-3" name="pepople-3" value="do 3">
                             <label class="form-check-label" for="pepople-3">do 3 20e</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" v-model="entrepreneurForm.people" type="radio" id="pepople-4-7" name="pepople-4-7" value="4-7">
+                            <input class="form-check-input" v-model="people" type="radio" id="pepople-4-7" name="pepople-4-7" value="4-7">
                             <label class="form-check-label" for="pepople-4-7">4-7 30e</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" v-model="entrepreneurForm.people" type="radio" id="pepople-8-10" name="pepople-8-10" value="8-10">
+                            <input class="form-check-input" v-model="people" type="radio" id="pepople-8-10" name="pepople-8-10" value="8-10">
                             <label class="form-check-label" for="pepople-8-10">8-10 60e</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" v-model="entrepreneurForm.people" type="radio" id="pepople-11-19" name="pepople-11-19" value="11-19">
+                            <input class="form-check-input" v-model="people" type="radio" id="pepople-11-19" name="pepople-11-19" value="11-19">
                             <label class="form-check-label" for="pepople-11-19">11-19 100e</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" v-model="entrepreneurForm.people" type="radio" id="pepople-20" name="pepople-20" value="20 i više">
+                            <input class="form-check-input" v-model="people" type="radio" id="pepople-20" name="pepople-20" value="20 i više">
                             <label class="form-check-label" for="pepople-20">20 i više 200e</label>
                         </div>
                     </div>
@@ -73,39 +73,39 @@
                     <h5 v-else>Prihod koje ostvarujete na godišnjem nivou (od prodaje proizvoda, usluga...):</h5>
 
                     <div class="form-check">
-                        <input class="form-check-input 150" v-model="entrepreneurForm.income" type="radio" id="150" name="150" value="do 1500000 rsd">
+                        <input class="form-check-input 150" v-model="income" type="radio" id="150" name="150" value="do 1500000 rsd">
                         <label class="form-check-label" for="150">do 1500000 rsd 0e</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.income" type="radio" id="150-400" name="150-400" value="1500000-4000000 rsd">
+                        <input class="form-check-input" v-model="income" type="radio" id="150-400" name="150-400" value="1500000-4000000 rsd">
                         <label class="form-check-label" for="150-400">1500000-4000000 rsd 5e</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.income" type="radio" id="400-600" name="400-600" value="4000000-6000000 rsd">
+                        <input class="form-check-input" v-model="income" type="radio" id="400-600" name="400-600" value="4000000-6000000 rsd">
                         <label class="form-check-label" for="400-600">4000000-6000000 rsd 10e</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.income" type="radio" id="600-1000" name="600-1000" value="6000000-10000000 rsd">
+                        <input class="form-check-input" v-model="income" type="radio" id="600-1000" name="600-1000" value="6000000-10000000 rsd">
                         <label class="form-check-label" for="600-1000">6000000-10000000 rsd 20e</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.income" type="radio" id="1000" name="1000" value="preko 10000000 rsd">
+                        <input class="form-check-input" v-model="income" type="radio" id="1000" name="1000" value="preko 10000000 rsd">
                         <label class="form-check-label" for="1000">preko 10000000 rsd 50e</label>
                     </div>
                     
-                    <div v-if="entrepreneurForm.income === 'do 1500000 rsd' || entrepreneurForm.income === '1500000-4000000 rsd' || entrepreneurForm.income === '4000000-6000000 rsd'"> 
+                    <div v-if="income === 'do 1500000 rsd' || income === '1500000-4000000 rsd' || income === '4000000-6000000 rsd'"> 
                         <h5 v-if="hideNew">Da li želite da budete paušalno oporezovani?</h5>
                         <h5 v-else>Da li ste paušalno oporezovani?</h5>
                         <div class="form-check">
-                            <input class="form-check-input" v-model="entrepreneurForm.incomeExtra" type="radio" id="da" name="prihod da" value="da">
+                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="da" name="prihod da" value="da">
                             <label class="form-check-label" for="da">da</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" v-model="entrepreneurForm.incomeExtra" type="radio" id="ne" name="prihod ne" value="ne">
+                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="ne" name="prihod ne" value="ne">
                             <label class="form-check-label" for="ne">ne</label>
                         </div>
                         <div class="form-check" v-if="hideNew">
-                            <input class="form-check-input" v-model="entrepreneurForm.incomeExtra" type="radio" id="nisam-siguran/na" name="nisam siguran" value="nisam-siguran/na">
+                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="nisam-siguran/na" name="nisam siguran" value="nisam-siguran/na">
                             <label class="form-check-label" for="nisam-siguran/na">nisam siguran/na</label>
                         </div>
                     </div> <!--end of the extra content -->
@@ -117,15 +117,15 @@
                     <h5 v-else>Da li ste u sistemu pdv-a:</h5>
 
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.pdv" type="radio" id="pdv-da" name="da" value="pdv-da">
+                        <input class="form-check-input" v-model="pdv" type="radio" id="pdv-da" name="da" value="pdv-da">
                         <label class="form-check-label" for="pdv-da">da 15e</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.pdv" type="radio" id="pdv-ne" name="ne" value="pdv-ne">
+                        <input class="form-check-input" v-model="pdv" type="radio" id="pdv-ne" name="ne" value="pdv-ne">
                         <label class="form-check-label" for="pdv-ne">ne 0e</label>
                     </div>
                     <div class="form-check" v-if="hideNew">
-                        <input class="form-check-input" v-model="entrepreneurForm.pdv" type="radio" id="pdv-da-ne" name="pdv-da-ne" value="nisam siguran/sigurna">
+                        <input class="form-check-input" v-model="pdv" type="radio" id="pdv-da-ne" name="pdv-da-ne" value="nisam siguran/sigurna">
                         <label class="form-check-label" for="pdv-da-ne">nisam siguran/sigurna 0e</label>
                     </div>
                     <div v-else></div>
@@ -137,15 +137,15 @@
                     <h5 v-else>Platni prometi koji obavljate sa Vašim klijentima je:</h5>
 
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.payment" type="radio" id="din" name="din" value="samo dinarski">
+                        <input class="form-check-input" v-model="payment" type="radio" id="din" name="din" value="samo dinarski">
                         <label class="form-check-label" for="din">samo dinarski 0e</label>
                     </div>       
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.payment" type="radio" id="deviz" name="deviz" value="samo devizni">
+                        <input class="form-check-input" v-model="payment" type="radio" id="deviz" name="deviz" value="samo devizni">
                         <label class="form-check-label" for="deviz">samo devizni 5e</label>
                     </div>   
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.payment" type="radio" id="din-deviz" name="div-deviz" value="i dinarski i devizni">
+                        <input class="form-check-input" v-model="payment" type="radio" id="din-deviz" name="div-deviz" value="i dinarski i devizni">
                         <label class="form-check-label" for="din-deviz">i dinarski i devizni 5e</label>
                     </div>                  
                 </div> <!--end of form-payments -->
@@ -155,15 +155,15 @@
                     <h5 v-else>Vaši klijenti su:</h5>
 
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.clients" type="radio" id="fiz" name="fiz" value="fizicka lica">
+                        <input class="form-check-input" v-model="clients" type="radio" id="fiz" name="fiz" value="fizicka lica">
                         <label class="form-check-label" for="fiz">fizicka lica 10e </label>
                     </div>       
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.clients" type="radio" id="prav" name="prav" value="pravna lica">
+                        <input class="form-check-input" v-model="clients" type="radio" id="prav" name="prav" value="pravna lica">
                         <label class="form-check-label" for="prav">pravna lica 0e</label>
                     </div>   
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.clients" type="radio" id="fiz-prav" name="fiz-prav" value="i fizicka i pravna">
+                        <input class="form-check-input" v-model="clients" type="radio" id="fiz-prav" name="fiz-prav" value="i fizicka i pravna">
                         <label class="form-check-label" for="fiz-prav">i fizicka i pravna 10e</label>
                     </div>   
                 </div> <!--end of form-clients -->
@@ -172,15 +172,15 @@
                     <h5 v-if="hideNew">Da li ste u obavezi da posedujete fiskalnu kasu:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Da li posedujete fiskalnu kasu:</h5>
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.cashRegister" type="radio" id="f-kasa-da" name="f-kasa-da" value="da">
+                        <input class="form-check-input" v-model="cashRegister" type="radio" id="f-kasa-da" name="f-kasa-da" value="da">
                         <label class="form-check-label" for="f-kasa-da">da 5e</label>
                     </div>       
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.cashRegister" type="radio" id="f-kasa-ne" name="f-kasa-ne" value="ne">
+                        <input class="form-check-input" v-model="cashRegister" type="radio" id="f-kasa-ne" name="f-kasa-ne" value="ne">
                         <label class="form-check-label" for="f-kasa-ne">ne 0e</label>
                     </div>   
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.cashRegister" type="radio" id="f-kasa-da-ne" name="f-kasa-da-ne" value="nisam siguran/sigurna">
+                        <input class="form-check-input" v-model="cashRegister" type="radio" id="f-kasa-da-ne" name="f-kasa-da-ne" value="nisam siguran/sigurna">
                         <label class="form-check-label" for="f-kasa-da-ne">nisam siguran/sigurna 0e</label>
                     </div>   
                 </div> <!--end of form-cash-register -->   
@@ -190,11 +190,11 @@
                     <h5 v-else>Elektronsko bankarstvo:</h5>
 
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.eBanking" type="radio" id="e-bank-solo" name="e-bank-solo" value="obavljate samostalno">
+                        <input class="form-check-input" v-model="eBanking" type="radio" id="e-bank-solo" name="e-bank-solo" value="obavljate samostalno">
                         <label class="form-check-label" for="e-bank-solo">obavljate samostalno 0e</label>
                     </div>   
                     <div class="form-check">
-                        <input class="form-check-input" v-model="entrepreneurForm.eBanking" type="radio" id="e-bank-accountant" name="e-bank-accountant" value="prepustite knjigovotstvenoj agenciji">
+                        <input class="form-check-input" v-model="eBanking" type="radio" id="e-bank-accountant" name="e-bank-accountant" value="prepustite knjigovotstvenoj agenciji">
                         <label class="form-check-label" for="e-bank-accountant">prepustite knjigovotstvenoj agenciji 5e</label>
                     </div>   
                 </div> <!--end of form-cash-e-banking -->   
@@ -202,7 +202,7 @@
                 <div class="comment">
                     <h5>Dodatni komentar:</h5>
                     <div class="form-group">
-                        <textarea v-model="entrepreneurForm.comment" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                        <textarea v-model="comment" class="form-control" id="exampleFormControlTextarea1" rows="3" 
                         :placeholder=" hideNew ? 'Ovde možete opisati ukratko Vašu delatnost kojom planirate da se bavite, dati dodatne informacije koje smatrate da su bitne ili postaviti pitanje' : 'Ovde možete opisati ukratko Vašu delatnost kojom se bavite, dati dodatne informacije koje smatrate da su bitne ili postaviti pitanje:'"
                         ></textarea>
                     </div>
@@ -212,7 +212,7 @@
                     <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu: <span class="red"> *</span></h5>
                     <div class="form-group">
                         <label for="email">Email adresa: </label>
-                        <input type="email" v-model="entrepreneurForm.email" name="email" class="form-control" id="email" placeholder="name@example.com">
+                        <input type="email" v-model="email" name="email" class="form-control" id="email" placeholder="name@example.com">
                     </div>
 
                 </div> <!--end of form-email --> 
@@ -232,7 +232,7 @@ export default {
 
     data() {
         return{
-            entrepreneurForm:{
+            // entrepreneurForm:{
                 checkedServices: [],
                 people: '',
                 income: '',
@@ -243,8 +243,9 @@ export default {
                 cashRegister: '',
                 eBanking: '',
                 comment: '',
-                email: ''
-            }
+                email: '',
+                entrepreneurFormData: {}
+            // }
         } 
     },
     props: {hideNew: Boolean, hide: Boolean, hideAlready: Boolean},
@@ -253,23 +254,39 @@ export default {
             'getEntrepreneurFormData'
         ]),
         showButtons(){
-            this.entrepreneurForm.checkedServices = []
-            this.entrepreneurForm.people = ''
-            this.entrepreneurForm.income = ''
-            this.entrepreneurForm.incomeExtra = ''
-            this.entrepreneurForm.pdv = ''
-            this.entrepreneurForm.payment = ''
-            this.entrepreneurForm.clients = ''
-            this.entrepreneurForm.cashRegister = ''
-            this.entrepreneurForm.eBanking = ''
-            this.entrepreneurForm.comment = ''
-            this.entrepreneurForm.email = ''
+            this.checkedServices = []
+            this.people = ''
+            this.income = ''
+            this.incomeExtra = ''
+            this.pdv = ''
+            this.payment = ' '
+            this.clients = ''
+            this.cashRegister = ''
+            this.eBanking = ''
+            this.comment = ''
+            this.email = '',
+            
 
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
         async submitEntrepreneurForm(){
-        //    console.log(this.entrepreneurForm);
-           await this.getEntrepreneurFormData(this.entrepreneurForm);
+           console.log('form view ',this.entrepreneurForm);
+            if(this.income !== 'do 1500000 rsd' || this.income !== '1500000-4000000 rsd' || this.income !== '4000000-6000000 rsd'){this.incomeExtra = "ne"}
+           await this.getEntrepreneurFormData(
+            this.entrepreneurFormData =  {  
+                checkedServices : this.checkedServices,
+                people: this.people,
+                income:  this.income,
+                incomeExtra:  this.incomeExtra,
+                pdv:  this.pdv,
+                payment: this.payment,
+                clients: this.clients,
+                cashRegister: this.cashRegister,
+                eBanking: this.eBanking,
+                comment: this.comment,
+                email: this.email 
+            }
+                ).then(response => console.log(response)).catch(err => console.log(err.response.data))
         }
     }
 
