@@ -1,7 +1,9 @@
 import { RequestHandler } from "./RequestHandler";
 class EntrepreneurService extends RequestHandler{
-    getEntrepreneurFormData(payload){
+   async getEntrepreneurFormData(payload){
         console.log('service', payload);
+       const reponse = await this.apiClient.post("/entrepreneur-mail", payload);
+       console.log('response', reponse);
     }
 }
 const entrepreneurService = new EntrepreneurService();
