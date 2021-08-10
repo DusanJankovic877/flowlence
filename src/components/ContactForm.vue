@@ -124,11 +124,11 @@ export default {
 </script>
 <style>
   .form{
-    /* border: 1px solid #555555; */
+
     margin: 0 auto;
   }
   .left{
-    /* border-right: 1px solid #555555; */
+
     padding-top: 50px !important;
     text-align: left;
     margin: 0 auto !important;

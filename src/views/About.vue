@@ -8,27 +8,29 @@
   <div class="about-content col-lg-12">
     <div class="about-us col-lg-7 m-auto">
       <h1>O nama</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Porro impedit nam, amet laborum vero dolorem eligendi voluptate, 
-        aliquam ullam asperiores libero maxime laboriosam sequi nesciunt ratione sint perferendis excepturi quia!
+      <p>
+        Individualni pristup svakom klijentu, posvećenost, pouzdanost i kvalitet usluge su osnovni
+        principi na kojima se zasniva naše poslovanje.
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, 
-        inventore expedita harum eveniet commodi maiores debitis enim magni est totam exercitationem voluptatem suscipit hic necessitatibus, 
-        voluptas rerum, culpa architecto consectetur.
+        Želimo da omogućimo našim klijentima kapacitet za uspešan razvoj biznisa, da budemo
+        podrška iz oblasti kojom se bavimo i oslonac za bezbedno poslovanje i pridržavanje
+        zakonskih propisa.
       </p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem,
-        explicabo ipsa? Voluptas error, alias eligendi, quae sit sequi delectus autem nemo inventore 
-        obcaecati cum eius laboriosam quibusdam harum rem quidem.
+      <p>
+        Smatramo da je naš posao izuzetno odgovoran i veliku pažnju posvećujemo informisanju
+        klijenata o aktuelnim promenama zakonskih propisa koji se njih odnose kao I davanju saveta
+        iz naše oblasti. U našoj sferi poslovanja od izuzetnog je značaja da redovno pratimo propise,
+        posećujemo seminare I edukujemo se o raznim promenama zakonskih regulativa koje mogu
+        imati direktan uticaj na biznis klijenata. Stalna edukacija i usavršavanje je prioritet pogotovo
+        u našoj zemlji, koju karakterišu izuzetno česte izmene postojećih I stalno donošenje novih
+        zakonskih akata.
       </p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem,
-        explicabo ipsa? Voluptas error, alias eligendi, quae sit sequi delectus autem nemo inventore 
-        obcaecati cum eius laboriosam quibusdam harum rem quidem.
+      <p>
+        Imajući u vidu da je današnje poslovanje sve više usmereno na internet, pružamo klijentima 
+        mogućnost da budu u kontaktu sa name putem digitalne komunikacije, sa minimalnim ličnim kontaktom.
       </p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem,
-        explicabo ipsa? Voluptas error, alias eligendi, quae sit sequi delectus autem nemo inventore 
-        obcaecati cum eius laboriosam quibusdam harum rem quidem.
-      </p>
+
 
 
     </div> <!--end of about-us div -->
