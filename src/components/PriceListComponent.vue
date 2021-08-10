@@ -6,15 +6,14 @@
           <h1>Procena cene usluga</h1>
           <p>Da saznate više o cenama kliknite na dugme više o cenama</p>
           <div class="price-row">
-              <div class="krug">
-                <router-link class="prices-link" to="/price-list/entrepreneur">
+            <div class="krug">
+              <router-link class="prices-link" to="/price-list/entrepreneur">
                 <div class="price-card-body">
                 <h1>Preduzetnik</h1>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
-
-            </router-link>
-              </div>
+              </router-link>
+            </div>
             <div class="krug">
             <router-link class=" prices-link" to="/price-list">
                 <div class="price-card-body">
