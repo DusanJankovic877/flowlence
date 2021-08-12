@@ -18,23 +18,10 @@
                         Trenutno se bavite:
                     </h5>
 
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="services" id="services" v-model="checkedServices">
-                    <label class="form-check-label" for="services">
-                        Uslugama  40e
-                    </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="trading" id="trading" v-model="checkedServices">
-                        <label class="form-check-label" for="trading">
-                            Trgovinom  60e
-                        </label>
-                    </div>
-    
-                    <div class=" form-check">
-                        <input class="form-check-input" type="checkbox" value="production" id="production" v-model="checkedServices">
-                        <label class="form-check-label" for="production">
-                            Proizvodnjom  80e
+                    <div v-for="service in services" :key="service.id" class="form-check">
+                        <input class="form-check-input" type="checkbox" :value="service.id" :id="service.title" v-model="servicesId">
+                        <label class="form-check-label" :for="service.title">
+                            {{service.title}}
                         </label>
                     </div>
                 </div><!-- end of form-services -->
@@ -44,26 +31,10 @@
                     <h5 v-if="hideNew">Broj lica koji očekujete da zaposlite (uključujući u ovaj broj i Vas kao preduzetnika)<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Broj lica koji zapošljavate (uključujući u ovaj broj i Vas kao preduzetnika)</h5>
 
-                    <div class="input-group form-people">
-                        <div class="form-check">
-                            <input class="form-check-input" v-model="people" type="radio" id="pepople-3" name="pepople-3" value="do 3">
-                            <label class="form-check-label" for="pepople-3">do 3 20e</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" v-model="people" type="radio" id="pepople-4-7" name="pepople-4-7" value="4-7">
-                            <label class="form-check-label" for="pepople-4-7">4-7 30e</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" v-model="people" type="radio" id="pepople-8-10" name="pepople-8-10" value="8-10">
-                            <label class="form-check-label" for="pepople-8-10">8-10 60e</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" v-model="people" type="radio" id="pepople-11-19" name="pepople-11-19" value="11-19">
-                            <label class="form-check-label" for="pepople-11-19">11-19 100e</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" v-model="people" type="radio" id="pepople-20" name="pepople-20" value="20 i više">
-                            <label class="form-check-label" for="pepople-20">20 i više 200e</label>
+                    <div  class="input-group form-people">
+                        <div v-for="person in people" :key="person.id" class="form-check">
+                            <input class="form-check-input" type="radio"  :value="person.id" :id="person.title" v-model="peopleId" >
+                            <label class="form-check-label" :for="person.title">{{person.title}}</label>
                         </div>
                     </div>
                 </div> <!--end of number-of-people -->
@@ -72,63 +43,44 @@
                     <h5 v-if="hideNew">Prihod koji očekujete da ostvarite u narednih godinu dana (od prodaje proizvoda, usluga...):<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Prihod koje ostvarujete na godišnjem nivou (od prodaje proizvoda, usluga...):</h5>
 
-                    <div class="form-check">
-                        <input class="form-check-input 150" v-model="income" type="radio" id="150" name="150" value="do 1500000 rsd">
-                        <label class="form-check-label" for="150">do 1500000 rsd 0e</label>
+                    <div v-for="income in incomes" :key="income.id" class="form-check">
+                        <input class="form-check-input 150" type="radio" :value="income.id" :id="income.title" v-model="incomeId"  >
+                        <label class="form-check-label" :for="income.title">{{income.title}}</label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" v-model="income" type="radio" id="150-400" name="150-400" value="1500000-4000000 rsd">
-                        <label class="form-check-label" for="150-400">1500000-4000000 rsd 5e</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" v-model="income" type="radio" id="400-600" name="400-600" value="4000000-6000000 rsd">
-                        <label class="form-check-label" for="400-600">4000000-6000000 rsd 10e</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" v-model="income" type="radio" id="600-1000" name="600-1000" value="6000000-10000000 rsd">
-                        <label class="form-check-label" for="600-1000">6000000-10000000 rsd 20e</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" v-model="income" type="radio" id="1000" name="1000" value="preko 10000000 rsd">
-                        <label class="form-check-label" for="1000">preko 10000000 rsd 50e</label>
-                    </div>
-                    
-                    <div v-if="income === 'do 1500000 rsd' || income === '1500000-4000000 rsd' || income === '4000000-6000000 rsd'"> 
+                   
+                    <div v-if="incomeId === 0 || incomeId === 1 || incomeId === 2"> 
+                  
                         <h5 v-if="hideNew">Da li želite da budete paušalno oporezovani?</h5>
                         <h5 v-else>Da li ste paušalno oporezovani?</h5>
-                        <div class="form-check">
-                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="da" name="prihod da" value="da">
-                            <label class="form-check-label" for="da">da</label>
+                        <div v-for="extraIncome in extraIncomes" :key="extraIncome.id" class="form-check">
+                            <input class="form-check-input" type="radio" :value="extraIncome.id" :id="extraIncome.title"  v-model="extraIncomeId"  >
+                            <label class="form-check-label" :for="extraIncome.title">{{extraIncome.title}}</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="ne" name="prihod ne" value="ne">
-                            <label class="form-check-label" for="ne">ne</label>
-                        </div>
-                        <div class="form-check" v-if="hideNew">
-                            <input class="form-check-input" v-model="incomeExtra" type="radio" id="nisam-siguran/na" name="nisam siguran" value="nisam-siguran/na">
-                            <label class="form-check-label" for="nisam-siguran/na">nisam siguran/na</label>
-                        </div>
-                    </div> <!--end of the extra content -->
+                    </div>  <!-- end of the extra content -->
                 </div> <!--end of form-income -->
             <hr>
                 <div class="pdv">
 
                     <h5 v-if="hideNew">Da li planirate da budete u sistemu pdv-a: <!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Da li ste u sistemu pdv-a:</h5>
-
-                    <div class="form-check">
+<!-- {{pdvs}} -->
+                    <!-- <div class="form-check">
                         <input class="form-check-input" v-model="pdv" type="radio" id="pdv-da" name="da" value="pdv-da">
                         <label class="form-check-label" for="pdv-da">da 15e</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" v-model="pdv" type="radio" id="pdv-ne" name="ne" value="pdv-ne">
                         <label class="form-check-label" for="pdv-ne">ne 0e</label>
+                    </div> -->
+               
+                    <div v-for="pdv in pdvs" :key="pdv.id" class="form-check" >
+                        <div>
+                            <input class="form-check-input"  type="radio" :value="pdv.id" :id="pdv.title"  v-model="pdvId" >
+                            <label class="form-check-label" :for="pdv.title">{{pdv.title}}</label>
+
+                        </div>
+                        
                     </div>
-                    <div class="form-check" v-if="hideNew">
-                        <input class="form-check-input" v-model="pdv" type="radio" id="pdv-da-ne" name="pdv-da-ne" value="nisam siguran/sigurna">
-                        <label class="form-check-label" for="pdv-da-ne">nisam siguran/sigurna 0e</label>
-                    </div>
-                    <div v-else></div>
                 </div> <!--end of form-pdv -->
             <hr>
                 <div class="payments">
@@ -209,11 +161,11 @@
                 </div> <!--end of form-comment --> 
             <hr>
                 <div class="email">
-                    <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu: <span class="red"> *</span></h5>
+                    <!-- <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu: <span class="red"> *</span></h5>
                     <div class="form-group">
                         <label for="email">Email adresa: </label>
                         <input type="email" v-model="email" name="email" class="form-control" id="email" placeholder="name@example.com">
-                    </div>
+                    </div> -->
 
                 </div> <!--end of form-email --> 
                 <div :class="hide ? 'showButtons row ' : 'hide row '">
@@ -232,12 +184,58 @@ export default {
 
     data() {
         return{
-            // entrepreneurForm:{
-                checkedServices: [],
-                people: '',
-                income: '',
-                incomeExtra: '',
-                pdv: '',
+                //hard coded data
+                services:
+                [  
+                    {id:0, title: "Uslugama",price: 40},
+                    {id:1, title: "Trgovinom",price: 60},
+                    {id:2, title: "Proizvodnjom",price: 80},
+                ],
+                people: [
+                    {id:0, title: "do 3",price: 20},
+                    {id:1, title: "4-7",price: 30},
+                    {id:2, title: "8-10",price: 60},
+                    {id:3, title: "11-19",price: 100},
+                    {id:4, title: "20 i više",price: 200},
+                ],
+                incomes:[
+                    {id:0, title: "do 1 500 000 rsd",price: 0},
+                    {id:1, title: "1 500 000-4 000 000 rsd",price: 5},
+                    {id:2, title: "4 000 000-6 000 000 rsd",price: 10},
+                    {id:3, title: "6 000 000-10 000 000 rsd",price: 20},
+                    {id:4, title: "preko 10 000 000 rsd",price: 50},
+
+                ],
+                extraIncomes: [
+                    {id:0, title: "da",price: 0},
+                    {id:1, title: "ne",price: 0},
+                    {id:2, title: "nisam siguran/na",price: 0},                    
+                ],
+                pdvs: [
+                    {id:0, title: "da",price: 0},
+                    {id:1, title: "ne",price: 0},
+                    {id:2, title: "nisam siguran/na",price: 0},                    
+                ],
+                //DATA TO BE POPULATED
+                    totalPrice: [],
+                    totalSum: 0,
+                //services
+                    selectedServices:[],
+                    servicesId:[],
+                    selectedPrice : [],
+                    servicesSum:0,
+                //people
+                    selectedPeople: {},
+                    peopleId:'',
+                //income
+                    selectedIncome: {},
+                    incomeId:'',
+                //extraIncome
+                    selectedExtraIncome: {},
+                    extraIncomeId: '',
+                //pdv
+                    selectedPdv: {},
+                    pdvId: '',
                 payment: '',
                 clients: '',
                 cashRegister: '',
@@ -245,7 +243,7 @@ export default {
                 comment: '',
                 email: '',
                 entrepreneurFormData: {}
-            // }
+            
         } 
     },
     props: {hideNew: Boolean, hide: Boolean, hideAlready: Boolean},
@@ -254,10 +252,10 @@ export default {
             'getEntrepreneurFormData'
         ]),
         showButtons(){
-            this.checkedServices = []
-            this.people = ''
-            this.income = ''
-            this.incomeExtra = ''
+            this.servicesId = []
+            this.peopleId= ''
+            this.incomeId = ''
+            this.extraIncomeId = '',
             this.pdv = ''
             this.payment = ' '
             this.clients = ''
@@ -270,27 +268,59 @@ export default {
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
         async submitEntrepreneurForm(){
-           console.log('form view ',this.entrepreneurForm);
-            if(this.income !== 'do 1500000 rsd' || this.income !== '1500000-4000000 rsd' || this.income !== '4000000-6000000 rsd'){this.incomeExtra = "ne"}
-           await this.getEntrepreneurFormData(
-            this.entrepreneurFormData =  {  
-                checkedServices : this.checkedServices,
-                people: this.people,
-                income:  this.income,
-                incomeExtra:  this.incomeExtra,
-                pdv:  this.pdv,
-                payment: this.payment,
-                clients: this.clients,
-                cashRegister: this.cashRegister,
-                eBanking: this.eBanking,
-                comment: this.comment,
-                email: this.email 
+        if(this.selectedPrice.length !== 0){
+            this.selectedPrice = []; this.selectedServices= []; this.servicesSum = 0; this.servicesId=[];
             }
-                ).then(response => console.log(response)).catch(err => console.log(err.response.data))
-        }
-    }
+        else{
+            //services
+          this.servicesId.forEach(serviceId => {
+            var service = this.services.find(x => x.id === serviceId)
+            this.selectedServices.push(service);
+          });
+          this.selectedServices.forEach(sService => {
+            this.selectedPrice.push(sService.price);
+          });
+          //people
+          this.selectedPeople = this.people.find(x => x.id === this.peopleId)
+          //income
+          this.selectedIncome = this.incomes.find(x => x.id === this.incomeId)
+          //extraIncome
+          this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
+          //pdv
 
-    
+          
+
+          this.servicesSum = this.selectedPrice.reduce((a,b) => a + b, 0);
+            if(this.servicesSum)this.totalPrice.push(this.servicesSum);
+            if(this.selectedPeople)this.totalPrice.push(this.selectedPeople.price);
+            if(this.selectedIncome)this.totalPrice.push(this.selectedIncome.price);
+            if(this.selectedExtraIncome)this.totalPrice.push(this.selectedExtraIncome.price);
+
+       
+          
+          
+          this.totalSum = this.totalPrice.reduce((a,b) => a + b, 0);
+            console.log(this.totalSum);
+        }
+        
+        //    console.log('form view ',this.entrepreneurForm);
+        //     if(this.income !== 'do 1500000 rsd' || this.income !== '1500000-4000000 rsd' || this.income !== '4000000-6000000 rsd'){this.incomeExtra = "ne"}
+        //    await this.getEntrepreneurFormData(
+        //     this.entrepreneurFormData =  {  
+        //         checkedServices : this.checkedServices,
+        //         people: this.people,
+        //         income:  this.income,
+        //         incomeExtra:  this.incomeExtra,
+        //         pdv:  this.pdv,
+        //         payment: this.payment,
+        //         clients: this.clients,
+        //         cashRegister: this.cashRegister,
+        //         eBanking: this.eBanking,
+        //         comment: this.comment,
+        //         email: this.email 
+        //     }).then(response => console.log(response)).catch(err => console.log(err.response.data));
+        }
+    },
     
 }
 </script>

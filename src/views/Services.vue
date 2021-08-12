@@ -13,7 +13,7 @@
             </router-link>
           </div> <!-- 1st-->
           <div class="krug">
-            <router-link class="prices-link" to="/price-list/entrepreneur">
+            <router-link class="prices-link" to="/services/">
               <div class="price-card-body">
               <h3>Knjigovodstvene usluge</h3>
                 <p class="card-text">vođenje poslovnih knjiga, Knjiženje dokumentacije,Vođenje analitičke evidencije...</p>
@@ -22,7 +22,7 @@
             </router-link>
           </div><!-- 2nd-->
           <div class="krug">
-            <router-link class="prices-link" to="/price-list/entrepreneur">
+            <router-link class="prices-link" to="/services/">
               <div class="price-card-body">
               <h3>Obračun zarada / Kadrovske usluge</h3>
                 <p class="card-text">Popunjavanje ugovora o radnom angažovanju, Prijavljivanje I odjavljivanje zaposlenih...</p>
@@ -31,7 +31,7 @@
             </router-link>
           </div> <!-- 3rd-->
           <div class="krug">
-            <router-link class="prices-link" to="/price-list/entrepreneur">
+            <router-link class="prices-link" to="/services/">
               <div class="price-card-body">
               <h3>Platni promet (dinarski I devizni)</h3>
                 <p class="card-text">Otvaranje tekućih računa, Elektronsko bankarstvo, Priprema naloga za plaćanje...</p>
@@ -40,7 +40,7 @@
             </router-link>
           </div><!-- 4th-->
           <div class="krug">
-            <router-link class="prices-link" to="/price-list/entrepreneur">
+            <router-link class="prices-link" to="/services/">
               <div class="price-card-body">
               <h3>Poreski I finansijski konsalting</h3>
                 <p class="card-text">Savetovanje klijenta u vezi svih poreskih pitanja, kao I davanje predloga...</p>
@@ -49,7 +49,7 @@
             </router-link>
           </div> <!-- 5th-->
           <div class="krug">
-            <router-link class="prices-link" to="/price-list/entrepreneur">
+            <router-link class="prices-link" to="/services/">
               <div class="price-card-body">
               <h3>Izračunavanje finansijskih pokazatelja, izrada biznis planova</h3>
                 <p class="card-text">izračunavanje pokazateljima, Izrada biznis plana...</p>
@@ -60,7 +60,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .krug{
     /* background-color: #FBA922; */
     height: 320px;
