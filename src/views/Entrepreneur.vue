@@ -30,7 +30,7 @@
         </div>
 
         <div class="entrepreneur">
-            <Form @handle-show-buttons="handleShowButtons"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
+            <Form ref="childComponent" @handle-show-buttons="handleShowButtons"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
         </div>
         <!-- <div :class="hide ? 'showButtons row ' : 'hide row '">
             <button class="go-back-button col-lg-3 btn btn-danger" @click="showButtons">Idi nazad</button>
@@ -62,6 +62,7 @@ export default {
         },
         handleAlreadyEntrepreneur(){
             this.hideAlready = true
+            this.$refs.childComponent.setValue(this.hideAlready);
             this.hide = true
         },
         handleShowButtons(){
