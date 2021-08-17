@@ -226,7 +226,7 @@ export default {
                     eBankingId: '',
                 comment: '',
                 email: '',
-                entrepreneurFormData: {}
+                entrepreneurFormData: {},
             
         } 
     },
@@ -275,7 +275,15 @@ export default {
           //income
           this.selectedIncome = this.incomes.find(x => x.id === this.incomeId)
           //extraIncome
-          this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
+            if(this.selectedIncome.title === "do 1 500 000 rsd"){
+                this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
+            }else if(this.selectedIncome === "1 500 000-4 000 000 rsd"){
+                this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
+            }else if(this.selectedIncome === "4 000 000-6 000 000 rsd"){
+                this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
+            }else {
+               this.selectedExtraIncome = 'not needed' 
+            }
           //pdv
           this.selectedPdv = this.pdvs.find(x => x.id === this.pdvId)
           //payment
@@ -287,14 +295,11 @@ export default {
           //e banking
           this.selectedEBanking = this.eBankings.find(x => x.id === this.eBankingId)
 
-
-            // console.log(this.clientId);
-
-
-
           //SUMMARy
-          this.servicesSum = this.selectedPrice.reduce((a,b) => a + b, 0);
+            //services summ
+            this.servicesSum = this.selectedPrice.reduce((a,b) => a + b, 0);
             if(this.servicesSum)this.totalPrice.push(this.servicesSum);
+            //others sum
             if(this.selectedPeople)this.totalPrice.push(this.selectedPeople.price);
             if(this.selectedIncome)this.totalPrice.push(this.selectedIncome.price);
             if(this.selectedExtraIncome)this.totalPrice.push(this.selectedExtraIncome.price);
@@ -303,42 +308,29 @@ export default {
             if(this.selectedClient)this.totalPrice.push(this.selectedClient.price)
             if(this.selectedCashRegister)this.totalPrice.push(this.selectedCashRegister.price)
             if(this.selectedEBanking)this.totalPrice.push(this.selectedEBanking.price)
-            // console.log('total price', this.selectedPdv.price);
 
-          this.totalSum = this.totalPrice.reduce((a,b) => a + b, 0);
-            console.log(this.totalSum);
-        }
-        
-        //    console.log('form view ',this.entrepreneurForm);
-        //     if(this.income !== 'do 1500000 rsd' || this.income !== '1500000-4000000 rsd' || this.income !== '4000000-6000000 rsd'){this.incomeExtra = "ne"}
+            this.totalSum = this.totalPrice.reduce((a,b) => a + b, 0);
+                console.log('total sum',this.totalSum);
+            }
+
         //    await this.getEntrepreneurFormData(
         //     this.entrepreneurFormData =  {  
-        //         checkedServices : this.checkedServices,
-        //         people: this.people,
-        //         income:  this.income,
-        //         incomeExtra:  this.incomeExtra,
-        //         pdv:  this.pdv,
-        //         payment: this.payment,
-        //         clients: this.clients,
-        //         cashRegister: this.cashRegister,
-        //         eBanking: this.eBanking,
-        //         comment: this.comment,
-        //         email: this.email 
+        //         checkedServices : this.selectedServices,
+        //         people: this.selectedPeople,
+        //         income:  this.selectedIncome,
+        //         incomeExtra:  this.selectedIncomeExtra,
+        //         pdv:  this.selectedPdv,
+        //         payment: this.selectedPayment,
+        //         client: this.selectedClient,
+        //         cashRegister: this.selectedCashRegister,
+        //         eBanking: this.selectedEBanking,
+        //         comment: this.selectedComment,
+        //         email: this.selectedEmail,
+        //         totalSum = this.totalSum
         //     }).then(response => console.log(response)).catch(err => console.log(err.response.data));
         }
-    },
-//      mounted:  function () {
-//    this.$nextTick(function () {
-//     // Code that will run only after the
-//     // entire view has been rendered
-//     if(this.hideNew){
+    }
 
-//     this.pdvs.splice(1,1);
-//     console.log(this.pdvs);
-//     }
-//   })
-// }
-    
 }
 </script>
 <style>
