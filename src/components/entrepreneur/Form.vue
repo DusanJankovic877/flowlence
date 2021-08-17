@@ -250,8 +250,8 @@ export default {
             this.clientId = ''
             this.cashRegisterId = ''
             this.eBankingId = ''
-            this.commentId = ''
-            this.emailId = ''
+            this.comment = ''
+            this.email = ''
             if(this.hideAlready){
                 this.pdvs.push({id: 2,title: "nisam siguran/na",price: 0})
             }
@@ -275,15 +275,17 @@ export default {
           //income
           this.selectedIncome = this.incomes.find(x => x.id === this.incomeId)
           //extraIncome
-            if(this.selectedIncome.title === "do 1 500 000 rsd"){
+
+            if(this.incomeId === 0){
                 this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
-            }else if(this.selectedIncome === "1 500 000-4 000 000 rsd"){
+            }else if(this.incomeId === 1){
                 this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
-            }else if(this.selectedIncome === "4 000 000-6 000 000 rsd"){
+            }else if(this.incomeId === 2){
                 this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
             }else {
                this.selectedExtraIncome = 'not needed' 
             }
+
           //pdv
           this.selectedPdv = this.pdvs.find(x => x.id === this.pdvId)
           //payment
@@ -313,21 +315,21 @@ export default {
                 console.log('total sum',this.totalSum);
             }
 
-        //    await this.getEntrepreneurFormData(
-        //     this.entrepreneurFormData =  {  
-        //         checkedServices : this.selectedServices,
-        //         people: this.selectedPeople,
-        //         income:  this.selectedIncome,
-        //         incomeExtra:  this.selectedIncomeExtra,
-        //         pdv:  this.selectedPdv,
-        //         payment: this.selectedPayment,
-        //         client: this.selectedClient,
-        //         cashRegister: this.selectedCashRegister,
-        //         eBanking: this.selectedEBanking,
-        //         comment: this.selectedComment,
-        //         email: this.selectedEmail,
-        //         totalSum = this.totalSum
-        //     }).then(response => console.log(response)).catch(err => console.log(err.response.data));
+           await this.getEntrepreneurFormData(
+            this.entrepreneurFormData =  {  
+                checkedServices : this.selectedServices,
+                people: this.selectedPeople,
+                income:  this.selectedIncome,
+                incomeExtra:  this.selectedExtraIncome,
+                pdv:  this.selectedPdv,
+                payment: this.selectedPayment,
+                client: this.selectedClient,
+                cashRegister: this.selectedCashRegister,
+                eBanking: this.selectedEBanking,
+                comment: this.comment,
+                email: this.email,
+                totalSum: this.totalSum
+            }).then(response => console.log(response)).catch(err => console.log(err.response.data));
         }
     }
 
