@@ -283,7 +283,7 @@ export default {
             }else if(this.incomeId === 2){
                 this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
             }else {
-               this.selectedExtraIncome = 'not needed' 
+               this.selectedExtraIncome = {title:"ne", price:0}
             }
 
           //pdv
