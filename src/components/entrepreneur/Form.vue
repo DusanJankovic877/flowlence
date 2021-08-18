@@ -169,7 +169,7 @@ export default {
                     {id:2, title: "nisam siguran/na",price: 0},                    
                 ],
                 pdvs: [
-                    {id:0, title: "da ",price: 0},
+                    {id:0, title: "da ",price: 15},
                     {id:1, title: "ne ",price: 0},
                     {id:2, title: "nisam siguran/na ",price: 0},                    
                 ],
