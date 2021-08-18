@@ -328,7 +328,8 @@ export default {
                 eBanking: this.selectedEBanking,
                 comment: this.comment,
                 email: this.email,
-                totalSum: this.totalSum
+                totalSum: this.totalSum,
+                checkedServicesSum: this.servicesSum
             }).then(response => console.log(response)).catch(err => console.log(err.response.data));
         }
     }
