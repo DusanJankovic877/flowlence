@@ -193,6 +193,7 @@ export default {
                     {id:0, title: "obavljate samostalno",price: 0},
                     {id:1, title: "prepustite knjigovotstvenoj agenciji" ,price: 5},              
                 ],
+                entrepreneur: '',
                 //DATA TO BE POPULATED
                     totalPrice: [],
                     totalSum: 0,
@@ -267,6 +268,10 @@ export default {
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
         async submitEntrepreneurForm(){
+            if(this.hideNew) this.entrepreneur = 'Novi preduzetnik'
+            else this.entrepreneur = 'Postojeći preduzetnik'
+            
+            console.log(this.entrepreneur);
         if(this.selectedPrice.length !== 0){
             this.selectedPrice = []; this.selectedServices= []; this.servicesSum = 0; this.servicesId=[];
             }
@@ -326,6 +331,7 @@ export default {
 
            await this.getEntrepreneurFormData(
             this.entrepreneurFormData =  {  
+                entrepreneur: this.entrepreneur,
                 checkedServices : this.selectedServices,
                 people: this.selectedPeople,
                 income:  this.selectedIncome,
