@@ -58,11 +58,13 @@ export default {
     methods:{
         handleNewEntrepreneur(){
             this.hideNew = true
+            this.$refs.childComponent.setHideNewValue(this.hideNew);
+
             this.hide = true
         },
         handleAlreadyEntrepreneur(){
             this.hideAlready = true
-            this.$refs.childComponent.setValue(this.hideAlready);
+            this.$refs.childComponent.setHideAlreadyValue(this.hideAlready);
             this.hide = true
         },
         handleShowButtons(){

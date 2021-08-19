@@ -166,12 +166,13 @@ export default {
                 extraIncomes: [
                     {id:0, title: "da",price: 0},
                     {id:1, title: "ne",price: 0},
-                    {id:2, title: "nisam siguran/na",price: 0},                    
+                    
+                                     
                 ],
                 pdvs: [
                     {id:0, title: "da ",price: 15},
                     {id:1, title: "ne ",price: 0},
-                    {id:2, title: "nisam siguran/na ",price: 0},                    
+                    // {id:2, title: "nisam siguran/na ",price: 0},                    
                 ],
                 payments: [
                     {id:0, title: "samo dinarski",price: 0},
@@ -235,9 +236,19 @@ export default {
         ...mapActions([
             'getEntrepreneurFormData'
         ]),
-        setValue(value){
+        setHideNewValue(value){
+            if(value){
+                this.extraIncomes.push({id:2, title: "nisam siguran/na",price: 0})
+                this.pdvs.push({id:2, title: "nisam siguran/na",price: 0})
+            }else if(value){
+                    // this.extraIncomes.splice(2,1);
+                    
+            }
+        },
+        setHideAlreadyValue(value){
             if(value){
                 this.pdvs.splice(2,1);
+                this.extraIncomes.splice(2,1);
             }
         },
         showButtons(){
@@ -252,9 +263,7 @@ export default {
             this.eBankingId = ''
             this.comment = ''
             this.email = ''
-            if(this.hideAlready){
-                this.pdvs.push({id: 2,title: "nisam siguran/na",price: 0})
-            }
+
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
         async submitEntrepreneurForm(){
