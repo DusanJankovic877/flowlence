@@ -5,19 +5,20 @@
         <h2 v-if="hideNew">Novi preduzetnik</h2>
         <h1 v-else>Postojeći preduzetnik</h1>
         <hr>
-     
+    
         <form @submit.prevent>
                 <h4 v-if="hideNew">Tek planiram da se registrujem kao preduzetnik</h4>
                 <h4 v-else>Već poslujem u formi preduzetnika</h4>
             <hr>
                 <!-- <FormServices :hideNew="hideNew" :checkedServices="entrepreneurForm.checkedServices"/>  -->
                 <div class="form-services"> 
-
+                  
                     <h5 v-if="hideNew">Planirate da se bavite:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>
                         Trenutno se bavite:
                     </h5>
-                    <div v-for="service in services" :key="service.id" class="form-check">
+                    
+                    <div v-for="service in formData.services" :key="service.id" >
                         <input class="form-check-input" type="checkbox" :value="service.id" :id="service.title" v-model="servicesId">
                         <label class="form-check-label" :for="service.title">
                             {{service.title}}
@@ -30,7 +31,7 @@
                     <h5 v-if="hideNew">Broj lica koji očekujete da zaposlite (uključujući u ovaj broj i Vas kao preduzetnika)<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Broj lica koji zapošljavate (uključujući u ovaj broj i Vas kao preduzetnika)</h5>
                     <div  class="input-group form-people">
-                        <div v-for="person in people" :key="person.id" class="form-check">
+                        <div v-for="person in formData.people" :key="person.id" class="form-check">
                             <input class="form-check-input" type="radio"  :value="person.id" :id="person.title" v-model="peopleId" >
                             <label class="form-check-label" :for="person.title">{{person.title}}</label>
                         </div>
@@ -41,16 +42,16 @@
 
                     <h5 v-if="hideNew">Prihod koji očekujete da ostvarite u narednih godinu dana (od prodaje proizvoda, usluga...):<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Prihod koje ostvarujete na godišnjem nivou (od prodaje proizvoda, usluga...):</h5>
-                    <div v-for="income in incomes" :key="income.id" class="form-check">
+                    <div v-for="income in formData.incomes" :key="income.id" class="form-check">
                         <input class="form-check-input 150" type="radio" :value="income.id" :id="income.title" v-model="incomeId"  >
                         <label class="form-check-label" :for="income.title">{{income.title}}</label>
                     </div>
-                   
-                    <div v-if="incomeId === 0 || incomeId === 1 || incomeId === 2"> 
+                
+                    <div v-if="incomeId === 9 || incomeId === 10 || incomeId === 11"> 
                   
                         <h5 v-if="hideNew">Da li želite da budete paušalno oporezovani?</h5>
                         <h5 v-else>Da li ste paušalno oporezovani?</h5>
-                        <div v-for="extraIncome in extraIncomes" :key="extraIncome.id" class="form-check">
+                        <div v-for="extraIncome in handledExtraIncomes" :key="extraIncome.id" class="form-check">
                             <input class="form-check-input" type="radio" :value="extraIncome.id" :id="extraIncome.title"  v-model="extraIncomeId"  >
                             <label class="form-check-label" :for="extraIncome.title">{{extraIncome.title}}</label>
                         </div>
@@ -61,7 +62,7 @@
 
                     <h5 v-if="hideNew">Da li planirate da budete u sistemu pdv-a: <!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Da li ste u sistemu pdv-a:</h5>
-                    <div v-for="pdv in pdvs" :key="pdv.id" class="form-check" >
+                    <div v-for="pdv in handledPdvs" :key="pdv.id" class="form-check" >
                             <input class="form-check-input"  type="radio" :value="pdv.id" :id="pdv.title"  v-model="pdvId" >
                             <label class="form-check-label" :for="pdv.title">{{pdv.title}}</label>
                     </div>
@@ -71,7 +72,7 @@
 
                     <h5 v-if="hideNew">Platni prometi koji ćete obavljati sa Vašim klijentima će biti:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Platni prometi koji obavljate sa Vašim klijentima je:</h5>
-                    <div  v-for="payment in payments" :key="payment.id" class="form-check">
+                    <div  v-for="payment in formData.payments" :key="payment.id" class="form-check">
                         <input class="form-check-input" type="radio" :value="payment.id" :id="payment.title" v-model="paymentId">
                         <label class="form-check-label" :for="payment.title">{{payment.title}}</label>
                     </div>       
@@ -81,7 +82,7 @@
                     
                     <h5 v-if="hideNew">Vaši klijenti će biti:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Vaši klijenti su:</h5>
-                    <div v-for="client in clients" :key="client.id" class="form-check">
+                    <div v-for="client in formData.clients" :key="client.id" class="form-check">
                         <input class="form-check-input"  type="radio" :value="client.id" :id="client.title" v-model="clientId">
                         <label class="form-check-label" :for="client.title">{{client.title}}</label>
                     </div>       
@@ -91,7 +92,7 @@
 
                     <h5 v-if="hideNew">Da li ste u obavezi da posedujete fiskalnu kasu:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Da li posedujete fiskalnu kasu:</h5>
-                    <div v-for="cashRegister in cashRegisters" :key="cashRegister.id" class="form-check">
+                    <div v-for="cashRegister in formData.cashRegisters" :key="cashRegister.id" class="form-check">
                         <input class="form-check-input"  type="radio" :value="cashRegister.id" :id="cashRegister.title" v-model="cashRegisterId">
                         <label class="form-check-label" :for="cashRegister.title">{{cashRegister.title}}</label>
                     </div>       
@@ -101,7 +102,7 @@
 
                     <h5 v-if="hideNew">Elektronsko bankartvo želite da: <!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Elektronsko bankarstvo:</h5>
-                    <div v-for="eBanking in eBankings" :key="eBanking.id" class="form-check">
+                    <div v-for="eBanking in formData.eBankings" :key="eBanking.id" class="form-check">
                         <input class="form-check-input"  type="radio" :value="eBanking.id" :id="eBanking.title" v-model="eBankingId">
                         <label class="form-check-label" :for="eBanking.title">{{eBanking.title}}</label>
                     </div>   
@@ -135,66 +136,17 @@
 </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+
+import { mapActions, mapGetters} from 'vuex'
 
 export default {
 
     data() {
         return{
-                //hard coded data
-                services:
-                [  
-                    {id:0, title: "Uslugama",price: 40},
-                    {id:1, title: "Trgovinom",price: 60},
-                    {id:2, title: "Proizvodnjom",price: 80},
-                ],
-                people: [
-                    {id:0, title: "do 3",price: 20},
-                    {id:1, title: "4-7",price: 30},
-                    {id:2, title: "8-10",price: 60},
-                    {id:3, title: "11-19",price: 100},
-                    {id:4, title: "20 i više",price: 200},
-                ],
-                incomes:[
-                    {id:0, title: "do 1 500 000 rsd",price: 0},
-                    {id:1, title: "1 500 000-4 000 000 rsd",price: 5},
-                    {id:2, title: "4 000 000-6 000 000 rsd",price: 10},
-                    {id:3, title: "6 000 000-10 000 000 rsd",price: 20},
-                    {id:4, title: "preko 10 000 000 rsd",price: 50},
-
-                ],
-                extraIncomes: [
-                    {id:0, title: "da",price: 0},
-                    {id:1, title: "ne",price: 0},
-                    
-                                     
-                ],
-                pdvs: [
-                    {id:0, title: "da ",price: 15},
-                    {id:1, title: "ne ",price: 0},
-                    // {id:2, title: "nisam siguran/na ",price: 0},                    
-                ],
-                payments: [
-                    {id:0, title: "samo dinarski",price: 0},
-                    {id:1, title: "samo devizni",price: 5},
-                    {id:2, title: "i dinarski i devizni",price: 5},                    
-                ],
-                clients: [
-                    {id:0, title: "fizička lica ",price: 0},
-                    {id:1, title: "pravna lica",price: 0},
-                    {id:2, title: "i fizička i pravna lica",price: 10},                    
-                ],
-                cashRegisters: [
-                    {id:0, title: " da",price: 5},
-                    {id:1, title: " ne",price: 0},
-                    {id:2, title: " nisam siguran/na",price: 0},                  
-                ],
-                eBankings: [
-                    {id:0, title: "obavljate samostalno",price: 0},
-                    {id:1, title: "prepustite knjigovotstvenoj agenciji" ,price: 5},              
-                ],
-                entrepreneur: '',
-                //DATA TO BE POPULATED
+            //DATA TO BE POPULATED
+            handledPdvs: [],
+            handledExtraIncomes: [],
+            entrepreneur: '',
                     totalPrice: [],
                     totalSum: 0,
                 //services
@@ -232,25 +184,35 @@ export default {
             
         } 
     },
-    props: {hideNew: Boolean, hide: Boolean, hideAlready: Boolean},
+    props: {hideNew: Boolean, hide: Boolean, hideAlready: Boolean, formData: Object},
     methods:{
         ...mapActions([
-            'getEntrepreneurFormData'
+            'getEntrepreneurFormData','setEntrepreneurFormData'
         ]),
+        
         setHideNewValue(value){
             if(value){
-                this.extraIncomes.push({id:2, title: "nisam siguran/na",price: 0})
-                this.pdvs.push({id:2, title: "nisam siguran/na",price: 0})
-            }else if(value){
-                    // this.extraIncomes.splice(2,1);
-                    
+                const pdv1 = this.formData.pdvs[16];
+                const pdv2 = this.formData.pdvs[17];
+                const pdv3 = this.formData.pdvs[18];
+                this.handledPdvs = [pdv1, pdv2, pdv3];
+                const extraIncome1 = this.formData.extraIncomes[13]
+                const extraIncome2 = this.formData.extraIncomes[14]
+                const extraIncome3 = this.formData.extraIncomes[15]
+                this.handledExtraIncomes = [extraIncome1, extraIncome2, extraIncome3]
             }
         },
         setHideAlreadyValue(value){
-            if(value){
-                this.pdvs.splice(2,1);
-                this.extraIncomes.splice(2,1);
-            }
+            const pdv1 = this.formData.pdvs[16]
+            const pdv2 = this.formData.pdvs[17]
+            const pdv3 = this.formData.pdvs[18]
+            this.handledPdvs = [pdv1, pdv2, pdv3]
+            const extraIncome1 = this.formData.extraIncomes[13]
+            const extraIncome2 = this.formData.extraIncomes[14]
+            const extraIncome3 = this.formData.extraIncomes[15]
+            this.handledExtraIncomes = [extraIncome1, extraIncome2, extraIncome3]
+            if(value && this.handledPdvs.length === 3)this.handledPdvs.splice(2,1);
+            if(value && this.handledExtraIncomes.length === 3)this.handledExtraIncomes.splice(2,1);
         },
         showButtons(){
             this.servicesId = []
@@ -264,6 +226,7 @@ export default {
             this.eBankingId = ''
             this.comment = ''
             this.email = ''
+      
 
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
@@ -347,7 +310,15 @@ export default {
                 checkedServicesSum: this.servicesSum
             }).then(response => console.log(response)).catch(err => console.log(err.response.data));
         }
-    }
+    },
+    computed:{
+        ...mapGetters['formData']
+    },
+    // async beforeRouteEnter(from, to, next){
+    //     // await this.setEntrepreneurFormData();
+    //     await this.$store.dispatch('setEntrepreneurFormData')
+    //     next();
+    // }
 
 }
 </script>

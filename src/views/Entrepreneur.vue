@@ -2,7 +2,7 @@
       <div class="price-list col-lg-7 m-auto">
         <h1>Procena cene Usluga</h1>
         <hr>
-
+ 
         <h4 v-if="hide">Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
         <h4 v-else>Izaberite ponuđene opcije kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
 
@@ -30,7 +30,7 @@
         </div>
 
         <div class="entrepreneur">
-            <Form ref="childComponent" @handle-show-buttons="handleShowButtons"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
+            <Form ref="childComponent" @handle-show-buttons="handleShowButtons" :formData="formData"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
         </div>
         <!-- <div :class="hide ? 'showButtons row ' : 'hide row '">
             <button class="go-back-button col-lg-3 btn btn-danger" @click="showButtons">Idi nazad</button>
@@ -41,8 +41,9 @@
     </div>
 </template>
 <script>
-
+import store from '../store'
 import Form from '../components/entrepreneur/Form.vue'
+import { mapGetters} from 'vuex'
 export default {
     components:{
         Form
@@ -72,6 +73,15 @@ export default {
             if(this.hideAlready)this.hideAlready = false
             this.hide = false;
         }
+    },
+    computed:{
+        ...mapGetters(['formData']),
+    },
+        async beforeRouteEnter(from, to, next){
+       
+
+        await store.dispatch('setEntrepreneurFormData')
+        next();
     }
 
 }
