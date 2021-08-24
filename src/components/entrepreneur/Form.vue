@@ -146,6 +146,7 @@ export default {
             //DATA TO BE POPULATED
             handledPdvs: [],
             handledExtraIncomes: [],
+            handledPeople: [],
             entrepreneur: '',
                     totalPrice: [],
                     totalSum: 0,
@@ -192,6 +193,12 @@ export default {
         
         setHideNewValue(value){
             if(value){
+                this.formData.people.forEach(data => {
+                    if(data.form_id === 2){
+                        this.handledPeople.push(data)
+                    }
+                });
+                console.log(this.handledPeople);
                 const pdv1 = this.formData.pdvs[16];
                 const pdv2 = this.formData.pdvs[17];
                 const pdv3 = this.formData.pdvs[18];
@@ -241,14 +248,16 @@ export default {
         else{
             //services
           this.servicesId.forEach(serviceId => {
-            var service = this.services.find(x => x.id === serviceId)
+            var service = this.formData.services.find(x => x.id === serviceId)
             this.selectedServices.push(service);
+
           });
           this.selectedServices.forEach(sService => {
-            this.selectedPrice.push(sService.price);
+              this.selectedPrice.push(sService.price);
           });
           //people
-          this.selectedPeople = this.people.find(x => x.id === this.peopleId)
+          this.selectedPeople = this.handledPeople.find(x => x.id === this.peopleId)
+              console.log(this.selectedPeople);
           //income
           this.selectedIncome = this.incomes.find(x => x.id === this.incomeId)
           //extraIncome
@@ -312,7 +321,8 @@ export default {
         }
     },
     computed:{
-        ...mapGetters['formData']
+        ...mapGetters['formData'],
+        
     },
     // async beforeRouteEnter(from, to, next){
     //     // await this.setEntrepreneurFormData();
