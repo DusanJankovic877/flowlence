@@ -51,7 +51,7 @@
                   
                         <h5 v-if="hideNew">Da li želite da budete paušalno oporezovani?</h5>
                         <h5 v-else>Da li ste paušalno oporezovani?</h5>
-                        <div v-for="extraIncome in handledExtraIncomes" :key="extraIncome.id" class="form-check">
+                        <div v-for="extraIncome in formData.extraIncomes" :key="extraIncome.id" class="form-check">
                             <input class="form-check-input" type="radio" :value="extraIncome.id" :id="extraIncome.title"  v-model="extraIncomeId"  >
                             <label class="form-check-label" :for="extraIncome.title">{{extraIncome.title}}</label>
                         </div>
@@ -62,7 +62,7 @@
 
                     <h5 v-if="hideNew">Da li planirate da budete u sistemu pdv-a: <!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Da li ste u sistemu pdv-a:</h5>
-                    <div v-for="pdv in handledPdvs" :key="pdv.id" class="form-check" >
+                    <div v-for="pdv in formData.pdvs" :key="pdv.id" class="form-check" >
                             <input class="form-check-input"  type="radio" :value="pdv.id" :id="pdv.title"  v-model="pdvId" >
                             <label class="form-check-label" :for="pdv.title">{{pdv.title}}</label>
                     </div>
@@ -144,8 +144,8 @@ export default {
     data() {
         return{
             //DATA TO BE POPULATED
-            handledPdvs: [],
-            handledExtraIncomes: [],
+            removedPdv: '',
+            removedExtraIncome: [],
             handledPeople: [],
             entrepreneur: '',
                     totalPrice: [],
@@ -192,34 +192,12 @@ export default {
         ]),
         
         setHideNewValue(value){
-            if(value){
-                this.formData.people.forEach(data => {
-                    if(data.form_id === 2){
-                        this.handledPeople.push(data)
-                    }
-                });
-                console.log(this.handledPeople);
-                const pdv1 = this.formData.pdvs[16];
-                const pdv2 = this.formData.pdvs[17];
-                const pdv3 = this.formData.pdvs[18];
-                this.handledPdvs = [pdv1, pdv2, pdv3];
-                const extraIncome1 = this.formData.extraIncomes[13]
-                const extraIncome2 = this.formData.extraIncomes[14]
-                const extraIncome3 = this.formData.extraIncomes[15]
-                this.handledExtraIncomes = [extraIncome1, extraIncome2, extraIncome3]
-            }
+            if(value && this.formData.extraIncomes.length == 2)this.formData.extraIncomes.push(this.removedExtraIncome);
+            if(value && this.formData.pdvs.length == 2)this.formData.pdvs.push(this.removedPdv);       
         },
         setHideAlreadyValue(value){
-            const pdv1 = this.formData.pdvs[16]
-            const pdv2 = this.formData.pdvs[17]
-            const pdv3 = this.formData.pdvs[18]
-            this.handledPdvs = [pdv1, pdv2, pdv3]
-            const extraIncome1 = this.formData.extraIncomes[13]
-            const extraIncome2 = this.formData.extraIncomes[14]
-            const extraIncome3 = this.formData.extraIncomes[15]
-            this.handledExtraIncomes = [extraIncome1, extraIncome2, extraIncome3]
-            if(value && this.handledPdvs.length === 3)this.handledPdvs.splice(2,1);
-            if(value && this.handledExtraIncomes.length === 3)this.handledExtraIncomes.splice(2,1);
+            if(value && this.formData.pdvs.length === 3) this.removedPdv = this.formData.pdvs.splice(2,1).pop();
+            if(value && this.formData.extraIncomes.length === 3) this.removedExtraIncome = this.formData.extraIncomes.splice(2,1).pop();
         },
         showButtons(){
             this.servicesId = []
@@ -256,32 +234,32 @@ export default {
               this.selectedPrice.push(sService.price);
           });
           //people
-          this.selectedPeople = this.handledPeople.find(x => x.id === this.peopleId)
+          this.selectedPeople = this.formData.people.find(x => x.id === this.peopleId)
               console.log(this.selectedPeople);
           //income
-          this.selectedIncome = this.incomes.find(x => x.id === this.incomeId)
+          this.selectedIncome = this.formData.incomes.find(x => x.id === this.incomeId)
           //extraIncome
 
             if(this.incomeId === 0){
-                this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
+                this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
             }else if(this.incomeId === 1){
-                this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
+                this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
             }else if(this.incomeId === 2){
-                this.selectedExtraIncome = this.extraIncomes.find(x => x.id === this.extraIncomeId)
+                this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
             }else {
                this.selectedExtraIncome = {title:"ne", price:0}
             }
 
           //pdv
-          this.selectedPdv = this.pdvs.find(x => x.id === this.pdvId)
+          this.selectedPdv = this.formData.pdvs.find(x => x.id === this.pdvId)
           //payment
-          this.selectedPayment = this.payments.find(x => x.id === this.paymentId)
+          this.selectedPayment = this.formData.payments.find(x => x.id === this.paymentId)
           //client
-          this.selectedClient = this.clients.find(x => x.id === this.clientId)
+          this.selectedClient = this.formData.clients.find(x => x.id === this.clientId)
           //cash register
-          this.selectedCashRegister = this.cashRegisters.find(x => x.id === this.cashRegisterId)
+          this.selectedCashRegister = this.formData.cashRegisters.find(x => x.id === this.cashRegisterId)
           //e banking
-          this.selectedEBanking = this.eBankings.find(x => x.id === this.eBankingId)
+          this.selectedEBanking = this.formData.eBankings.find(x => x.id === this.eBankingId)
 
           //SUMMARy
             //services summ
