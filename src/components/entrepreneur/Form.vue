@@ -19,9 +19,9 @@
                     </h5>
                     
                     <div v-for="service in formData.services" :key="service.id" >
-                        <input class="form-check-input" type="checkbox" :value="service.id" :id="service.title" v-model="servicesId">
-                        <label class="form-check-label" :for="service.title">
-                            {{service.title}}
+                        <input class="form-check-input" type="checkbox" :value="service.id" :id="service.id" v-model="servicesId">
+                        <label class="form-check-label" :for="service.id">
+                            {{service.option_text}}
                         </label>
                     </div>
                 </div><!-- end of form-services -->
@@ -32,8 +32,8 @@
                     <h5 v-else>Broj lica koji zapošljavate (uključujući u ovaj broj i Vas kao preduzetnika)</h5>
                     <div  class="input-group form-people">
                         <div v-for="person in formData.people" :key="person.id" class="form-check">
-                            <input class="form-check-input" type="radio"  :value="person.id" :id="person.title" v-model="peopleId" >
-                            <label class="form-check-label" :for="person.title">{{person.title}}</label>
+                            <input class="form-check-input" type="radio"  :value="person.id" :id="person.id" v-model="peopleId" >
+                            <label class="form-check-label" :for="person.id">{{person.option_text}}</label>
                         </div>
                     </div>
                 </div> <!--end of number-of-people -->
@@ -43,8 +43,8 @@
                     <h5 v-if="hideNew">Prihod koji očekujete da ostvarite u narednih godinu dana (od prodaje proizvoda, usluga...):<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Prihod koje ostvarujete na godišnjem nivou (od prodaje proizvoda, usluga...):</h5>
                     <div v-for="income in formData.incomes" :key="income.id" class="form-check">
-                        <input class="form-check-input 150" type="radio" :value="income.id" :id="income.title" v-model="incomeId"  >
-                        <label class="form-check-label" :for="income.title">{{income.title}}</label>
+                        <input class="form-check-input 150" type="radio" :value="income.id" :id="income.id" v-model="incomeId"  >
+                        <label class="form-check-label" :for="income.id">{{income.option_text}}</label>
                     </div>
                 
                     <div v-if="incomeId === 9 || incomeId === 10 || incomeId === 11"> 
@@ -52,8 +52,8 @@
                         <h5 v-if="hideNew">Da li želite da budete paušalno oporezovani?</h5>
                         <h5 v-else>Da li ste paušalno oporezovani?</h5>
                         <div v-for="extraIncome in formData.extraIncomes" :key="extraIncome.id" class="form-check">
-                            <input class="form-check-input" type="radio" :value="extraIncome.id" :id="extraIncome.title"  v-model="extraIncomeId"  >
-                            <label class="form-check-label" :for="extraIncome.title">{{extraIncome.title}}</label>
+                            <input class="form-check-input" type="radio" :value="extraIncome.id" :id="extraIncome.id"  v-model="extraIncomeId"  >
+                            <label class="form-check-label" :for="extraIncome.id">{{extraIncome.option_text}}</label>
                         </div>
                     </div>  <!-- end of the extra content -->
                 </div> <!--end of form-income -->
@@ -63,8 +63,8 @@
                     <h5 v-if="hideNew">Da li planirate da budete u sistemu pdv-a: <!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Da li ste u sistemu pdv-a:</h5>
                     <div v-for="pdv in formData.pdvs" :key="pdv.id" class="form-check" >
-                            <input class="form-check-input"  type="radio" :value="pdv.id" :id="pdv.title"  v-model="pdvId" >
-                            <label class="form-check-label" :for="pdv.title">{{pdv.title}}</label>
+                            <input class="form-check-input"  type="radio" :value="pdv.id" :id="pdv.id"  v-model="pdvId" >
+                            <label class="form-check-label" :for="pdv.id">{{pdv.option_text}}</label>
                     </div>
                 </div> <!--end of form-pdv -->
             <hr>
@@ -73,8 +73,8 @@
                     <h5 v-if="hideNew">Platni prometi koji ćete obavljati sa Vašim klijentima će biti:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Platni prometi koji obavljate sa Vašim klijentima je:</h5>
                     <div  v-for="payment in formData.payments" :key="payment.id" class="form-check">
-                        <input class="form-check-input" type="radio" :value="payment.id" :id="payment.title" v-model="paymentId">
-                        <label class="form-check-label" :for="payment.title">{{payment.title}}</label>
+                        <input class="form-check-input" type="radio" :value="payment.id" :id="payment.id" v-model="paymentId">
+                        <label class="form-check-label" :for="payment.id">{{payment.option_text}}</label>
                     </div>       
                 </div> <!--end of form-payments -->
             <hr>
@@ -83,8 +83,8 @@
                     <h5 v-if="hideNew">Vaši klijenti će biti:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Vaši klijenti su:</h5>
                     <div v-for="client in formData.clients" :key="client.id" class="form-check">
-                        <input class="form-check-input"  type="radio" :value="client.id" :id="client.title" v-model="clientId">
-                        <label class="form-check-label" :for="client.title">{{client.title}}</label>
+                        <input class="form-check-input"  type="radio" :value="client.id" :id="client.id" v-model="clientId">
+                        <label class="form-check-label" :for="client.id">{{client.option_text}}</label>
                     </div>       
                 </div> <!--end of form-clients -->
             <hr>
@@ -93,8 +93,8 @@
                     <h5 v-if="hideNew">Da li ste u obavezi da posedujete fiskalnu kasu:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Da li posedujete fiskalnu kasu:</h5>
                     <div v-for="cashRegister in formData.cashRegisters" :key="cashRegister.id" class="form-check">
-                        <input class="form-check-input"  type="radio" :value="cashRegister.id" :id="cashRegister.title" v-model="cashRegisterId">
-                        <label class="form-check-label" :for="cashRegister.title">{{cashRegister.title}}</label>
+                        <input class="form-check-input"  type="radio" :value="cashRegister.id" :id="cashRegister.id" v-model="cashRegisterId">
+                        <label class="form-check-label" :for="cashRegister.id">{{cashRegister.option_text}}</label>
                     </div>       
                 </div> <!--end of form-cash-register -->   
             <hr>
@@ -103,8 +103,8 @@
                     <h5 v-if="hideNew">Elektronsko bankartvo želite da: <!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Elektronsko bankarstvo:</h5>
                     <div v-for="eBanking in formData.eBankings" :key="eBanking.id" class="form-check">
-                        <input class="form-check-input"  type="radio" :value="eBanking.id" :id="eBanking.title" v-model="eBankingId">
-                        <label class="form-check-label" :for="eBanking.title">{{eBanking.title}}</label>
+                        <input class="form-check-input"  type="radio" :value="eBanking.id" :id="eBanking.id" v-model="eBankingId">
+                        <label class="form-check-label" :for="eBanking.id">{{eBanking.option_text}}</label>
                     </div>   
                 </div> <!--end of form-cash-e-banking -->   
             <hr>
@@ -239,15 +239,15 @@ export default {
           //income
           this.selectedIncome = this.formData.incomes.find(x => x.id === this.incomeId)
           //extraIncome
-
-            if(this.incomeId === 0){
+            console.log('extra income', this.extraIncomeId);
+            if(this.extraIncomeId === 14){
                 this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
-            }else if(this.incomeId === 1){
+            }else if(this.extraIncomeId === 15){
                 this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
-            }else if(this.incomeId === 2){
+            }else if(this.extraIncomeId === 16){
                 this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
             }else {
-               this.selectedExtraIncome = {title:"ne", price:0}
+               this.selectedExtraIncome = {option_text:"ne", price:0}
             }
 
           //pdv
