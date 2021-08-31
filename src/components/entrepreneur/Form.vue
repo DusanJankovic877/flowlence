@@ -10,7 +10,6 @@
                 <h4 v-if="hideNew">Tek planiram da se registrujem kao preduzetnik</h4>
                 <h4 v-else>Već poslujem u formi preduzetnika</h4>
             <hr>
-                <!-- <FormServices :hideNew="hideNew" :checkedServices="entrepreneurForm.checkedServices"/>  -->
                 <div class="form-services"> 
                   
                     <h5 v-if="hideNew">Planirate da se bavite:<!-- <span class="red"> *</span> --></h5>
@@ -59,20 +58,20 @@
                 </div> <!--end of form-income -->
             <hr>
                 <div class="pdv">
-
+<!-- pdv will be stated as item1 because its different for entrepreneur and doo -->
                     <h5 v-if="hideNew">Da li planirate da budete u sistemu pdv-a: <!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Da li ste u sistemu pdv-a:</h5>
-                    <div v-for="pdv in formData.pdvs" :key="pdv.id" class="form-check" >
+                    <div v-for="pdv in formData.item1" :key="pdv.id" class="form-check" >
                             <input class="form-check-input"  type="radio" :value="pdv.id" :id="pdv.id"  v-model="pdvId" >
                             <label class="form-check-label" :for="pdv.id">{{pdv.option_text}}</label>
                     </div>
                 </div> <!--end of form-pdv -->
             <hr>
                 <div class="payments">
-
+<!-- payments will be stated as item2 because its different for entrepreneur and doo -->
                     <h5 v-if="hideNew">Platni prometi koji ćete obavljati sa Vašim klijentima će biti:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Platni prometi koji obavljate sa Vašim klijentima je:</h5>
-                    <div  v-for="payment in formData.payments" :key="payment.id" class="form-check">
+                    <div  v-for="payment in formData.item2" :key="payment.id" class="form-check">
                         <input class="form-check-input" type="radio" :value="payment.id" :id="payment.id" v-model="paymentId">
                         <label class="form-check-label" :for="payment.id">{{payment.option_text}}</label>
                     </div>       
@@ -99,10 +98,11 @@
                 </div> <!--end of form-cash-register -->   
             <hr>
                 <div class="e-banking">
+<!-- e-banking will be stated as item3 because its different for entrepreneur and doo -->
 
                     <h5 v-if="hideNew">Elektronsko bankartvo želite da: <!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Elektronsko bankarstvo:</h5>
-                    <div v-for="eBanking in formData.eBankings" :key="eBanking.id" class="form-check">
+                    <div v-for="eBanking in formData.item3" :key="eBanking.id" class="form-check">
                         <input class="form-check-input"  type="radio" :value="eBanking.id" :id="eBanking.id" v-model="eBankingId">
                         <label class="form-check-label" :for="eBanking.id">{{eBanking.option_text}}</label>
                     </div>   
@@ -145,8 +145,7 @@ export default {
         return{
             //DATA TO BE POPULATED
             removedPdv: '',
-            removedExtraIncome: [],
-            handledPeople: [],
+            removedExtraIncome: '',
             entrepreneur: '',
                     totalPrice: [],
                     totalSum: 0,
@@ -193,10 +192,10 @@ export default {
         
         setHideNewValue(value){
             if(value && this.formData.extraIncomes.length == 2)this.formData.extraIncomes.push(this.removedExtraIncome);
-            if(value && this.formData.pdvs.length == 2)this.formData.pdvs.push(this.removedPdv);       
+            if(value && this.formData.item1.length == 2)this.formData.pdvs.push(this.removedPdv);       
         },
         setHideAlreadyValue(value){
-            if(value && this.formData.pdvs.length === 3) this.removedPdv = this.formData.pdvs.splice(2,1).pop();
+            if(value && this.formData.item1.length === 3) this.removedPdv = this.formData.pdvs.splice(2,1).pop();
             if(value && this.formData.extraIncomes.length === 3) this.removedExtraIncome = this.formData.extraIncomes.splice(2,1).pop();
         },
         showButtons(){
@@ -251,15 +250,15 @@ export default {
             }
 
           //pdv
-          this.selectedPdv = this.formData.pdvs.find(x => x.id === this.pdvId)
+          this.selectedPdv = this.formData.item1.find(x => x.id === this.pdvId)
           //payment
-          this.selectedPayment = this.formData.payments.find(x => x.id === this.paymentId)
+          this.selectedPayment = this.formData.item2.find(x => x.id === this.paymentId)
           //client
           this.selectedClient = this.formData.clients.find(x => x.id === this.clientId)
           //cash register
           this.selectedCashRegister = this.formData.cashRegisters.find(x => x.id === this.cashRegisterId)
           //e banking
-          this.selectedEBanking = this.formData.eBankings.find(x => x.id === this.eBankingId)
+          this.selectedEBanking = this.formData.item3.find(x => x.id === this.eBankingId)
 
           //SUMMARy
             //services summ
@@ -301,12 +300,8 @@ export default {
     computed:{
         ...mapGetters['formData'],
         
-    },
-    // async beforeRouteEnter(from, to, next){
-    //     // await this.setEntrepreneurFormData();
-    //     await this.$store.dispatch('setEntrepreneurFormData')
-    //     next();
-    // }
+    }
+
 
 }
 </script>

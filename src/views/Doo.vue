@@ -9,7 +9,7 @@
         <div class="row">
 
             <div :class="hide ?'entrepreneur-krug hide' : 'entrepreneur-krug'">
-                <button class="entrepreneur-prices-link" @click="handleNewEntrepreneur">
+                <button class="entrepreneur-prices-link" @click="handleNewDoo">
                 <router-link class="entrepreneur-prices-link" to="/price-list/entrepreneur">
                     <div class="entrepreneur-card-body">
                         <h2>Novi preduzetnik</h2>
@@ -20,7 +20,7 @@
             </div>
 
             <div :class="hide ?'entrepreneur-krug hide' : 'entrepreneur-krug'">
-                <button class="entrepreneur-prices-link" @click="handleAlreadyEntrepreneur">
+                <button class="entrepreneur-prices-link" @click="handleAlreadyDoo">
                     <div class="entrepreneur-card-body">
                         <h2>Već postojeći preduzetnik</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -35,50 +35,25 @@
     </div>
 </template>
 <script>
-import store from '../store'
-import Form from '../components/entrepreneur/Form.vue'
-import { mapGetters} from 'vuex'
 export default {
-    components:{
-        Form
-    },
     data() {
-       return{
+      return{
             hide: false,
             hideNew: false,
             hideAlready: false,
-       } 
+      }  
     },
+    methods: {
+        handleNewDoo(){
 
-    methods:{
-        handleNewEntrepreneur(){
-            this.hideNew = true
-            this.$refs.childComponent.setHideNewValue(this.hideNew);
+        },
+        handleAlreadyDoo(){
 
-            this.hide = true
-        },
-        handleAlreadyEntrepreneur(){
-            this.hideAlready = true
-            this.$refs.childComponent.setHideAlreadyValue(this.hideAlready);
-            this.hide = true
-        },
-        handleShowButtons(){
-            if(this.hideNew)this.hideNew = false
-            if(this.hideAlready)this.hideAlready = false
-            this.hide = false;
         }
-    },
-    computed:{
-        ...mapGetters(['formData']),
-    },
-        async beforeRouteEnter(from, to, next){
-        await store.dispatch('getFormData', {'path' : from.path})
-        next();
     }
-
 }
 </script>
-<style>
+<style scoped>
 .go-back-button{
     margin: 10px auto;
 }

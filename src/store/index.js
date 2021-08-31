@@ -22,9 +22,10 @@ export default new Vuex.Store({
     async getContactFormData(state, payload){
       await contactServices.getContactFormData(payload);
     },
-    async setEntrepreneurFormData(state){
-       const response = await entrepreneurService.setEntrepreneurFormData();
+    async getFormData(state, payload){
+       const response = await entrepreneurService.getFormData(payload);
        state.commit('setFormData', response)
+       
     }
   },
   getters: {

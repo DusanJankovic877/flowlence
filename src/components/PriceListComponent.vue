@@ -15,7 +15,7 @@
               </router-link>
             </div>
             <div class="krug">
-            <router-link class=" prices-link" to="/price-list">
+            <router-link class=" prices-link" to="/price-list/doo">
                 <div class="price-card-body">
                 <h1>DOO</h1>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
