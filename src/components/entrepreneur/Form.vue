@@ -2,8 +2,10 @@
 <div class="col-lg-7 m-auto">
 
       <hr>
-        <h2 v-if="hideNew">Novi preduzetnik</h2>
-        <h1 v-else>Postojeći preduzetnik</h1>
+        <h2 v-if="hideNew && isEntrepreneur">Novi preduzetnik</h2>
+        <h1 v-else-if="hideNew && isEntrepreneur == false">Novi Doo</h1>
+        <h1 v-else-if="isEntrepreneur">Postojeći preduzetnik</h1>
+        <h1 v-else-if="isEntrepreneur == false">Postojeći Doo</h1>
         <hr>
     
         <form @submit.prevent>
@@ -36,7 +38,23 @@
                         </div>
                     </div>
                 </div> <!--end of number-of-people -->
+                
             <hr>
+            <div>
+
+                <div v-if="isEntrepreneur == false" class="founders">
+
+                    <h5 v-if="hideNew">Osnivači društva će biti:<!-- <span class="red"> *</span> --></h5>
+                    <h5 v-else>Osnivači društva su:</h5>
+                    <div  class="input-group form-people">
+                        <div v-for="founder in formData.founders" :key="founder.id" class="form-check">
+                            <input class="form-check-input" type="radio"  :value="founder.id" :id="founder.id" v-model="peopleId" >
+                            <label class="form-check-label" :for="founder.id">{{founder.option_text}}</label>
+                        </div>
+                    </div>
+                </div> <!--end of founders -->
+                <hr>
+            </div>
                 <div class="income">
 
                     <h5 v-if="hideNew">Prihod koji očekujete da ostvarite u narednih godinu dana (od prodaje proizvoda, usluga...):<!-- <span class="red"> *</span> --></h5>
@@ -45,8 +63,8 @@
                         <input class="form-check-input 150" type="radio" :value="income.id" :id="income.id" v-model="incomeId"  >
                         <label class="form-check-label" :for="income.id">{{income.option_text}}</label>
                     </div>
-                
-                    <div v-if="incomeId === 9 || incomeId === 10 || incomeId === 11"> 
+
+                    <div v-if="isEntrepreneur && incomeId === 9 || isEntrepreneur && incomeId === 10 || isEntrepreneur && incomeId === 11"> 
                   
                         <h5 v-if="hideNew">Da li želite da budete paušalno oporezovani?</h5>
                         <h5 v-else>Da li ste paušalno oporezovani?</h5>
@@ -191,12 +209,17 @@ export default {
         ]),
         
         setHideNewValue(value){
-            if(value && this.formData.extraIncomes.length == 2)this.formData.extraIncomes.push(this.removedExtraIncome);
-            if(value && this.formData.item1.length == 2)this.formData.pdvs.push(this.removedPdv);       
+            if(this.isEntrepreneur){
+
+                if(value && this.formData.extraIncomes.length == 2)this.formData.extraIncomes.push(this.removedExtraIncome);
+            }
+            if(value && this.formData.item1.length == 2)this.formData.item1.push(this.removedPdv);       
         },
         setHideAlreadyValue(value){
-            if(value && this.formData.item1.length === 3) this.removedPdv = this.formData.pdvs.splice(2,1).pop();
-            if(value && this.formData.extraIncomes.length === 3) this.removedExtraIncome = this.formData.extraIncomes.splice(2,1).pop();
+            console.log();
+            if(value && this.formData.item1.length === 3) this.removedPdv = this.formData.item1.splice(2,1).pop();
+            if(this.isEntrepreneur){
+            if(value && this.formData.extraIncomes.length === 3) this.removedExtraIncome = this.formData.extraIncomes.splice(2,1).pop();}
         },
         showButtons(){
             this.servicesId = []
@@ -299,6 +322,10 @@ export default {
     },
     computed:{
         ...mapGetters['formData'],
+        isEntrepreneur(){
+            return this.$route.path == '/price-list/entrepreneur';
+        }
+
         
     }
 

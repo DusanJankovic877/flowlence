@@ -10,32 +10,40 @@
 
             <div :class="hide ?'entrepreneur-krug hide' : 'entrepreneur-krug'">
                 <button class="entrepreneur-prices-link" @click="handleNewDoo">
-                <router-link class="entrepreneur-prices-link" to="/price-list/entrepreneur">
+           
                     <div class="entrepreneur-card-body">
-                        <h2>Novi preduzetnik</h2>
+                        <h2>Novi DOO</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                </router-link>
+       
                 </button>
             </div>
 
             <div :class="hide ?'entrepreneur-krug hide' : 'entrepreneur-krug'">
                 <button class="entrepreneur-prices-link" @click="handleAlreadyDoo">
                     <div class="entrepreneur-card-body">
-                        <h2>Već postojeći preduzetnik</h2>
+                        <h2>Već postojeći DOO</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                 </button>
             </div>
         </div>
+        <button v-if="!hideNew && !hideAlready" class="go-back-button col-lg-3 btn btn-danger" @click="goBackTopRiceList">idi nazad</button>
 
         <div class="entrepreneur">
+      
             <Form ref="childComponent" @handle-show-buttons="handleShowButtons" :formData="formData"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
         </div>
     </div>
 </template>
 <script>
+import store from '../store'
+import Form from '../components/entrepreneur/Form.vue'
+import { mapGetters} from 'vuex'
 export default {
+    components:{
+        Form
+    },
     data() {
       return{
             hide: false,
@@ -44,12 +52,31 @@ export default {
       }  
     },
     methods: {
+        goBackTopRiceList(){
+            this.$router.push('/price-list')
+        },
         handleNewDoo(){
-
+            this.hideNew = true
+            this.$refs.childComponent.setHideNewValue(this.hideNew);
+            this.hide = true
         },
         handleAlreadyDoo(){
-
+            this.hideAlready = true
+            this.$refs.childComponent.setHideAlreadyValue(this.hideAlready);
+            this.hide = true
+        },
+        handleShowButtons(){
+            if(this.hideNew)this.hideNew = false
+            if(this.hideAlready)this.hideAlready = false
+            this.hide = false;
         }
+    },
+        computed:{
+        ...mapGetters(['formData']),
+    },
+        async beforeRouteEnter(from, to, next){
+        await store.dispatch('getFormData', {'path' : from.path})
+        next();
     }
 }
 </script>

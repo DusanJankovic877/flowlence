@@ -10,12 +10,12 @@
 
             <div :class="hide ?'entrepreneur-krug hide' : 'entrepreneur-krug'">
                 <button class="entrepreneur-prices-link" @click="handleNewEntrepreneur">
-                <router-link class="entrepreneur-prices-link" to="/price-list/entrepreneur">
+           
                     <div class="entrepreneur-card-body">
                         <h2>Novi preduzetnik</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                </router-link>
+               
                 </button>
             </div>
 
@@ -28,10 +28,11 @@
                 </button>
             </div>
         </div>
-
         <div class="entrepreneur">
             <Form ref="childComponent" @handle-show-buttons="handleShowButtons" :formData="formData"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
         </div>
+    
+        <button v-if="!hideNew && !hideAlready" class="go-back-button col-lg-3 btn btn-danger" @click="goBackTopRiceList">Idi nazad</button>
     </div>
 </template>
 <script>
@@ -51,10 +52,12 @@ export default {
     },
 
     methods:{
+        goBackTopRiceList(){
+            this.$router.push('/price-list')
+        },
         handleNewEntrepreneur(){
             this.hideNew = true
             this.$refs.childComponent.setHideNewValue(this.hideNew);
-
             this.hide = true
         },
         handleAlreadyEntrepreneur(){
@@ -69,7 +72,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['formData']),
+        ...mapGetters(['formData'])
     },
         async beforeRouteEnter(from, to, next){
         await store.dispatch('getFormData', {'path' : from.path})
