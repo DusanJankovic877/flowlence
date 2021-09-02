@@ -42,9 +42,9 @@
                 </div> <!--end of number-of-people -->
                 
             <hr>
-            <div>
+            <!-- <div> -->
 
-                <div v-if="isEntrepreneur == false" class="founders">
+                <!-- <div v-if="isEntrepreneur == false" class="founders"> -->
 
                     <h5 v-if="hideNew">Osnivači društva će biti:<!-- <span class="red"> *</span> --></h5>
                     <h5 v-else>Osnivači društva su:</h5>
@@ -54,9 +54,9 @@
                             <label class="form-check-label" :for="founder.id">{{founder.option_text}}</label>
                         </div>
                     </div>
-                </div> <!--end of founders -->
+                <!-- </div> end of founders -->
                 <hr>
-            </div>
+            <!-- </div> -->
                 <div class="income">
 
                     <h5 v-if="hideNew">Prihod koji očekujete da ostvarite u narednih godinu dana (od prodaje proizvoda, usluga...):<!-- <span class="red"> *</span> --></h5>
@@ -147,9 +147,9 @@
                     </div>
 
                 </div> <!--end of form-email --> 
-                <div :class="hide ? 'showButtons row ' : 'hide row '">
-                    <button class="go-back-button col-lg-3 btn btn-danger" @click="showButtons">Idi nazad</button>
-                    <button class="submit-button col-lg-3 btn btn-success" @click="submitEntrepreneurForm">Pošalji</button>
+                <div :class="hide ? 'showButtons circles ' : 'hide circles '">
+                    <button class="go-back-button col-lg-4 btn btn-danger" @click="showButtons">Idi nazad</button>
+                    <button class="submit-button col-lg-4 btn btn-success" @click="submitEntrepreneurForm">Pošalji</button>
                 </div>
            
         </form>
@@ -245,7 +245,7 @@ export default {
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
         async submitEntrepreneurForm(){
-  
+            if(this.totalPrice !== 0 )this.totalSum = 0; this.totalPrice = []
             if(this.hideNew && this.$route.path == "/price-list/entrepreneur") this.entrepreneur = 'Novi preduzetnik';
             else if(this.hideNew && this.$route.path == "/price-list/doo")this.doo = 'Novi Doo';
             else if(this.hideAlready && this.$route.path == "/price-list/entrepreneur")this.entrepreneur = 'Postojeći preduzetnik'
@@ -369,6 +369,8 @@ export default {
 }
 </script>
 <style>
+.go-back-button{margin-left: 0;}
+.submit-button{margin-left: auto;}
 .red{
     color: red;
 }

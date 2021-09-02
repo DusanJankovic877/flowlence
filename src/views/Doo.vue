@@ -6,7 +6,7 @@
         <h4 v-if="hide">Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
         <h4 v-else>Izaberite ponuđene opcije kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
 
-        <div class="row">
+        <div class="circles">
 
             <div :class="hide ?'entrepreneur-krug hide' : 'entrepreneur-krug'">
                 <button class="entrepreneur-prices-link" @click="handleNewDoo">
@@ -28,7 +28,7 @@
                 </button>
             </div>
         </div>
-        <button v-if="!hideNew && !hideAlready" class="go-back-button col-lg-3 btn btn-danger" @click="goBackTopRiceList">idi nazad</button>
+        <button v-if="!hideNew && !hideAlready" class="go-back-button col-lg-3 btn btn-danger" @click="goBackToPriceList">idi nazad</button>
 
         <div class="entrepreneur">
       
@@ -52,7 +52,7 @@ export default {
       }  
     },
     methods: {
-        goBackTopRiceList(){
+        goBackToPriceList(){
             this.$router.push('/price-list')
         },
         handleNewDoo(){
@@ -91,4 +91,5 @@ export default {
 .hide{
     display: none !important;
 }
+
 </style>

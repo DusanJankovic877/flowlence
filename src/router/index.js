@@ -8,6 +8,7 @@ import Blog from '../views/Blog.vue'
 import Contact from '../views/Contact.vue'
 import Entrepreneur from '../views/Entrepreneur.vue'
 import Doo from '../views/Doo.vue'
+import Association from '../views/Association.vue'
 
 
 Vue.use(VueRouter)
@@ -42,6 +43,11 @@ const routes = [
     path: '/price-list/doo',
     name: 'price-list',
     component: Doo
+  },
+  {
+    path: '/price-list/association',
+    name: 'price-list',
+    component: Association
   },
   
   {

@@ -1,7 +1,7 @@
 <template>
         <div class="services col-lg-7 m-auto">
           <h1>Usluge</h1>
-    <div class="row">
+    <div class="circles">
 
           <div class="krug">
             <router-link class="prices-link" to="/price-list/entrepreneur">

@@ -1,7 +1,8 @@
 import { RequestHandler } from "./RequestHandler";
 class DooService extends RequestHandler{
    async getDooFormData(payload){
-       const reponse = await this.apiClient.post("/doo-mail", payload);
+       const response = await this.apiClient.post("/doo-mail", payload);
+       console.log(response);
     }
 }
 const dooService = new DooService();
