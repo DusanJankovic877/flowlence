@@ -2,15 +2,17 @@
 <div class="col-lg-7 m-auto">
 
       <hr>
-        <h2 v-if="hideNew && isEntrepreneur">Novi preduzetnik</h2>
-        <h1 v-else-if="hideNew && isEntrepreneur == false">Novi Doo</h1>
+        <h1 v-if="hideNew && isEntrepreneur">Novi preduzetnik</h1>
         <h1 v-else-if="isEntrepreneur">Postojeći preduzetnik</h1>
+        <h1 v-else-if="hideNew && isEntrepreneur == false">Novi Doo</h1>
         <h1 v-else-if="isEntrepreneur == false">Postojeći Doo</h1>
         <hr>
     
         <form @submit.prevent>
-                <h4 v-if="hideNew">Tek planiram da se registrujem kao preduzetnik</h4>
-                <h4 v-else>Već poslujem u formi preduzetnika</h4>
+                <h4 v-if="hideNew && isEntrepreneur">Tek planiram da se registrujem kao preduzetnik</h4>
+                <h4 v-else-if="isEntrepreneur">Već poslujem u formi preduzetnika</h4>
+                <h4 v-if="hideNew && isEntrepreneur == false">Tek planiram da se registrujem kao Doo</h4>
+                <h4 v-else-if="isEntrepreneur == false">Već poslujem u formi Doo</h4>
             <hr>
                 <div class="form-services"> 
                   
@@ -48,7 +50,7 @@
                     <h5 v-else>Osnivači društva su:</h5>
                     <div  class="input-group form-people">
                         <div v-for="founder in formData.founders" :key="founder.id" class="form-check">
-                            <input class="form-check-input" type="radio"  :value="founder.id" :id="founder.id" v-model="peopleId" >
+                            <input class="form-check-input" type="radio"  :value="founder.id" :id="founder.id" v-model="founderId" >
                             <label class="form-check-label" :for="founder.id">{{founder.option_text}}</label>
                         </div>
                     </div>
@@ -165,6 +167,7 @@ export default {
             removedPdv: '',
             removedExtraIncome: '',
             entrepreneur: '',
+            doo: '',
                     totalPrice: [],
                     totalSum: 0,
                 //services
@@ -175,6 +178,9 @@ export default {
                 //people
                     selectedPeople: {},
                     peopleId:'',
+                //founders
+                    selectedFounder: {},
+                    founderId: '',
                 //income
                     selectedIncome: {},
                     incomeId:'',
@@ -196,27 +202,27 @@ export default {
                 //e banking
                     selectedEBanking: {},
                     eBankingId: '',
+
                 comment: '',
                 email: '',
                 entrepreneurFormData: {},
+                dooFormData: {},
             
         } 
     },
     props: {hideNew: Boolean, hide: Boolean, hideAlready: Boolean, formData: Object},
     methods:{
         ...mapActions([
-            'getEntrepreneurFormData','setEntrepreneurFormData'
+            'getEntrepreneurFormData','setEntrepreneurFormData', 'getDooFormData'
         ]),
         
         setHideNewValue(value){
             if(this.isEntrepreneur){
-
                 if(value && this.formData.extraIncomes.length == 2)this.formData.extraIncomes.push(this.removedExtraIncome);
             }
             if(value && this.formData.item1.length == 2)this.formData.item1.push(this.removedPdv);       
         },
         setHideAlreadyValue(value){
-            console.log();
             if(value && this.formData.item1.length === 3) this.removedPdv = this.formData.item1.splice(2,1).pop();
             if(this.isEntrepreneur){
             if(value && this.formData.extraIncomes.length === 3) this.removedExtraIncome = this.formData.extraIncomes.splice(2,1).pop();}
@@ -233,15 +239,18 @@ export default {
             this.eBankingId = ''
             this.comment = ''
             this.email = ''
+            this.founders = ''
       
 
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
         async submitEntrepreneurForm(){
-            if(this.hideNew) this.entrepreneur = 'Novi preduzetnik'
-            else this.entrepreneur = 'Postojeći preduzetnik'
-            
-            console.log(this.entrepreneur);
+  
+            if(this.hideNew && this.$route.path == "/price-list/entrepreneur") this.entrepreneur = 'Novi preduzetnik';
+            else if(this.hideNew && this.$route.path == "/price-list/doo")this.doo = 'Novi Doo';
+            else if(this.hideAlready && this.$route.path == "/price-list/entrepreneur")this.entrepreneur = 'Postojeći preduzetnik'
+            else if(this.hideAlready && this.$route.path == "/price-list/doo")this.doo = 'Postojeći Doo'
+
         if(this.selectedPrice.length !== 0){
             this.selectedPrice = []; this.selectedServices= []; this.servicesSum = 0; this.servicesId=[];
             }
@@ -257,19 +266,23 @@ export default {
           });
           //people
           this.selectedPeople = this.formData.people.find(x => x.id === this.peopleId)
-              console.log(this.selectedPeople);
+
+          //founders
+          if(this.formData.founders)this.selectedFounder = this.formData.founders.find(x => x.id == this.founderId)
           //income
           this.selectedIncome = this.formData.incomes.find(x => x.id === this.incomeId)
           //extraIncome
             console.log('extra income', this.extraIncomeId);
-            if(this.extraIncomeId === 14){
-                this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
-            }else if(this.extraIncomeId === 15){
-                this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
-            }else if(this.extraIncomeId === 16){
-                this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
-            }else {
-               this.selectedExtraIncome = {option_text:"ne", price:0}
+            if(this.formData.extraIncomes){
+                if(this.extraIncomeId === 14){
+                    this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
+                }else if(this.extraIncomeId === 15){
+                    this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
+                }else if(this.extraIncomeId === 16){
+                    this.selectedExtraIncome = this.formData.extraIncomes.find(x => x.id === this.extraIncomeId)
+                }else {
+                   this.selectedExtraIncome = {option_text:"ne", price:0}
+                }
             }
 
           //pdv
@@ -289,8 +302,9 @@ export default {
             if(this.servicesSum)this.totalPrice.push(this.servicesSum);
             //others sum
             if(this.selectedPeople)this.totalPrice.push(this.selectedPeople.price);
+            if(this.selectedFounder == true)this.totalPrice.push(this.selectedFounder.price)
             if(this.selectedIncome)this.totalPrice.push(this.selectedIncome.price);
-            if(this.selectedExtraIncome)this.totalPrice.push(this.selectedExtraIncome.price);
+            if(this.selectedExtraIncome == true)this.totalPrice.push(this.selectedExtraIncome.price);
             if(this.selectedPdv)this.totalPrice.push(this.selectedPdv.price)
             if(this.selectedPayment)this.totalPrice.push(this.selectedPayment.price)
             if(this.selectedClient)this.totalPrice.push(this.selectedClient.price)
@@ -298,26 +312,48 @@ export default {
             if(this.selectedEBanking)this.totalPrice.push(this.selectedEBanking.price)
 
             this.totalSum = this.totalPrice.reduce((a,b) => a + b, 0);
-                console.log('total sum',this.totalSum);
+      
+            }
+            if(this.$route.path == "/price-list/entrepreneur"){
+               
+                await this.getEntrepreneurFormData(
+                 this.entrepreneurFormData =  {  
+                     entrepreneur: this.entrepreneur,
+                     checkedServices : this.selectedServices,
+                     people: this.selectedPeople,
+                     income:  this.selectedIncome,
+                     incomeExtra:  this.selectedExtraIncome,
+                     pdv:  this.selectedPdv,
+                     payment: this.selectedPayment,
+                     client: this.selectedClient,
+                     cashRegister: this.selectedCashRegister,
+                     eBanking: this.selectedEBanking,
+                     comment: this.comment,
+                     email: this.email,
+                     totalSum: this.totalSum,
+                     checkedServicesSum: this.servicesSum
+                 }).then(response => console.log(response)).catch(err => console.log(err.response.data));
+            }else if(this.$route.path == "/price-list/doo"){
+                await this.getDooFormData(
+                    this.dooFormData = {
+                        doo: this.doo,
+                        checkedServices : this.selectedServices,
+                        people: this.selectedPeople,
+                        founders: this.selectedFounder,
+                        income:  this.selectedIncome,
+                        pdv:  this.selectedPdv,
+                        payment: this.selectedPayment,
+                        client: this.selectedClient,
+                        cashRegister: this.selectedCashRegister,
+                        eBanking: this.selectedEBanking,
+                        comment: this.comment,
+                        email: this.email,
+                        totalSum: this.totalSum,
+                        checkedServicesSum: this.servicesSum
+                    } 
+                );
             }
 
-           await this.getEntrepreneurFormData(
-            this.entrepreneurFormData =  {  
-                entrepreneur: this.entrepreneur,
-                checkedServices : this.selectedServices,
-                people: this.selectedPeople,
-                income:  this.selectedIncome,
-                incomeExtra:  this.selectedExtraIncome,
-                pdv:  this.selectedPdv,
-                payment: this.selectedPayment,
-                client: this.selectedClient,
-                cashRegister: this.selectedCashRegister,
-                eBanking: this.selectedEBanking,
-                comment: this.comment,
-                email: this.email,
-                totalSum: this.totalSum,
-                checkedServicesSum: this.servicesSum
-            }).then(response => console.log(response)).catch(err => console.log(err.response.data));
         }
     },
     computed:{
