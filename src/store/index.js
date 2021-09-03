@@ -28,6 +28,9 @@ export default new Vuex.Store({
     async getDooFormData(state, payload){
       await dooService.getDooFormData(payload)
     },
+    async getAssociationMailData(state, payload){
+      await associationService.getAssociationMailData(payload)
+    },
     async getAssociationFormData(state){
       const response = await associationService.getAssociationFormData();
       state.commit('setAssociationFormData', response)
@@ -37,8 +40,7 @@ export default new Vuex.Store({
     },
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
-       state.commit('setFormData', response)
-       
+       state.commit('setFormData', response)   
     }
   },
   getters: {

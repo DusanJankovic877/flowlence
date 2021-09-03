@@ -166,10 +166,12 @@
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
     data() {
       return{
         association: '',
+        associationMailData:{},
         assocFounderId: '',
         selectedAssocFounder: {},
         assocFounder2Id: '',
@@ -190,10 +192,15 @@ export default {
         selectedEbanking: {},
         totalPrice: [],
         totalSum: 0,
+        comment: '',
+        email: ''
       }  
     },
     props: {hideNew: Boolean, hide: Boolean, hideAlready: Boolean, formData: Object},
     methods:{
+                ...mapActions([
+             'getAssociationMailData'
+        ]),
         setHideNewValue(value){
             console.log(value);
             // if(this.isEntrepreneur){
@@ -225,7 +232,7 @@ export default {
 
           this.$emit('handle-show-buttons', this.hideNew, this.hideAlready)
         },
-        submitEntrepreneurForm(){
+        async submitEntrepreneurForm(){
             if(this.totalPrice !== 0 )this.totalSum = 0; this.totalPrice = []
             if(this.hideNew) this.association = 'Novo udruženje';
             else this.association = 'Već postojeće udruženje';
@@ -269,6 +276,29 @@ export default {
             this.totalSum = this.totalPrice.reduce((a,b) => a + b, 0);
             console.log('price',this.totalPrice.length);
             console.log(this.totalSum);
+
+            await this.getAssociationMailData(
+                this.associationMailData = {
+                    association: this.association,
+                    assocFounder: this.selectedAssocFounder,
+                    assocFounder2: this.selectedAssocFounder2,
+                    registration: this.selectedRegistration,
+                    income: this.selectedIncome,
+                    person: this.selectedPerson,
+                    pdv: this.selectedPdv,
+                    payment: this.selectedPayment,
+                    cashRegister: this.selectedPayment,
+                    eBanking: this.selectedEbanking,
+                    comment: this.comment,
+                    email: this.email,
+                    totalSum: this.totalSum
+
+
+                }
+            )
+    
+
+            
         }
     }
 }
