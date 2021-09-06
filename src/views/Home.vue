@@ -38,12 +38,15 @@ export default {
 }
 </script>
 <style>
+
 .home{
   margin-bottom: -310px !important;
 }
 
 .contact{
+  position: relative;
   margin-top: -100px;
+  margin-bottom: -424px !important;
 }
 .contact-info {
   background-color: #1194A8;

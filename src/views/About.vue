@@ -44,7 +44,9 @@ body{
   box-sizing: border-box !important;
 }
 .about{
+  position: relative;
   margin-top: -151px !important;
+  margin-bottom: -423px !important;
 }
 .about-content  {
   background-color: #3EB2A2;

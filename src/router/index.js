@@ -24,11 +24,13 @@ const routes = [
     name: 'about',
     component: About
   },
-  {
-    path: '/services',
-    name: 'services',
-    component: Services
-  },
+
+{
+  path: '/services',
+  name: 'services',
+  component: Services
+},
+//PRICE LIST
   {
     path: '/price-list',
     name: 'price-list',
@@ -49,7 +51,7 @@ const routes = [
     name: 'price-list',
     component: Association
   },
-  
+//END OF PRICE LIST
   {
     path: '/blog',
     name: 'blog',
