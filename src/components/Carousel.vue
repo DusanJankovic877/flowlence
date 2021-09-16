@@ -7,7 +7,7 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="../assets/racunovodja.jpg" class="d-block w-100" alt="a">
+          <img src="../assets/kafa2.jpg" class="d-block w-100" alt="a">
           <div class="carousel-caption  d-md-block">
             <h5>Zakažite konsultacije</h5>
             <p>Some representative placeholder content for the first slide.</p>
@@ -17,14 +17,14 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img src="../assets/racunovodja2.jpg" class="d-block w-100" alt="a">
+          <img src="../assets/naocare.jpg" class="d-block w-100" alt="a">
           <div class="carousel-caption d-md-block">
             <h5>Second slide label</h5>
             <p>Some representative placeholder content for the second slide.</p>
           </div>
         </div>
         <div class="carousel-item">
-          <img src="../assets/racunovodja.jpg" class="d-block w-100" alt="a">
+          <img src="../assets/3.jpg" class="d-block w-100" alt="a">
           <div class="carousel-caption  d-md-block">
             <h5>Third slide label</h5>
             <p>Some representative placeholder content for the third slide.</p>
@@ -44,18 +44,20 @@
 </template>
 <style>
 .carousel-inner{
+  
   height: 70vh !important;
+
 }
 .carousel-caption{
   right: 0;
   left: 0;
-  bottom: 50%;
+  bottom: 10%;
   background:rgba(0, 0, 0, 0.57) !important;
   width: 50%;
   margin:0  auto;
 }
 .carousel-indicators{
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 .carousel-caption a{
   border-radius: 0 !important;

@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-      <svg class="footer-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="white" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+      <!-- <svg class="footer-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="white" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg> -->
 
         <div class="footer-content">
 
@@ -14,15 +14,21 @@
     </div>
 </template>
 <style>
-.footer-top{
+.footer{
 
-    margin-bottom: -320px;
+    /* margin-top: 100px; */
 }
 .footer-content{
+    padding:0 5px;
     padding-top: 100px;
-    background-color: #2B5877;
-    color: white;
+    background-color: #e6e6e6;
+    color: #404040;
     padding-bottom: 10px;
 }
+@media only screen and (max-width: 1024px){
+
+}
+@media only screen and (max-width: 768px){}
+@media only screen and (max-width: 414px){}
 
 </style>

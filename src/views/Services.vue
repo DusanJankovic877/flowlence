@@ -160,9 +160,9 @@ export default {
 </script>
 <style >
 .services {
-  margin-top: 300px !important;
+  margin-top: 50px !important;
   margin-bottom: -160px !important;
-  padding-bottom: 158px;
+  padding-bottom: 156px;
 
 }
 .text-left p{
@@ -191,7 +191,7 @@ export default {
 }
 .krug:hover {
   text-decoration: none;
-  background-color: #385663;
+  background-color: #e6e6e6;
   font-family: 'RobotoSlab-Medium', sans-serif !important;
   border-radius: 25em;
 

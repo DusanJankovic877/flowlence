@@ -5,13 +5,13 @@
           <div class="info-row">
             <div class="col-lg-2 info-mail">
               <p>
-              <img src="../../assets/svg/telephone.svg" alt="phone">
+              <img src="../../assets/svg/telephone-fill.svg" alt="phone">
                 &nbsp;flowlence@gmail.com
               </p>
             </div>
             <div class="info-phone col-lg-2 ">
               <p>
-                <img src="../../assets/svg/envelope.svg" alt="phone"> 
+                <img src="../../assets/svg/envelope-fill.svg" alt="phone"> 
                 &nbsp;+38163466371
                 </p>
             </div>
@@ -40,7 +40,7 @@
                 Procena cena usluge   
                 <b-dropdown id="dropdown-1"  right class="m-2">
                   <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">Preduzetnik</router-link></b-dropdown-item>
-                  <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">DOO</router-link></b-dropdown-item>
+                  <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur" style="width: 100px !important">DOO</router-link></b-dropdown-item>
                   <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">Udruženje</router-link></b-dropdown-item>
                 </b-dropdown> 
                 </router-link>
@@ -55,8 +55,11 @@
 
             
           </ul>
+          
         </div>
+        
       </div>
+      
     </nav>
     
 </template>
@@ -80,14 +83,14 @@ export default {
 }
 nav {
   display: block !important;
-  background-color: #2B5877 !important;
-  border-bottom: 3px solid #fba822;
+  background-color: #e6e6e6 !important;
+  /* border-bottom: 3px solid #fba822; */
 }
 .nav-links, .navbar-brand{
   padding-bottom: 20px;
 }
 nav p, a{
-  color: #98B4C2;
+  /* color: #404040 !important; */
 }
 .info-row{
   margin-right: 0;
@@ -117,26 +120,29 @@ nav p, a{
 
 }
 .expand, .dropdown-label{
-  background-color: #2B5877 ;
+  background-color: #4d4d4d ;
 }
 #dropdown-1{
   margin: 0 !important;
 }
+.dropdown-menu{
+  background-color: #e6e6e6 !important;
+}
 .dropdown-item:hover{
-  background-color: #2B5877;
+  background-color: #4d4d4d;
 }
 
 #dropdown-1__BV_toggle_:hover{
-  background-color: #FBA922;
-  color: #2B5877
+  background-color: #4d4d4d;
+  color: #f2f2f2
 }
 #dropdown-1__BV_toggle_{
-  background-color: #2B5877;
+  background-color: #e6e6e6;
   margin: 0 !important;
   padding: 0 7px;
   border: none;
   box-shadow: none !important;
-  color: #72A5C2;
+  color: #4d4d4d;
 }
 @media only screen and (max-width: 1024px){
     nav{

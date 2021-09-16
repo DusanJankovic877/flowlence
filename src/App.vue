@@ -32,13 +32,15 @@ export default{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+
 }
 p, a, label{
   font-family: 'RobotoSlab-Medium', sans-serif !important;
+  color: #404040 !important;
 }
 h1, h2, h3, h4, h5{
   font-family: 'RobotoSlab-Bold', sans-serif !important;
+  color: #404040 !important;
 }
 
 

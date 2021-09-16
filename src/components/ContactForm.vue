@@ -1,7 +1,6 @@
 <template>
     <div class="form col-lg-12">
-      <div class="row">
-        <div class="left col-lg-4" >
+        <div class="col-lg-4 left">
         <div class="contact-text col-lg-12">
           <h2>KONTAKTIRAJTE NAS</h2>
           <p>
@@ -14,7 +13,7 @@
           <p>+381 63 466 371</p>
         </div>
         </div>
-        <div class="right col-lg-8" >
+        <div class="col-lg-8 right" >
         <b-form @submit.prevent v-if="show" class="contact-form col-lg-8">
           <!-- NAME -->
             <b-form-group id="input-name" label="Vaše Ime:" label-for="input-name">
@@ -24,7 +23,7 @@
               </div>
               <div v-else></div>
             </b-form-group>
-          <div class="row">
+         
             <div class="col-lg-6">
               <!-- EMAIL -->
               <b-form-group id="input-email" label="Email adresa:" label-for="input-email">
@@ -45,7 +44,7 @@
                 <div v-else></div>
               </b-form-group>
             </div>
-          </div>
+          
           <b-form-group id="input-message" label="Poruka:" label-for="input-message">
             <b-form-textarea id="input-message" v-model="form.message" rows="3"  placeholder="Unesite poruku" required></b-form-textarea>
           <div class="alert alert-danger" role="alert" v-if="errors.message.length">
@@ -53,14 +52,14 @@
           </div>
           <div v-else></div>
           </b-form-group>
-          <div class="col-lg-12 ">
-            <div class="row">
-              <b-button class="col-lg-3 contact-form-button" @click="handleSubmit">Pošaljite</b-button>
-            </div>
+          <div class="col-lg-12" >
+           
+              <b-button class="col-lg-3 contact-form-button" @click="handleSubmit" style="float:right;">Pošaljite</b-button>
+           
           </div>
         </b-form>
         </div>
-        </div>
+       
     </div>  
 </template>
 <script>
@@ -128,12 +127,14 @@ export default {
     margin: 0 auto;
   }
   .left{
-
+    float: left;
     padding-top: 50px !important;
     text-align: left;
     margin: 0 auto !important;
   }
   .right{
+    float: right;
+
     padding: 50px 0px 0px 0px;
     
   }
@@ -190,10 +191,11 @@ export default {
 
   .left{
     padding-top: 50px;
-    padding-left: 0px !important;
+    padding: 0px  5px!important;
   }
   .right{
-    padding-left: 0px !important;
+    padding: 5px !important;
+    float: none;
   }
 }
 </style>

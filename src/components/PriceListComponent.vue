@@ -37,6 +37,10 @@
     </div> <!-- end of price list -->
 </template>
 <style scoped>
+.price-list{
+  position:relative;
+  margin-bottom: -423px !important;
+}
 .price-info{
   background-color: #FBA922;
 }
@@ -79,11 +83,24 @@
   border-radius: 0;
 }
 @media only screen and (max-width: 1024px){
+  .price-list{
+    margin-bottom: -167px !important;
+  }
   .price-row{
   display: inherit;
+  }
+  .price-info{
+    padding-bottom: 50px;
+  }
 }
-.price-info{
-  padding-bottom: 50px;
+@media only screen and (max-width: 768px){
+    .price-list{
+    margin-bottom: -125px !important;
+  }
 }
+@media only screen and (max-width: 414px){
+    .price-list{
+    margin-bottom: -90px !important;
+  }
 }
 </style>
