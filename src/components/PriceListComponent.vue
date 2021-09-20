@@ -39,23 +39,17 @@
 <style scoped>
 .price-list{
   position:relative;
-  margin-bottom: -423px !important;
+  margin-bottom: -163px !important;
 }
 .price-info{
   background-color: #FBA922;
 }
-.prices-link{
-  text-decoration: none;
-  color: #385663;
-}
-.prices-link:hover{
-  color: white !important;
-}
+
 .price-row{
   display: flex;
 }
 
-.krug{
+ .krug{
     background-color: white;
     height: 320px;
     width: 320px;
@@ -66,17 +60,19 @@
 
 .krug:hover {
   text-decoration: none;
-  background-color: #385663;
+  background-color: #8b8b8b;
   font-family: 'RobotoSlab-Medium', sans-serif !important;
   border-radius: 25em;
 
 }
+
 .price-card-body{
   height: 320px;
   width: 320px;
   border-radius: 25em !important;
   padding: 93px 10px 0 10px;
 }
+
 
 
 .price-list a, .contact a{

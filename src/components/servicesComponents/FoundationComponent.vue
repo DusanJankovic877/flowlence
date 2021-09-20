@@ -1,6 +1,7 @@
 <template>
 <div class="col-lg-4 m-auto service-height">
     <h2>Osnivanje</h2>
+    {{fromRoute}}
     <ul class="text-left">
         <li>    
             <p>konsalting pre postupka osnivanja (izbor odgovarajuće pravne forme, definisanje pretežne
@@ -15,8 +16,8 @@
         </li>
     </ul>
 
-
-    <button class="btn btn-danger" @click="goBack">idi nazad</button>
+    <button class="btn btn-danger" v-if="fromRoute === 'home'" @click="goBackToHome">Nazad na početnu</button>
+    <button v-else class="btn btn-danger" @click="goBack">Idi nazad</button>
 </div>
 </template>
 <script>
@@ -26,9 +27,17 @@ export default {
 
        } 
     },
+      computed: {
+    fromRoute() {
+        return this.$route.params.from;
+    }
+},
     methods:{
         goBack(){
             this.$emit('send-result-values', false) 
+        },
+        goBackToHome(){
+            this.$router.push('/')
         }
     },
 }
