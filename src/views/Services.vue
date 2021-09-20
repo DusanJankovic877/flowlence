@@ -187,7 +187,7 @@ export default {
 .service-height{
   position: relative;
   z-index: 1;
-  height:460px !important;
+  min-height:460px !important;
   margin-bottom: 5px !important;
 }
 .krug{
