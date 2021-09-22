@@ -79,7 +79,7 @@
 }
 @media only screen and (max-width: 600px){
     .carousel-inner{
-  height: 45vh !important;
+  height: 55vh !important;
   /* bottom: 150px; */
 }
 
@@ -111,7 +111,7 @@
   .carousel-indicators button{
     /* margin: 0 215px ; */
   margin-bottom:75px !important;
-
+color:black !important;
   width: 15px !important;
 }
 .carousel-caption{
@@ -122,5 +122,24 @@
   width: 70%;
   margin:0  auto;
 }
+}
+@media only screen and (max-width: 414px){
+  .carousel{
+    
+    height: 139px;
+  }
+  .carousel-inner{
+    margin-bottom: -267px;
+  }
+  .carousel-indicators{
+    margin: 0 !important;
+    margin-bottom: 15px !important;
+    height: 9px !important;
+
+  }
+  .carousel button{
+    margin-bottom: 250px;
+
+  }
 }
 </style>

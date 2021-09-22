@@ -1,5 +1,5 @@
 <template>
-    <div class="form col-lg-12">
+    <div class="form col-lg-7 m-auto">
         <div class="col-lg-4 left">
         <div class="contact-text col-lg-12">
           <h2>KONTAKTIRAJTE NAS</h2>

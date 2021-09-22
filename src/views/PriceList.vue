@@ -1,5 +1,7 @@
 <template>
-<div>
+<div class="price-list">
+  <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
+
     <PriceListComponent class="price-list-component"/>
 </div>
 </template>
@@ -13,6 +15,13 @@ export default {
 }
 </script>
 <style>
+.price-list{
+    margin-bottom: -311px !important;
+
+}
+.price-list-img{
+  margin-bottom: -120px;
+}
 .price-list-component{
     margin-top: -190px;
 }

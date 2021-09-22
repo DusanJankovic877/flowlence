@@ -1,5 +1,9 @@
 <template>
+<div>
+
+  <img class=" responsive" src="../assets/3.jpg" alt="">
         <div class="services col-lg-7 m-auto">
+  
           <h1>Usluge</h1>
 
     <div :class="hide ? 'circles hide' : 'circles'">
@@ -69,6 +73,7 @@
     <CalculationFinancialIndicatorsComponent @send-result-values="calculationFinancialIndicatorsReset" :class="calculation ? ' ' : 'hide' "/>
 
   </div>
+</div>
 </template>
 <script>
 import AccountingServicesComponent from '../components/servicesComponents/AccountingServicesComponent.vue';

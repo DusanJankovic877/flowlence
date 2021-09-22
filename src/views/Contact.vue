@@ -1,7 +1,8 @@
 <template>
 <div class="full-width-contact">
+  <img class="blog-img responsive" src="../assets/3.jpg" alt="">
 
-    <div class="contact-us col-lg-7 m-auto">
+    <div class="contact-us col-lg-12">
         <ContactForm/>
 
     </div>
@@ -25,12 +26,16 @@ export default {
 <style>
 .full-width-contact{
 
-    min-height: 470px !important;
+    min-height: 1070px !important;
     /* margin-bottom: -110px !important; */
 }
 .contact-us{
-    margin-top: 50px !important;
-
+    /* margin-top: 50px !important; */
+    padding-bottom: 50px;
+}
+.responsive{
+      width: 100%;
+  height: auto;
 }
 
 @media only screen and (max-width: 1024px){

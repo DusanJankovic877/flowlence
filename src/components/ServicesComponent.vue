@@ -1,5 +1,7 @@
 <template>
-    <div class="circles col-lg-7 m-auto">
+<div class=" col-lg-7 m-auto">
+      <h1>Usluge</h1>
+    <div class="circles">
               <div class="krug" @click="foundationServices">
         <router-link  class="prices-link" to="">
           <div class="price-card-body">
@@ -58,6 +60,7 @@
             </router-link>
           </div> <!-- 6th-->
     </div>
+</div>
 </template>
 <script>
 export default {
