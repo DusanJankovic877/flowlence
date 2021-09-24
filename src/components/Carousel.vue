@@ -64,7 +64,7 @@
 }
 @media only screen and (max-width: 1024px){
   .carousel-inner{
-  height: 40vh !important;
+    /* height: 40vh !important; */
   /* bottom: 150px; */
 }
   .carousel-caption{
@@ -78,10 +78,13 @@
 
 }
 @media only screen and (max-width: 600px){
-    .carousel-inner{
-  height: 55vh !important;
+  .carousel-inner{
+    height: 19vh !important;
   /* bottom: 150px; */
 }
+      .carousel button{
+        margin-bottom: 0 !important;
+      }
 
   
 
@@ -123,23 +126,75 @@ color:black !important;
   margin:0  auto;
 }
 }
-@media only screen and (max-width: 414px){
-  .carousel{
-    
-    height: 139px;
-  }
+@media only screen and (max-height: 823px){
   .carousel-inner{
-    margin-bottom: -267px;
-  }
-  .carousel-indicators{
-    margin: 0 !important;
-    margin-bottom: 15px !important;
-    height: 9px !important;
+    margin-bottom: -18px;
 
   }
   .carousel button{
-    margin-bottom: 250px;
+    margin-bottom: 17px !important;
 
+  }
+    .carousel-indicators{
+    margin: 0 !important;
+    margin-bottom: 27px !important;
+    height: 9px !important;
+
+  }
+  .carousel-caption h5, .carousel-caption p, .carousel-caption .btn{
+    font-size: 6px;
+    margin: 0;
+    
+  }
+}
+@media only screen and (max-height: 812px){
+    .carousel-inner{
+    margin-bottom: -21px;
+    height: 18vh !important;
+  }
+  .carousel button{
+    margin-bottom: 20px !important;
+  }
+  .carousel-indicators{
+    margin: 0 !important;
+    margin-bottom: 30px !important;
+    height: 9px !important;
+  }
+}
+@media only screen and (max-height: 736px){
+  .carousel-inner{
+    margin-bottom: -2px;
+  }
+  .carousel button{
+    margin-bottom: 0px !important;
+  }
+  .carousel-indicators{
+    margin-bottom: 15px !important;
+  }
+}
+@media only screen and (max-height: 731px){
+  .carousel-inner{
+    margin-bottom: -3px;
+  }
+}
+@media only screen and (max-height: 640px){
+  .carousel-inner{
+    margin-bottom: -2px;
+  }
+  .carousel-caption{
+    margin-bottom: 5px;
+  }
+  .carousel-indicators{
+    margin-bottom: 10px !important;
+  }
+}
+@media only screen and (max-height: 568px){
+  .carousel-inner{
+    height:19vh !important;
+    margin-bottom: -1px;
+}
+  .carousel-caption{
+    margin-bottom: 0px;
   }
 }
 </style>

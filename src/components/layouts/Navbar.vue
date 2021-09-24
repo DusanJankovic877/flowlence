@@ -1,6 +1,6 @@
 <template>
 
-    <nav class="navbar navbar-expand-lg navbar-dark  sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light  sticky-top">
                 <div class="col-lg-7 m-auto">
           <div class="info-row">
             <div class="col-lg-2 info-mail">
@@ -84,7 +84,7 @@ export default {
 nav {
   display: block !important;
   background-color: #e6e6e6 !important;
-  /* border-bottom: 3px solid #fba822; */
+
 }
 .nav-links, .navbar-brand{
   padding-bottom: 20px;
@@ -113,6 +113,10 @@ nav p, a{
 .navbar-toggler{
     border: none;
     box-shadow: none !important;
+}
+.navbar-toggler-icon{
+  
+  color: black !important;
 }
 .text, .option{
   font-family: 'RobotoSlab-Medium', sans-serif !important;
