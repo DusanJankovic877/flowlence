@@ -46,7 +46,7 @@
 .carousel-inner{
   
   height: 70vh !important;
-  margin-bottom: -47px !important;
+  margin-bottom: -144px !important;
 
 }
 .carousel-caption{
@@ -81,9 +81,9 @@
   }
 
 }
-@media only screen and (max-width: 768px){ /*I-pad */
+@media only screen and (max-width: 769px){ /*I-pad */
   .carousel-inner{
-    height: 257px !important;
+    height: 358px !important;
     margin-bottom: 50px !important;
 
   }
@@ -101,65 +101,7 @@
   }
  
 }
-@media only screen and (max-height: 823px){ /* Pixel 2XL */
-  .carousel-inner{
-    margin-bottom: 0 !important;
-    height: 137px !important;
-  }
-  .carousel-caption{
-    padding: 5px;
-    width:250px;
-  }
-    .carousel button{
-    margin:0 3px !important;
-  }
-  .carousel-indicators{
-    margin-bottom: -5px !important;
-  }
-  .carousel-caption h5, .carousel-caption p, .carousel-caption .btn{
-    font-size: 8px;
-    margin: 0;
-  }
-}
-@media only screen and (max-width: 375px){ /* Iphone X */
-    .carousel-inner{
-    margin-bottom: 0 !important;
-    height: 125px !important;
-  }
-  .carousel button{
-    margin: 0 3px !important;
-  }
-  .carousel-indicators{
-    margin: 0 auto -5px auto !important;
-    width: 100px;
-  }
-}
-@media only screen and (max-width: 411px){/* Iphone 6/7/8 plus*/ 
-  .carousel-inner{
-    height:138px !important;
-    margin-bottom: 0px !important;
-    
-  }
-  .carousel button{
-    margin: 0 3px !important;
-  }
-  .carousel-indicators{
-    margin: 0 auto -5px auto !important;
-    width: 100px;
-  }
-}
-@media only screen and (max-width: 411px){/* Pixel 2  need fixing*/
-  .carousel-inner{
-    margin-bottom: -1px !important;
-  }
-  .carousel-indicators{
-    margin-bottom: -3px !important;
-  }
-  .carousel-caption{
-    padding: 5px;
-    width:250px;
-  }
-}
+
 @media only screen and (max-width: 540px){/*Surface Duo */
   .carousel-inner{
     height: 190px !important;
@@ -177,7 +119,20 @@
     
   }
 }
-@media only screen and (max-width: 375PX){/* Iphone 6/7/8 */
+@media only screen and (min-width:411px){/* Pixel 2  need fixing*/
+  .carousel-inner{
+    height: 138px !important;
+    margin-bottom: -1px !important;
+  }
+  .carousel-indicators{
+    margin-bottom: -3px !important;
+  }
+  .carousel-caption{
+    padding: 5px;
+    width:250px;
+  }
+}
+@media only screen and (max-width: 375px){/* Iphone 6/7/8 */
   .carousel-inner{
     height:125px !important;
     margin-bottom: 0px !important;

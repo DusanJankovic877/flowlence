@@ -96,7 +96,13 @@ body{
 
 @media only screen and (max-width: 1024px){
   .about{
-    margin-top:-50px !important;
+    margin-top:2px !important;
+    margin-bottom:-167px !important;
+  }
+}
+@media only screen and (max-width: 768px){
+  .about{
+    margin-top:1px !important;
     margin-bottom:-167px !important;
   }
 }
