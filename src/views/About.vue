@@ -61,7 +61,7 @@ body{
 }
 .about{
   position: relative;
-  margin-top: -54px !important;
+  margin-top: 4px !important;
   margin-bottom: -310px !important;
 }
 .about-content  {

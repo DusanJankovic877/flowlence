@@ -46,6 +46,7 @@
 .carousel-inner{
   
   height: 70vh !important;
+  margin-bottom: -47px !important;
 
 }
 .carousel-caption{
@@ -62,7 +63,7 @@
 .carousel-caption a{
   border-radius: 0 !important;
 }
-@media only screen and (max-height: 1366px){/*I pad pro */
+@media only screen and (max-width: 1024px){/*I pad pro */
   .carousel-inner{
     height: 400px !important;
     margin-bottom: -58px !important;
@@ -80,7 +81,7 @@
   }
 
 }
-@media only screen and (max-height: 1024px){ /*I-pad */
+@media only screen and (max-width: 768px){ /*I-pad */
   .carousel-inner{
     height: 257px !important;
     margin-bottom: 50px !important;
@@ -120,7 +121,7 @@
     margin: 0;
   }
 }
-@media only screen and (max-height: 812px){ /* Iphone X */
+@media only screen and (max-width: 375px){ /* Iphone X */
     .carousel-inner{
     margin-bottom: 0 !important;
     height: 125px !important;
@@ -133,7 +134,7 @@
     width: 100px;
   }
 }
-@media only screen and (max-height: 736px){/* Iphone 6/7/8 plus*/ 
+@media only screen and (max-width: 411px){/* Iphone 6/7/8 plus*/ 
   .carousel-inner{
     height:138px !important;
     margin-bottom: 0px !important;
@@ -147,7 +148,7 @@
     width: 100px;
   }
 }
-@media only screen and (max-height: 731px){/* Pixel 2 */
+@media only screen and (max-width: 411px){/* Pixel 2  need fixing*/
   .carousel-inner{
     margin-bottom: -1px !important;
   }
@@ -159,7 +160,7 @@
     width:250px;
   }
 }
-@media only screen and (max-height: 720px){/*Surface Duo */
+@media only screen and (max-width: 540px){/*Surface Duo */
   .carousel-inner{
     height: 190px !important;
     margin-bottom: 40px !important;
@@ -176,7 +177,7 @@
     
   }
 }
-@media only screen and (max-height: 667px){/* Iphone 6/7/8 */
+@media only screen and (max-width: 375PX){/* Iphone 6/7/8 */
   .carousel-inner{
     height:125px !important;
     margin-bottom: 0px !important;
@@ -189,7 +190,7 @@
     width: 100px;
   }
 }
-@media only screen and (max-height: 640px){/* Galaxy  S5/Motorola G4 */
+@media only screen and (max-width: 360px){/* Galaxy  S5/Motorola G4 */
   .carousel-inner{
     height:120px !important;
 
@@ -204,7 +205,7 @@
   }
 
 }
-@media only screen and (max-height: 568px){ /*iphone5/SE*/
+@media only screen and (max-width: 320px){ /*iphone5/SE*/
   .carousel-inner{
     height:107px !important;
   }
