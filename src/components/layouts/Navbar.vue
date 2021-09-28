@@ -155,6 +155,9 @@ nav p, a{
   .info-mail{
     margin-right: 100px;
   }
+  ul li a {
+    padding:8px 4px 0 4px !important;
+  }
 }
 @media only screen and (max-width: 600px){
   nav{

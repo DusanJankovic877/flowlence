@@ -67,7 +67,9 @@ body{
 .about-content  {
   padding-top: 100px;
 
-  background-color: #e6e6e6;
+  /* background-color: #e6e6e6; */
+  background-color: black;
+  
   color: #fff;
   padding-bottom: 1px;
 }
@@ -98,6 +100,8 @@ body{
     margin-bottom:-167px !important;
   }
 }
+
+
 @media only screen and (max-width: 414px){
   .about{
     
