@@ -1,8 +1,8 @@
 <template>
-<div class=" col-lg-7 m-auto">
+<div class="contet-circles col-lg-7 m-auto">
       <h1>Usluge</h1>
     <div class="circles">
-              <div class="krug" @click="foundationServices">
+      <div class="krug" @click="foundationServices">
         <router-link  class="prices-link" to="">
           <div class="price-card-body">
           <h3>Osnivanje</h3>
@@ -32,7 +32,7 @@
         </router-link>
       </div> <!-- 3rd-->
 
-          <div class="krug" @click="paymentsServices">
+          <div class="krug fourth-circle" @click="paymentsServices">
             <router-link class="prices-link" to="">
               <div class="price-card-body">
               <h3>Platni promet (dinarski I devizni)</h3>
@@ -41,7 +41,7 @@
               </div>
             </router-link>
           </div><!-- 4th-->
-          <div class="krug" @click="taxFinancialConsultings">
+          <div class="krug fifth-circle" @click="taxFinancialConsultings">
             <router-link class="prices-link" to="">
               <div class="price-card-body">
               <h3>Poreski I finansijski konsalting</h3>
@@ -50,7 +50,7 @@
               </div>
             </router-link>
           </div> <!-- 5th-->
-          <div class="krug" @click="calculationFinancialIndicators">
+          <div class="krug sixth-circle" @click="calculationFinancialIndicators">
             <router-link class="prices-link" to="">
               <div class="price-card-body">
               <h3>Izračunavanje finansijskih pokazatelja, izrada biznis planova</h3>
@@ -96,3 +96,47 @@ export default {
   }
 }
 </script>
+<style>
+  .services-margin{
+    position: relative;
+    z-index: 1;
+    ;
+  }
+@media only screen and (max-width: 1280px){
+    .services-margin{
+    margin-top: 150px;
+    margin-bottom: -40px !important; 
+  }
+  .contet-circles{
+    width: 100%;
+  }
+}
+@media (max-width:768px){
+  .krug{
+    padding-top: 25px !important;
+  }
+  .services-margin{
+    margin-top: 170px !important;
+    margin-bottom: -40px !important; 
+  }
+  .fourth-circle{
+    padding-top: 40px !important;
+  }  
+  .fifth-circle{
+    padding-top: 40px !important;
+  }
+  .sixth-circle{
+    padding-top: 30px !important;
+  }
+  .services-margin h1{
+    font-size: 20px;
+  }
+  .price-card-body h3{
+    font-size: 18px;
+  }
+  .price-card-body p{
+    font-size: 14px;
+  }
+
+}
+</style>

@@ -62,7 +62,7 @@ export default{
   .about{
     position: relative;
 
-    margin-bottom: -410px;
+    margin-bottom: -210px;
   }
   .about-content  {
     padding-top: 100px;
@@ -110,7 +110,7 @@ export default{
 }
 @media (max-width:540px){
   .about{
-    margin-bottom:-270px !important;
+    /* margin-bottom:-270px !important; */
   }
   .about-content{padding: 20px 10px !important;}
   .about-content h1{

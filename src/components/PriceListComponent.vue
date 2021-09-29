@@ -1,8 +1,8 @@
 <template>
-        <div class="price-list col-lg-12">
+    <div class="price-list col-lg-12">
       <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#E6E6E6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
       <div class="price-info ">
-        <div class="col-lg-7 m-auto">
+        <div class="price-circle-content col-lg-7 m-auto">
           <h1>Procena cene usluga</h1>
           <p>Da saznate više o cenama kliknite na dugme više o cenama</p>
           <div class="price-row">
@@ -11,6 +11,7 @@
                 <div class="price-card-body">
                 <h1>Preduzetnik</h1>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p><b>pošaljite upitnik</b></p>
                 </div>
               </router-link>
             </div>
@@ -19,6 +20,7 @@
                 <div class="price-card-body">
                 <h1>DOO</h1>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p><b>pošaljite upitnik</b></p>
                 </div>
             </router-link>
             </div>
@@ -27,6 +29,7 @@
               <div class="price-card-body">
               <h1>Udruženje</h1>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p><b>pošaljite upitnik</b></p>
               </div>
             </router-link>
             </div>
@@ -38,14 +41,20 @@
 </template>
 <style scoped>
 .price-list{
+  /* z-index: -1; */
   position:relative;
   margin-bottom: -163px !important;
 }
 .price-info{
   background-color: #E6E6E6;
 }
+.circle{
+    z-index: 1;
 
+  position: relative;
+}
 .price-row{
+
   display: flex;
 }
 
@@ -78,25 +87,58 @@
 .price-list a, .contact a{
   border-radius: 0;
 }
-@media only screen and (max-width: 1024px){
+@media only screen and (max-width: 1280px){
+  .price-circle-content{
+    width: 100%;
+  }
+    .price-card-body{
+
+  padding: 75px 10px 0 10px;
+}
   .price-list{
     margin-bottom: -167px !important;
   }
   .price-row{
-  display: inherit;
+  display: flex;
   }
   .price-info{
     padding-bottom: 50px;
   }
 }
 @media only screen and (max-width: 768px){
+  .price-card-body{
+
+  padding: 65px 10px 0 10px;
+}
     .price-list{
     margin-bottom: -125px !important;
   }
+      .price-row{
+  display: inherit;
+  }
+    .price-info h1{
+    font-size: 20px;
+  }
+  .price-info p{
+    font-size:14px;
+  }
 }
-@media only screen and (max-width: 414px){
-    .price-list{
-    margin-bottom: -90px !important;
+@media (max-width:540px){
+
+  .price-info h1{
+    font-size: 20px;
+  }
+  .price-info p{
+    font-size:14px;
+  }
+  .price-list{
+  margin-bottom: -90px !important;
+  }
+  .price-card-body h1{
+    font-size: 18px;
+  }
+    .price-card-body p{
+    font-size: 14px;
   }
 }
 </style>

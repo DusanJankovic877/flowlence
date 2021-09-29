@@ -72,8 +72,8 @@ export default {
   margin-bottom: -310px !important;
 }
 .services-margin{
-  margin-top: 250px !important;
-  margin-bottom: -160px !important;
+  /* margin-top: 250px; */
+  margin-bottom: -160px;
 
 }
 .blog-margin{
