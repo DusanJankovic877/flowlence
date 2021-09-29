@@ -56,65 +56,68 @@ export default{
 </script>
 
 <style>
-body{
-  box-sizing: border-box !important;
-}
-.about{
-  position: relative;
-  margin-top: 4px !important;
-  margin-bottom: -310px !important;
-}
-.about-content  {
-  padding-top: 100px;
-
-  /* background-color: #e6e6e6; */
-  background-color: black;
-  
-  color: #fff;
-  padding-bottom: 1px;
-}
-.about-us h1{
-  color: #385663;
-}
-.about-us p {
-  color: #385663;
-  font-size: 19px;
-  font-family: 'RobotoSlab-Medium', sans-serif !important;
-}
-.about svg{
-  display: flex !important;
-}
-.up{
-  margin-bottom: -2px;
-   transform: rotateX(180deg) rotateY(180deg);
-}
-.down{
-  margin-top: -2px;
-  /* transform: rotateX(180deg) rotateY(180deg); */
-}
-
-
-@media only screen and (max-width: 1024px){
+  body{
+    box-sizing: border-box !important;
+  }
   .about{
-    margin-top:2px !important;
-    margin-bottom:-167px !important;
+    position: relative;
+
+    margin-bottom: -410px;
+  }
+  .about-content  {
+    padding-top: 100px;
+    /* background-color: #e6e6e6; */
+    background-color: black;
+    color: #fff;
+    padding-bottom: 1px;
+  }
+  .about-us h1{
+    color: #385663;
+  }
+  .about-us p {
+    color: #385663;
+    font-size: 19px;
+    font-family: 'RobotoSlab-Medium', sans-serif !important;
+  }
+  .about svg{
+    display: flex !important;
+  }
+  .up{
+    margin-bottom: -2px;
+    transform: rotateX(180deg) rotateY(180deg);
+  }
+  .down{
+    margin-top: -2px;
+    /* transform: rotateX(180deg) rotateY(180deg); */
+  }
+@media only screen and (max-width: 1280px){
+    .about-content h1{
+    font-size: 35px;
+  }
+  .about-content p{
+    font-size: 25px;
+  }
+  .about-us{
+    margin: 0  auto!important;
+    padding-bottom: 50px;
+    width: 90%;
   }
 }
 @media only screen and (max-width: 768px){
-  .about{
-    margin-top:1px !important;
-    margin-bottom:-167px !important;
+  .about-content{
+    padding: 30px 20px;
   }
 }
-
-
-@media only screen and (max-width: 414px){
+@media (max-width:540px){
   .about{
-    
-    margin-top:0px !important;
-    margin-bottom:-90px !important;
+    margin-bottom:-270px !important;
   }
-
+  .about-content{padding: 20px 10px !important;}
+  .about-content h1{
+    font-size: 16px;
+  }
+  .about-content p{
+    font-size: 12px;
+  }
 }
-
 </style>

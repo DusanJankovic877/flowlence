@@ -31,150 +31,98 @@
           </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <button  class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <div id="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
+
+        </div>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <div id="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
+        </div>
       </button>
 
     </div> <!-- carousel end-->  
 </template>
 <style>
-.carousel-inner{
-  
-  height: 70vh !important;
-  margin-bottom: -144px !important;
-
-}
-.carousel-caption{
-  right: 0;
-  left: 0;
-  bottom: 10%;
-  background:rgba(0, 0, 0, 0.57) !important;
-  width: 50%;
-  margin:0  auto;
-}
-.carousel-indicators{
-  margin-bottom: 60px;
-}
-.carousel-caption a{
-  border-radius: 0 !important;
-}
-@media only screen and (max-width: 1024px){/*I pad pro */
-  .carousel-inner{
-    height: 400px !important;
-    margin-bottom: -58px !important;
-  }
-  .carousel button{
-    margin-bottom: 30px !important;
-  }
-  .carousel-caption h5, .carousel-caption p, .carousel-caption .btn{
-    font-size: 18px;
-    margin: 1px;
-  }
-    .carousel-indicators{
-    margin: 0 !important;
-    margin-bottom: 25px !important;
-  }
-
-}
-@media only screen and (max-width: 769px){ /*I-pad */
-  .carousel-inner{
-    height: 358px !important;
-    margin-bottom: 50px !important;
-
-  }
-  .carousel button{
-    margin-bottom: 0px !important;
-  }
-  .carousel-indicators{
-    margin: 0 !important;
-    margin-bottom: 5px !important;
-  }
-  .carousel-caption h5, .carousel-caption p, .carousel-caption .btn{
-    font-size: 13px;
-    margin: 1px;
-    
-  }
- 
-}
-
-@media only screen and (max-width: 540px){/*Surface Duo */
-  .carousel-inner{
-    height: 190px !important;
-    margin-bottom: 40px !important;
-  }
-  .carousel button{
-    margin-bottom: 0px !important;
-  }
-  .carousel-indicators{
-    margin: 0 auto 6px auto !important;
-  }
-  .carousel-caption h5, .carousel-caption p, .carousel-caption .btn{
-    font-size: 8px;
-    margin: 1px;
-    
-  }
-}
-@media only screen and (min-width:411px){/* Pixel 2  need fixing*/
-  .carousel-inner{
-    height: 138px !important;
-    margin-bottom: -1px !important;
-  }
-  .carousel-indicators{
-    margin-bottom: -3px !important;
-  }
+@media (max-width:540px){ /*iphone5/SE*/
   .carousel-caption{
-    padding: 5px;
-    width:250px;
-  }
-}
-@media only screen and (max-width: 375px){/* Iphone 6/7/8 */
-  .carousel-inner{
-    height:125px !important;
-    margin-bottom: 0px !important;
-  }
-  .carousel button{
-    margin: 0 3px !important;
-  }
-  .carousel-indicators{
-    margin: 0 auto -6px auto !important;
-    width: 100px;
-  }
-}
-@media only screen and (max-width: 360px){/* Galaxy  S5/Motorola G4 */
-  .carousel-inner{
-    height:120px !important;
+    margin: 0 auto 0 auto;
 
-  }
-  .carousel-caption{
-    padding: 5px;
-    width:250px;
-  }
-    .carousel-indicators{
-    margin: 0 auto -7px auto !important;
-    width: 90px;
-  }
-
-}
-@media only screen and (max-width: 320px){ /*iphone5/SE*/
-  .carousel-inner{
-    height:107px !important;
-  }
-  .carousel-caption{
+    background:rgba(0, 0, 0, 0.57);
     padding: 2px;
-    width:230px;
+    width:190px;
   }
-
+  .carousel-caption h5{
+    font-size: 12px !important;
+    margin-bottom: 0;
+  }
+  .carousel-caption  p, .carousel-caption .btn{
+    font-size: 10px !important;
+    margin-bottom: 0;
+  }
   .carousel .btn{
-    padding: 2px !important;
+    padding: 2px;
   }
   .carousel-indicators{
+    margin: 0 auto 0 auto;
     width: 90px;
   }
 
 }
+@media only screen and (max-width: 1280px){
+    .carousel-caption{
+    margin: 0 auto 0 auto;
+
+    background:rgba(0, 0, 0, 0.57);
+    padding: 2px;
+    width:360px;
+  }
+  .carousel-caption h5{
+    font-size: 18px ;
+    margin: 5px 0;
+  }
+  .carousel-caption  p, .carousel-caption .btn{
+    font-size: 15px ;
+    margin-bottom: 5px;
+    
+  }
+  .carousel-caption a{
+    border-radius: 0 !important;
+  }
+  .carousel .btn{
+    padding: 5px 10px;
+  }
+  .carousel-indicators{
+    margin: 0 auto 0 auto;
+    width: 90px;
+  }
+
+}
+/* @media only screen and (min-width: 1281px){ */
+
+  .carousel-caption  p, .carousel-caption h5{
+    color:rgb(190, 190, 190) !important;
+  }
+  .carousel-caption{
+    
+    right: 0;
+    left: 0;
+    bottom: 10%;
+    background:rgba(0, 0, 0, 0.57);
+    width: 50%;
+    margin:0  auto;
+  }
+  .carousel-caption a{
+    border-radius: 0;
+    
+  }
+/* } */
+
+
+
+
 </style>
