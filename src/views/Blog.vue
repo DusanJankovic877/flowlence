@@ -3,29 +3,31 @@
   <img v-if="currentRoutePath !== '/'" class="blog-img responsive" src="../assets/3.jpg" alt="">
 
       <div class="blog col-lg-7 m-auto">
+       
+          
       <h1 style="margin-bottom: 120px">Blog</h1>
-        <div class="blog-row">
-      <div class="card col-lg-3">
-        <h4>post title</h4>
-        <img src="../assets/racunovodja.jpg" alt="">
-        <div class="card-body">
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      <div class="card col-lg-3 m-auto" >
-        <h4>post title</h4>
-        <img src="../assets/racunovodja.jpg" alt="">
-        <div class="card-body">
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      <div class="card col-lg-3">
-        <h4>post title</h4>
-        <img src="../assets/racunovodja.jpg" alt="">
-        <div class="card-body">
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
+        <div class="circles">
+            <div class="krug blog-circle col-lg-12" style="">
+              <h4>post title</h4>
+              <img src="../assets/racunovodja.jpg" alt="image">
+              <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            <div class="krug blog-circle col-lg-12" style="">
+              <h4>post title</h4>
+              <img src="../assets/racunovodja.jpg" alt="image">
+              <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            <div class="krug blog-circle col-lg-12" style="">
+              <h4>post title</h4>
+              <img src="../assets/racunovodja.jpg" alt="image">
+              <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
     </div>
 
   </div>
@@ -53,6 +55,15 @@ position: relative;
 }
 .blog-row{
   display: flex;
+}
+.blog-circle{
+overflow: hidden;
+}
+.blog-circle h4{
+  margin:20px 0;
+}
+.blog-circle img{
+  width: 320px;
 }
 @media only screen and (max-width: 1024px){
   .full-width{

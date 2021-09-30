@@ -66,8 +66,8 @@ export default{
   }
   .about-content  {
     padding-top: 100px;
-    /* background-color: #e6e6e6; */
-    background-color: black;
+    background-color: #e6e6e6;
+    /* background-color: black; */
     color: #fff;
     padding-bottom: 1px;
   }
