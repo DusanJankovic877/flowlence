@@ -36,7 +36,8 @@
 
     </div> <!--end of about-us div -->
   </div>  <!--end of about-content div -->
-  <svg class="down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e6e6e6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+  <svg v-if="currentRouteName === '/'" class="down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e6e6e6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+  <!-- <div v-else class="box" >sdasds</div> -->
 </div><!--end of about div -->
 
 </template>
@@ -56,13 +57,18 @@ export default{
 </script>
 
 <style>
+.box{
+width: 100%;
+height: 320px; 
+background-color: #e6e6e6;
+}
   body{
     box-sizing: border-box !important;
   }
   .about{
     position: relative;
 
-    margin-bottom: -210px;
+    
   }
   .about-content  {
     padding-top: 100px;
@@ -91,6 +97,10 @@ export default{
     /* transform: rotateX(180deg) rotateY(180deg); */
   }
 @media only screen and (max-width: 1280px){
+    .about{
+
+    /* margin-bottom: 210px; */
+  }
     .about-content h1{
     font-size: 35px;
   }
@@ -106,6 +116,13 @@ export default{
 @media only screen and (max-width: 768px){
   .about-content{
     padding: 30px 20px;
+  }
+      .about-content h1{
+    font-size: 25px;
+    margin-top: 55px;
+  }
+  .about-content p{
+    font-size: 15px;
   }
 }
 @media (max-width:540px){

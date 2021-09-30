@@ -122,15 +122,15 @@ export default {
 }
 </script>
 <style>
-  .form{
+    form{
+      margin: 0 auto;
+    }
 
-    margin: 0 auto;
-  }
   .left{
     float: left;
     padding-top: 50px !important;
     text-align: left;
-    margin: 0 auto !important;
+    margin: 0 auto ;
   }
   .right{
     float: right;
@@ -142,9 +142,6 @@ export default {
     border-radius: 0 !important;
     border: none !important;
     border-bottom: 1px solid #555555 !important;
-  }
-  form{
-    margin: 0 auto;
   }
   .contact-form-button{
     background-color: #C9C9C9;
@@ -172,13 +169,28 @@ export default {
     }
   }
 @media only screen and (max-width: 1024px) {
-  .left{
-    padding: 0px !important;
-    padding-left: 0px !important;
+  .form{width: 100%; margin-left:40px !important;}
+  .right{
+    padding: 0;
+    margin:0;
+    
   }
 }
-@media only screen and (max-width: 769px) {
+@media only screen and (max-width: 768px) {
+  .form{
+    width: 100% !important;
+    margin: 0 auto!important;
+  }
 
+    .left{
+  width: 90%;
+   margin-left: 30px ;
+  }
+  .right{
+    width: 90%;
+    margin-left: 30px;
+    float: left;
+  }
   .image-card {
       top:4%;
       left:4%;

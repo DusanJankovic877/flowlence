@@ -14,6 +14,7 @@
     </div>
 </template>
 <style>
+
 .footer-content{
     height: 310px;
     padding-top: 55px !important;

@@ -1,11 +1,17 @@
 <template>
   <div class="home">
     <Carousel/>
+    <div class="about-margin">
+
     <About/>
+    </div>
     <div class="services-margin">
       <ServicesComponent/>
     </div>
+    <div class="price-list-margin">
+
     <PriceListComponent/>
+    </div>
     <div class="blog-margin">
     <Blog/>
     </div>
@@ -39,66 +45,61 @@ export default {
     Blog,
     ServicesComponent,
   },
-  // methods:{
-  //   foundationServices(){
-  //     this.$router.push({name: 'services', params: {hideAll: true, showFoundation: true}})
-  //   },
-  //   accountingServices(){
-  //     this.$router.push({name: 'services', params: {hideAll: true, showAccounting: true}})
-  //   },
-  //   payrollPersonnelServices(){
-  //     this.$router.push({name: 'services', params: {hideAll: true, showPayroll: true}})
-  //   },
-  //   paymentsServices(){
-  //     this.$router.push({name: 'services', params: {hideAll: true, showPayment: true}})
-
-  //   },
-  //   taxFinancialConsultings(){
-  //     this.$router.push({name: 'services', params: {hideAll: true, showTax: true}})
-
-  //   },
-  //   calculationFinancialIndicators(){
-  //     this.$router.push({name: 'services', params: {hideAll: true, showCalculation: true}})
-
-  //   }
-
-
-  // }
 }
 </script>
 <style>
+  .home{
+    margin-bottom: -310px !important;
+  }
+  .about-margin{
+    margin-bottom: -210px;
+  }
+  .services-margin{
+    margin-bottom: -160px;
 
-.home{
-  margin-bottom: -310px !important;
-}
-.services-margin{
-  /* margin-top: 250px; */
-  margin-bottom: -160px;
+  }
+  .price-list-margin{
+    margin-bottom: -260px;
 
-}
-.blog-margin{
-  margin-top: 50px !important; 
-}
-
-.contact{
-  position: relative;
-  margin-top: -100px;
-  /* margin-bottom: -424px !important; */
-}
-.contact-info {
-  background-color: #1194A8;
-  /* color: white; */
-}
-.contact-info{
-  color: white !important;
-}
+  }
+  .blog-margin{
+    margin-top: 120px ; 
+  }
+  .contact{
+    position: relative;
+    margin-top: -100px;
+  }
+  .contact-info {
+    background-color: #1194A8;
+  }
+  .contact-info{
+    color: white !important;
+  }
 @media only screen and (max-width: 1024px){
-.contact{
-  margin-top: -50px;
-  
+  .price-list-margin{
+    margin-bottom: -160px;
+
+  }
+  .blog-margin{
+    margin-top: 50px !important; 
+  }
+  .contact{
+    margin-bottom: -167px !important;
+  }
+  .home{
+    margin-bottom: -70px !important;
+  }
 }
-.home{
-  margin-bottom: -70px !important;
+@media only screen and (max-width: 768px){
+  .contact{
+    margin-bottom: -125px !important;
+  }
 }
+@media only screen and (max-width: 600px){
+  .blog-margin{
+    margin-top: 150px !important; 
+
+    margin-bottom: -150px !important; 
+  }
 }
 </style>

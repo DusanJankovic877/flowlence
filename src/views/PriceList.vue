@@ -1,5 +1,5 @@
 <template>
-<div class="price-list">
+<div class="price-list-view">
   <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
 
     <PriceListComponent class="price-list-component"/>
@@ -15,9 +15,7 @@ export default {
 }
 </script>
 <style>
-.price-list{
-    margin-bottom: -311px !important;
-
+.price-list-view{
 }
 .price-list-img{
   margin-bottom: -120px;
@@ -61,5 +59,43 @@ export default {
 .hide{
     display: none !important;
 }
+@media only screen and (max-width: 1280px){
 
+.price-list-img{
+  margin-bottom: -19px;
+}
+}
+@media only screen and (max-width: 768px){
+
+.price-list-img{
+  margin-bottom: 64px;
+}
+}
+@media only screen and (max-width: 540px){
+  .price-list-img{
+  margin-bottom: 101px;
+}
+}
+@media only screen and (max-width: 414px){
+  .price-list-img{
+  margin-bottom: 122px;
+}
+}
+@media only screen and (max-width: 375px){
+.price-list-img{
+  margin-bottom: 128px;
+}
+}
+@media only screen and (max-width: 360px){
+.price-list-img{
+  margin-bottom: 131px;
+}
+}
+@media only screen and (max-width: 320px){
+  .price-list-img{
+  margin-bottom: 137px;
+
+}
+
+}
 </style>
