@@ -124,15 +124,14 @@ export default {
 <style>
 
   .left{
-      margin-top: 350px !important;
-
+    margin-top: 50px !important;
     float: left;
     padding-top: 50px !important;
     text-align: left;
     margin: 0 auto ;
   }
   .right{
-      margin-top: 350px !important;
+      margin-top: 50px !important;
 
     float: right;
 
@@ -163,7 +162,7 @@ export default {
 @media screen and (max-device-width: 1281px) {
     .left {
       padding: 0 !important;
-      margin-top: 400px !important;
+      margin-top: 100px !important;
       margin-left: 100px !important;
     }
     .right{
@@ -186,13 +185,13 @@ export default {
     margin-left:40px !important;}
   .left {
     padding: 0 !important;
-    margin-top: 250px !important;
+    margin-top: 50px !important;
     margin-left: 0px !important;
 
     }
   .right{
     padding: 0;
-    margin-top: 250px !important;
+    margin-top: 50px !important;
     margin-left: 0px !important;
     padding-left: 100px;
 
@@ -207,13 +206,13 @@ export default {
   }
 
   .left{
-    margin-top: 150px !important;
+    margin-top: 25px !important;
 
     width: 90%; 
   }
   .right{
     width: 90%;
-    margin-top: 50px !important;
+    margin-top: 25px !important;
     padding-left: 0px !important;
     float: left;
   }

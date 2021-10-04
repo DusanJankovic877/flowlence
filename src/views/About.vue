@@ -71,7 +71,7 @@ background-color: #e6e6e6;
     
   }
   .about-content  {
-    padding-top: 100px;
+    padding-top: 50px;
     background-color: #e6e6e6;
     /* background-color: black; */
     color: #fff;

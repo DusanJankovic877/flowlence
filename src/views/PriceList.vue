@@ -15,13 +15,15 @@ export default {
 }
 </script>
 <style>
-.price-list-view{
-}
+
 .price-list-img{
-  margin-bottom: -120px;
+  margin-bottom: 0px;
 }
 .price-list-component{
-    margin-top: -190px;
+    margin-top: 0px;
+}
+.price-circle-content h1{
+  /* padding-top: 50px; */
 }
 .entrepreneur-prices-link{
   text-decoration: none;

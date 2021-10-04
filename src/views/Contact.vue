@@ -1,10 +1,11 @@
 <template>
 
 <div class="full-width-contact">
-  <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
+  <img class="responsive" src="../assets/3.jpg" alt="">
 
     <div class="contact-us  price-list-component col-lg-12">
-      <!-- <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="white" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg> -->
+           
+
         <ContactForm style=""/>
 
     </div>
@@ -21,14 +22,14 @@ export default {
         return{
 
         }
-    },
+    }
 }
 </script>
 
 <style>
 
   .full-width-contact{
-    margin-bottom: 767px !important;
+    margin-bottom: 267px !important;
   }
 
 .contact-us{

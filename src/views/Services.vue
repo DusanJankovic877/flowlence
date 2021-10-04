@@ -2,6 +2,7 @@
 <div>
 
   <img class=" responsive" src="../assets/3.jpg" alt="">
+  
         <div class="services col-lg-7 m-auto">
   
           <h1>Usluge</h1>
@@ -94,11 +95,8 @@ export default {
 
 
   },
-  computed: {
-    currentRouteName() {
-        return this.$route.params;
-    }
-},
+
+
   data() {
     return{
       foundation: false,
