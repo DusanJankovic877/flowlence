@@ -26,7 +26,7 @@
          
             <div class="col-lg-6">
               <!-- EMAIL -->
-              <b-form-group id="input-email" label="Email adresa:" label-for="input-email">
+               <b-form-group id="input-email" label="Email adresa:" label-for="input-email">
                 <b-form-input id="input-email" v-model="form.email" type="email" placeholder="petar@gmail.com"  required></b-form-input>
                 <div class="alert alert-danger" role="alert" v-if="errors.email.length">
                   {{errors.email}}
@@ -122,17 +122,18 @@ export default {
 }
 </script>
 <style>
-    form{
-      margin: 0 auto;
-    }
 
   .left{
+      margin-top: 350px !important;
+
     float: left;
     padding-top: 50px !important;
     text-align: left;
     margin: 0 auto ;
   }
   .right{
+      margin-top: 350px !important;
+
     float: right;
 
     padding: 50px 0px 0px 0px;
@@ -162,48 +163,76 @@ export default {
 @media screen and (max-device-width: 1281px) {
     .left {
       padding: 0 !important;
-      /* padding: 30px !important;  */
+      margin-top: 400px !important;
+      margin-left: 100px !important;
+    }
+    .right{
+      margin-left: -100px !important;
+      padding-left: 100px;
     }
     .form{
-      padding-bottom: 0;
+     margin: 0 auto !important;
+      
+     
+      /* margin-top: 300px !important; */
+      height: 100% !important;
+      width: 95% !important;
+      padding-left: 50px;
     }
   }
 @media only screen and (max-width: 1024px) {
-  .form{width: 100%; margin-left:40px !important;}
+  .form{
+    /* width: 100%;  */
+    margin-left:40px !important;}
+  .left {
+    padding: 0 !important;
+    margin-top: 250px !important;
+    margin-left: 0px !important;
+
+    }
   .right{
     padding: 0;
-    margin:0;
+    margin-top: 250px !important;
+    margin-left: 0px !important;
+    padding-left: 100px;
+
     
   }
 }
 @media only screen and (max-width: 768px) {
   .form{
-    width: 100% !important;
-    margin: 0 auto!important;
+    width: 90% !important;
+    margin: 0px auto!important;
+    margin-top: 0px !important;
   }
 
-    .left{
-  width: 90%;
-   margin-left: 30px ;
+  .left{
+    margin-top: 150px !important;
+
+    width: 90%; 
   }
   .right{
     width: 90%;
-    margin-left: 30px;
+    margin-top: 50px !important;
+    padding-left: 0px !important;
     float: left;
   }
   .image-card {
       top:4%;
-      left:4%;
   }
-  .text{
-    padding: 2px 2px 2px 10px!important;
-  }
+
 }
 @media only screen and (max-width: 600px) {
+  .form{
+    margin-left: 0 !important;
+  }
 
   .left{
+    margin-top: 0px;
+
     padding-top: 50px;
     padding: 0px  5px!important;
+    float:left !important;
   }
   .right{
     padding: 5px !important;

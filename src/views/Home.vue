@@ -99,7 +99,10 @@ export default {
   .blog-margin{
     margin-top: 150px !important; 
 
-    margin-bottom: -150px !important; 
+    margin-bottom: 60px !important; 
+  }
+    .contact{
+    margin-bottom: 0px !important;
   }
 }
 </style>
