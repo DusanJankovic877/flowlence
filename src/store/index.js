@@ -41,6 +41,11 @@ export default new Vuex.Store({
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
        state.commit('setFormData', response)   
+    },
+    //EXAMPLE NEXT LVL
+    async getExampleFormData(state){
+      const response = await entrepreneurService.getExampleFormData()
+      console.log('state', response);
     }
   },
   getters: {

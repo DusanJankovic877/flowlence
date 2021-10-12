@@ -107,9 +107,6 @@ export default{
 
   padding: 75px 10px 0 10px;
 }
-  .price-list{
-    /* margin-bottom: -167px !important; */
-  }
   .price-row{
   display: flex;
   }

@@ -22,9 +22,7 @@ export default {
 .price-list-component{
     margin-top: 0px;
 }
-.price-circle-content h1{
-  /* padding-top: 50px; */
-}
+
 .entrepreneur-prices-link{
   text-decoration: none;
   color: #385663;

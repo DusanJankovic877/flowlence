@@ -3,12 +3,13 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Services from '../views/Services.vue'
-import PriceList from '../views/PriceList.vue'
+// import PriceList from '../views/PriceList.vue'
 import Blog from '../views/Blog.vue'
 import Contact from '../views/Contact.vue'
 import Entrepreneur from '../views/Entrepreneur.vue'
 import Doo from '../views/Doo.vue'
 import Association from '../views/Association.vue'
+import Example from '../views/Example.vue'
 
 
 Vue.use(VueRouter)
@@ -34,7 +35,7 @@ const routes = [
   {
     path: '/price-list',
     name: 'price-list',
-    component: PriceList
+    component: Example
   },
   {
     path: '/price-list/entrepreneur',

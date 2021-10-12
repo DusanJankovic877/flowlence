@@ -8,6 +8,12 @@ class EntrepreneurService extends RequestHandler{
         const response = await  this.apiClient.post('/get-form-data', payload);
         return response.data;
     }
+    async getExampleFormData(){
+        const response = await  this.apiClient.get('/get-example-data', payload);
+        return response;
+        //go to laravel and make route
+
+    }
 }
 const entrepreneurService = new EntrepreneurService();
 export default entrepreneurService;
