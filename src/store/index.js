@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     entrepreneurForm:{},
     formData:{},
-    associationFormData:{}
+    associationFormData:{},
+    exampleFormData:{}
   },
   mutations: {
     setFormData(state, payload){
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     setAssociationFormData(state, payload){
       state.associationFormData = payload
+    },
+    setExampleFormData(state, payload){
+      state.exampleFormData = payload
     }
 
   },
@@ -40,17 +44,21 @@ export default new Vuex.Store({
     },
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
-       state.commit('setFormData', response)   
+       console.log(payload);
+       state.commit('setFormData', response)  
+     
     },
     //EXAMPLE NEXT LVL
     async getExampleFormData(state){
       const response = await entrepreneurService.getExampleFormData()
+      state.commit('setExampleFormData', response);
       console.log('state', response);
     }
   },
   getters: {
     formData: (state) => state.formData,
-    assocFormData: (state) => state.associationFormData
+    assocFormData: (state) => state.associationFormData,
+    exampleFormData: (state) => state.exampleFormData
     
   },
   modules: {

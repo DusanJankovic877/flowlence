@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Services from '../views/Services.vue'
-// import PriceList from '../views/PriceList.vue'
+import PriceList from '../views/PriceList.vue'
 import Blog from '../views/Blog.vue'
 import Contact from '../views/Contact.vue'
-import Entrepreneur from '../views/Entrepreneur.vue'
+// import Entrepreneur from '../views/Entrepreneur.vue'
 import Doo from '../views/Doo.vue'
 import Association from '../views/Association.vue'
 import Example from '../views/Example.vue'
@@ -35,12 +35,12 @@ const routes = [
   {
     path: '/price-list',
     name: 'price-list',
-    component: Example
+    component: PriceList
   },
   {
     path: '/price-list/entrepreneur',
     name: 'price-list',
-    component: Entrepreneur
+    component: Example
   },
   {
     path: '/price-list/doo',

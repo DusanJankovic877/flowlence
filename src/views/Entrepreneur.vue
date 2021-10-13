@@ -1,6 +1,8 @@
 <template>
+
       <div class="price-list col-lg-7 m-auto">
         <h1>Procena cene Usluga</h1>
+           
         <hr>
  
         <h4 v-if="hide">Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
@@ -28,8 +30,9 @@
                 </button>
             </div>
         </div>
+           
         <div class="entrepreneur">
-            <Form ref="childComponent" @handle-show-buttons="handleShowButtons" :formData="formData"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
+            <!-- <Form ref="childComponent" @handle-show-buttons="handleShowButtons" :formData="formData"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/> -->
         </div>
     
         <button v-if="!hideNew && !hideAlready" class="go-back-button col-lg-3 btn btn-danger" @click="goBackToPriceList">Idi nazad</button>
@@ -37,11 +40,13 @@
 </template>
 <script>
 import store from '../store'
-import Form from '../components/entrepreneur/Form.vue'
+// import Form from '../components/entrepreneur/Form.vue'
+import Example from '../views/Example.vue'
 import { mapGetters} from 'vuex'
 export default {
     components:{
-        Form
+        // Form,
+        Example
     },
     data() {
        return{
@@ -75,7 +80,7 @@ export default {
         ...mapGetters(['formData'])
     },
         async beforeRouteEnter(from, to, next){
-        await store.dispatch('getFormData', {'path' : from.path})
+        await store.dispatch('getFormData', {'path' : '/price-list/entrepreneur'})
         next();
     }
 
