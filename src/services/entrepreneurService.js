@@ -8,6 +8,11 @@ class EntrepreneurService extends RequestHandler{
         const response = await  this.apiClient.post('/get-form-data', payload);
         return response.data;
     }
+    async getSelectedDataOptions(payload){
+        const response = await this.apiClient.post('/get-selected-data-options', payload)
+        console.log('get selected data options', payload);
+        return response;
+    }
     async getExampleFormData(){
         const response = await  this.apiClient.get('/get-example-data');
         return response.data;

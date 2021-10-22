@@ -1,59 +1,26 @@
 <template>
     <div class="price-list col-lg-12">
-      <div v-if="hideButtons" class="menu-circles">
-        <svg v-if="currentRouteName === '/'" class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e6e6e6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
-        <div class="price-info ">
-          <div class="price-circle-content col-lg-7 m-auto">
-            <h1 class="pl-content-heading">Procena cene usluga</h1>
-            <p>Da saznate više o cenama kliknite na dugme više o cenama</p>
-            <div class="price-row">
-              <div class="krug" @click="handleHideButtons('entrepreneur')">
-                <router-link class="prices-link" to="/price-list">
-                  <div class="price-card-body">
-                  <h1>Preduzetnik</h1>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p><b>pošaljite upitnik</b></p>
-                  </div>
-                </router-link>
-              </div>
-              <div class="krug" @click="handleHideButtons('doo')">
-              <router-link class=" prices-link" to="/price-list">
-                  <div class="price-card-body">
-                  <h1>DOO</h1>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p><b>pošaljite upitnik</b></p>
-                  </div>
-              </router-link>
-              </div>
-              <div class="krug" @click="handleHideButtons('association')">
-              <router-link class="prices-link " to="/price-list">
-                <div class="price-card-body">
-                <h1>Udruženje</h1>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <p><b>pošaljite upitnik</b></p>
-                </div>
-              </router-link>
-              </div>
-            </div><!-- end of row -->
-          </div><!-- end of col-lg-7-->
-        </div> <!-- end of price-info -->
-        <svg v-if="currentRouteName === '/'" class="down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#E6E6E6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
-        <div v-else class="box" ></div>
-      </div> <!-- end of menu circles--> 
-      <div v-else>
-        <h1>forma</h1>
-        {{selectedButton}}
-        <example :formData="formData"/>
-        <button class="btn btn-danger" @click="handleHideForm()">idi nazad</button>
-      </div>
+      <price-list-component-three-buttons 
+        :hideButtons="hideButtons" 
+        :selectedButton="selectedButton" 
+        :currentRouteName="currentRouteName" 
+        :formData="formData" 
+        @handle-hide-buttons="handleHideButtons" 
+        @handle-hide-form="handleHideForm"
+        @hadnle-get-selected-data-options="handleGetSelectedDataOptions"
+        />
+
     </div> <!-- end of price list -->
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
 // import store from '../store'
-import Example from '../views/Example.vue'
+// import Example from '../views/Example.vue'
+import PriceListComponentThreeButtons from './PriceListComponentThreeButtons.vue'
 export default{
-  components: { Example },
+  components: { 
+    // Example, 
+  PriceListComponentThreeButtons },
   data() {
     return {
       hideButtons: true,
@@ -61,14 +28,17 @@ export default{
     }
   },
   methods:{
-    ...mapActions(['getFormData']),
+    ...mapActions(['getFormData', 'getSelectedDataOptions']),
     async handleHideButtons(val){
       this.hideButtons = false
       this.selectedButton = val
       await this.getFormData({name: this.selectedButton})
     },
-    handleHideForm(){
-      this.hideButtons = true
+   async handleGetSelectedDataOptions(val){
+     await this.getSelectedDataOptions(val)
+    },
+    handleHideForm(val){
+      this.hideButtons = val
       this.selectedButton = ' '
     }
   },
@@ -103,6 +73,7 @@ export default{
 }
 
  .krug{
+   border:none;
     background-color: white;
     height: 320px;
     width: 320px;

@@ -34,7 +34,7 @@ export default {
   color: white !important;
   background-color: #385663 ;
 }
-
+.krug{border: none;}
 .entrepreneur-krug{
     background-color: #FBA922;
     height: 320px;
@@ -45,6 +45,7 @@ export default {
 
 }
 .entrepreneur-krug:hover {
+
   text-decoration: none;
   background-color: #385663 ;
   font-family: 'RobotoSlab-Medium', sans-serif !important;

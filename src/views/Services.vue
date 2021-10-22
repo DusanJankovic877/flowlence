@@ -182,6 +182,10 @@ export default {
 .services {
   margin-top: 50px !important;
   padding-bottom: 156px;
+}
+.circles{
+  display: flex !important;
+  flex-wrap: wrap;
 
 }
 .text-left p{

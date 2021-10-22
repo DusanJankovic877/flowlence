@@ -42,6 +42,9 @@ export default new Vuex.Store({
     async getContactFormData(state, payload){
       await contactServices.getContactFormData(payload);
     },
+    async getSelectedDataOptions(state,payload){
+      await entrepreneurService.getSelectedDataOptions(payload);
+    },
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
        console.log(payload);
