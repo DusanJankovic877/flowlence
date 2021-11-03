@@ -10,7 +10,7 @@
     </div>
     <div class="price-list-margin">
 
-    <PriceListComponent/>
+    <PriceListComponent :fromRoute="fromRoute"/>
     </div>
     <div class="blog-margin">
     <Blog/>
@@ -45,6 +45,11 @@ export default {
     Blog,
     ServicesComponent,
   },
+  computed:{
+    fromRoute() {
+        return this.$route.params.from;
+    }
+  }
 }
 </script>
 <style>

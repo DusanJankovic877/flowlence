@@ -1,16 +1,64 @@
 <template>
 <div class="price-list-view">
   <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
+      <price-list-component-three-buttons
+        :class="hideButtons ? 'hide' : '' " 
+        :hideButtons="hideButtons" 
+        :selectedButton="selectedButton" 
+        :currentRouteName="currentRouteName" 
+        :formData="formData"
+        @handle-hide-buttons="handleHideButtons" 
+        @handle-hide-form="handleHideForm"
+        @hadnle-get-selected-data-options="handleGetSelectedDataOptions"
+      />
+      <div :class="hideButtons ? '' : 'hide'">
+        <h1>forma</h1>
+        <price-list-components-selected-buttons :selectedButton="selectedButton"/>
+        <!-- <example :formData="formData"/> -->
+        <button class="btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
+      </div>
 
-    <PriceListComponent class="price-list-component"/>
 </div>
 </template>
 <script>
-import PriceListComponent from '../components/PriceListComponent.vue'
+import { mapActions, mapGetters } from 'vuex'
+import PriceListComponentThreeButtons from '../components/PriceListComponentThreeButtons.vue'
+import PriceListComponentsSelectedButtons from '../components/PriceListComponentsSelectedButtons.vue'
 export default {
     components:{
-        PriceListComponent
+        PriceListComponentThreeButtons,
+        PriceListComponentsSelectedButtons
     },
+    data() {
+      return {
+        hideButtons: false,
+        selectedButton: ''
+      }
+    },
+      computed: {
+        ...mapGetters(['formData']),
+        currentRouteName() {
+            return this.$route.path;
+        },
+
+
+      },
+    methods:{
+      ...mapActions(['getFormData', 'getSelectedDataOptions']),
+      async handleHideButtons(val, bool){
+        this.hideButtons = bool
+        this.selectedButton = val
+        await this.getFormData({name: this.selectedButton})
+      },
+    async handleGetSelectedDataOptions(val){
+        await this.getSelectedDataOptions(val)
+
+      },
+      handleHideForm(val){
+        this.hideButtons = val
+        this.selectedButton = ' '
+      }
+    }
   
 }
 </script>
