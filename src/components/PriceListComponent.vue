@@ -2,16 +2,6 @@
 
     <div class="price-list col-lg-12">
         <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e6e6e6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
-
-      <!-- <price-list-component-three-buttons 
-        :hideButtons="hideButtons" 
-        :selectedButton="selectedButton" 
-        :currentRouteName="currentRouteName" 
-        :formData="formData" 
-        @handle-hide-buttons="handleHideButtons" 
-        @handle-hide-form="handleHideForm"
-        @hadnle-get-selected-data-options="handleGetSelectedDataOptions"
-        /> -->
         <div class="price-info ">
           <div class="price-circle-content col-lg-7 m-auto">
             <h1 class="pl-content-heading">Procena cene usluga</h1>
@@ -53,23 +43,13 @@
 
 </template>
 <script>
-// import { mapActions, mapGetters } from 'vuex'
-// import store from '../store'
-// import Example from '../views/Example.vue'
-// import PriceListComponentThreeButtons from './PriceListComponentThreeButtons.vue'
 export default{
-  components: { 
-    // Example, 
-  // PriceListComponentThreeButtons 
-  },
+
   data() {
     return {
       hideButtons: true,
       selectedButton: ''
     }
-  },
-  props:{
-    fromRoute: String
   },
   methods:{
     handleReRoute(val){
