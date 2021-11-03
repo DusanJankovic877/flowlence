@@ -1,8 +1,6 @@
 <template>
-
       <div class="price-list col-lg-7 m-auto">
         <h1>Procena cene Usluga</h1>
-           
         <hr>
  
         <h4 v-if="hide">Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
@@ -11,61 +9,56 @@
         <div class="circles">
 
             <div :class="hide ?'entrepreneur-krug hide' : 'entrepreneur-krug'">
-                <button class="entrepreneur-prices-link" @click="handleNewEntrepreneur">
+                <button class="entrepreneur-prices-link" @click="handleNewDoo">
            
                     <div class="entrepreneur-card-body">
-                        <h2>Novi preduzetnik</h2>
+                        <h2>Novi DOO</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-               
+       
                 </button>
             </div>
 
             <div :class="hide ?'entrepreneur-krug hide' : 'entrepreneur-krug'">
-                <button class="entrepreneur-prices-link" @click="handleAlreadyEntrepreneur">
+                <button class="entrepreneur-prices-link" @click="handleAlreadyDoo">
                     <div class="entrepreneur-card-body">
-                        <h2>Već postojeći preduzetnik</h2>
+                        <h2>Već postojeći DOO</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                 </button>
             </div>
         </div>
-           
         <div class="entrepreneur">
-            <!-- <Form ref="childComponent" @handle-show-buttons="handleShowButtons" :formData="formData"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/> -->
+      
+            <Form ref="childComponent" @handle-show-buttons="handleShowButtons" :formData="formData"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
         </div>
-    
-        <button v-if="!hideNew && !hideAlready" class="go-back-button col-lg-3 btn btn-danger" @click="goBackToPriceList">Idi nazad</button>
     </div>
 </template>
 <script>
 import store from '../store'
-// import Form from '../components/entrepreneur/Form.vue'
-import Example from '../views/Example.vue'
+import Form from './entrepreneur/Form.vue'
 import { mapGetters} from 'vuex'
 export default {
     components:{
-        // Form,
-        Example
+        Form
     },
     data() {
-       return{
+      return{
             hide: false,
             hideNew: false,
-            hideAlready: false,
-       } 
-    },
 
-    methods:{
+      }  
+    },
+    methods: {
         goBackToPriceList(){
             this.$router.push('/price-list')
         },
-        handleNewEntrepreneur(){
+        handleNewDoo(){
             this.hideNew = true
             this.$refs.childComponent.setHideNewValue(this.hideNew);
             this.hide = true
         },
-        handleAlreadyEntrepreneur(){
+        handleAlreadyDoo(){
             this.hideAlready = true
             this.$refs.childComponent.setHideAlreadyValue(this.hideAlready);
             this.hide = true
@@ -76,19 +69,25 @@ export default {
             this.hide = false;
         }
     },
-    computed:{
-        ...mapGetters(['formData'])
+        computed:{
+        ...mapGetters(['formData']),
     },
         async beforeRouteEnter(from, to, next){
-        await store.dispatch('getFormData', {'path' : '/price-list/entrepreneur'})
+        await store.dispatch('getFormData', {'path' : from.path})
         next();
     }
-
 }
 </script>
-<style>
-.circles{
-    display: flex;
-    flex-wrap: wrap !important;
+<style scoped>
+.go-back-button{
+    margin: 10px auto;
 }
+.submit-button{
+    margin: 10px auto;
+
+}
+.hide{
+    display: none !important;
+}
+
 </style>

@@ -51,6 +51,7 @@ export default{
       selectedButton: ''
     }
   },
+
   methods:{
     handleReRoute(val){
       console.log('click home');

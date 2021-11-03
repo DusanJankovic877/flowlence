@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{selectedButton}}
+       selektovano dugme {{selectedButton}}
     </div>
 </template>
 <script>

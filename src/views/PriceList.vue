@@ -13,7 +13,12 @@
     />
     <div :class="hideButtons ? '' : 'hide'">
       <h1>forma</h1>
-      <price-list-components-selected-buttons :selectedButton="selectedButton"/>
+      <div class="selected-buttons">
+        <div v-if="selectedButton === 'entrepreneur'"><EntrepreneurComponent/></div>
+        <div v-else-if="selectedButton === 'doo'"><DooComponent/></div>
+        <div v-else-if="selectedButton === 'association'"><AssociationComponent/></div>
+      </div>
+      <!-- <price-list-components-selected-buttons :selectedButton="selectedButton"/> -->
       <!-- <example :formData="formData"/> -->
       <button v-if="fromRoute === 'home'" class="btn btn-danger" @click="goToHome">Idi na početnu</button>
       <button v-else class="btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
@@ -23,11 +28,15 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import PriceListComponentThreeButtons from '../components/PriceListComponentThreeButtons.vue'
-import PriceListComponentsSelectedButtons from '../components/PriceListComponentsSelectedButtons.vue'
+import EntrepreneurComponent from '../components/EntrepreneurComponent.vue'
+import DooComponent from '../components/DooComponent.vue'
+import AssociationComponent from '../components/AssociationComponent.vue'
 export default {
   components:{
     PriceListComponentThreeButtons,
-    PriceListComponentsSelectedButtons
+    EntrepreneurComponent,
+    DooComponent,
+    AssociationComponent,
   },
   data() {
     return {
