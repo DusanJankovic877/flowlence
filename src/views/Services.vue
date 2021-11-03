@@ -8,62 +8,56 @@
           <h1>Usluge</h1>
 
     <div :class="hide ? 'circles hide' : 'circles'">
-          <div class="krug" @click="foundationService">
-            <router-link  class="prices-link" to="/services">
+
+            <button  class="prices-link krug"  @click="foundationService">
               <div class="price-card-body">
               <h3>Osnivanje</h3>
                 <p class="card-text">konsalting pre postupka osnivanja, provera rezervisanosti naziva, podnošenje dokumentacije...</p>
                 <p><b>više informacija</b> </p>
               </div>
-            </router-link>
-          </div> <!-- 1st-->
-          <div class="krug" @click="accountingService">
-            <router-link class="prices-link" to="/services">
+            </button><!-- 1st-->
+
+            <button class="prices-link krug" @click="accountingService">
               <div class="price-card-body">
               <h3>Knjigovodstvene usluge</h3>
                 <p class="card-text">vođenje poslovnih knjiga, Knjiženje dokumentacije,Vođenje analitičke evidencije...</p>
                 <p><b>više informacija</b> </p>
 
               </div>
-            </router-link>
-          </div><!-- 2nd-->
+            </button><!-- 2nd-->
 
-          <div class="krug" @click="payrollPersonnelService">
-            <router-link class="prices-link" to="/services">
+
+            <button class="prices-link krug" @click="payrollPersonnelService">
               <div class="price-card-body">
               <h3>Obračun zarada / Kadrovske usluge</h3>
                 <p class="card-text">Popunjavanje ugovora o radnom angažovanju, Prijavljivanje I odjavljivanje zaposlenih...</p>
                 <p><b>više informacija</b> </p>
               </div>
-            </router-link>
-          </div> <!-- 3rd-->
-          <div class="krug" @click="paymentsService">
-            <router-link class="prices-link" to="/services">
+            </button><!-- 3rd-->
+
+            <button class="prices-link krug" @click="paymentsService">
               <div class="price-card-body">
               <h3>Platni promet (dinarski I devizni)</h3>
                 <p class="card-text">Otvaranje tekućih računa, Elektronsko bankarstvo, Priprema naloga za plaćanje...</p>
                 <p><b>više informacija</b> </p>
               </div>
-            </router-link>
-          </div><!-- 4th-->
-          <div class="krug" @click="taxFinancialConsulting">
-            <router-link class="prices-link" to="/services">
+            </button><!-- 4th-->
+
+            <button class="prices-link krug" @click="taxFinancialConsulting">
               <div class="price-card-body">
               <h3>Poreski I finansijski konsalting</h3>
                 <p class="card-text">Savetovanje klijenta u vezi svih poreskih pitanja, kao I davanje predloga...</p>
                 <p><b>više informacija</b> </p>
               </div>
-            </router-link>
-          </div> <!-- 5th-->
-          <div class="krug" @click="calculationFinancialIndicator">
-            <router-link class="prices-link" to="/services">
+            </button><!-- 5th-->
+
+            <button class="prices-link krug" @click="calculationFinancialIndicator">
               <div class="price-card-body">
               <h3>Izračunavanje finansijskih pokazatelja, izrada biznis planova</h3>
                 <p class="card-text">izračunavanje pokazateljima, Izrada biznis plana...</p>
                 <p><b>više informacija</b> </p>
               </div>
-            </router-link>
-          </div> <!-- 6th-->
+            </button><!-- 6th-->
 
     </div>
 
