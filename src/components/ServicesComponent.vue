@@ -18,7 +18,7 @@
           <p><b>više informacija</b> </p>
 
         </div>
-      </button>><!-- 2nd-->
+      </button><!-- 2nd-->
 
       <button class="prices-link krug" @click="payrollPersonnelServices">
         <div class="price-card-body">
@@ -35,7 +35,7 @@
           <p class="card-text">Otvaranje tekućih računa, Elektronsko bankarstvo, Priprema naloga za plaćanje...</p>
           <p><b>više informacija</b> </p>
         </div>
-      </button>><!-- 4th-->
+      </button><!-- 4th-->
 
       <button class="prices-link krug" @click="taxFinancialConsultings">
         <div class="price-card-body">

@@ -8,7 +8,6 @@
   <div class="about-content col-lg-12">
     <div class="about-us col-lg-7 m-auto">
       <h1>O nama</h1>
-      {{currentRouteName}}
       <p>
         Individualni pristup svakom klijentu, posvećenost, pouzdanost i kvalitet usluge su osnovni
         principi na kojima se zasniva naše poslovanje.
