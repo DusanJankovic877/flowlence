@@ -76,6 +76,12 @@ export default {
 </script>
 <style>
 .price-row{
-  display: flex;
+  display: inline-flex !important;
+  flex-wrap: wrap;
+}
+@media (max-width:540px){
+  .price-row{
+  display: none;
+}
 }
 </style>
