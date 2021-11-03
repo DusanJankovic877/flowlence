@@ -7,19 +7,25 @@
         <li><p>Obračun zarada, poreza I doprinosa na zarade</p></li>
         <li><p>Kontakt sa fondovima socijalnih osiguranja</p></li>
     </ul>
-    <button class="btn btn-danger" @click="goBack">idi nazad</button>
+       <serviceButtonsComponent @send-result-values="goBackTo" @go-back-home="goBackToHome" :fromRoute="fromRoute"/>
+
 </div>
 </template>
 <script>
+import serviceButtonsComponent from './serviceButtonsComponent.vue'
 export default {
-    data() {
-       return{
-
-       } 
+    components:{
+        serviceButtonsComponent
+    },
+    props: {
+        fromRoute: String
     },
     methods:{
-        goBack(){
-            this.$emit('send-result-values', false) 
+        goBackTo(val){
+            this.$emit('send-result-values-to-parent', val) 
+        },
+        goBackToHome(){
+            this.$emit('go-back-home-to-parent') 
         }
     },
 }

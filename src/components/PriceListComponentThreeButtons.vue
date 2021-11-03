@@ -7,27 +7,33 @@
             <h1 class="pl-content-heading">Procena cene usluga</h1>
             <p>Da saznate više o cenama kliknite na dugme više o cenama</p>
             <div class="price-row">
-              <button class="krug prices-link" @click="handleHideButtons('entrepreneur')">
+               <div class="krug" @click="handleHideButtons('entrepreneur')">
+              <router-link class="krug prices-link"  to="/price-list">
                 <div class="price-card-body">
                 <h1>Preduzetnik</h1>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   <p><b>pošaljite upitnik</b></p>
                 </div>
-              </button>
-              <button class="krug prices-link" @click="handleHideButtons('doo')">
+              </router-link>
+               </div>
+               <div class="krug"  @click="handleHideButtons('doo')">
+              <router-link class="krug prices-link" to="/price-list">
                   <div class="price-card-body">
                   <h1>DOO</h1>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     <p><b>pošaljite upitnik</b></p>
                   </div>
-              </button>
-              <button class="krug prices-link" @click="handleHideButtons('association')">
+              </router-link>
+               </div>
+              <div class="krug"  @click="handleHideButtons('association')">
+              <router-link class="krug prices-link" to="/price-list">
                 <div class="price-card-body">
                 <h1>Udruženje</h1>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   <p><b>pošaljite upitnik</b></p>
                 </div>
-              </button>
+              </router-link>
+              </div>
             </div><!-- end of row -->
           </div><!-- end of col-lg-7-->
         </div> <!-- end of price-info -->
@@ -69,5 +75,7 @@ export default {
 }
 </script>
 <style>
-
+.price-row{
+  display: flex;
+}
 </style>

@@ -66,12 +66,13 @@
           </div> <!-- 6th-->
 
     </div>
-    <Foundation @send-result-values="foundationServiceReset" :class="foundation ? ' ' : 'hide'"/>
-    <AccountingServicesComponent @send-result-values="accountingServicesReset" :class="accounting ? ' ' : 'hide'"/>
-    <PayrollComponent @send-result-values="payrollReset" :class="payroll ? ' ' : 'hide' "/>
-    <PaymentsComponent @send-result-values="paymentsServicesReset" :class="payment ? ' ' : 'hide' "/>
-    <TaxFinancialConsultingComponent @send-result-values="taxFinancialConsultingReset" :class="taxFinancial ? ' ' : 'hide' "/>
-    <CalculationFinancialIndicatorsComponent @send-result-values="calculationFinancialIndicatorsReset" :class="calculation ? ' ' : 'hide' "/>
+
+    <Foundation @send-result-values-to-parent="serviceReset" @go-back-home-to-parent="toHome" :fromRoute="fromRoute" :class="foundation ? ' ' : 'hide'"/>
+    <AccountingServicesComponent @send-result-values-to-parent="serviceReset" @go-back-home-to-parent="toHome" :fromRoute="fromRoute" :class="accounting ? ' ' : 'hide'"/>
+    <PayrollComponent @send-result-values-to-parent="serviceReset" @go-back-home-to-parent="toHome" :fromRoute="fromRoute" :class="payroll ? ' ' : 'hide' "/>
+    <PaymentsComponent @send-result-values-to-parent="serviceReset" @go-back-home-to-parent="toHome" :fromRoute="fromRoute" :class="payment ? ' ' : 'hide' "/>
+    <TaxFinancialConsultingComponent @send-result-values-to-parent="serviceReset" @go-back-home-to-parent="toHome" :fromRoute="fromRoute" :class="taxFinancial ? ' ' : 'hide' "/>
+    <CalculationFinancialIndicatorsComponent @send-result-values-to-parent="serviceReset" @go-back-home-to-parent="toHome" :fromRoute="fromRoute" :class="calculation ? ' ' : 'hide' "/>
 
   </div>
 </div>
@@ -91,9 +92,6 @@ export default {
     PaymentsComponent,
     TaxFinancialConsultingComponent,
     CalculationFinancialIndicatorsComponent
-
-
-
   },
 
 
@@ -106,6 +104,11 @@ export default {
       taxFinancial: false,
       calculation: false,
       hide:false,
+    }
+  },
+  computed: {
+    fromRoute() {
+        return this.$route.params.from;
     }
   },
   created(){
@@ -121,60 +124,50 @@ export default {
 
   methods: {
 
+    serviceReset(value){
+      this.foundation = value;
+      this.accounting = value;
+      this.payroll = value;
+      this.payment = value;
+      this.taxFinancial = value;
+      this.calculation = value;
+      this.hide = value
+    },
+
+    toHome(){
+      this.$router.push('/')
+    },
+
     foundationService(){
       this.foundation = true;
       this.hide = true
-
-    },
-    foundationServiceReset(value){
-      this.foundation = value;
-      this.hide = value
     },
 
     accountingService(){
       this.accounting = true;
       this.hide = true
     },
-    accountingServicesReset(value){
-      this.accounting = value;
-      this.hide = value
-    },
 
     payrollPersonnelService(){
       this.payroll = true;
       this.hide = true
-    },
-    payrollReset(value){
-      this.payroll = value;
-      this.hide = value
     },
 
     paymentsService(){
       this.payment = true;
       this.hide = true
     },
-    paymentsServicesReset(value){
-      this.payment = value;
-      this.hide = value
-    },
 
     taxFinancialConsulting(){
       this.taxFinancial = true;
       this.hide = true
-    },
-    taxFinancialConsultingReset(value){
-      this.taxFinancial = value;
-      this.hide = value
     },
 
     calculationFinancialIndicator(){
       this.calculation = true;
       this.hide = true
     },
-    calculationFinancialIndicatorsReset(value){
-      this.calculation = value;
-      this.hide = value
-    }
+
   }
 }
 </script>

@@ -15,29 +15,24 @@
             </p>
         </li>
     </ul>
-
-    <button class="btn btn-danger" v-if="fromRoute === 'home'" @click="goBackToHome">Nazad na početnu</button>
-    <button v-else class="btn btn-danger" @click="goBack">Idi nazad</button>
+    <serviceButtonsComponent @send-result-values="goBackTo" @go-back-home="goBackToHome" :fromRoute="fromRoute"/>
 </div>
 </template>
 <script>
+import serviceButtonsComponent from './serviceButtonsComponent.vue'
 export default {
-    data() {
-       return{
-
-       } 
+    components:{
+        serviceButtonsComponent
     },
-      computed: {
-    fromRoute() {
-        return this.$route.params.from;
-    }
-},
+    props: {
+        fromRoute: String
+    },
     methods:{
-        goBack(){
-            this.$emit('send-result-values', false) 
+        goBackTo(val){
+            this.$emit('send-result-values-to-parent', val) 
         },
         goBackToHome(){
-            this.$router.push('/')
+            this.$emit('go-back-home-to-parent') 
         }
     },
 }
