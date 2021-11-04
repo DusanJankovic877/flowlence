@@ -6,27 +6,30 @@
       :hideButtons="hideButtons" 
       :selectedButton="selectedButton" 
       :currentRouteName="currentRouteName" 
-      :formData="formData"
       @handle-hide-buttons="handleHideButtons" 
       @handle-hide-form="handleHideForm"
-      @hadnle-get-selected-data-options="handleGetSelectedDataOptions"
+ 
     />
+ 
     <div :class="hideButtons ? '' : 'hide'">
-      <h1>forma</h1>
-      <div class="selected-buttons">
-        <div v-if="selectedButton === 'entrepreneur'"><EntrepreneurComponent/></div>
-        <div v-else-if="selectedButton === 'doo'"><DooComponent/></div>
-        <div v-else-if="selectedButton === 'association'"><AssociationComponent/></div>
+      <div :class="hideSelectedButtons ? 'hide selected-buttons' : 'selected-buttons'">
+        <div v-if="selectedButton === 'entrepreneur'"><EntrepreneurComponent @handle-selected-option="handleSelectedOption"/></div>
+        <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
+        <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
       <!-- <price-list-components-selected-buttons :selectedButton="selectedButton"/> -->
       <!-- <example :formData="formData"/> -->
+ {{formData}}
       <button v-if="fromRoute === 'home'" class="btn btn-danger" @click="goToHome">Idi na početnu</button>
       <button v-else class="btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
     </div>
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, 
+mapGetters, 
+mapMutations
+} from 'vuex'
 import PriceListComponentThreeButtons from '../components/PriceListComponentThreeButtons.vue'
 import EntrepreneurComponent from '../components/EntrepreneurComponent.vue'
 import DooComponent from '../components/DooComponent.vue'
@@ -41,10 +44,13 @@ export default {
   data() {
     return {
       hideButtons: false,
-      selectedButton: ''
+      selectedButton: '',
+      hideSelectedButtons: false,
+      showForm: false
     }
   },
   computed: {
+    
     ...mapGetters(['formData']),
     currentRouteName() {
       return this.$route.path;
@@ -55,23 +61,31 @@ export default {
   },
 
   methods:{
-    ...mapActions(['getFormData', 'getSelectedDataOptions']),
+    ...mapMutations(['setEmptyFormData']),
+    ...mapActions(['getFormData']),
     async handleHideButtons(val, bool){
       this.hideButtons = bool
       this.selectedButton = val
-      this.formData = await this.getFormData({name: this.selectedButton})
-    },
-    async handleGetSelectedDataOptions(val){
-      await this.getSelectedDataOptions(val)
-    },
-
-    handleHideForm(val){
-      this.hideButtons = val
-      this.selectedButton = ' '
+       
     },
     goToHome(){
       this.$router.push('/')
-    }
+    },
+    async handleSelectedOption(val){
+      console.log('entrepreneur price list', val);
+      
+      await this.getFormData({name: val})
+      this.hideSelectedButtons = true;
+      this.showForm = true;
+    },
+
+    async handleHideForm(val){
+ 
+      await this.setEmptyFormData();
+      this.hideButtons = val
+      this.hideSelectedButtons = val;
+      this.selectedButton = ' '
+    },
 
   },
   created(){
@@ -85,27 +99,19 @@ export default {
 }
 </script>
 <style>
-
+.title{
+  color: #404040;
+}
 .price-list-img{
   margin-bottom: 0px;
 }
 .price-list-component{
     margin-top: 0px;
 }
-
-.entrepreneur-prices-link{
-  text-decoration: none;
-  color: #385663;
-  border-radius: 25em;
-  border: none;
-  background-color: #FBA922;
-}
-.entrepreneur-prices-link:hover{
-  color: white !important;
-  background-color: #385663 ;
-}
-.krug{border: none;}
+.krug{border: none;color:#404040;}
 .entrepreneur-krug{
+    color: #404040;
+border: none;
     background-color: #FBA922;
     height: 320px;
     width: 320px;
@@ -114,14 +120,18 @@ export default {
     margin:5px auto !important;
 
 }
-.entrepreneur-krug:hover {
 
+.entrepreneur-krug:hover{
+  color: white;
   text-decoration: none;
   background-color: #385663 ;
   font-family: 'RobotoSlab-Medium', sans-serif !important;
   border-radius: 25em;
 } 
+
+
 .entrepreneur-card-body{
+
   height: 320px;
   width: 320px;
   border-radius: 25em !important;

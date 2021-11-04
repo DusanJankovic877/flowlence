@@ -5,35 +5,26 @@
         <div class="price-info ">
           <div class="price-circle-content col-lg-7 m-auto">
             <h1 class="pl-content-heading">Procena cene usluga</h1>
-            <p>Da saznate više o cenama kliknite na dugme više o cenama</p>
+            <p class="pl-content-paragraph">Da saznate više o cenama popunite upitnik</p>
             <div class="price-row">
-               <div class="krug" @click="handleReRoute('entrepreneur')">
-              <router-link class="krug prices-link"  to="">
+              <button  class="prices-link krug" @click="handleReRoute('entrepreneur')">
                 <div class="price-card-body">
-                <h1>Preduzetnik</h1>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <h1>Preduzetnik</h1>
                   <p><b>pošaljite upitnik</b></p>
                 </div>
-              </router-link>
-               </div>
-               <div class="krug"  @click="handleReRoute('doo')">
-              <router-link class="krug prices-link" to="">
-                  <div class="price-card-body">
+              </button><!-- 1st -->
+              <button  class="prices-link krug" @click="handleReRoute('doo')">
+                <div class="price-card-body">
                   <h1>DOO</h1>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p><b>pošaljite upitnik</b></p>
-                  </div>
-              </router-link>
-               </div>
-              <div class="krug"  @click="handleReRoute('association')">
-              <router-link class="krug prices-link" to="">
-                <div class="price-card-body">
-                <h1>Udruženje</h1>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   <p><b>pošaljite upitnik</b></p>
                 </div>
-              </router-link>
-              </div>
+              </button><!-- 2nd -->
+              <button  class="prices-link krug" @click="handleReRoute('association')">
+                <div class="price-card-body">
+                  <h1>Udruženje</h1>
+                  <p><b>pošaljite upitnik</b></p>
+                </div>
+              </button><!-- 3rd -->
             </div><!-- end of row -->
           </div><!-- end of col-lg-7-->
         </div> <!-- end of price-info -->
@@ -86,20 +77,20 @@ export default{
 }
 </script>
 <style scoped>
-.price-info{
-  background-color: #E6E6E6;
-}
-.circle{
-  z-index: 1;
-  position: relative;
-}
-.pl-content-heading{
-  padding-top:50px;
-}
-.price-row{
+  .price-info{
+    background-color: #E6E6E6;
+  }
+  .circle{
+    z-index: 1;
+    position: relative;
+  }
 
-  display: flex;
-}
+  .pl-content-heading, .pl-content-paragraph{
+    color: #404040;
+  }
+  .price-row{
+    display: flex;
+  }
 
  .krug{
    border:none;
@@ -109,28 +100,21 @@ export default{
     border-radius: 25em;
     padding: 0;
     margin:5px auto !important;
-}
+  } 
 
-.krug:hover {
+ .krug:hover {
   text-decoration: none;
   background-color: #8b8b8b;
   font-family: 'RobotoSlab-Medium', sans-serif !important;
   border-radius: 25em;
 
-}
-
-.price-card-body{
-  height: 320px;
-  width: 320px;
-  border-radius: 25em !important;
-  padding: 93px 10px 0 10px;
-}
-
-
-
-.price-list a, .contact a{
-  border-radius: 0;
-}
+  }
+  .price-card-body h1{
+    margin-bottom: 70px;
+  }
+  .price-list a, .contact a{
+    border-radius: 0;
+  }
 @media only screen and (max-width: 1280px){
   .price-circle-content{
     width: 100%;
@@ -138,7 +122,7 @@ export default{
     .price-card-body{
 
   padding: 75px 10px 0 10px;
-}
+  }
   .price-row{
   display: flex;
   }
@@ -150,7 +134,7 @@ export default{
   .price-card-body{
 
   padding: 65px 10px 0 10px;
-}
+  }
     .price-list{
     margin-bottom: -125px !important;
   }

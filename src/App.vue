@@ -35,12 +35,11 @@ export default{
 
 }
 p, a, label{
-  font-family: 'RobotoSlab-Medium', sans-serif !important;
-  color: #404040 !important;
+  font-family: 'RobotoSlab-Medium', sans-serif !important; 
 }
 h1, h2, h3, h4, h5{
   font-family: 'RobotoSlab-Bold', sans-serif !important;
-  color: #404040 !important;
+
 }
 
 

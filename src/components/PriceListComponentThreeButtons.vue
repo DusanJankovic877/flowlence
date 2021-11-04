@@ -1,11 +1,10 @@
 <template>
 <div>
       <div class="menu-circles">
-        <!-- <svg v-if="currentRouteName === '/'" class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e6e6e6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg> -->
         <div class="price-info ">
           <div class="price-circle-content col-lg-7 m-auto">
-            <h1 class="pl-content-heading">Procena cene usluga</h1>
-            <p>Da saznate više o cenama kliknite na dugme više o cenama</p>
+            <h1 class="title">Procena cene usluga</h1>
+            <p>Da saznate više o cenama popunite upitnik</p>
             <div class="price-row">
              
               <button class="krug prices-link"  @click="handleHideButtons('entrepreneur')">
@@ -36,18 +35,11 @@
           </div><!-- end of col-lg-7-->
         </div> <!-- end of price-info -->
       </div> <!-- end of menu circles--> 
-      <!-- <div >
-        <h1>forma</h1> -->
-        <!-- <price-list-components-selected-buttons :selectedButton="selectedButton"/> -->
-        <!-- <example :formData="formData"/> -->
-        <!-- <button class="btn btn-danger" @click="handleHideForm(true)">idi nazad</button>
-      </div> -->
 </div>
 </template>
 <script>
-// import PriceListComponentsSelectedButtons from './PriceListComponentsSelectedButtons.vue'
 export default {
-  // components: { PriceListComponentsSelectedButtons },
+
     data() {
         return{
 
@@ -60,7 +52,6 @@ export default {
     },
     methods:{
         handleHideButtons(val){
-            this.$emit('hadnle-get-selected-data-options', val)
             this.$emit('handle-hide-buttons', val, true)
         }
     }
@@ -68,6 +59,9 @@ export default {
 }
 </script>
 <style>
+/* .{
+  color: #404040 !important;
+} */
 .price-row{
   display: inline-flex !important;
   flex-wrap: wrap;

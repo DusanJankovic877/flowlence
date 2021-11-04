@@ -22,6 +22,9 @@ export default new Vuex.Store({
     },
     setExampleFormData(state, payload){
       state.exampleFormData = payload
+    },
+    setEmptyFormData(state){
+      state.formData = {}
     }
 
   },
@@ -42,20 +45,20 @@ export default new Vuex.Store({
     async getContactFormData(state, payload){
       await contactServices.getContactFormData(payload);
     },
-    async getSelectedDataOptions(state,payload){
-      await entrepreneurService.getSelectedDataOptions(payload);
-    },
+
+    // i use this one
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
-       console.log(payload);
+      //  console.log(payload);
        state.commit('setFormData', response)  
      
     },
+    //
     //EXAMPLE NEXT LVL
     async getExampleFormData(state){
       const response = await entrepreneurService.getExampleFormData()
       state.commit('setExampleFormData', response);
-      console.log('state', response);
+      // console.log('state', response);
     }
   },
   getters: {

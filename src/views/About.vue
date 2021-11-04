@@ -72,7 +72,6 @@ background-color: #e6e6e6;
   .about-content  {
     padding-top: 50px;
     background-color: #e6e6e6;
-    /* background-color: black; */
     color: #fff;
     padding-bottom: 1px;
   }
@@ -93,13 +92,9 @@ background-color: #e6e6e6;
   }
   .down{
     margin-top: -2px;
-    /* transform: rotateX(180deg) rotateY(180deg); */
   }
 @media only screen and (max-width: 1280px){
-    .about{
 
-    /* margin-bottom: 210px; */
-  }
     .about-content h1{
     font-size: 35px;
   }
@@ -125,9 +120,6 @@ background-color: #e6e6e6;
   }
 }
 @media (max-width:540px){
-  .about{
-    /* margin-bottom:-270px !important; */
-  }
   .about-content{padding: 20px 10px !important;}
   .about-content h1{
     font-size: 16px;

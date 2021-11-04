@@ -7,7 +7,7 @@
       <div class="blog col-lg-7 m-auto">
        
           
-      <h1>Blog</h1>
+      <h1 class="title">Blog</h1>
         <div class="circles">
             <div class="krug blog-circle col-lg-12" style="">
               <h4>post title</h4>

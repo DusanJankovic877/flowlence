@@ -122,7 +122,9 @@ export default {
 }
 </script>
 <style>
-
+  .contact-text, label{
+    color: #404040;
+  }
   .left{
     margin-top: 50px !important;
     float: left;
