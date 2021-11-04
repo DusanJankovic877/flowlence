@@ -89,6 +89,7 @@ nav {
 .nav-links, .navbar-brand{
   padding-bottom: 20px;
 }
+
 .info-row{
   margin-right: 0;
 }

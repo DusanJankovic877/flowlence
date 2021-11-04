@@ -3,11 +3,11 @@
         <h1>Procena cene Usluga</h1>
         <hr>
  
-        <h4 v-if="hide">Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
-        <h4 v-else>Izaberite ponuđene opcije kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
+        <!-- <h4 v-if="hide">Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4>
+        <h4 v-else>Izaberite ponuđene opcije kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4> -->
 
         <div class="circles">
-                <button class="entrepreneur-krug" @click="handleSelectedOption">
+                <button class="entrepreneur-krug" @click="handleSelectedOption('newAssociation')">
                     <div class="entrepreneur-card-body">
                         <h2>Novo udruženje</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -15,7 +15,7 @@
                
                 </button>
         
-                <button class="entrepreneur-krug" @click="handleSelectedOption">
+                <button class="entrepreneur-krug" @click="handleSelectedOption('alreadyAssociation')">
                     <div class="entrepreneur-card-body">
                         <h2>Već postojeće udruženje</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

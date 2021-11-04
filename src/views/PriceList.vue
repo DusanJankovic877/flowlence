@@ -8,18 +8,14 @@
       :currentRouteName="currentRouteName" 
       @handle-hide-buttons="handleHideButtons" 
       @handle-hide-form="handleHideForm"
- 
     />
- 
     <div :class="hideButtons ? '' : 'hide'">
       <div :class="hideSelectedButtons ? 'hide selected-buttons' : 'selected-buttons'">
         <div v-if="selectedButton === 'entrepreneur'"><EntrepreneurComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <!-- <price-list-components-selected-buttons :selectedButton="selectedButton"/> -->
-      <!-- <example :formData="formData"/> -->
- {{formData}}
+      <FormComponent :formData="formData"/>
       <button v-if="fromRoute === 'home'" class="btn btn-danger" @click="goToHome">Idi na početnu</button>
       <button v-else class="btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
     </div>
@@ -34,12 +30,14 @@ import PriceListComponentThreeButtons from '../components/PriceListComponentThre
 import EntrepreneurComponent from '../components/EntrepreneurComponent.vue'
 import DooComponent from '../components/DooComponent.vue'
 import AssociationComponent from '../components/AssociationComponent.vue'
+import FormComponent from '../components/FormComponent.vue'
 export default {
   components:{
     PriceListComponentThreeButtons,
     EntrepreneurComponent,
     DooComponent,
     AssociationComponent,
+    FormComponent
   },
   data() {
     return {

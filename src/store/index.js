@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import entrepreneurService from '../services/entrepreneurService'
-import dooService from '../services/dooService'
+
 import contactServices from '../services/contactServices'
-import associationService from '../services/associationService'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -17,31 +17,13 @@ export default new Vuex.Store({
     setFormData(state, payload){
       state.formData = payload;
     },
-    setAssociationFormData(state, payload){
-      state.associationFormData = payload
-    },
-    setExampleFormData(state, payload){
-      state.exampleFormData = payload
-    },
     setEmptyFormData(state){
       state.formData = {}
     }
 
   },
   actions: {
-    async getEntrepreneurFormData(state, payload){
-       await entrepreneurService.getEntrepreneurFormData(payload)
-    },
-    async getDooFormData(state, payload){
-      await dooService.getDooFormData(payload)
-    },
-    async getAssociationMailData(state, payload){
-      await associationService.getAssociationMailData(payload)
-    },
-    async getAssociationFormData(state){
-      const response = await associationService.getAssociationFormData();
-      state.commit('setAssociationFormData', response)
-    },
+
     async getContactFormData(state, payload){
       await contactServices.getContactFormData(payload);
     },
@@ -53,17 +35,10 @@ export default new Vuex.Store({
        state.commit('setFormData', response)  
      
     },
-    //
-    //EXAMPLE NEXT LVL
-    async getExampleFormData(state){
-      const response = await entrepreneurService.getExampleFormData()
-      state.commit('setExampleFormData', response);
-      // console.log('state', response);
-    }
+    
   },
   getters: {
     formData: (state) => state.formData,
-    assocFormData: (state) => state.associationFormData,
     exampleFormData: (state) => state.exampleFormData
     
   },

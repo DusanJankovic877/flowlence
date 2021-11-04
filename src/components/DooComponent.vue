@@ -8,7 +8,7 @@
 
         <div class="circles">
 
-                <button class="entrepreneur-krug" @click="handleSelectedOption">
+                <button class="entrepreneur-krug" @click="handleSelectedOption('newDoo')">
            
                     <div class="entrepreneur-card-body">
                         <h2>Novi DOO</h2>
@@ -17,7 +17,7 @@
        
                 </button>
 
-                <button class="entrepreneur-krug" @click="handleSelectedOption">
+                <button class="entrepreneur-krug" @click="handleSelectedOption('alreadyDoo')">
                     <div class="entrepreneur-card-body">
                         <h2>Već postojeći DOO</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
