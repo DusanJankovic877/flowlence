@@ -1,9 +1,6 @@
 <template>
-<div class="col-lg-4 m-auto">
-<pre>
+<div class="col-lg-4 m-auto form-div">
 
-    <!-- {{formData.services}} -->
-</pre>
 
     <!-- <form @submit.prevent>
         <div class="form-services" v-for="service in formData.services" :key="service.id">
@@ -93,33 +90,26 @@
         </div>
 
     </form> -->
-        <div  v-for="data in formData" :key="data.id">
-    <pre>
 
-    {{formData}}
-              {{eBankingId}}
-    </pre>
+    <!-- <pre> -->
+{{formValue}}
+              <!-- {{eBankingId}} -->
+    <!-- </pre> -->
+        <div  class="form-sections" v-for="data in formData.data" :key="data.id">
             <h5>{{data.question_text}}</h5>
-            <div class="form-check" v-for="text_o in data.question_options" :key="text_o.id">
-                <input  class="form-check-input"   :type="data.question_type.type" :value="text_o.id" :id="text_o.id" v-model="eBankingId">
-                <label  class="form-check-label"  :key="text_o.id" :for="text_o.id">{{text_o.option_text}}</label>
-            
+            <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
+                 <div class="form-check">
+                    <input class="form-check-input" 
+                        :type="data.question_type.type" 
+                        :value="question_o.id" 
+                        :id="question_o.id" 
+                        v-model="formValue[data.name]">
+                    <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
+                </div>
+
             </div>
         </div>
-        <!-- <div class="form-pdv" v-for="e_banking in formData.e_bankings" :key="e_banking.id">
-            <h5>{{e_banking.question_text}}</h5>
-            <div class="input-group"  v-for="option in e_banking.question_options" :key="option.id">
-                <div class="form-check">
-                    <input class="form-check-input" :type="e_banking.question_type.type" :id="option.id" :value="option.id" v-model="eBankingId">
-                    <label class="form-check-label" :for="option.id">{{option.option_text}}</label>
-                </div>
-            </div>
-        </div> -->
-        <!-- <div v-for="data in formData" :key="data.id">
 
-        <input v-for="data in formData" :key="data.id" class="form-check-input" :type="data.question_type.type" id="option.id" value="option.id" v-model="eBankingId">
-        <label class="form-check-label" :for="option.id">{{option.option_text}}</label>
-        </div> -->
 
 </div>
 
@@ -128,15 +118,20 @@
 export default {
     data() {
        return{
-               servicesId: [],
-               personId: '',
-               incomeId:'',
-               extraIncomeId: '',
-               pdvId: '',
-               paymentId: '',
-               clientId: '',
-               cashRegisterId: '',
-               eBankingId: '',
+           formValue:{
+
+               firstQuestion:[],
+               secondQuestion: '',
+               thirdQuestion:'',
+               fourthQuestion: '',
+               fifthQuestion: '',
+               sixthQuestion: '',
+               seventhQuestion: '',
+               eighthQuestion: '',
+               ninthQuestion: '',
+           }
+            
+               
        } 
     },
     props:{
@@ -146,11 +141,12 @@ export default {
 }
 </script>
 <style>
-form h5{
-    color: #404040 ;
+.form-div{
+    margin-top:50px !important;
+   
 }
-form{
-    
+.form-sections h5{
+    color: #404040 ;
     text-align: left;
 }
 .form-people{

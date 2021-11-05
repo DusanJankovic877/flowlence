@@ -14,7 +14,7 @@
                     </div>
                
                 </button>
-                <button class="entrepreneur-krug" @click="handleSelectedOption('alredyEntrepreneur')">
+                <button class="entrepreneur-krug" @click="handleSelectedOption('alreadyEntrepreneur')">
                     <div class="entrepreneur-card-body">
                         <h2>Već postojeći preduzetnik</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
