@@ -15,7 +15,7 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData"/>
+      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :lumpSums="lumpSums"/>
       <button v-if="fromRoute === 'home'" class="btn btn-danger" @click="goToHome(false)">Idi na početnu</button>
       <button v-else class="btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
     </div>
@@ -44,7 +44,20 @@ export default {
       hideButtons: false,
       selectedButton: '',
       hideSelectedButtons: false,
-      showForm: false
+      showForm: false,
+      formValues:{
+        firstQuestion:[],
+        secondQuestion: '',
+        thirdQuestion:'',
+        fourthQuestion: '',
+        fifthQuestion: '',
+        sixthQuestion: '',
+        seventhQuestion: '',
+        eighthQuestion: '',
+        ninthQuestion: '',
+      },
+      lumpSums: {},
+      removedQuestionOption: {}
     }
   },
   computed: {
@@ -73,6 +86,17 @@ export default {
     async handleSelectedOption(val){
       // val is string
       await this.getFormData({name: val})
+      const income = this.formData.data.splice(2, 1);
+      this.formData.data.push(income[0]);
+      const lupmS = this.formData.data.splice(7, 1);
+        this.lumpSums = lupmS[0]
+     
+      if(val === 'alreadyEntrepreneur'){
+
+        this.removedQuestionOption = this.lumpSums.question_options.pop();
+    
+
+      }
       this.hideSelectedButtons = true;
       this.showForm = true;
     },
@@ -84,6 +108,12 @@ export default {
       this.hideSelectedButtons = val;
       this.showForm = val
       this.selectedButton = ' '
+      
+      if(this.lumpSum.question_options.length){
+        this.lumpSum.question_options.push(this.removedQuestionOption);
+        this.removedQuestionOption = {}
+        }
+      
     },
 
   },
