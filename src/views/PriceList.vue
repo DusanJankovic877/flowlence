@@ -109,10 +109,7 @@ export default {
       this.showForm = val
       this.selectedButton = ' '
       
-      if(this.lumpSum.question_options.length){
-        this.lumpSum.question_options.push(this.removedQuestionOption);
-        this.removedQuestionOption = {}
-        }
+
       
     },
 
