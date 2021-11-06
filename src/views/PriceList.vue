@@ -1,6 +1,7 @@
 <template>
   <div class="price-list-view">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
+    {{lumpSums.question_options}}
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -108,8 +109,10 @@ export default {
       this.hideSelectedButtons = val;
       this.showForm = val
       this.selectedButton = ' '
+      this.removedQuestionOption = {}
+      this.lumpSums = {}
+      // mozda staviti da u state obrisem formData
       
-
       
     },
 

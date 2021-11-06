@@ -5,7 +5,7 @@
     <form @submit.prevent>
 <pre>
 
-{{lumpSums.question_options}}
+
 </pre>
         <div  class="form-sections" v-for="data in formData.data" :key="data.id">
             <h5>{{data.question_text}}</h5>
