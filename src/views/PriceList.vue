@@ -15,8 +15,8 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :formData="formData"/>
-      <button v-if="fromRoute === 'home'" class="btn btn-danger" @click="goToHome">Idi na početnu</button>
+      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData"/>
+      <button v-if="fromRoute === 'home'" class="btn btn-danger" @click="goToHome(false)">Idi na početnu</button>
       <button v-else class="btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
     </div>
   </div>
@@ -48,7 +48,6 @@ export default {
     }
   },
   computed: {
-    
     ...mapGetters(['formData']),
     currentRouteName() {
       return this.$route.path;
@@ -66,22 +65,24 @@ export default {
       this.selectedButton = val
        
     },
-    goToHome(){
+    goToHome(val){
+      // val is boolean
+      this.hideButtons = val;
       this.$router.push('/')
     },
     async handleSelectedOption(val){
-      console.log('entrepreneur price list', val);
-      
+      // val is string
       await this.getFormData({name: val})
       this.hideSelectedButtons = true;
       this.showForm = true;
     },
 
     async handleHideForm(val){
- 
+      //val is boolean
       await this.setEmptyFormData();
       this.hideButtons = val
       this.hideSelectedButtons = val;
+      this.showForm = val
       this.selectedButton = ' '
     },
 
@@ -109,7 +110,7 @@ export default {
 .krug{border: none;color:#404040;}
 .entrepreneur-krug{
     color: #404040;
-border: none;
+    border: none;
     background-color: #FBA922;
     height: 320px;
     width: 320px;
