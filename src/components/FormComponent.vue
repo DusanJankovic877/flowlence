@@ -1,7 +1,5 @@
 <template>
 <div class="col-lg-4 m-auto form-div">
-
-
     <form @submit.prevent class="form-sections">
         <div v-for="data in formData.data" :key="data.id">
             <h5>{{data.question_text}}</h5>
@@ -31,27 +29,27 @@
                 </div>
             </div> 
         </div>
-            <!--
-            <div class="comment">
+      
+        <div class="comment">
 
-                <h5>Dodatni komentar:</h5>
-                <div class="form-group">
-                    <textarea v-model="comment" class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                    :placeholder=" hideNew ? 'Ovde možete opisati ukratko Vašu delatnost kojom planirate da se bavite, dati dodatne informacije koje smatrate da su bitne ili postaviti pitanje' : 'Ovde možete opisati ukratko Vašu delatnost kojom se bavite, dati dodatne informacije koje smatrate da su bitne ili postaviti pitanje:'"
-                    ></textarea>
-                </div>
-            </div> end of form-comment 
-            
-            <hr>
-            <div class="email">
+            <h5>Dodatni komentar:</h5>
+            <div class="form-group">
+                <textarea v-model="formValues.comment" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                :placeholder=" selectedFormOption === 'newEntrepreneur' ? 'Ovde možete opisati ukratko Vašu delatnost kojom planirate da se bavite, dati dodatne informacije koje smatrate da su bitne ili postaviti pitanje' : 'Ovde možete opisati ukratko Vašu delatnost kojom se bavite, dati dodatne informacije koje smatrate da su bitne ili postaviti pitanje:'"
+                ></textarea>
+            </div>
+        </div>  <!-- end of form-comment --> 
+        
+        <hr>
+        <div class="email">
 
-                <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu: <span class="red"> *</span></h5>
-                <div class="form-group">
-                    <label for="email">Email adresa: </label>
-                    <input type="email" v-model="email" name="email" class="form-control" id="email" placeholder="name@example.com">
-                </div>
+            <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu: <span class="red"> *</span></h5>
+            <div class="form-group">
+                <label for="email">Email adresa: </label>
+                <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com">
+            </div>
 
-            </div> end of form-email --> 
+        </div>  <!-- end of form-email --> 
            
     </form>
 
@@ -63,27 +61,18 @@
 </template>
 <script>
 export default {
-    data() {
-       return{
-
-            
-               
-       } 
-    },
     props:{
         formData: Object,
         formValues: Object,
-        lumpSums: Object
-    },
-    methods:{
-
+        lumpSums: Object,
+        selectedFormOption: String
     }
-
 }
 </script>
 <style>
 .form-div{
     margin-top:50px !important;
+    padding: 10px;
    
 }
 .form-sections h5{
@@ -92,5 +81,12 @@ export default {
 }
 .form-people{
     display: block;
+}
+.red{
+    color: red;
+}
+@media only screen and (max-width: 1280px){
+    .form-div{
+    margin-top:10px !important;}
 }
 </style>

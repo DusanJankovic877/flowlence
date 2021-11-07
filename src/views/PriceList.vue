@@ -1,5 +1,5 @@
 <template>
-  <div class="price-list-view">
+  <div class="price-list-view col-lg-12">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
@@ -15,9 +15,13 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :lumpSums="lumpSums"/>
-      <button v-if="fromRoute === 'home'" class="btn btn-danger" @click="goToHome(false)">Idi na početnu</button>
-      <button v-else class="btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
+      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :lumpSums="lumpSums" :selectedFormOption="selectedFormOption"/>
+      <div class="col-lg-7 m-auto">
+      <button v-if="fromRoute === 'home'" class="col-lg-2 btn btn-danger" @click="goToHome(false)">Idi na početnu</button>
+
+      <button v-else class="col-lg-2 left-button btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
+      <button :class="showForm ? 'col-lg-2 right-button btn btn-success' : 'hide'" @click="handleSubmitForm">Pošalji</button>
+      </div>
     </div>
   </div>
 </template>
@@ -40,6 +44,7 @@ export default {
     return {
       hideButtons: false,
       selectedButton: '',
+      selectedFormOption: '',
       hideSelectedButtons: false,
       showForm: false,
       formValues:{
@@ -70,12 +75,11 @@ export default {
   },
 
   methods:{
-    
     ...mapActions(['getFormData', 'setEmptyFormData']),
     async handleHideButtons(val, bool){
+      //val is a string
       this.hideButtons = bool
       this.selectedButton = val
-       
     },
     goToHome(val){
       // val is boolean
@@ -85,6 +89,7 @@ export default {
     async handleSelectedOption(val){
       // val is string
       await this.getFormData({name: val})
+      this.selectedFormOption = val;
       const income = this.formData.data.splice(2, 1);
       this.formData.data.push(income[0]);
       const lupmS = this.formData.data.splice(7, 1);
@@ -112,6 +117,9 @@ export default {
         else this.formValues[key] = ''
       }
     },
+    handleSubmitForm(){
+
+    }
 
   },
   created(){
@@ -155,9 +163,7 @@ export default {
   border-radius: 25em;
 } 
 
-
 .entrepreneur-card-body{
-
   height: 320px;
   width: 320px;
   border-radius: 25em !important;
@@ -166,43 +172,43 @@ export default {
 .hide{
     display: none !important;
 }
+.right-button{margin-left:22% !important;}
 @media only screen and (max-width: 1280px){
 
-.price-list-img{
-  margin-bottom: -19px;
-}
+  .price-list-img{
+    margin-bottom: -19px;
+  }
 }
 @media only screen and (max-width: 768px){
 
-.price-list-img{
-  margin-bottom: 64px;
-}
+  .price-list-img{
+    margin-bottom: 64px;
+  }
 }
 @media only screen and (max-width: 540px){
-  .price-list-img{
-  margin-bottom: 101px;
-}
+    .price-list-img{
+    margin-bottom: 101px;
+  }
 }
 @media only screen and (max-width: 414px){
-  .price-list-img{
-  margin-bottom: 122px;
-}
+    .price-list-img{
+    margin-bottom: 122px;
+  }
 }
 @media only screen and (max-width: 375px){
-.price-list-img{
-  margin-bottom: 128px;
-}
+  .price-list-img{
+    margin-bottom: 128px;
+  }
 }
 @media only screen and (max-width: 360px){
-.price-list-img{
-  margin-bottom: 131px;
-}
+  .price-list-img{
+    margin-bottom: 131px;
+  }
 }
 @media only screen and (max-width: 320px){
   .price-list-img{
-  margin-bottom: 137px;
-
-}
+    margin-bottom: 137px;
+  }
 
 }
 </style>
