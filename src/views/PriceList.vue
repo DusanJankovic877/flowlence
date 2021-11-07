@@ -1,7 +1,6 @@
 <template>
   <div class="price-list-view">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
-    {{lumpSums.question_options}}
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -23,10 +22,7 @@
   </div>
 </template>
 <script>
-import { mapActions, 
-mapGetters, 
-mapMutations
-} from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import PriceListComponentThreeButtons from '../components/PriceListComponentThreeButtons.vue'
 import EntrepreneurComponent from '../components/EntrepreneurComponent.vue'
 import DooComponent from '../components/DooComponent.vue'
@@ -56,6 +52,8 @@ export default {
         seventhQuestion: '',
         eighthQuestion: '',
         ninthQuestion: '',
+        email: '',
+        comment: ''
       },
       lumpSums: {},
       removedQuestionOption: {}
@@ -72,8 +70,8 @@ export default {
   },
 
   methods:{
-    ...mapMutations(['setEmptyFormData']),
-    ...mapActions(['getFormData']),
+    
+    ...mapActions(['getFormData', 'setEmptyFormData']),
     async handleHideButtons(val, bool){
       this.hideButtons = bool
       this.selectedButton = val
@@ -93,10 +91,7 @@ export default {
         this.lumpSums = lupmS[0]
      
       if(val === 'alreadyEntrepreneur'){
-
         this.removedQuestionOption = this.lumpSums.question_options.pop();
-    
-
       }
       this.hideSelectedButtons = true;
       this.showForm = true;
@@ -105,15 +100,17 @@ export default {
     async handleHideForm(val){
       //val is boolean
       await this.setEmptyFormData();
-      this.hideButtons = val
+      this.hideButtons = val;
       this.hideSelectedButtons = val;
-      this.showForm = val
-      this.selectedButton = ' '
+      this.showForm = val;
+      this.selectedButton = ' ';
       this.removedQuestionOption = {}
-      this.lumpSums = {}
-      // mozda staviti da u state obrisem formData
-      
-      
+      this.lumpSums = {};
+      //emtying formValues 
+      for (var key in this.formValues) {
+        if(key === 'firstQuestion')this.formValues[key] = []
+        else this.formValues[key] = ''
+      }
     },
 
   },

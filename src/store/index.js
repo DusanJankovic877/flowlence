@@ -35,6 +35,9 @@ export default new Vuex.Store({
        state.commit('setFormData', response)  
      
     },
+     setEmptyFormData(state){
+       state.commit('setEmptyFormData');
+    }
     
   },
   getters: {
