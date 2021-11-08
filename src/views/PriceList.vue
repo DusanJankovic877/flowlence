@@ -15,7 +15,7 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :lumpSums="lumpSums" :selectedFormOption="selectedFormOption"/>
+      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionNine="questionNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
       <div class="col-lg-7 m-auto">
       <button v-if="fromRoute === 'home'" class="col-lg-2 btn btn-danger" @click="goToHome(false)">Idi na početnu</button>
 
@@ -60,9 +60,8 @@ export default {
         email: '',
         comment: ''
       },
-      lumpSums: {},
+      questionNine: {},
       removedQuestionOption: {},
-      pdvs: {},
       removedPdv:{},
       removedCashRegister:{}
     }
@@ -94,14 +93,20 @@ export default {
       await this.getFormData({name: val})
       this.selectedFormOption = val;
       //ENTREPRENEUR
-      if (this.selectedButton === 'entrepreneur') {
+      if(this.selectedButton === 'entrepreneur') {
         const income = this.formData.data.splice(2, 1);
         this.formData.data.push(income[0]);
         const lupmS = this.formData.data.splice(7, 1);
-        this.lumpSums = lupmS[0]
+        this.questionNine = lupmS[0]
+      }else if(this.selectedButton === 'association'){
+        const income = this.formData.data.splice(3, 1);
+        this.questionNine = income[0]
+        const economicActivity = this.formData.data.splice(2, 1);
+        this.formData.data.push(economicActivity[0]);
+        
       }
       if(val === 'alreadyEntrepreneur'){
-        this.removedQuestionOption = this.lumpSums.question_options.pop();
+        this.removedQuestionOption = this.questionNine.question_options.pop();
         const pdvs = this.formData.data.find(x => x.q_id === 8);
         this.removedPdv = pdvs.question_options.pop()
         const cashRegister = this.formData.data.find(x => x.q_id === 14)
@@ -111,6 +116,13 @@ export default {
         const pdvs = this.formData.data.find(x => x.q_id === 28);
         this.removedPdv = pdvs.question_options.pop()
         const cashRegister = this.formData.data.find(x => x.q_id === 34)
+        this.removedCashRegister = cashRegister.question_options.pop();
+      }else if(val === 'alreadyAssociation'){
+        
+        this.economicActivity
+        const pdvs = this.formData.data.find(x => x.q_id === 48);
+        this.removedPdv = pdvs.question_options.pop()
+        const cashRegister = this.formData.data.find(x => x.q_id === 52)
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       
@@ -126,7 +138,7 @@ export default {
       this.showForm = val;
       this.selectedButton = ' ';
       this.removedQuestionOption = {}
-      this.lumpSums = {};
+      this.questionNine = {};
       //emtying formValues 
       for (var key in this.formValues) {
         if(key === 'firstQuestion')this.formValues[key] = []

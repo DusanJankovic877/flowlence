@@ -1,5 +1,6 @@
 <template>
 <div class="col-lg-4 m-auto form-div">
+
     <form @submit.prevent class="form-sections">
         <div v-for="data in formData.data" :key="data.id">
             <h5>{{data.question_text}}</h5>
@@ -15,23 +16,42 @@
             </div>
               <hr>
         </div>
-        <!--EXTRA FIELD extra income,  -->
-        <div v-if="formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11">
-            <h5>{{lumpSums.question_text}}</h5>
-            <div class="input-group" v-for="lumpSum in lumpSums.question_options" :key="lumpSum.id">
-                
+       
+        <!--EXTRA FIELD -->
+        <!-- ENTREPRENEUR -->
+        <div v-if="formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11 && selectedButton === 'entrepreneur'">
+            <h5>{{questionNine.question_text}}</h5>
+            <div class="input-group" v-for="lumpSum in questionNine.question_options" :key="lumpSum.id">
                 <div class="form-check">
                     <input class="form-check-input" 
                         type="radio" 
                         :value="lumpSum.id" 
                         :id="lumpSum.id" 
-                        v-model="formValues.ninthQuestion">
-                    <label  class="form-check-label"  :key="lumpSum.id" :for="lumpSum.id">{{lumpSum.option_text}}</label>
+                        v-model="formValues.ninthQuestion"
+                    >
+                    <label  class="form-check-label" :for="lumpSum.id">{{lumpSum.option_text}}</label>
                 </div>
-          
             </div> 
             <hr>
         </div>
+      
+        <!-- ASSOCIATION -->
+        <div v-if="formValues.thirdQuestion === 65 && selectedButton === 'association'">
+            <div class="input-group" v-for="income in questionNine.question_options" :key="income.id">
+                <div class="form-check">
+                    <input class="form-check-input"
+                            type="radio"
+                            :value="income.id"
+                            :id="income.id"
+                            v-model="formValues.ninthQuestion"
+                    >
+                    <label class="form-check-label" :for="income.id">{{income.option_text}}</label>
+
+                </div>
+            </div>
+            <hr>
+        </div>
+                    
       
         <div class="comment">
 
@@ -67,7 +87,8 @@ export default {
     props:{
         formData: Object,
         formValues: Object,
-        lumpSums: Object,
+        questionNine: Object,
+        selectedButton: String,
         selectedFormOption: String
     }
 }
