@@ -18,7 +18,6 @@
       <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionNine="questionNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
       <div class="col-lg-7 m-auto">
       <button v-if="fromRoute === 'home'" class="col-lg-2 btn btn-danger" @click="goToHome(false)">Idi na početnu</button>
-
       <button v-else class="col-lg-2 left-button btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
       <button :class="showForm ? 'col-lg-2 right-button btn btn-success' : 'hide'" @click="handleSubmitForm">Pošalji</button>
       </div>
@@ -98,12 +97,15 @@ export default {
         this.formData.data.push(income[0]);
         const lupmS = this.formData.data.splice(7, 1);
         this.questionNine = lupmS[0]
-      }else if(this.selectedButton === 'association'){
+      }
+      //ASSOCIATION
+      else if(this.selectedButton === 'association'){
         const income = this.formData.data.splice(3, 1);
         this.questionNine = income[0]
         const economicActivity = this.formData.data.splice(2, 1);
         this.formData.data.push(economicActivity[0]);
       }else{return}
+      //ALREADY ENTREPRENEUR
       if(val === 'alreadyEntrepreneur'){
         this.removedQuestionOption = this.questionNine.question_options.pop();
         const pdvs = this.formData.data.find(x => x.q_id === 8);
@@ -111,19 +113,22 @@ export default {
         const cashRegister = this.formData.data.find(x => x.q_id === 14)
         this.removedCashRegister = cashRegister.question_options.pop();
       }
+      //ALREADY DOO
       else if(val === 'alreadyDoo'){
         const pdvs = this.formData.data.find(x => x.q_id === 28);
         this.removedPdv = pdvs.question_options.pop()
         const cashRegister = this.formData.data.find(x => x.q_id === 34)
         this.removedCashRegister = cashRegister.question_options.pop();
-      }else if(val === 'alreadyAssociation'){
-        
+      }
+      //ALREADY ASSOCIATION
+      else if(val === 'alreadyAssociation'){
         this.economicActivity
         const pdvs = this.formData.data.find(x => x.q_id === 48);
         this.removedPdv = pdvs.question_options.pop()
         const cashRegister = this.formData.data.find(x => x.q_id === 52)
         this.removedCashRegister = cashRegister.question_options.pop();
-      }else{return}
+      }
+      else{return}
       
       this.hideSelectedButtons = true;
       this.showForm = true;
