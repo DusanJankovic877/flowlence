@@ -45,35 +45,9 @@ export default{
 
   methods:{
     handleReRoute(val){
-      console.log('click home');
       this.$router.push({name: 'price-list', params: {hideAll: false, selectedButton: val, from: 'home'}})
     }
-    // ...mapActions(['getFormData', 'getSelectedDataOptions']),
-  //   async handleHideButtons(val){
-  //     this.hideButtons = false
-  //     this.selectedButton = val
-  //     await this.getFormData({name: this.selectedButton})
-  //   },
-  //  async handleGetSelectedDataOptions(val){
-  //    await this.getSelectedDataOptions(val)
-  //   },
-  //   handleHideForm(val){
-  //     this.hideButtons = val
-  //     this.selectedButton = ' '
-  //   }
-  },
-//     computed: {
-//       ...mapGetters(['formData']),
-//     currentRouteName() {
-//         return this.$route.path;
-//     }
-// },
-    // async created(){
-    //   if(this.selectedButton === 'entrepreneur'){
-
-        // await store.dispatch('getExampleFormData')
-    //   }
-    // }
+  }
 }
 </script>
 <style scoped>
