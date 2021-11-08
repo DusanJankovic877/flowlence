@@ -61,7 +61,10 @@ export default {
         comment: ''
       },
       lumpSums: {},
-      removedQuestionOption: {}
+      removedQuestionOption: {},
+      pdvs: {},
+      removedPdv:{},
+      removedCashRegister:{}
     }
   },
   computed: {
@@ -90,14 +93,27 @@ export default {
       // val is string
       await this.getFormData({name: val})
       this.selectedFormOption = val;
-      const income = this.formData.data.splice(2, 1);
-      this.formData.data.push(income[0]);
-      const lupmS = this.formData.data.splice(7, 1);
+      //ENTREPRENEUR
+      if (this.selectedButton === 'entrepreneur') {
+        const income = this.formData.data.splice(2, 1);
+        this.formData.data.push(income[0]);
+        const lupmS = this.formData.data.splice(7, 1);
         this.lumpSums = lupmS[0]
-     
+      }
       if(val === 'alreadyEntrepreneur'){
         this.removedQuestionOption = this.lumpSums.question_options.pop();
+        const pdvs = this.formData.data.find(x => x.q_id === 8);
+        this.removedPdv = pdvs.question_options.pop()
+        const cashRegister = this.formData.data.find(x => x.q_id === 14)
+        this.removedCashRegister = cashRegister.question_options.pop();
       }
+      else if(val === 'alreadyDoo'){
+        const pdvs = this.formData.data.find(x => x.q_id === 28);
+        this.removedPdv = pdvs.question_options.pop()
+        const cashRegister = this.formData.data.find(x => x.q_id === 34)
+        this.removedCashRegister = cashRegister.question_options.pop();
+      }
+      
       this.hideSelectedButtons = true;
       this.showForm = true;
     },

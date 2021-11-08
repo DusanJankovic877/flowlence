@@ -13,6 +13,7 @@
                     <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
                 </div>
             </div>
+              <hr>
         </div>
         <!--EXTRA FIELD extra income,  -->
         <div v-if="formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11">
@@ -27,7 +28,9 @@
                         v-model="formValues.ninthQuestion">
                     <label  class="form-check-label"  :key="lumpSum.id" :for="lumpSum.id">{{lumpSum.option_text}}</label>
                 </div>
+          
             </div> 
+            <hr>
         </div>
       
         <div class="comment">
@@ -46,13 +49,13 @@
             <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu: <span class="red"> *</span></h5>
             <div class="form-group">
                 <label for="email">Email adresa: </label>
-                <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com">
+                <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
             </div>
 
         </div>  <!-- end of form-email --> 
            
     </form>
-
+<!-- trebs dodati error messages -->
  
 
 
