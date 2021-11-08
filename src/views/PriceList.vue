@@ -103,8 +103,7 @@ export default {
         this.questionNine = income[0]
         const economicActivity = this.formData.data.splice(2, 1);
         this.formData.data.push(economicActivity[0]);
-        
-      }
+      }else{return}
       if(val === 'alreadyEntrepreneur'){
         this.removedQuestionOption = this.questionNine.question_options.pop();
         const pdvs = this.formData.data.find(x => x.q_id === 8);
@@ -124,7 +123,7 @@ export default {
         this.removedPdv = pdvs.question_options.pop()
         const cashRegister = this.formData.data.find(x => x.q_id === 52)
         this.removedCashRegister = cashRegister.question_options.pop();
-      }
+      }else{return}
       
       this.hideSelectedButtons = true;
       this.showForm = true;
