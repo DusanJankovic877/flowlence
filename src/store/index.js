@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import entrepreneurService from '../services/entrepreneurService'
-
 import contactServices from '../services/contactServices'
+import recaptchaValidate from '../services/recaptchaValidate'
 
 Vue.use(Vuex)
 
@@ -11,7 +11,7 @@ export default new Vuex.Store({
     entrepreneurForm:{},
     formData:{},
     associationFormData:{},
-    exampleFormData:{}
+    validateReCaptcha: false
   },
   mutations: {
     setFormData(state, payload){
@@ -19,31 +19,31 @@ export default new Vuex.Store({
     },
     setEmptyFormData(state){
       state.formData = {}
+    },
+    setCaptchaValidate(state, payload){
+      if(payload)state.validateReCaptcha = payload
     }
 
   },
   actions: {
-
     async getContactFormData(state, payload){
       await contactServices.getContactFormData(payload);
     },
-
-    // i use this one
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
-      //  console.log(payload);
        state.commit('setFormData', response)  
-     
     },
      setEmptyFormData(state){
        state.commit('setEmptyFormData');
-    }
-    
+    },
+    async getCaptchaValidate(state,payload){
+      const response = await recaptchaValidate.validate(payload)
+      state.commit('setCaptchaValidate', response.success); 
+    } 
   },
   getters: {
     formData: (state) => state.formData,
-    exampleFormData: (state) => state.exampleFormData
-    
+    validateReCaptcha: (state) => state.validateReCaptcha
   },
   modules: {
   
