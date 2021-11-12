@@ -3,6 +3,7 @@
 
     <form @submit.prevent class="form-sections">
         <div v-for="data in formData.data" :key="data.id">
+            {{formValues[data.name]}}
             <h5>{{data.question_text}}</h5>
             <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
                  <div class="form-check">
@@ -37,6 +38,7 @@
       
         <!-- ASSOCIATION -->
         <div v-if="formValues.thirdQuestion === 65 && selectedButton === 'association'">
+            <h5>{{questionNine.question_text}}</h5>
             <div class="input-group" v-for="income in questionNine.question_options" :key="income.id">
                 <div class="form-check">
                     <input class="form-check-input"
@@ -45,6 +47,7 @@
                             :id="income.id"
                             v-model="formValues.ninthQuestion"
                     >
+                    {{income.id}}
                     <label class="form-check-label" :for="income.id">{{income.option_text}}</label>
 
                 </div>

@@ -60,12 +60,12 @@ export default {
       formValues:{
         firstQuestion:[],
         secondQuestion: '',
-        thirdQuestion:'',
         fourthQuestion: '',
         fifthQuestion: '',
         sixthQuestion: '',
         seventhQuestion: '',
         eighthQuestion: '',
+        thirdQuestion:'',
         ninthQuestion: '',
         email: '',
         comment: ''
@@ -76,6 +76,14 @@ export default {
       removedCashRegister:{},
       //selected data for summing
         selectedFirstQuestions:[], 
+        selectedSecondQuestion: {},
+        selectedThirdQuestion: {},
+        selectedFourthQuestion:{},
+        selectedFifthQuestion: {},
+        selectedSixthQuestion: {},
+        selectedSeventhQuestion: {},
+        selectedEighthQuestion: {},
+        selectedNinthQuestion: {},
     }
   },
   computed: {
@@ -91,32 +99,32 @@ export default {
     ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData']),
     async handleHideButtons(val, bool){
       //val is a string
-      this.hideButtons = bool
-      this.selectedButton = val
+      this.hideButtons = bool;
+      this.selectedButton = val;
     },
     goToHome(val){
       // val is boolean
       this.hideButtons = val;
-      this.$router.push('/')
+      this.$router.push('/');
     },
      validate(response){
-        this.getCaptchaValidate(response)
+        this.getCaptchaValidate(response);
     },
     async handleSelectedOption(val){
       // val is string
-      await this.getFormData({name: val})
+      await this.getFormData({name: val});
       this.selectedFormOption = val;
       //ENTREPRENEUR
       if(this.selectedButton === 'entrepreneur') {
         const income = this.formData.data.splice(2, 1);
         this.formData.data.push(income[0]);
         const lupmS = this.formData.data.splice(7, 1);
-        this.questionNine = lupmS[0]
+        this.questionNine = lupmS[0];
       }
       //ASSOCIATION
       else if(this.selectedButton === 'association'){
         const income = this.formData.data.splice(3, 1);
-        this.questionNine = income[0]
+        this.questionNine = income[0];
         const economicActivity = this.formData.data.splice(2, 1);
         this.formData.data.push(economicActivity[0]);
       }
@@ -124,23 +132,22 @@ export default {
       if(val === 'alreadyEntrepreneur'){
         this.removedQuestionOption = this.questionNine.question_options.pop();
         const pdvs = this.formData.data.find(x => x.q_id === 8);
-        this.removedPdv = pdvs.question_options.pop()
-        const cashRegister = this.formData.data.find(x => x.q_id === 14)
+        this.removedPdv = pdvs.question_options.pop();
+        const cashRegister = this.formData.data.find(x => x.q_id === 14);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       //ALREADY DOO
       else if(val === 'alreadyDoo'){
         const pdvs = this.formData.data.find(x => x.q_id === 28);
-        this.removedPdv = pdvs.question_options.pop()
-        const cashRegister = this.formData.data.find(x => x.q_id === 34)
+        this.removedPdv = pdvs.question_options.pop();
+        const cashRegister = this.formData.data.find(x => x.q_id === 34);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       //ALREADY ASSOCIATION
       else if(val === 'alreadyAssociation'){
-        this.economicActivity
         const pdvs = this.formData.data.find(x => x.q_id === 48);
-        this.removedPdv = pdvs.question_options.pop()
-        const cashRegister = this.formData.data.find(x => x.q_id === 52)
+        this.removedPdv = pdvs.question_options.pop();
+        const cashRegister = this.formData.data.find(x => x.q_id === 52);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
      
@@ -158,10 +165,19 @@ export default {
       this.removedQuestionOption = {};
       this.questionNine = {};
       this.selectedFirstQuestions = [];
+      this.selectedSecondQuestion = {};
+      this.selectedThirdQuestion = {};
+      this.selectedFourthQuestion = {};
+      this.selectedFifthQuestion = {};
+      this.selectedSixthQuestion = {};
+      this.selectedSeventhQuestion = {};
+      this.selectedEighthQuestion = {};
+      this.selectedNinthQuestion = {};
+
       //emtying formValues 
       for (var key in this.formValues) {
-        if(key === 'firstQuestion')this.formValues[key] = []
-        else this.formValues[key] = ''
+        if(key === 'firstQuestion')this.formValues[key] = [];
+        else this.formValues[key] = '';
       }
     },
     async handleSubmitForm(){
@@ -170,22 +186,119 @@ export default {
       // }
       //FIRST QUESTION
       if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
-        const firstQuestion = this.formData.data.find(x=> x.id === 1)
+        const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
         this.formValues.firstQuestion.forEach(question => {
           firstQuestion.question_options.forEach(option => {
             if (question === option.id) {
-            this.selectedFirstQuestions.push(option)
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = firstQuestion.question_text;
+            this.selectedFirstQuestions.push(newOption);
             }
           });
         });
       }else if(this.selectedButton === 'association'){
-        const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion')
+        const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
         firstQuestion.question_options.forEach(option => {
               if (this.formValues.firstQuestion === option.id) {
-            this.selectedFirstQuestions.push(option)
-            }
+                const newOption = {};
+                newOption.option_text = option.option_text;
+                newOption.price = option.price;
+                newOption.question_text = firstQuestion.question_text;
+                this.selectedFirstQuestions.push(newOption);
+              }
         });
       }
+      //SECOND QUESTION
+        const secondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
+        secondQuestion.question_options.forEach(option => {
+          if (this.formValues.secondQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = secondQuestion.question_text;
+            this.selectedSecondQuestion = newOption;
+        } 
+        });
+        //THIRD QUESTION but it is 4th because i have removed 3rd question at the end of array
+        const fourthQuestion = this.formData.data.find(x=> x.name === 'fourthQuestion');
+        fourthQuestion.question_options.forEach(option => {
+          if (this.formValues.fourthQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = fourthQuestion.question_text;
+            this.selectedThirdQuestion = newOption;
+          }
+        });
+        //FOURTH QUESTION
+        const fifthQuestion = this.formData.data.find(x => x.name === 'fifthQuestion');
+        fifthQuestion.question_options.forEach(option => {
+          if (this.formValues.fifthQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = fifthQuestion.question_text;
+            this.selectedFourthQuestion = newOption;
+          }
+        });
+        //FIFTH QUESTION
+        const sixthQuestion = this.formData.data.find(x => x.name === 'sixthQuestion');
+        sixthQuestion.question_options.forEach(option => {
+          if (this.formValues.sixthQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = sixthQuestion.question_text;
+            this.selectedFifthQuestion = newOption;
+          }
+        });
+        //SIXTH QUESTION
+        const seventhQuestion = this.formData.data.find(x => x.name === 'seventhQuestion');
+        seventhQuestion.question_options.forEach(option => {
+          if (this.formValues.seventhQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = seventhQuestion.question_text;
+            this.selectedSixthQuestion = newOption;
+          }
+        });
+        //SEVENTH QUESTION
+        const eighthQuestion = this.formData.data.find(x => x.name === 'eighthQuestion');
+        eighthQuestion.question_options.forEach(option => {
+          if (this.formValues.eighthQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = eighthQuestion.question_text;
+            this.selectedSeventhQuestion = newOption;
+          }
+        });
+        //EIGHTH QUESTION
+        const thirdQuestion = this.formData.data.find(x => x.name === 'thirdQuestion');
+        thirdQuestion.question_options.forEach(option => {
+          if (this.formValues.thirdQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = thirdQuestion.question_text;
+            this.selectedEighthQuestion = newOption;
+          }
+        });
+        //NINTH QEUSTION
+        console.log(this.questionNine);
+        this.questionNine.question_options.forEach(option => {
+          if (this.formValues.ninthQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = this.questionNine.question_text;
+            this.selectedNinthQuestion = newOption;
+          }
+        });       
+        // console.log(this.selectedNinthQuestion);
 
 
      
