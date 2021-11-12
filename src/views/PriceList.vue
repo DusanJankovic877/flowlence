@@ -1,6 +1,7 @@
 <template>
   <div class="price-list-view col-lg-12">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
+
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -16,7 +17,9 @@
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
       <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionNine="questionNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
+      
       <div class="col-lg-7 m-auto">
+      <re-captcha :class="showForm ? 'right-button' : 'hide '" :siteKey="siteKey" @validate="validate"/>
       <button v-if="fromRoute === 'home'" class="col-lg-2 btn btn-danger" @click="goToHome(false)">Idi na početnu</button>
       <button v-else class="col-lg-2 left-button btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
       <button :class="showForm ? 'col-lg-2 right-button btn btn-success' : 'hide'" @click="handleSubmitForm">Pošalji</button>
@@ -31,16 +34,21 @@ import EntrepreneurComponent from '../components/EntrepreneurComponent.vue'
 import DooComponent from '../components/DooComponent.vue'
 import AssociationComponent from '../components/AssociationComponent.vue'
 import FormComponent from '../components/FormComponent.vue'
+import ReCaptcha from '../components/ReCaptcha.vue'
+
+
 export default {
   components:{
     PriceListComponentThreeButtons,
     EntrepreneurComponent,
     DooComponent,
     AssociationComponent,
-    FormComponent
+    FormComponent,
+    ReCaptcha
   },
-  data() {
+  data(){
     return {
+      siteKey: process.env.VUE_APP_RECAPTCHA_PUBLIC_KEY,
       hideButtons: false,
       selectedButton: '',
       selectedFormOption: '',
@@ -63,10 +71,11 @@ export default {
       removedQuestionOption: {},
       removedPdv:{},
       removedCashRegister:{}
+      
     }
   },
   computed: {
-    ...mapGetters(['formData']),
+    ...mapGetters(['formData','validateReCaptcha']),
     currentRouteName() {
       return this.$route.path;
     },
@@ -74,9 +83,8 @@ export default {
       return this.$route.params.from;
     }
   },
-
   methods:{
-    ...mapActions(['getFormData', 'setEmptyFormData']),
+    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate']),
     async handleHideButtons(val, bool){
       //val is a string
       this.hideButtons = bool
@@ -87,6 +95,19 @@ export default {
       this.hideButtons = val;
       this.$router.push('/')
     },
+     validate(response){
+
+        this.getCaptchaValidate(response)
+
+      // Validation.validate({response: response}).then(result => {
+      //     this.$emit('validate', result.success)
+      // }).catch(error => console.log(error));
+    },
+    captchaValidate(success){
+      this.getCaptchaValidate(success)
+   
+    },
+
     async handleSelectedOption(val){
       // val is string
       await this.getFormData({name: val})
@@ -104,7 +125,7 @@ export default {
         this.questionNine = income[0]
         const economicActivity = this.formData.data.splice(2, 1);
         this.formData.data.push(economicActivity[0]);
-      }else{return}
+      }
       //ALREADY ENTREPRENEUR
       if(val === 'alreadyEntrepreneur'){
         this.removedQuestionOption = this.questionNine.question_options.pop();
@@ -128,7 +149,7 @@ export default {
         const cashRegister = this.formData.data.find(x => x.q_id === 52)
         this.removedCashRegister = cashRegister.question_options.pop();
       }
-      else{return}
+     
       
       this.hideSelectedButtons = true;
       this.showForm = true;
