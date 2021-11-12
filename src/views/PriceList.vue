@@ -1,7 +1,10 @@
 <template>
   <div class="price-list-view col-lg-12">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
+    <pre>
 
+<!-- {{formData.data}} -->
+    </pre>
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -70,8 +73,9 @@ export default {
       questionNine: {},
       removedQuestionOption: {},
       removedPdv:{},
-      removedCashRegister:{}
-      
+      removedCashRegister:{},
+      //selected data for summing
+        selectedFirstQuestions:[], 
     }
   },
   computed: {
@@ -84,7 +88,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate']),
+    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData']),
     async handleHideButtons(val, bool){
       //val is a string
       this.hideButtons = bool
@@ -96,18 +100,8 @@ export default {
       this.$router.push('/')
     },
      validate(response){
-
         this.getCaptchaValidate(response)
-
-      // Validation.validate({response: response}).then(result => {
-      //     this.$emit('validate', result.success)
-      // }).catch(error => console.log(error));
     },
-    captchaValidate(success){
-      this.getCaptchaValidate(success)
-   
-    },
-
     async handleSelectedOption(val){
       // val is string
       await this.getFormData({name: val})
@@ -154,7 +148,6 @@ export default {
       this.hideSelectedButtons = true;
       this.showForm = true;
     },
-
     async handleHideForm(val){
       //val is boolean
       await this.setEmptyFormData();
@@ -162,15 +155,40 @@ export default {
       this.hideSelectedButtons = val;
       this.showForm = val;
       this.selectedButton = ' ';
-      this.removedQuestionOption = {}
+      this.removedQuestionOption = {};
       this.questionNine = {};
+      this.selectedFirstQuestions = [];
       //emtying formValues 
       for (var key in this.formValues) {
         if(key === 'firstQuestion')this.formValues[key] = []
         else this.formValues[key] = ''
       }
     },
-    handleSubmitForm(){
+    async handleSubmitForm(){
+      // if (this.validateReCaptcha) {
+      //   await this.setMailFormData()
+      // }
+      //FIRST QUESTION
+      if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
+        const firstQuestion = this.formData.data.find(x=> x.id === 1)
+        this.formValues.firstQuestion.forEach(question => {
+          firstQuestion.question_options.forEach(option => {
+            if (question === option.id) {
+            this.selectedFirstQuestions.push(option)
+            }
+          });
+        });
+      }else if(this.selectedButton === 'association'){
+        const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion')
+        firstQuestion.question_options.forEach(option => {
+              if (this.formValues.firstQuestion === option.id) {
+            this.selectedFirstQuestions.push(option)
+            }
+        });
+      }
+
+
+     
 
     }
 

@@ -39,7 +39,10 @@ export default new Vuex.Store({
     async getCaptchaValidate(state,payload){
       const response = await recaptchaValidate.validate(payload)
       state.commit('setCaptchaValidate', response.success); 
-    } 
+    },
+    async setMailFormData(state,payload){
+      console.log(payload);
+    }
   },
   getters: {
     formData: (state) => state.formData,
