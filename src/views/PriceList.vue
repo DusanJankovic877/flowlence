@@ -122,9 +122,13 @@ export default {
       }
       //ASSOCIATION
       else if(this.selectedButton === 'association'){
+        const eBank = this.formData.data.find(x => x.q_id === 53)
+        eBank.name ="fourthQuestion"
         const income = this.formData.data.splice(3, 1);
+        income.name ="ninthQuestion"
         this.questionsForQNine = income[0];
       }
+
 
       //ALREADY ENTREPRENEUR
       if(val === 'alreadyEntrepreneur'){
@@ -193,20 +197,24 @@ export default {
             newOption.price = option.price;
             newOption.question_text = firstQuestion.question_text;
             this.selectedFirstQuestions.push(newOption);
+          // console.log('en t1 q', this.selectedFirstQuestions);
             }
           });
         });
-      }else if(this.selectedButton === 'association'){
+      }
+      else if(this.selectedButton === 'association'){
         const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
         firstQuestion.question_options.forEach(option => {
-              if (this.formValues.firstQuestion === option.id) {
-                const newOption = {};
-                newOption.option_text = option.option_text;
-                newOption.price = option.price;
-                newOption.question_text = firstQuestion.question_text;
-                this.selectedFirstQuestions.push(newOption);
-              }
+          const newOption = {};
+          if (this.formValues.firstQuestion === option.id) {
+            newOption.question_text = firstQuestion.question_text;
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            this.selectedFirstQuestions = newOption
+          }
         });
+          console.log('as t1 q', this.selectedFirstQuestions);
+
       }
       //SECOND QUESTION
         const secondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
@@ -219,10 +227,11 @@ export default {
             this.selectedSecondQuestion = newOption;
         } 
         });
+        console.log('2 q', this.selectedSecondQuestion);
         //THIRD QUESTION but it is 4th because i have removed 3rd question at the end of array
-        const fourthQuestion = this.formData.data.find(x=> x.name === 'fourthQuestion');
+        const fourthQuestion = this.formData.data.find(x=> x.name === 'thirdQuestion');
         fourthQuestion.question_options.forEach(option => {
-          if (this.formValues.fourthQuestion === option.id) {
+          if (this.formValues.thirdQuestion === option.id) {
             const newOption = {};
             newOption.option_text = option.option_text;
             newOption.price = option.price;
@@ -230,17 +239,20 @@ export default {
             this.selectedThirdQuestion = newOption;
           }
         });
+        console.log('3 q', this.selectedThirdQuestion);
+
         //FOURTH QUESTION
-        const fifthQuestion = this.formData.data.find(x => x.name === 'fifthQuestion');
-        fifthQuestion.question_options.forEach(option => {
-          if (this.formValues.fifthQuestion === option.id) {
-            const newOption = {};
-            newOption.option_text = option.option_text;
-            newOption.price = option.price;
-            newOption.question_text = fifthQuestion.question_text;
-            this.selectedFourthQuestion = newOption;
-          }
-        });
+          const fifthQuestion = this.formData.data.find(x => x.name === 'fourthQuestion');
+          fifthQuestion.question_options.forEach(option => {
+            if (this.formValues.fourthQuestion === option.id) {
+              const newOption = {};
+              newOption.option_text = option.option_text;
+              newOption.price = option.price;
+              newOption.question_text = fifthQuestion.question_text;
+              this.selectedFourthQuestion = newOption;
+            }
+          });
+          console.log('4th',this.selectedFourthQuestion);
         //FIFTH QUESTION
         const sixthQuestion = this.formData.data.find(x => x.name === 'sixthQuestion');
         sixthQuestion.question_options.forEach(option => {
@@ -252,6 +264,8 @@ export default {
             this.selectedFifthQuestion = newOption;
           }
         });
+        console.log('5 q', this.selectedFifthQuestion);
+
         //SIXTH QUESTION
         const seventhQuestion = this.formData.data.find(x => x.name === 'seventhQuestion');
         seventhQuestion.question_options.forEach(option => {
@@ -263,6 +277,8 @@ export default {
             this.selectedSixthQuestion = newOption;
           }
         });
+        console.log('6 q', this.selectedSixthQuestion);
+
         //SEVENTH QUESTION
         const eighthQuestion = this.formData.data.find(x => x.name === 'eighthQuestion');
         eighthQuestion.question_options.forEach(option => {
@@ -274,6 +290,8 @@ export default {
             this.selectedSeventhQuestion = newOption;
           }
         });
+        console.log('7 q', this.selectedSeventhQuestion);
+
         //EIGHTH QUESTION
         const thirdQuestion = this.formData.data.find(x => x.name === 'thirdQuestion');
         thirdQuestion.question_options.forEach(option => {
@@ -285,18 +303,22 @@ export default {
             this.selectedEighthQuestion = newOption;
           }
         });
+        console.log('8 q', this.selectedEighthQuestion);
+
         //NINTH QEUSTION
-        console.log(this.questionNine);
-        this.questionNine.question_options.forEach(option => {
-          if (this.formValues.ninthQuestion === option.id) {
-            const newOption = {};
-            newOption.option_text = option.option_text;
-            newOption.price = option.price;
-            newOption.question_text = this.questionNine.question_text;
-            this.selectedNinthQuestion = newOption;
-          }
-        });       
-        // console.log(this.selectedNinthQuestion);
+          this.questionsForQNine.question_options.forEach(option => {
+            if (this.formValues.ninthQuestion === option.id) {
+              const newOption = {};
+              newOption.option_text = option.option_text;
+              newOption.price = option.price;
+              newOption.question_text = this.questionsForQNine.question_text;
+              this.selectedNinthQuestion = newOption;
+            }
+          });       
+          
+        
+       
+        console.log('9th',this.selectedNinthQuestion);
 
 
      

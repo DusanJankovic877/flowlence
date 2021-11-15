@@ -18,6 +18,7 @@
                 </div>
             </div>
             <hr>
+
             <!-- EXTRA FIELD  WILL SHOW IF YOU SELECT CERTAIN OPTION -->
             <div  v-if="data.q_id === 42 || data.q_id === 41 || data.q_id === 5 || data.q_id === 6 ">
                 <div  v-if="formValues.thirdQuestion === 65 || formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11">
@@ -28,9 +29,10 @@
                                 type="radio"
                                 :value="option.id"
                                 :id="option.id"
-                                v-model="formValues.questionNine"
+                                v-model="formValues.ninthQuestion"
                                 name="questionNine"
                             />
+                        
                             <label  class="form-check-label"  :key="option.id" :for="option.id">{{option.option_text}}</label>
                         </div>
                     </div>
