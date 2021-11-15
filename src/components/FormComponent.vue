@@ -3,7 +3,6 @@
 
     <form @submit.prevent class="form-sections">
         <div v-for="data in formData.data" :key="data.id">
-            {{formValues[data.name]}}
             <h5>{{data.question_text}}</h5>
             <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
                  <div class="form-check">
@@ -11,53 +10,36 @@
                         :type="data.question_type.type" 
                         :value="question_o.id" 
                         :id="question_o.id" 
-                        v-model="formValues[data.name]">
+                        v-model="formValues[data.name]"
+                        :name="data.name"
+                        >
+                                  {{data.q_id}}
                     <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
                 </div>
             </div>
-              <hr>
-        </div>
-       
-        <!--EXTRA FIELD -->
-        <!-- ENTREPRENEUR -->
-        <div v-if="formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11 && selectedButton === 'entrepreneur'">
-            <h5>{{questionNine.question_text}}</h5>
-            <div class="input-group" v-for="lumpSum in questionNine.question_options" :key="lumpSum.id">
-                <div class="form-check">
-                    <input class="form-check-input" 
-                        type="radio" 
-                        :value="lumpSum.id" 
-                        :id="lumpSum.id" 
-                        v-model="formValues.ninthQuestion"
-                    >
-                    <label  class="form-check-label" :for="lumpSum.id">{{lumpSum.option_text}}</label>
-                </div>
-            </div> 
             <hr>
-        </div>
-      
-        <!-- ASSOCIATION -->
-        <div v-if="formValues.thirdQuestion === 65 && selectedButton === 'association'">
-            <h5>{{questionNine.question_text}}</h5>
-            <div class="input-group" v-for="income in questionNine.question_options" :key="income.id">
-                <div class="form-check">
-                    <input class="form-check-input"
-                            type="radio"
-                            :value="income.id"
-                            :id="income.id"
-                            v-model="formValues.ninthQuestion"
-                    >
-                    {{income.id}}
-                    <label class="form-check-label" :for="income.id">{{income.option_text}}</label>
-
+            <!-- EXTRA FIELD  WILL SHOW IF YOU SELECT CERTAIN OPTION -->
+            <div  v-if="data.q_id === 42 || data.q_id === 41 || data.q_id === 5 || data.q_id === 6 ">
+                <div  v-if="formValues.thirdQuestion === 65 || formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11">
+                    <h5>{{questionsForQNine.question_text}}</h5>
+                    <div class="input-group" v-for="option in questionsForQNine.question_options" :key="option.id">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                type="radio"
+                                :value="option.id"
+                                :id="option.id"
+                                v-model="formValues.questionNine"
+                                name="questionNine"
+                            />
+                            <label  class="form-check-label"  :key="option.id" :for="option.id">{{option.option_text}}</label>
+                        </div>
+                    </div>
+                    <hr>
                 </div>
             </div>
-            <hr>
+            <div v-else></div>
         </div>
-                    
-      
         <div class="comment">
-
             <h5>Dodatni komentar:</h5>
             <div class="form-group">
                 <textarea v-model="formValues.comment" class="form-control" id="exampleFormControlTextarea1" rows="3" 
@@ -65,18 +47,14 @@
                 ></textarea>
             </div>
         </div>  <!-- end of form-comment --> 
-        
         <hr>
         <div class="email">
-
             <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu: <span class="red"> *</span></h5>
             <div class="form-group">
                 <label for="email">Email adresa: </label>
                 <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
             </div>
-
         </div>  <!-- end of form-email --> 
-           
     </form>
 <!-- trebs dodati error messages -->
  
@@ -92,7 +70,8 @@ export default {
         formValues: Object,
         questionNine: Object,
         selectedButton: String,
-        selectedFormOption: String
+        selectedFormOption: String,
+        questionsForQNine: Object
     }
 }
 </script>

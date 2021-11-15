@@ -2,7 +2,7 @@
   <div class="price-list-view col-lg-12">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
     <pre>
-
+{{formValues}}
 <!-- {{formData.data}} -->
     </pre>
     <price-list-component-three-buttons
@@ -19,7 +19,7 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionNine="questionNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
+      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionNine="questionNine" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
       
       <div class="col-lg-7 m-auto">
       <re-captcha :class="showForm ? 'right-button' : 'hide '" :siteKey="siteKey" @validate="validate"/>
@@ -70,6 +70,7 @@ export default {
         email: '',
         comment: ''
       },
+      questionsForQNine: {},
       questionNine: {},
       removedQuestionOption: {},
       removedPdv:{},
@@ -116,21 +117,18 @@ export default {
       this.selectedFormOption = val;
       //ENTREPRENEUR
       if(this.selectedButton === 'entrepreneur') {
-        const income = this.formData.data.splice(2, 1);
-        this.formData.data.push(income[0]);
-        const lupmS = this.formData.data.splice(7, 1);
-        this.questionNine = lupmS[0];
+        const lupmS = this.formData.data.splice(8, 1);
+        this.questionsForQNine = lupmS[0];
       }
       //ASSOCIATION
       else if(this.selectedButton === 'association'){
         const income = this.formData.data.splice(3, 1);
-        this.questionNine = income[0];
-        const economicActivity = this.formData.data.splice(2, 1);
-        this.formData.data.push(economicActivity[0]);
+        this.questionsForQNine = income[0];
       }
+
       //ALREADY ENTREPRENEUR
       if(val === 'alreadyEntrepreneur'){
-        this.removedQuestionOption = this.questionNine.question_options.pop();
+        this.removedQuestionOption = this.questionsForQNine.question_options.pop();
         const pdvs = this.formData.data.find(x => x.q_id === 8);
         this.removedPdv = pdvs.question_options.pop();
         const cashRegister = this.formData.data.find(x => x.q_id === 14);
@@ -141,6 +139,7 @@ export default {
         const pdvs = this.formData.data.find(x => x.q_id === 28);
         this.removedPdv = pdvs.question_options.pop();
         const cashRegister = this.formData.data.find(x => x.q_id === 34);
+        console.log(cashRegister);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       //ALREADY ASSOCIATION
@@ -150,8 +149,7 @@ export default {
         const cashRegister = this.formData.data.find(x => x.q_id === 52);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
-     
-      
+
       this.hideSelectedButtons = true;
       this.showForm = true;
     },
