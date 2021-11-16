@@ -1,10 +1,7 @@
 <template>
   <div class="price-list-view col-lg-12">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
-    <pre>
-{{formValues}}
-<!-- {{formData.data}} -->
-    </pre>
+
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -19,7 +16,7 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionNine="questionNine" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
+      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
       
       <div class="col-lg-7 m-auto">
       <re-captcha :class="showForm ? 'right-button' : 'hide '" :siteKey="siteKey" @validate="validate"/>
@@ -71,7 +68,6 @@ export default {
         comment: ''
       },
       questionsForQNine: {},
-      questionNine: {},
       removedQuestionOption: {},
       removedPdv:{},
       removedCashRegister:{},
@@ -112,6 +108,7 @@ export default {
         this.getCaptchaValidate(response);
     },
     async handleSelectedOption(val){
+     
       // val is string
       await this.getFormData({name: val});
       this.selectedFormOption = val;
@@ -122,7 +119,8 @@ export default {
       }
       //ASSOCIATION
       else if(this.selectedButton === 'association'){
-        const eBank = this.formData.data.find(x => x.q_id === 53)
+         console.log(this.formData.data);
+        const eBank = this.formData.data.find(x => x.q_id === 54)
         eBank.name ="fourthQuestion"
         const income = this.formData.data.splice(3, 1);
         income.name ="ninthQuestion"
@@ -165,7 +163,6 @@ export default {
       this.showForm = val;
       this.selectedButton = ' ';
       this.removedQuestionOption = {};
-      this.questionNine = {};
       this.selectedFirstQuestions = [];
       this.selectedSecondQuestion = {};
       this.selectedThirdQuestion = {};

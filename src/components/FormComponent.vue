@@ -70,7 +70,6 @@ export default {
     props:{
         formData: Object,
         formValues: Object,
-        questionNine: Object,
         selectedButton: String,
         selectedFormOption: String,
         questionsForQNine: Object
