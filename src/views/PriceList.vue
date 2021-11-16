@@ -1,7 +1,10 @@
 <template>
   <div class="price-list-view col-lg-12">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
+    <pre>
 
+ 
+    </pre>
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -67,7 +70,7 @@ export default {
         email: '',
         comment: ''
       },
-      totalPrice:'',
+      totalPrice:[],
       questionsForQNine: {},
       removedQuestionOption: {},
       removedPdv:{},
@@ -178,7 +181,7 @@ export default {
       this.selectedSeventhQuestion = {};
       this.selectedEighthQuestion = {};
       this.selectedNinthQuestion = {};
-      this.totalPrice = ''
+      this.totalPrice = [];
 
       //emtying formValues 
       for (var key in this.formValues) {
@@ -315,7 +318,26 @@ export default {
             });
           }
           const firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
-          console.log(firstQSum);
+          this.totalPrice.push(firstQSum)
+          //second question
+          this.totalPrice.push(this.selectedSecondQuestion.price);
+          this.totalPrice.push(this.selectedThirdQuestion.price);
+          //fourth question
+          this.totalPrice.push(this.selectedNinthQuestion.price);
+          //fifth question
+          this.totalPrice.push(this.selectedFourthQuestion.price);
+          //sixth question
+          this.totalPrice.push(this.selectedFifthQuestion.price);
+          //seventh question
+          this.totalPrice.push(this.selectedSixthQuestion.price);
+          //eighth question
+          this.totalPrice.push(this.selectedSeventhQuestion.price);
+          //ninth question
+          this.totalPrice.push(this.selectedEighthQuestion.price);
+          const realTotalPrice = this.totalPrice.reduce((a,b) => a + b, 0);
+          console.log(realTotalPrice);
+        
+
           
 
     }
