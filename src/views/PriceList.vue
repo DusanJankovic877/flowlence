@@ -67,6 +67,7 @@ export default {
         email: '',
         comment: ''
       },
+      totalPrice:'',
       questionsForQNine: {},
       removedQuestionOption: {},
       removedPdv:{},
@@ -112,6 +113,7 @@ export default {
       // val is string
       await this.getFormData({name: val});
       this.selectedFormOption = val;
+      //HANDLING FORM DATA SO THEY CAN PROPERLY DISPLAYED
       //ENTREPRENEUR
       if(this.selectedButton === 'entrepreneur') {
         const lupmS = this.formData.data.splice(8, 1);
@@ -119,15 +121,19 @@ export default {
       }
       //ASSOCIATION
       else if(this.selectedButton === 'association'){
-         console.log(this.formData.data);
-        const eBank = this.formData.data.find(x => x.q_id === 54)
-        eBank.name ="fourthQuestion"
+         console.log(this.selectedFormOption);
+         if(this.selectedFormOption === 'newAssociation'){
+           const eBank = this.formData.data.find(x => x.q_id === 53)
+           eBank.name ="fourthQuestion"
+         }else if(this.selectedFormOption === 'alreadyAssociation'){
+           const eBank = this.formData.data.find(x => x.q_id === 54)
+           eBank.name ="fourthQuestion"
+         }
+        
         const income = this.formData.data.splice(3, 1);
         income.name ="ninthQuestion"
         this.questionsForQNine = income[0];
       }
-
-
       //ALREADY ENTREPRENEUR
       if(val === 'alreadyEntrepreneur'){
         this.removedQuestionOption = this.questionsForQNine.question_options.pop();
@@ -172,6 +178,7 @@ export default {
       this.selectedSeventhQuestion = {};
       this.selectedEighthQuestion = {};
       this.selectedNinthQuestion = {};
+      this.totalPrice = ''
 
       //emtying formValues 
       for (var key in this.formValues) {
@@ -183,6 +190,7 @@ export default {
       // if (this.validateReCaptcha) {
       //   await this.setMailFormData()
       // }
+      //FINDING SELECTED DATA AND ASSINING IT TO PROPERTIES
       //FIRST QUESTION
       if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
         const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
@@ -194,7 +202,6 @@ export default {
             newOption.price = option.price;
             newOption.question_text = firstQuestion.question_text;
             this.selectedFirstQuestions.push(newOption);
-          // console.log('en t1 q', this.selectedFirstQuestions);
             }
           });
         });
@@ -210,8 +217,6 @@ export default {
             this.selectedFirstQuestions = newOption
           }
         });
-          console.log('as t1 q', this.selectedFirstQuestions);
-
       }
       //SECOND QUESTION
         const secondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
@@ -224,7 +229,6 @@ export default {
             this.selectedSecondQuestion = newOption;
         } 
         });
-        console.log('2 q', this.selectedSecondQuestion);
         //THIRD QUESTION but it is 4th because i have removed 3rd question at the end of array
         const fourthQuestion = this.formData.data.find(x=> x.name === 'thirdQuestion');
         fourthQuestion.question_options.forEach(option => {
@@ -236,8 +240,6 @@ export default {
             this.selectedThirdQuestion = newOption;
           }
         });
-        console.log('3 q', this.selectedThirdQuestion);
-
         //FOURTH QUESTION
           const fifthQuestion = this.formData.data.find(x => x.name === 'fourthQuestion');
           fifthQuestion.question_options.forEach(option => {
@@ -249,7 +251,6 @@ export default {
               this.selectedFourthQuestion = newOption;
             }
           });
-          console.log('4th',this.selectedFourthQuestion);
         //FIFTH QUESTION
         const sixthQuestion = this.formData.data.find(x => x.name === 'sixthQuestion');
         sixthQuestion.question_options.forEach(option => {
@@ -261,8 +262,6 @@ export default {
             this.selectedFifthQuestion = newOption;
           }
         });
-        console.log('5 q', this.selectedFifthQuestion);
-
         //SIXTH QUESTION
         const seventhQuestion = this.formData.data.find(x => x.name === 'seventhQuestion');
         seventhQuestion.question_options.forEach(option => {
@@ -274,8 +273,6 @@ export default {
             this.selectedSixthQuestion = newOption;
           }
         });
-        console.log('6 q', this.selectedSixthQuestion);
-
         //SEVENTH QUESTION
         const eighthQuestion = this.formData.data.find(x => x.name === 'eighthQuestion');
         eighthQuestion.question_options.forEach(option => {
@@ -287,8 +284,6 @@ export default {
             this.selectedSeventhQuestion = newOption;
           }
         });
-        console.log('7 q', this.selectedSeventhQuestion);
-
         //EIGHTH QUESTION
         const thirdQuestion = this.formData.data.find(x => x.name === 'thirdQuestion');
         thirdQuestion.question_options.forEach(option => {
@@ -300,8 +295,6 @@ export default {
             this.selectedEighthQuestion = newOption;
           }
         });
-        console.log('8 q', this.selectedEighthQuestion);
-
         //NINTH QEUSTION
           this.questionsForQNine.question_options.forEach(option => {
             if (this.formValues.ninthQuestion === option.id) {
@@ -311,14 +304,19 @@ export default {
               newOption.question_text = this.questionsForQNine.question_text;
               this.selectedNinthQuestion = newOption;
             }
-          });       
+          });   
+          //SUMMING SELECTED FORM DATA
+          //first question
+          const selectedPrice = [];
+          if(this.selectedButton === 'association')selectedPrice.push(this.selectedFirstQuestions.price)
+          else {
+            this.selectedFirstQuestions.forEach(option => {
+              selectedPrice.push(option.price);
+            });
+          }
+          const firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
+          console.log(firstQSum);
           
-        
-       
-        console.log('9th',this.selectedNinthQuestion);
-
-
-     
 
     }
 
