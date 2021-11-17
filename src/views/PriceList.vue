@@ -52,6 +52,7 @@ export default {
   data(){
     return {
       defaultValue: {option_text: '/', price: 0, question_text: ''},
+      defaultFQ: [ {option_text: '/', price: 0, question_text: ''}],
       siteKey: process.env.VUE_APP_RECAPTCHA_PUBLIC_KEY,
       hideButtons: false,
       selectedButton: '',
@@ -386,32 +387,50 @@ export default {
 
           //SUMMING SELECTED FORM DATA
           //first question
-          const selectedPrice = [];
-          if(this.selectedButton === 'association'){
-            console.log('selected assoc true');
-            selectedPrice.push(this.selectedFirstOption.price)
-            }else if(this.selectedButton === 'doo' || this.selectedButton === 'entrepreneur'){
-              console.log('first q', this.selectedFirstOption);
-            this.selectedFirstOption.forEach(option => {
-              selectedPrice.push(option.price);
-            });
-          }
+         
+
             console.log(Object.keys(this.selectedFirstOption).length === 0);
           if(Object.keys(this.selectedFirstOption).length == 0){
-            this.totalPrice.push(0)
+            const firsthQ = this.formData.data.find(x => x.name = 'firstQestion');
+            this.defaultFQ.forEach(element => {
+              element.question_text = firsthQ.question_text;
+
+            });
+            // this.defaultFQ.question_text = 
+            this.selectedFirstOption = this.defaultFQ
+            this.firstQSum = 0;
+            this.totalPrice.push(this.firstQSum);
+            console.log('default first', this.selectedFirstOption);
             }else{ 
+              console.log('passed else');
+              const selectedPrice = [];
+              if(this.selectedButton === 'association'){
+                console.log('selected assoc true');
+                selectedPrice.push(this.selectedFirstOption.price)
+                }else if(this.selectedButton === 'doo' || this.selectedButton === 'entrepreneur'){
+                  console.log('first q', this.selectedFirstOption);
+                this.selectedFirstOption.forEach(option => {
+                  selectedPrice.push(option.price);
+                });
               this.firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
               this.totalPrice.push(this.firstQSum)
+              }
             }
           //second question
           if (Object.keys(this.selectedSecondOption).length == 0) {
-            this.totalPrice.push(0)
+            const fourthQ = this.formData.data.find(x => x.name = 'secondQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedSecondOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
           }else{
             this.totalPrice.push(this.selectedSecondOption.price);
           }
           //third uqestion
           if (Object.keys(this.selectedThirdOption).length == 0) {
-            this.totalPrice.push(0)
+            const fourthQ = this.formData.data.find(x => x.name = 'thirdQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedThirdOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
           }else{
             this.totalPrice.push(this.selectedThirdOption.price);
           }
@@ -419,42 +438,59 @@ export default {
           if(Object.keys(this.selectedFourthOption).length === 0){
             const fourthQ = this.formData.data.find(x => x.name = 'fourthQestion');
             this.defaultValue.question_text = fourthQ.question_text;
-            this.totalPrice.push(0);
+            this.selectedFourthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
           }else{
             this.totalPrice.push(this.selectedFourthOption.price);
           }
           //fifth question
           if(Object.keys(this.selectedFifthOption).length === 0){
-            this.totalPrice.push(0);
+            const fourthQ = this.formData.data.find(x => x.name = 'fifthQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedFifthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
           }else{
             this.totalPrice.push(this.selectedFifthOption.price);
           }
           //sixth question
           if(Object.keys(this.selectedSixthOption).length === 0){
-            this.totalPrice.push(0);
+            const fourthQ = this.formData.data.find(x => x.name = 'sixthQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedSixthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
           }else{
             this.totalPrice.push(this.selectedSixthOption.price);
           }
           //seventh question
           if(Object.keys(this.selectedSeventhOption).length === 0){
-            this.totalPrice.push(0);
+            const fourthQ = this.formData.data.find(x => x.name = 'seventhQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedSeventhOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
           }else{
             this.totalPrice.push(this.selectedSeventhOption.price);
           }
           //eighth question
           if(Object.keys(this.selectedEighthOption).length === 0){
-            this.totalPrice.push(0);
+            const fourthQ = this.formData.data.find(x => x.name = 'eighthQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedEighthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
           }else{
             this.totalPrice.push(this.selectedEighthOption.price);
           }
           //ninth question
           if(Object.keys(this.selectedNinthOption).length === 0){ 
-            this.totalPrice.push(0);
+            const fourthQ = this.formData.data.find(x => x.name = 'ninthQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedNinthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
           }else{
             this.totalPrice.push(this.selectedNinthOption.price);
           }
           this.realTotalPrice = this.totalPrice.reduce((a,b) => a + b, 0);
           console.log(this.realTotalPrice);
+          console.log('total' ,this.totalPrice);
 
         if (this.validateReCaptcha) {
           console.log('captcha validated');
@@ -470,7 +506,7 @@ export default {
             eighthQuestion: this.selectedEighthOption,
             ninthQuestion: this.selectedNinthOption,
             email: this.formValues.email,
-            comment: this.formValues.comment,
+            comment: this.formValues.comment === '' ? '/' : this.formValues.comment,
             totalPrice: this.realTotalPrice,
             firstQSum: this.firstQSum
           }
