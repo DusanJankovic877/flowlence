@@ -41,7 +41,7 @@ export default new Vuex.Store({
       state.commit('setCaptchaValidate', response.success); 
     },
     async setMailFormData(state,payload){
-      console.log(payload);
+      await entrepreneurService.setMailFormData(payload)
     }
   },
   getters: {

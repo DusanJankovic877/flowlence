@@ -51,6 +51,7 @@ export default {
   },
   data(){
     return {
+      defaultValue: {option_text: '/', price: 0, question_text: ''},
       siteKey: process.env.VUE_APP_RECAPTCHA_PUBLIC_KEY,
       hideButtons: false,
       selectedButton: '',
@@ -72,6 +73,7 @@ export default {
       },
       totalPrice:[],
       realTotalPrice:'',
+      firstQSum: '',
       questionsForQNine: {},
       removedQuestionOption: {},
       removedPdv:{},
@@ -209,6 +211,7 @@ export default {
       this.selectedEighthOption= {},
       this.selectedNinthOption= {},
       this.ternaryStatement= '';
+      this.firstQSum= '';
       this.totalPrice = [];
       this.realTotalPrice = ''
 
@@ -219,9 +222,6 @@ export default {
       }
     },
     async handleSubmitForm(){
-      // if (this.validateReCaptcha) {
-      //   await this.setMailFormData()
-      // }
       //FINDING SELECTED DATA AND ASSINING IT TO PROPERTIES
       //FIRST QUESTION
       if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
@@ -230,11 +230,10 @@ export default {
           firstQuestion.question_options.forEach(option => {
             if (question === option.id) {
               const newOption = {};
-            newOption.option_text = option.option_text;
-            newOption.price = option.price;
-            newOption.question_text = firstQuestion.question_text;
-            this.selectedFirstOption.push(newOption);
-        
+              newOption.option_text = option.option_text;
+              newOption.price = option.price;
+              newOption.question_text = firstQuestion.question_text;
+              this.selectedFirstOption.push(newOption);
             }
           });
         });
@@ -253,7 +252,6 @@ export default {
           }
         });
         console.log('1', this.selectedFirstOption);
-
       }
       //SECOND QUESTION
         const secondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
@@ -402,8 +400,8 @@ export default {
           if(Object.keys(this.selectedFirstOption).length == 0){
             this.totalPrice.push(0)
             }else{ 
-              const firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
-              this.totalPrice.push(firstQSum)
+              this.firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
+              this.totalPrice.push(this.firstQSum)
             }
           //second question
           if (Object.keys(this.selectedSecondOption).length == 0) {
@@ -419,6 +417,8 @@ export default {
           }
           //fourth question
           if(Object.keys(this.selectedFourthOption).length === 0){
+            const fourthQ = this.formData.data.find(x => x.name = 'fourthQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
             this.totalPrice.push(0);
           }else{
             this.totalPrice.push(this.selectedFourthOption.price);
@@ -455,6 +455,28 @@ export default {
           }
           this.realTotalPrice = this.totalPrice.reduce((a,b) => a + b, 0);
           console.log(this.realTotalPrice);
+
+        if (this.validateReCaptcha) {
+          console.log('captcha validated');
+          const submittedFormData = {
+            typeOfFrom: this.selectedFormOption,
+            firstQuestion: this.selectedFirstOption,
+            secondQuestion: this.selectedSecondOption,
+            thirdQuestion: this.selectedThirdOption,
+            fourthQuestion: this.selectedFourthOption,
+            fifthQuestion: this.selectedFifthOption,
+            sixthQuestion: this.selectedSixthOption,
+            seventhQuestion: this.selectedSeventhOption,
+            eighthQuestion: this.selectedEighthOption,
+            ninthQuestion: this.selectedNinthOption,
+            email: this.formValues.email,
+            comment: this.formValues.comment,
+            totalPrice: this.realTotalPrice,
+            firstQSum: this.firstQSum
+          }
+          // console.log(submittedFormData);
+          await this.setMailFormData(submittedFormData)
+        }
     }
 
   },
