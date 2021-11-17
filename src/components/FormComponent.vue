@@ -32,7 +32,7 @@
                                 v-model="formValues.ninthQuestion"
                                 name="questionNine"
                             />
-                        
+                        {{option.id}}
                             <label  class="form-check-label"  :key="option.id" :for="option.id">{{option.option_text}}</label>
                         </div>
                     </div>
