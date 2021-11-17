@@ -71,6 +71,7 @@ export default {
         comment: ''
       },
       totalPrice:[],
+      realTotalPrice:'',
       questionsForQNine: {},
       removedQuestionOption: {},
       removedPdv:{},
@@ -209,6 +210,7 @@ export default {
       this.selectedNinthOption= {},
       this.ternaryStatement= '';
       this.totalPrice = [];
+      this.realTotalPrice = ''
 
       //emtying formValues 
       for (var key in this.formValues) {
@@ -396,12 +398,25 @@ export default {
               selectedPrice.push(option.price);
             });
           }
-          const firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
-          this.totalPrice.push(firstQSum)
+            console.log(Object.keys(this.selectedFirstOption).length === 0);
+          if(Object.keys(this.selectedFirstOption).length == 0){
+            this.totalPrice.push(0)
+            }else{ 
+              const firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
+              this.totalPrice.push(firstQSum)
+            }
           //second question
-          this.totalPrice.push(this.selectedSecondOption.price);
+          if (Object.keys(this.selectedSecondOption).length == 0) {
+            this.totalPrice.push(0)
+          }else{
+            this.totalPrice.push(this.selectedSecondOption.price);
+          }
           //third uqestion
-          this.totalPrice.push(this.selectedThirdOption.price);
+          if (Object.keys(this.selectedThirdOption).length == 0) {
+            this.totalPrice.push(0)
+          }else{
+            this.totalPrice.push(this.selectedThirdOption.price);
+          }
           //fourth question
           if(Object.keys(this.selectedFourthOption).length === 0){
             this.totalPrice.push(0);
@@ -409,23 +424,37 @@ export default {
             this.totalPrice.push(this.selectedFourthOption.price);
           }
           //fifth question
-          this.totalPrice.push(this.selectedFifthOption.price);
+          if(Object.keys(this.selectedFifthOption).length === 0){
+            this.totalPrice.push(0);
+          }else{
+            this.totalPrice.push(this.selectedFifthOption.price);
+          }
           //sixth question
-          this.totalPrice.push(this.selectedSixthOption.price);
+          if(Object.keys(this.selectedSixthOption).length === 0){
+            this.totalPrice.push(0);
+          }else{
+            this.totalPrice.push(this.selectedSixthOption.price);
+          }
           //seventh question
-          this.totalPrice.push(this.selectedSeventhOption.price);
+          if(Object.keys(this.selectedSeventhOption).length === 0){
+            this.totalPrice.push(0);
+          }else{
+            this.totalPrice.push(this.selectedSeventhOption.price);
+          }
           //eighth question
-          this.totalPrice.push(this.selectedEighthOption.price);
+          if(Object.keys(this.selectedEighthOption).length === 0){
+            this.totalPrice.push(0);
+          }else{
+            this.totalPrice.push(this.selectedEighthOption.price);
+          }
           //ninth question
-          this.totalPrice.push(this.selectedNinthOption.price);
-
-          const realTotalPrice = this.totalPrice.reduce((a,b) => a + b, 0);
-          console.log(realTotalPrice);
-          // console.log(this.totalPrice);
-        
-
-          
-
+          if(Object.keys(this.selectedNinthOption).length === 0){ 
+            this.totalPrice.push(0);
+          }else{
+            this.totalPrice.push(this.selectedNinthOption.price);
+          }
+          this.realTotalPrice = this.totalPrice.reduce((a,b) => a + b, 0);
+          console.log(this.realTotalPrice);
     }
 
   },
