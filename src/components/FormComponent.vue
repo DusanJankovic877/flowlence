@@ -13,7 +13,6 @@
                         v-model="formValues[data.name]"
                         :name="data.name"
                         >
-                                  {{data.q_id}}
                     <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
                 </div>
             </div>
@@ -32,7 +31,6 @@
                                 v-model="formValues.ninthQuestion"
                                 name="questionNine"
                             />
-                        {{option.id}}
                             <label  class="form-check-label"  :key="option.id" :for="option.id">{{option.option_text}}</label>
                         </div>
                     </div>
@@ -41,6 +39,7 @@
             </div>
             <div v-else></div>
         </div>
+        <p style="color:red;">treba napraviti proveru za comment i email</p>
         <div class="comment">
             <h5>Dodatni komentar:</h5>
             <div class="form-group">

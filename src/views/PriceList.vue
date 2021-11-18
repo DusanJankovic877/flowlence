@@ -1,10 +1,6 @@
 <template>
   <div class="price-list-view col-lg-12">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
-    <pre>
-<!-- {{formValues}} -->
- 
-    </pre>
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -162,7 +158,6 @@ export default {
         const income = this.formData.data.splice(3, 1);
         // income.name ="fourthQuestion"
         this.questionsForQNine = income[0];
-        console.log('q nine',this.questionsForQNine);
       }
       //ALREADY ENTREPRENEUR
       if(val === 'alreadyEntrepreneur'){
@@ -177,7 +172,6 @@ export default {
         const pdvs = this.formData.data.find(x => x.q_id === 28);
         this.removedPdv = pdvs.question_options.pop();
         const cashRegister = this.formData.data.find(x => x.q_id === 34);
-        console.log(cashRegister);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       //ALREADY ASSOCIATION
@@ -249,8 +243,6 @@ export default {
             }
           });
         });
-        console.log('1', this.selectedFirstOption);
-
       }
       else if(this.selectedButton === 'association'){
         const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
@@ -263,7 +255,6 @@ export default {
             this.selectedFirstOption = newOption
           }
         });
-        console.log('1', this.selectedFirstOption);
       }
       //SECOND QUESTION
         const secondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
@@ -276,7 +267,6 @@ export default {
             this.selectedSecondOption = newOption;
         } 
         });
-            console.log('2', this.selectedSecondOption);
         //THIRD QUESTION but it is 4th because i have removed 3rd question at the end of array
         this.selectedThirdQuestion = this.formData.data.find(x=> x.name === 'thirdQuestion');
         this.selectedThirdQuestion.question_options.forEach(option => {
@@ -289,15 +279,11 @@ export default {
             this.selectedThirdOption = newOption;
           }
         });
-            console.log('3', this.selectedThirdOption);
         //FOURTH QUESTION
-          
-          
           this.selectedFourthQuestion = this.selectedButton === 'doo' ? this.formData.data.find(x => x.name === 'fourthQuestion') : this.questionsForQNine;
           this.selectedFourthQuestion.question_options.forEach(option => {
             const ternaryStatement = this.selectedButton === 'doo' ? this.formValues.fourthQuestion : this.formValues.ninthQuestion
              if (ternaryStatement === option.id){
-              console.log('true ternary');
               if(this.selectedButton === 'entrepreneur' || this.selectedButton === 'association'){
                 if(this.formValues.thirdQuestion === 9 || this.formValues.thirdQuestion === 10 || this.formValues.thirdQuestion === 11 || this.formValues.thirdQuestion === 65){
                   const newOption = {};
@@ -316,7 +302,6 @@ export default {
             }
                 
           });   
-          console.log('4', this.selectedFourthOption);
         //FIFTH QUESTION
           this.selectedFifthQuestion =this.selectedButton === 'entrepreneur'? this.formData.data.find(x => x.name === 'fourthQuestion'): this.formData.data.find(x => x.name === 'fifthQuestion');
           this.selectedFifthQuestion.question_options.forEach (option => {
@@ -329,8 +314,6 @@ export default {
             this.selectedFifthOption = newOption;
           }
         });
-            console.log('5', this.selectedFifthOption);
-
         //SIXTH QUESTION
         this.selectedSixthQuestion = this.selectedButton === 'entrepreneur' ? this.formData.data.find(x => x.name === 'fifthQuestion') : this.formData.data.find(x => x.name === 'sixthQuestion')
         this.selectedSixthQuestion.question_options.forEach(option => {
@@ -343,7 +326,6 @@ export default {
             this.selectedSixthOption = newOption;
           }
         });
-          console.log('6', this.selectedSixthOption);
         //SEVENTH QUESTION
         this.selectedSeventhQuestion = this.selectedButton === 'entrepreneur' ? this.formData.data.find(x => x.name === 'sixthQuestion') : this.formData.data.find(x => x.name === 'seventhQuestion')
         this.selectedSeventhQuestion.question_options.forEach(option => {
@@ -356,8 +338,6 @@ export default {
             this.selectedSeventhOption = newOption;
           }
         });
-          console.log('7', this.selectedSeventhOption);
-
         //EIGHTH QUESTION
         if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
           this.selectedEighthQuestion = this.selectedButton === 'entrepreneur' ? this.formData.data.find(x => x.name === 'seventhQuestion') : this.formData.data.find(x => x.name === 'eighthQuestion') 
@@ -379,28 +359,20 @@ export default {
             }
           
         });
-          console.log('8', this.selectedEighthOption);
-
         //NINTH QEUSTION is fourth in ASSOC in ENTREPRENEUR eight doo is ninth formValues
         this.selectedNinthQuestion = this.selectedButton === 'entrepreneur' || this.selectedButton === 'association' ? this.formData.data.find(x => x.name === 'eighthQuestion') : this.formData.data.find(x => x.name === 'ninthQuestion') ;
         this.selectedNinthQuestion.question_options.forEach(option => {
           const ternaryStatement = this.selectedButton === 'entrepreneur' || this.selectedButton === 'association' ? this.formValues.eighthQuestion : this.formValues.ninthQuestion;
           if (ternaryStatement === option.id) {
               const newOption = {};
-              
               newOption.option_text = option.option_text;
               newOption.price = option.price;
               newOption.question_text = this.selectedNinthQuestion.question_text;
               this.selectedNinthOption = newOption;
           }
           });
-          console.log('9', this.selectedNinthOption);
-
           //SUMMING SELECTED FORM DATA
           //first question
-         
-
-            console.log(Object.keys(this.selectedFirstOption).length === 0);
           if(Object.keys(this.selectedFirstOption).length == 0){
             const firsthQ = this.formData.data.find(x => x.name = 'firstQestion');
             this.defaultFQ.forEach(element => {
@@ -411,15 +383,11 @@ export default {
             this.selectedFirstOption = this.defaultFQ
             this.firstQSum = 0;
             this.totalPrice.push(this.firstQSum);
-            console.log('default first', this.selectedFirstOption);
             }else{ 
-              console.log('passed else');
               const selectedPrice = [];
               if(this.selectedButton === 'association'){
-                console.log('selected assoc true');
                 selectedPrice.push(this.selectedFirstOption.price)
                 }else if(this.selectedButton === 'doo' || this.selectedButton === 'entrepreneur'){
-                  console.log('first q', this.selectedFirstOption);
                 this.selectedFirstOption.forEach(option => {
                   selectedPrice.push(option.price);
                 });
@@ -500,11 +468,7 @@ export default {
             this.totalPrice.push(this.selectedNinthOption.price);
           }
           this.realTotalPrice = this.totalPrice.reduce((a,b) => a + b, 0);
-          console.log(this.realTotalPrice);
-          console.log('total' ,this.totalPrice);
-
         if (this.validateReCaptcha) {
-          console.log('captcha validated');
           const submittedFormData = {
             typeOfFrom: this.selectedFormOption,
             firstQuestion: this.selectedFirstOption,
@@ -530,11 +494,8 @@ export default {
   created(){
     if(this.$route.params.from === 'home'){
     this.selectedButton = this.$route.params.selectedButton
-    
     }
   }
-
-  
 }
 </script>
 <style>
