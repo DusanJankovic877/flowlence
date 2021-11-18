@@ -2,7 +2,7 @@
   <div class="price-list-view col-lg-12">
     <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
     <pre>
-{{formValues}}
+<!-- {{formValues}} -->
  
     </pre>
     <price-list-component-three-buttons
@@ -22,10 +22,14 @@
       <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
       
       <div class="col-lg-7 m-auto">
-      <re-captcha :class="showForm ? 'right-button' : 'hide '" :siteKey="siteKey" @validate="validate"/>
+        <div v-if="emailFormMessage" class="error-message m-auto">
+          {{emailFormMessage.message}}
+        </div>
+        <div v-else></div>
+      <re-captcha :class="showForm ? 'right-button captcha' : 'hide captcha'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
       <button v-if="fromRoute === 'home'" class="col-lg-2 btn btn-danger" @click="goToHome(false)">Idi na početnu</button>
       <button v-else class="col-lg-2 left-button btn btn-danger" @click="handleHideForm(false)">idi nazad</button>
-      <button :class="showForm ? 'col-lg-2 right-button btn btn-success' : 'hide'" @click="handleSubmitForm">Pošalji</button>
+      <button :disabled="isActive" :class="showForm ? 'col-lg-2 right-button btn btn-success' : 'hide'" @click="handleSubmitForm">Pošalji</button>
       </div>
     </div>
   </div>
@@ -59,6 +63,7 @@ export default {
       selectedFormOption: '',
       hideSelectedButtons: false,
       showForm: false,
+      isActive: false,
       formValues:{
         firstQuestion:[],
         secondQuestion: '',
@@ -103,7 +108,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['formData','validateReCaptcha']),
+    ...mapGetters(['formData','validateReCaptcha', 'emailFormMessage']),
     currentRouteName() {
       return this.$route.path;
     },
@@ -112,7 +117,10 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData']),
+    resetCaptcha(){
+      this.$refs.ReCaptcha.reCaptchaReset()
+    },
+    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage']),
     async handleHideButtons(val, bool){
       //val is a string
       this.hideButtons = bool;
@@ -186,6 +194,7 @@ export default {
     async handleHideForm(val){
       //val is boolean
       await this.setEmptyFormData();
+      await this.setEmptyEmailFormMessage()
       this.hideButtons = val;
       this.hideSelectedButtons = val;
       this.showForm = val;
@@ -214,8 +223,9 @@ export default {
       this.ternaryStatement= '';
       this.firstQSum= '';
       this.totalPrice = [];
-      this.realTotalPrice = ''
-
+      this.realTotalPrice = '';
+      this.isActive = false;
+      this.$refs.ReCaptcha.reCaptchaReset();
       //emtying formValues 
       for (var key in this.formValues) {
         if(key === 'firstQuestion')this.formValues[key] = [];
@@ -225,6 +235,7 @@ export default {
     async handleSubmitForm(){
       //FINDING SELECTED DATA AND ASSINING IT TO PROPERTIES
       //FIRST QUESTION
+      this.isActive = true;
       if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
         const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
         this.formValues.firstQuestion.forEach(question => {
@@ -510,8 +521,8 @@ export default {
             totalPrice: this.realTotalPrice,
             firstQSum: this.firstQSum
           }
-          // console.log(submittedFormData);
           await this.setMailFormData(submittedFormData)
+          
         }
     }
 
@@ -519,7 +530,7 @@ export default {
   created(){
     if(this.$route.params.from === 'home'){
     this.selectedButton = this.$route.params.selectedButton
-    this.hideButtons = true;
+    
     }
   }
 
@@ -567,31 +578,54 @@ export default {
     display: none !important;
 }
 .right-button{margin-left:22% !important;}
-@media only screen and (max-width: 1280px){
+.error-message{
+  width: 56%;
+  background-color: #00A86B;
+  color: #053A28
+}
 
+@media only screen and (max-width: 1280px){
   .price-list-img{
     margin-bottom: -19px;
   }
+  .captcha{
+    margin-left: 25% !important;
+  }
 }
 @media only screen and (max-width: 768px){
-
   .price-list-img{
     margin-bottom: 64px;
   }
-}
-@media only screen and (max-width: 540px){
-    .price-list-img{
-    margin-bottom: 101px;
+  .captcha{
+    margin-left: 30% !important;
   }
 }
+@media only screen and (max-width: 540px){
+  .price-list-img{
+    margin-bottom: 101px;
+  }
+  .captcha{
+    margin-left: 22% !important;
+  }
+}
+
 @media only screen and (max-width: 414px){
-    .price-list-img{
+  .price-list-img{
     margin-bottom: 122px;
+  }
+  .error-message{
+  width: 100%;
+  }
+  .captcha{
+    margin-left: 13% !important;
   }
 }
 @media only screen and (max-width: 375px){
   .price-list-img{
     margin-bottom: 128px;
+  }
+  .captcha{
+    margin-left: 8% !important;
   }
 }
 @media only screen and (max-width: 360px){
@@ -602,6 +636,16 @@ export default {
 @media only screen and (max-width: 320px){
   .price-list-img{
     margin-bottom: 137px;
+  }
+  .captcha{
+  margin-left: 3% !important;
+  }
+}
+@media only screen and (max-width: 320px){
+  .captcha{
+    margin-left: 0% !important;
+    transform:scale(0.925);
+    transform-origin:0 0;
   }
 
 }

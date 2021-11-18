@@ -11,7 +11,8 @@ export default new Vuex.Store({
     entrepreneurForm:{},
     formData:{},
     associationFormData:{},
-    validateReCaptcha: false
+    validateReCaptcha: false,
+    emailFormMessage: ''
   },
   mutations: {
     setFormData(state, payload){
@@ -20,8 +21,14 @@ export default new Vuex.Store({
     setEmptyFormData(state){
       state.formData = {}
     },
+    setEmptyEmailFormMessage(state){
+      state.emailFormMessage = '';
+    },
     setCaptchaValidate(state, payload){
       if(payload)state.validateReCaptcha = payload
+    },
+    setFormEmailMessage(state, payload){
+      state.emailFormMessage = payload
     }
 
   },
@@ -33,20 +40,25 @@ export default new Vuex.Store({
        const response = await entrepreneurService.getFormData(payload);
        state.commit('setFormData', response)  
     },
-     setEmptyFormData(state){
+    setEmptyFormData(state){
        state.commit('setEmptyFormData');
+    },
+    setEmptyEmailFormMessage(state){
+      state.commit('setEmptyEmailFormMessage');
     },
     async getCaptchaValidate(state,payload){
       const response = await recaptchaValidate.validate(payload)
       state.commit('setCaptchaValidate', response.success); 
     },
     async setMailFormData(state,payload){
-      await entrepreneurService.setMailFormData(payload)
+     const response = await entrepreneurService.setMailFormData(payload)
+      state.commit('setFormEmailMessage', response);
     }
   },
   getters: {
     formData: (state) => state.formData,
-    validateReCaptcha: (state) => state.validateReCaptcha
+    validateReCaptcha: (state) => state.validateReCaptcha,
+    emailFormMessage: (state) => state.emailFormMessage
   },
   modules: {
   
