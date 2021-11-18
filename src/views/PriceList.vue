@@ -181,7 +181,6 @@ export default {
         const cashRegister = this.formData.data.find(x => x.q_id === 52);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
-
       this.hideSelectedButtons = true;
       this.showForm = true;
     },

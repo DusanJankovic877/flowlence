@@ -24,10 +24,6 @@
                     </div>
                 </button>
         </div>
-        <!-- <div class="entrepreneur">
-      
-            <Form ref="childComponent" @handle-show-buttons="handleShowButtons" :formData="formData"  :hide="hide" :hideAlready="hideAlready" :hideNew="hideNew" :class=" hideNew || hideAlready ? 'new-entrepreneur' : 'new-entrepreneur hide'"/>
-        </div> -->
     </div>
 </template>
 <script>
