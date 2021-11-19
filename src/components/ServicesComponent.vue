@@ -6,7 +6,10 @@
       <button  class="prices-link krug" @click="foundationServices">
         <div class="price-card-body">
         <h3>Osnivanje</h3>
-          <p class="card-text">konsalting pre postupka osnivanja, provera rezervisanosti naziva, podnošenje dokumentacije...</p>
+          <p class="card-text">
+            Prvi korak sa kojim započinjete svoje poslovanje jeste samo osnivanje. Njemu prethodi
+            definisanje velikog broja detalja....
+          </p>
           <p><b>više informacija</b> </p>
         </div>
       </button><!-- 1st -->
@@ -14,7 +17,7 @@
       <button class="prices-link krug" @click="accountingServices">
         <div class="price-card-body">
         <h3>Knjigovodstvene usluge</h3>
-          <p class="card-text">vođenje poslovnih knjiga, Knjiženje dokumentacije,Vođenje analitičke evidencije...</p>
+          <p class="card-text">Pružamo kompeltne knjigovodstvene usluge za sve vrste delatnosti. Obuhvataju sledeće:</p>
           <p><b>više informacija</b> </p>
 
         </div>
@@ -23,7 +26,10 @@
       <button class="prices-link krug" @click="payrollPersonnelServices">
         <div class="price-card-body">
         <h3>Obračun zarada / Kadrovske usluge</h3>
-          <p class="card-text">Popunjavanje ugovora o radnom angažovanju, Prijavljivanje I odjavljivanje zaposlenih...</p>
+          <p class="card-text">            
+            Ukoliko imate zaposlene ili tek planirate zapošljavanje od izuzetnog je značaja da se
+            upoznate sa svim...
+          </p>
           <p><b>više informacija</b> </p>
         </div>
       </button><!-- 3rd-->
@@ -32,7 +38,10 @@
       <button class="prices-link krug" @click="paymentsServices">
         <div class="price-card-body">
         <h3>Platni promet (dinarski I devizni)</h3>
-          <p class="card-text">Otvaranje tekućih računa, Elektronsko bankarstvo, Priprema naloga za plaćanje...</p>
+          <p class="card-text">
+            Danas je elektronsko bankarstvo deo naše svakodnevnice, koje omogućava da na brz i
+            efikasan način...
+          </p>
           <p><b>više informacija</b> </p>
         </div>
       </button><!-- 4th-->
@@ -40,7 +49,10 @@
       <button class="prices-link krug" @click="taxFinancialConsultings">
         <div class="price-card-body">
         <h3>Poreski I finansijski konsalting</h3>
-          <p class="card-text">Savetovanje klijenta u vezi svih poreskih pitanja, kao I davanje predloga...</p>
+          <p class="card-text">
+            Rizik od pogrešne primene poreskih propisa je izuzetno visok u okruženju koje karakteriše
+            stalne...
+          </p>
           <p><b>više informacija</b> </p>
         </div>
       </button><!-- 5th-->
@@ -48,7 +60,10 @@
       <button class="prices-link krug" @click="calculationFinancialIndicators">
         <div class="price-card-body">
         <h3>Izračunavanje finansijskih pokazatelja, izrada biznis planova</h3>
-          <p class="card-text">izračunavanje pokazateljima, Izrada biznis plana...</p>
+          <p class="card-text">
+            Finansijski izveštaji ne služe samo da bi se na osnovu njih utvrdile poreske obaveze, kako se
+            često misli...
+          </p>
           <p><b>više informacija</b> </p>
         </div>
       </button> <!-- 6th-->
