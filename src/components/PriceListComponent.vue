@@ -139,5 +139,17 @@ export default{
     .price-card-body p{
     font-size: 14px;
   }
+  .krug{
+    background-color: #f2f2f2;
+    height: 280px;
+    width: 280px;
+    border-radius: 25em;
+    padding: 0;
+    margin:5px auto !important;
+}
+.price-card-body {
+    height: 280px;
+    width: 280px;
+}
 }
 </style>

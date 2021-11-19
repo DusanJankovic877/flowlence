@@ -1,17 +1,28 @@
 <template>
-<div class="col-lg-4 m-auto service-height">
-    <h2>Poreski I finansijski konsalting</h2>
-    <ul class="text-left">
-        <li>
-            <p>
-                Savetovanje klijenta u vezi svih poreskih pitanja kao I davanje predloga za postizanje
-                optimalnog rešenja u skladu sa zakonskim propisima
-            </p>
-        </li>
-    </ul>
-            <serviceButtonsComponent @send-result-values="goBackTo" @go-back-home="goBackToHome" :fromRoute="fromRoute"/>
 
+<div>
+
+            <h2 style="margin-bottom: 50px;">Poreski I finansijski konsalting</h2>
+        <div class="col-lg-5 m-auto service-height">
+            <p>
+                Rizik od pogrešne primene poreskih propisa je izuzetno visok u okruženju koje karakteriše
+                stalne promene propisa, kao što je slučaj u našoj zemlji. Kompleksan poreski sistem zahteva
+                stalno praćenje donošenja novih i izmene postojećih propisa i kontinuiranu edukaciju.
+            </p>
+            <p>
+                Pored toga, često se propisuju brojni podsticaji i olakšice čijim se korišćenjem mogu stvoriti
+                poreske uštede ukoliko ispunjavate propisane uslove. 
+            </p>
+            <p>
+                Iz gore navedenih razloga smatramo da jedan od najvažnjih aspekta našeg poslovanja je
+                savetovanje klijenta u vezi svih poreskih pitanja kao I davanje predloga za postizanje
+                optimalnog rešenja u skladu sa zakonskim propisima. 
+            </p>
+
+        </div>
+            <serviceButtonsComponent @send-result-values="goBackTo" @go-back-home="goBackToHome" :fromRoute="fromRoute"/>
 </div>
+
 </template>
 <script>
 import serviceButtonsComponent from './serviceButtonsComponent.vue'
