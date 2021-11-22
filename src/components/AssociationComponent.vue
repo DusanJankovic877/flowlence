@@ -7,7 +7,7 @@
         <h4 v-else>Izaberite ponuđene opcije kako bi definisali ponudu koja će najviše odgovarati potrebama Vašeg poslovanja.</h4> -->
 
         <div class="circles">
-                <button class="entrepreneur-krug" @click="handleSelectedOption('newAssociation')">
+                <button class="entrepreneur-krug" @click="handleSelectedOption('new assoc')">
                     <div class="entrepreneur-card-body">
                         <h2>Novo udruženje</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -15,7 +15,7 @@
                
                 </button>
         
-                <button class="entrepreneur-krug" @click="handleSelectedOption('alreadyAssociation')">
+                <button class="entrepreneur-krug" @click="handleSelectedOption('already assoc')"> 
                     <div class="entrepreneur-card-body">
                         <h2>Već postojeće udruženje</h2>
                         <p class="entrepreneur-card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -26,10 +26,16 @@
     </div>
 </template>
 <script>
-
 export default {
+    data(){
+        return {
+
+            assoc: 'assoc'
+        }
+    },
         methods:{
         handleSelectedOption(val){
+          
             this.$emit('handle-selected-option', val)
         }
     }

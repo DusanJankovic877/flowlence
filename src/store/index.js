@@ -3,11 +3,12 @@ import Vuex from 'vuex'
 import entrepreneurService from '../services/entrepreneurService'
 import contactServices from '../services/contactServices'
 import recaptchaValidate from '../services/recaptchaValidate'
-
+import  NProgress  from 'nprogress';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    apiWaitingCount: 0,
     entrepreneurForm:{},
     formData:{},
     associationFormData:{},
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   mutations: {
     setFormData(state, payload){
       state.formData = payload;
+
     },
     setEmptyFormData(state){
       state.formData = {}
@@ -29,7 +31,13 @@ export default new Vuex.Store({
     },
     setFormEmailMessage(state, payload){
       state.emailFormMessage = payload
-    }
+    },
+    setApiWaitingCountIncrement(state){
+      state.apiWaitingCount += 1
+    },
+    setApiWaitingCountDecrement(state){
+      state.apiWaitingCount -= 1;
+    },
 
   },
   actions: {
@@ -53,10 +61,24 @@ export default new Vuex.Store({
     async setMailFormData(state,payload){
      const response = await entrepreneurService.setMailFormData(payload)
       state.commit('setFormEmailMessage', response);
+    },
+    startLoading({commit, state}){
+      if(state.apiWaitingCount === 0){
+        NProgress.start()
+        commit('setApiWaitingCountIncrement')
+      }
+    },
+    doneLoading({commit, state}){
+      commit('setApiWaitingCountDecrement')
+      if(state.apiWaitingCount === 0){
+        NProgress.done()
+
+      }
     }
   },
   getters: {
     formData: (state) => state.formData,
+
     validateReCaptcha: (state) => state.validateReCaptcha,
     emailFormMessage: (state) => state.emailFormMessage
   },

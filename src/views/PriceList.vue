@@ -133,7 +133,7 @@ export default {
     async handleSelectedOption(val){
      
       // val is string
-      await this.getFormData({name: val});
+      await this.getFormData({businessTypeParam: val});
       this.selectedFormOption = val;
       //HANDLING FORM DATA SO THEY CAN PROPERLY DISPLAYED
       //ENTREPRENEUR
@@ -182,7 +182,9 @@ export default {
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       this.hideSelectedButtons = true;
-      this.showForm = true;
+      // if(Object.keys(this.formData).length !== 0){
+        this.showForm = true;
+      // }
     },
     async handleHideForm(val){
       //val is boolean
@@ -204,6 +206,7 @@ export default {
       this.selectedEighthQuestion = {};
       this.selectedNinthQuestion = {};
       //selected options
+      this.selectedQuestionsOptionsArray =[],
       this.selectedFirstOption= [],
       this.selectedSecondOption= {},
       this.selectedThirdOption= {},
