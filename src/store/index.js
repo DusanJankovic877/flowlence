@@ -13,7 +13,8 @@ export default new Vuex.Store({
     formData:{},
     associationFormData:{},
     validateReCaptcha: false,
-    emailFormMessage: ''
+    emailFormMessage: '',
+    contactUsErrors:{}
   },
   mutations: {
     setFormData(state, payload){
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     setApiWaitingCountDecrement(state){
       state.apiWaitingCount -= 1;
     },
+    setConstactUsErrors(state, payload){
+      state.contactUsErrors = payload;
+    }
 
   },
   actions: {
@@ -74,13 +78,17 @@ export default new Vuex.Store({
         NProgress.done()
 
       }
+    },
+    setConstactUsErrors(state,payload){
+      state.commit('setConstactUsErrors', payload)
     }
   },
   getters: {
     formData: (state) => state.formData,
 
     validateReCaptcha: (state) => state.validateReCaptcha,
-    emailFormMessage: (state) => state.emailFormMessage
+    emailFormMessage: (state) => state.emailFormMessage,
+    contactUsErrors: (state) => state.contactUsErrors
   },
   modules: {
   

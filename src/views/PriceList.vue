@@ -182,9 +182,9 @@ export default {
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       this.hideSelectedButtons = true;
-      // if(Object.keys(this.formData).length !== 0){
+
         this.showForm = true;
-      // }
+
     },
     async handleHideForm(val){
       //val is boolean

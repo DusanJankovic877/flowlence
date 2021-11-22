@@ -22,11 +22,13 @@ export class RequestHandler {
         //   }
         this.apiClient.interceptors.request.use(  config => {
             store.dispatch('startLoading')
-
+            // if()
+            // console.log('request', this.apiClient.interceptors);
             return config;
         });
-        this.apiClient.interceptors.response.use(async response =>{
+        this.apiClient.interceptors.response.use(  response =>  {
             // await delay(3000);
+            console.log('response', response );
             store.dispatch('doneLoading')
             return response;
 
@@ -39,6 +41,16 @@ export class RequestHandler {
             // else {
             //     return Promise.reject(error);
             // }
-          });
+          }, async error =>  {
+              if( error.response.status === 422){
+                  store.dispatch('doneLoading')
+                  store.dispatch('setConstactUsErrors', error.response.data.errors)
+                //   return Promise.reject(error);
+                  return Promise.resolve();
+              }else{
+                  return Promise.reject(error);
+
+              }
+          })
     }
 }
