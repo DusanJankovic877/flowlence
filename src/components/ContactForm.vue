@@ -68,33 +68,22 @@
     </div>  
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
 export default {
-    data() {
-       return{
-        form: {
-            email: '',
-            name: '',
-            telephone: '',
-            message: ''
-        },
-
-       } 
-    },
-    computed:{
-      ...mapGetters(['contactUsErrors'])
+    props:{
+      contactUsErrors: Object,
+      form: Object
     },
     methods: {
-      ...mapActions(['getContactFormData']),
-       async handleSubmit() {
-          await this.getContactFormData(this.form)
+        handleSubmit() {
+         this.$emit('handle-submit', this.form)
         }
     }
 }
 </script>
 <style>
-  .contact-text, label{
-    color: #404040;
+  .contact-text, .input-group{
+    color: #404040 ;
+    text-align: left !important;
   }
   .left{
     margin-top: 50px !important;
@@ -109,6 +98,7 @@ export default {
     padding: 50px 0px 0px 0px;
     
   }
+  
   .contact-form input, textarea{
     border-radius: 0 !important;
     border: none !important;
