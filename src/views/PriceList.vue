@@ -488,10 +488,8 @@ export default {
             firstQSum: this.firstQSum
           }
           await this.setMailFormData(submittedFormData)
-          
         }
     }
-
   },
   created(){
     if(this.$route.params.from === 'home'){

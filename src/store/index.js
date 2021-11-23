@@ -28,7 +28,7 @@ export default new Vuex.Store({
       state.emailFormMessage = '';
     },
     setCaptchaValidate(state, payload){
-      if(payload)state.validateReCaptcha = payload
+     state.validateReCaptcha = payload
     },
     setFormEmailMessage(state, payload){
       state.emailFormMessage = payload
@@ -58,9 +58,14 @@ export default new Vuex.Store({
     setEmptyEmailFormMessage(state){
       state.commit('setEmptyEmailFormMessage');
     },
+    //at contact us when you leave it validateReCaptcha is reseted to false
+    emptyCaptchaValidate(state, payload){
+      state.commit('setCaptchaValidate', payload)
+    },
     async getCaptchaValidate(state,payload){
       const response = await recaptchaValidate.validate(payload)
       state.commit('setCaptchaValidate', response.success); 
+      
     },
     async setMailFormData(state,payload){
      const response = await entrepreneurService.setMailFormData(payload)

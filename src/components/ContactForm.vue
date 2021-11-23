@@ -59,8 +59,10 @@
               </div>
               <div v-else></div>
             </div>
-            <div class="col-lg-12 contact-input-button" >
-                <b-button class="col-lg-3 contact-form-button" @click="handleSubmit" style="float:right;">Pošaljite</b-button>
+
+            <div class="col-lg-12 contact-input-button">
+                <re-captcha :class="showForm ? 'captcha-contact' : 'hide captcha-contact'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
+                <b-button class="col-lg-3 contact-form-button" @click="handleSubmit" >Pošaljite</b-button>
             </div>
         </form>
       </div>
@@ -68,16 +70,38 @@
     </div>  
 </template>
 <script>
+import ReCaptcha from '../components/ReCaptcha.vue'
+
 export default {
+  data(){
+    return{
+      showForm: true
+    }
+  },
+  components:{
+        ReCaptcha
+  },
     props:{
       contactUsErrors: Object,
-      form: Object
+      form: Object,
+      siteKey: String,
+      validateReCaptcha: Boolean
     },
     methods: {
-        handleSubmit() {
-         this.$emit('handle-submit', this.form)
-        }
-    }
+      resetCaptcha(){
+        this.$refs.ReCaptcha.reCaptchaReset()
+      },
+      handleSubmit() {
+        this.$emit('handle-submit', this.form)
+      },
+      validate(response){
+        this.$emit('handle-validate', response)
+      }
+    },
+    beforeDestroy(){
+      if(this.validateReCaptcha)this.$refs.ReCaptcha.reCaptchaReset();
+    },
+
 }
 </script>
 <style>
@@ -98,17 +122,17 @@ export default {
     padding: 50px 0px 0px 0px;
     
   }
-  
   .contact-form input, textarea{
     border-radius: 0 !important;
     border: none !important;
     border-bottom: 1px solid #555555 !important;
   }
   .contact-form-button{
+    float:right;
     background-color: #C9C9C9;
     border: none !important;
     color:#5E5E5E;
-    margin-top: 25px;
+    margin-top: -39px;
     margin-bottom: 25px;
     margin-left: auto;
     border-radius: 0;
@@ -124,51 +148,46 @@ export default {
     height: 104px;
   }
   .contact-input-button{
-    margin-top: 50px;
+    margin-top: -10px;
+  }
+  .captcha-contact{
+    margin-top:35px;
   }
   .alert{
     height: 35px;
     margin: 0;
     padding: 5px ;
-
   }
 @media screen and (max-device-width: 1281px) {
-    .left {
-      padding: 0 !important;
-      margin-top: 100px !important;
-      margin-left: 100px !important;
-    }
-    .right{
-      margin-left: -100px !important;
-      padding-left: 100px;
-    }
-    .form{
-     margin: 0 auto !important;
-      
-     
-      /* margin-top: 300px !important; */
-      height: 100% !important;
-      width: 95% !important;
-      padding-left: 50px;
-    }
+  .left {
+    padding: 0 !important;
+    margin-top: 100px !important;
+    margin-left: 100px !important;
   }
+  .right{
+    margin-left: -100px !important;
+    padding-left: 100px;
+  }
+  .form{
+    margin: 0 auto !important;
+    height: 100% !important;
+    width: 95% !important;
+    padding-left: 50px;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .form{
-    /* width: 100%;  */
     margin-left:40px !important;}
   .left {
     padding: 0 !important;
     margin-top: 50px !important;
     margin-left: 0px !important;
-
     }
   .right{
     padding: 0;
     margin-top: 50px !important;
     margin-left: 0px !important;
     padding-left: 100px;
-
-    
   }
 }
 @media only screen and (max-width: 768px) {
@@ -177,10 +196,8 @@ export default {
     margin: 0px auto!important;
     margin-top: 0px !important;
   }
-
   .left{
     margin-top: 25px !important;
-
     width: 90%; 
   }
   .right{
@@ -192,16 +209,13 @@ export default {
   .image-card {
       top:4%;
   }
-
 }
 @media only screen and (max-width: 600px) {
   .form{
     margin-left: 0 !important;
   }
-
   .left{
     margin-top: 0px;
-
     padding-top: 50px;
     padding: 0px  5px!important;
     float:left !important;
@@ -209,6 +223,43 @@ export default {
   .right{
     padding: 5px !important;
     float: none;
+  }
+  .contact-form-button{
+    margin-top: 15px;
+    }
+  .captcha-contact{
+    margin-left: -25px;
+  }
+}
+@media only screen and (max-width: 540px) {
+  .contact-form-button{
+    margin-top: -37px;
+  }
+}
+@media only screen and (max-width: 414px) {
+  .contact-form-button{
+    margin-top: 17px;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .contact-form-button{
+    margin-top: 7px;
+  }
+  .captcha-contact{
+    transform:scale(0.925);
+    transform-origin:0 0;
+  }
+}
+@media only screen and (max-width: 280px) {
+  .contact-form-button{
+    margin-right: -31% !important;
+    margin-top: 15px;
+  }
+  .captcha-contact{
+    margin-left: -55px;
+        transform:scale(0.925);
+    transform-origin:0 0;
+
   }
 }
 </style>
