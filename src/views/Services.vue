@@ -1,7 +1,7 @@
 <template>
 <div>
 
-  <img class=" responsive" src="../assets/3.jpg" alt="">
+  <img class=" responsive" src="../assets/lisce.jpg" alt="">
   
         <div class="services col-lg-7 m-auto">
   
@@ -185,6 +185,9 @@ export default {
 .services {
   margin-top: 50px !important;
   padding-bottom: 156px;
+}
+.services h1 {
+  color: #404040;
 }
 .circles{
   display: flex !important;

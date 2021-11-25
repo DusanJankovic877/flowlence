@@ -34,6 +34,7 @@ export default {
             // console.log( form);
             // this.login(form);
             
+            //treba namestiti reset token
 
         }
     }

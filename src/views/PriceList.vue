@@ -1,6 +1,6 @@
 <template>
   <div class="price-list-view col-lg-12">
-    <img class="price-list-img responsive" src="../assets/3.jpg" alt="">
+    <img class="price-list-img responsive" src="../assets/hands.jpg" alt="">
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -189,7 +189,7 @@ export default {
 
     },
     async handleHideForm(val){
-      await this.getStuff()
+      // await this.getStuff()
       //val is boolean
       await this.setEmptyFormData();
       await this.setEmptyEmailFormMessage()

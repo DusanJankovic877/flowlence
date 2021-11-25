@@ -59,7 +59,7 @@
 
       <button class="prices-link krug" @click="calculationFinancialIndicators">
         <div class="price-card-body">
-        <h3>Izračunavanje finansijskih pokazatelja, izrada biznis planova</h3>
+        <h3>Izračunavanje finansijskih pokazatelja</h3>
           <p class="card-text">
             Finansijski izveštaji ne služe samo da bi se na osnovu njih utvrdile poreske obaveze, kako se
             često misli...

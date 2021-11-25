@@ -1,6 +1,6 @@
 <template>
 <div class="full-width">
-  <img v-if="currentRoutePath !== '/'" class="price-list-img responsive" src="../assets/3.jpg" alt="">
+  <img v-if="currentRoutePath !== '/'" class="price-list-img responsive" src="../assets/kocka.jpg" alt="">
     <div class="blog-component">
 
 
