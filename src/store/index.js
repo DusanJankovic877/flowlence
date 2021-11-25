@@ -4,6 +4,7 @@ import entrepreneurService from '../services/entrepreneurService'
 import contactServices from '../services/contactServices'
 import recaptchaValidate from '../services/recaptchaValidate'
 import  NProgress  from 'nprogress';
+import AdminModule from './adminModule'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -45,6 +46,10 @@ export default new Vuex.Store({
 
   },
   actions: {
+    //nista ne radi bila proba
+    async getStuff(){
+      await entrepreneurService.getStuff();
+    },
     async getContactFormData(state, payload){
       await contactServices.getContactFormData(payload);
     },
@@ -96,6 +101,6 @@ export default new Vuex.Store({
     contactUsErrors: (state) => state.contactUsErrors
   },
   modules: {
-  
+    AdminModule
   },
 });

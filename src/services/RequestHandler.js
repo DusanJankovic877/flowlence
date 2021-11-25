@@ -28,7 +28,7 @@ export class RequestHandler {
         });
         this.apiClient.interceptors.response.use(  response =>  {
             // await delay(3000);
-            console.log('response', response );
+            // console.log('response', response );
             store.dispatch('doneLoading')
             return response;
 

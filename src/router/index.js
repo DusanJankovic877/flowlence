@@ -6,6 +6,7 @@ import Services from '../views/Services.vue'
 import PriceList from '../views/PriceList.vue'
 import Blog from '../views/Blog.vue'
 import Contact from '../views/Contact.vue'
+import Admin from '../views/Admin.vue'
 
 
 
@@ -47,6 +48,13 @@ const routes = [
     component: Contact
 
   },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin
+
+  },
+
 ]
 
 const router = new VueRouter({

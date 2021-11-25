@@ -115,14 +115,16 @@ export default {
   methods:{
     resetCaptcha(){
       this.$refs.ReCaptcha.reCaptchaReset()
+      
     },
-    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage']),
+    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage','getStuff']),
     async handleHideButtons(val, bool){
       //val is a string
       this.hideButtons = bool;
       this.selectedButton = val;
     },
     goToHome(val){
+      
       // val is boolean
       this.hideButtons = val;
       this.$router.push('/');
@@ -187,6 +189,7 @@ export default {
 
     },
     async handleHideForm(val){
+      await this.getStuff()
       //val is boolean
       await this.setEmptyFormData();
       await this.setEmptyEmailFormMessage()
@@ -229,6 +232,7 @@ export default {
       }
     },
     async handleSubmitForm(){
+      
       //FINDING SELECTED DATA AND ASSINING IT TO PROPERTIES
       //FIRST QUESTION
       this.isActive = true;
@@ -491,7 +495,8 @@ export default {
         }
     }
   },
-  created(){
+   created(){
+    
     if(this.$route.params.from === 'home'){
     this.selectedButton = this.$route.params.selectedButton
     }

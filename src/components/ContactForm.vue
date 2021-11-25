@@ -142,7 +142,7 @@ export default {
     border: none !important;
   }
   .contact-text p{
-    margin: 2px 0;
+    line-height: 18px;
   }
   .contact-input-height{
     height: 104px;

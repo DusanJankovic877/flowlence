@@ -76,10 +76,10 @@ background-color: #e6e6e6;
     padding-bottom: 1px;
   }
   .about-us h1{
-    color: #385663;
+    color: #404040;
   }
   .about-us p {
-    color: #385663;
+    color: #404040;
     font-size: 19px;
     font-family: 'RobotoSlab-Medium', sans-serif !important;
   }

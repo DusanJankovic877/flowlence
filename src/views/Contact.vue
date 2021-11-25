@@ -2,7 +2,6 @@
 
 <div class="full-width-contact">
   <img class="responsive" src="../assets/3.jpg" alt="">
-{{validateReCaptcha}}
     <div class="contact-us  price-list-component col-lg-12">
         <ContactForm class="contact-form" 
           :contactUsErrors="contactUsErrors" 
