@@ -3,7 +3,9 @@
         {{isLogged}}
         {{loggedUser}}
         <h1>admin</h1>
-        <login-compoenent :form="form" @submit="submit"/>
+        <div v-if="!isLogged">
+            <login-compoenent :form="form" @submit="submit"/>
+        </div>
     </div>
 </template>
 <script>
@@ -31,6 +33,7 @@ export default {
            await this.login(form)
             // console.log( form);
             // this.login(form);
+            
 
         }
     }

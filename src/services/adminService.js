@@ -6,6 +6,11 @@ class AdminServices extends RequestHandler{
         return response.data;
 
     }
+    async getLogout(payload){
+        // const patload = JSON.stringify(payload)
+        await this.apiClient.post("/logout", payload)
+    
+    }
 }
 const adminServices = new AdminServices();
 export default adminServices;

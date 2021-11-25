@@ -9,6 +9,9 @@ const adminModule = {
     mutations:{
         setLogin(state, payload){
         state.loggedUser = payload
+        },
+        setLogout(state){
+            state.loggedUser =''
         }
     },
     actions:{
@@ -17,6 +20,13 @@ const adminModule = {
             state.commit('setLogin', response.user)
             localStorage.setItem('token', response.token)
             localStorage.setItem('user', JSON.stringify(response.user))
+        },
+        async getLogout(state,payload){
+            console.log('token', payload);
+            await adminService.getLogout({'token': payload})
+            localStorage.removeItem('user')
+            localStorage.removeItem('token')
+            state.commit('setLogout');
         }
     },
     getters:{

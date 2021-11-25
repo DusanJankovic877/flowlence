@@ -34,7 +34,8 @@
               <p class="nav-link">ulogovani korisnik</p>
           </li>
           <li class="nav-item">
-              <router-link class="nav-link" to="/logout">Odjavi se</router-link>
+            <button class="nav-link" style="border:none; background-color: #F8F9FA;" @click="logout">Odjavi se</button>
+              <!-- <router-link class="nav-link" to="" @click="logout">Odjavi se</router-link> -->
           </li>
         </ul>
         <!-- <form class="d-flex">
@@ -103,7 +104,7 @@
 </template>
 <script>
 
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
       return{
@@ -114,7 +115,11 @@ export default {
             ...mapGetters({isLogged: 'AdminModule/isLogged', loggedUser: 'AdminModule/loggedUser'})
   },
   methods:{
-
+    ...mapActions({getLogout: 'AdminModule/getLogout'}),
+      async logout(){
+        
+        await this.getLogout(localStorage.token)
+      }
     }
   }
 
