@@ -15,8 +15,8 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :class="showForm ? '' : 'hide'" :formData="formData" :formValues="formValues" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
-      
+      <FormComponent :class="showForm ? '' : 'hide'" :errors="errors" :formData="formData" :formValues="formValues" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
+      {{validateReCaptcha}}
       <div class="col-lg-7 m-auto">
         <div v-if="emailFormMessage" class="error-message m-auto">
           {{emailFormMessage.message}}
@@ -60,6 +60,7 @@ export default {
       hideSelectedButtons: false,
       showForm: false,
       isActive: false,
+      timeout: null,
       formValues:{
         firstQuestion:[],
         secondQuestion: '',
@@ -104,7 +105,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['formData','validateReCaptcha', 'emailFormMessage']),
+    ...mapGetters(['formData','validateReCaptcha', 'emailFormMessage', 'errors']),
     currentRouteName() {
       return this.$route.path;
     },
@@ -112,12 +113,14 @@ export default {
       return this.$route.params.from;
     }
   },
+
+
   methods:{
     resetCaptcha(){
       this.$refs.ReCaptcha.reCaptchaReset()
       
     },
-    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage','getStuff']),
+    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage','getStuff', 'deleteErrors', 'deleteEmailFormMessage']),
     async handleHideButtons(val, bool){
       //val is a string
       this.hideButtons = bool;
@@ -131,6 +134,7 @@ export default {
     },
      validate(response){
         this.getCaptchaValidate(response);
+
     },
     async handleSelectedOption(val){
      
@@ -162,7 +166,7 @@ export default {
         this.questionsForQNine = income[0];
       }
       //ALREADY ENTREPRENEUR
-      if(val === 'alreadyEntrepreneur'){
+      if(val === 'already ent'){
         this.removedQuestionOption = this.questionsForQNine.question_options.pop();
         const pdvs = this.formData.data.find(x => x.q_id === 8);
         this.removedPdv = pdvs.question_options.pop();
@@ -170,14 +174,14 @@ export default {
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       //ALREADY DOO
-      else if(val === 'alreadyDoo'){
+      else if(val === 'already doo'){
         const pdvs = this.formData.data.find(x => x.q_id === 28);
         this.removedPdv = pdvs.question_options.pop();
         const cashRegister = this.formData.data.find(x => x.q_id === 34);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       //ALREADY ASSOCIATION
-      else if(val === 'alreadyAssociation'){
+      else if(val === 'already assoc'){
         const pdvs = this.formData.data.find(x => x.q_id === 48);
         this.removedPdv = pdvs.question_options.pop();
         const cashRegister = this.formData.data.find(x => x.q_id === 52);
@@ -230,12 +234,18 @@ export default {
         if(key === 'firstQuestion')this.formValues[key] = [];
         else this.formValues[key] = '';
       }
+      this.deleteErrors();
+      this.deleteEmailFormMessage()
     },
     async handleSubmitForm(){
-      
+      this.deleteErrors();
+      this.timeout = setTimeout(() => Object.keys(this.errors).length === 0 ?  this.isActive = true : this.isActive = false, 2000)
       //FINDING SELECTED DATA AND ASSINING IT TO PROPERTIES
       //FIRST QUESTION
-      this.isActive = true;
+
+      if(this.validateReCaptcha === true){
+        this.isActive = true;
+      }
       if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
         const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
         this.formValues.firstQuestion.forEach(question => {
@@ -495,11 +505,15 @@ export default {
         }
     }
   },
-   created(){
+  created(){
     
     if(this.$route.params.from === 'home'){
     this.selectedButton = this.$route.params.selectedButton
     }
+  },
+  beforeDestroy(){
+    this.deleteErrors();
+    this.deleteEmailFormMessage()
   }
 }
 </script>

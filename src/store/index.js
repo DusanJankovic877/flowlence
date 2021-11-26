@@ -15,7 +15,7 @@ export default new Vuex.Store({
     associationFormData:{},
     validateReCaptcha: false,
     emailFormMessage: '',
-    contactUsErrors:{}
+    errors:{}
   },
   mutations: {
     setFormData(state, payload){
@@ -40,8 +40,14 @@ export default new Vuex.Store({
     setApiWaitingCountDecrement(state){
       state.apiWaitingCount -= 1;
     },
-    setConstactUsErrors(state, payload){
-      state.contactUsErrors = payload;
+    setErrors(state, payload){
+      state.errors = payload;
+    },
+    deleteErrors(state){
+      state.errors = {}
+    },
+    setDeleteFormMessage(state){
+      state.emailFormMessage =''
     }
 
   },
@@ -89,8 +95,14 @@ export default new Vuex.Store({
 
       }
     },
-    setConstactUsErrors(state,payload){
-      state.commit('setConstactUsErrors', payload)
+    setErrors(state,payload){
+      state.commit('setErrors', payload)
+    },
+    deleteErrors(state){
+      state.commit('deleteErrors')
+    },
+    deleteEmailFormMessage(state){
+      state.commit('setDeleteFormMessage')
     }
   },
   getters: {
@@ -98,7 +110,7 @@ export default new Vuex.Store({
 
     validateReCaptcha: (state) => state.validateReCaptcha,
     emailFormMessage: (state) => state.emailFormMessage,
-    contactUsErrors: (state) => state.contactUsErrors
+    errors: (state) => state.errors
   },
   modules: {
     AdminModule

@@ -55,6 +55,10 @@
                 <label for="email">Email adresa: </label>
                 <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
             </div>
+            <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.email">
+                {{errors.email[0]}}
+            </div>
+            <div v-else></div>
         </div>  <!-- end of form-email --> 
     </form>
 <!-- trebs dodati error messages -->
@@ -71,7 +75,8 @@ export default {
         formValues: Object,
         selectedButton: String,
         selectedFormOption: String,
-        questionsForQNine: Object
+        questionsForQNine: Object,
+        errors:Object
     }
 }
 </script>

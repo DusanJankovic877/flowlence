@@ -4,7 +4,7 @@
   <img class="responsive" src="../assets/saksija.jpg" alt="">
     <div class="contact-us  price-list-component col-lg-12">
         <ContactForm class="contact-form" 
-          :contactUsErrors="contactUsErrors" 
+          :errors="errors" 
           :form="form" 
           :validateReCaptcha="validateReCaptcha"
           @handle-submit="handleSubmit" 
@@ -34,10 +34,10 @@ export default {
         }
     },
     computed:{
-      ...mapGetters(['contactUsErrors', 'validateReCaptcha'])
+      ...mapGetters(['errors', 'validateReCaptcha'])
     },
     methods:{
-      ...mapActions(['getContactFormData','getCaptchaValidate']),
+      ...mapActions(['getContactFormData','getCaptchaValidate', 'deleteErrors']),
 
       async handleSubmit(form){
         await this.getContactFormData(form)
@@ -45,6 +45,9 @@ export default {
       validate(response){
         this.getCaptchaValidate(response);
       }
+    },
+    beforeDestroy(){
+      this.deleteErrors();
     }
 }
 </script>

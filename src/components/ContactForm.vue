@@ -21,8 +21,8 @@
                   <label for="name" class="form-label">Vaše Ime:</label>
                   <input type="text" class="form-control" id="name" v-model="form.name" placeholder="Petar" required>
                 </div>
-                <div class="alert alert-danger col-lg-12" role="alert" v-if="contactUsErrors.name">
-                  {{contactUsErrors.name[0]}}
+                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.name">
+                  {{errors.name[0]}}
                 </div>
                 <div v-else></div>
              </div>
@@ -32,8 +32,8 @@
                   <label for="emial" class="form-label">Vaš Email:</label>
                   <input type="email" class="form-control" id="email" v-model="form.email" placeholder="email@gmail.com" required>
                 </div>
-                <div class="alert alert-danger col-lg-12" role="alert" v-if="contactUsErrors.email">
-                  {{contactUsErrors.email[0]}}
+                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.email">
+                  {{errors.email[0]}}
                 </div>
                 <div v-else></div>
             </div>
@@ -43,8 +43,8 @@
                   <label for="telephone" class="form-label">Vaš Telefon:</label>
                   <input type="text" class="form-control" id="telephone" v-model="form.telephone" placeholder="+38163123456" required>
                 </div>
-                <div class="alert alert-danger col-lg-12" role="alert" v-if="contactUsErrors.telephone">
-                  {{contactUsErrors.telephone[0]}}
+                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.telephone">
+                  {{errors.telephone[0]}}
                 </div>
                 <div v-else></div>
             </div>
@@ -54,8 +54,8 @@
               <label for="textarea" class="form-label">Poruka:</label>
               <textarea class="form-control" id="textarea" v-model="form.message" placeholder="Unesite poruku" required rows="3" ></textarea>
               </div>
-              <div class="alert alert-danger col-lg-12" role="alert" v-if="contactUsErrors.message">
-                {{contactUsErrors.message[0]}}
+              <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.message">
+                {{errors.message[0]}}
               </div>
               <div v-else></div>
             </div>
@@ -82,7 +82,7 @@ export default {
         ReCaptcha
   },
     props:{
-      contactUsErrors: Object,
+      errors: Object,
       form: Object,
       siteKey: String,
       validateReCaptcha: Boolean

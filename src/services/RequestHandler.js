@@ -44,7 +44,7 @@ export class RequestHandler {
           }, async error =>  {
               if( error.response.status === 422){
                   store.dispatch('doneLoading')
-                  store.dispatch('setConstactUsErrors', error.response.data.errors)
+                  store.dispatch('setErrors', error.response.data.errors)
                 //   return Promise.reject(error);
                   return Promise.resolve();
               }else{
