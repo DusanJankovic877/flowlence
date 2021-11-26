@@ -49,18 +49,22 @@
                 <div v-else></div>
             </div>
             <!-- MESSAGE -->
-            <div class="input-group contact-input-height">
+            <div class="input-group contact-input-height mb-3">
               <div class=" col-lg-12">
               <label for="textarea" class="form-label">Poruka:</label>
               <textarea class="form-control" id="textarea" v-model="form.message" placeholder="Unesite poruku" required rows="3" ></textarea>
               </div>
-              <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.message">
+              <div class="alert alert-danger col-lg-12 " role="alert" v-if="errors.message">
                 {{errors.message[0]}}
               </div>
               <div v-else></div>
             </div>
-
-            <div class="col-lg-12 contact-input-button">
+         
+        <div v-if="emailFormMessage" class="error-message m-auto">
+          {{emailFormMessage}}
+        </div>
+        <div v-else></div>
+            <div class="col-lg-12 contact-input-button mt-5">
                 <re-captcha :class="showForm ? 'captcha-contact' : 'hide captcha-contact'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
                 <b-button class="col-lg-3 contact-form-button" @click="handleSubmit" >Pošaljite</b-button>
             </div>
@@ -85,7 +89,8 @@ export default {
       errors: Object,
       form: Object,
       siteKey: String,
-      validateReCaptcha: Boolean
+      validateReCaptcha: Boolean,
+      emailFormMessage: String
     },
     methods: {
       resetCaptcha(){

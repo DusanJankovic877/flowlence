@@ -33,6 +33,7 @@ export default new Vuex.Store({
     },
     setFormEmailMessage(state, payload){
       state.emailFormMessage = payload
+      console.log(state.emailFormMessage);
     },
     setApiWaitingCountIncrement(state){
       state.apiWaitingCount += 1
@@ -57,7 +58,9 @@ export default new Vuex.Store({
       await entrepreneurService.getStuff();
     },
     async getContactFormData(state, payload){
-      await contactServices.getContactFormData(payload);
+      const response = await contactServices.getContactFormData(payload);
+      state.commit('setFormEmailMessage', response)
+      console.log('store', response);
     },
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);

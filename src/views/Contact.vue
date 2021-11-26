@@ -2,11 +2,13 @@
 
 <div class="full-width-contact">
   <img class="responsive" src="../assets/saksija.jpg" alt="">
+ 
     <div class="contact-us  price-list-component col-lg-12">
         <ContactForm class="contact-form" 
           :errors="errors" 
           :form="form" 
           :validateReCaptcha="validateReCaptcha"
+      :emailFormMessage="emailFormMessage"
           @handle-submit="handleSubmit" 
           @handle-validate="validate"
           :siteKey="siteKey"
@@ -34,13 +36,15 @@ export default {
         }
     },
     computed:{
-      ...mapGetters(['errors', 'validateReCaptcha'])
+      ...mapGetters(['errors', 'validateReCaptcha', 'emailFormMessage'])
     },
     methods:{
-      ...mapActions(['getContactFormData','getCaptchaValidate', 'deleteErrors']),
+      ...mapActions(['getContactFormData','getCaptchaValidate', 'deleteErrors','deleteEmailFormMessage']),
 
       async handleSubmit(form){
+        this.deleteErrors()
         await this.getContactFormData(form)
+
       },
       validate(response){
         this.getCaptchaValidate(response);
@@ -48,6 +52,7 @@ export default {
     },
     beforeDestroy(){
       this.deleteErrors();
+      this.deleteEmailFormMessage()
     }
 }
 </script>

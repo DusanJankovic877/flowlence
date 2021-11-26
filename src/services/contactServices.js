@@ -1,7 +1,8 @@
 import { RequestHandler } from "./RequestHandler";
 class ContactServices extends RequestHandler{
     async getContactFormData(payload){
-        await this.apiClient.post("/mail", payload);
+        const response = await this.apiClient.post("/mail", payload);
+        return response.data.message;
     }
 }
 const contactServices = new ContactServices();

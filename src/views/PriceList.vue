@@ -19,7 +19,7 @@
       {{validateReCaptcha}}
       <div class="col-lg-7 m-auto">
         <div v-if="emailFormMessage" class="error-message m-auto">
-          {{emailFormMessage.message}}
+          {{emailFormMessage}}
         </div>
         <div v-else></div>
       <re-captcha :class="showForm ? 'right-button captcha' : 'hide captcha'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
