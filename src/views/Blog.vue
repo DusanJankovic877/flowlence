@@ -1,12 +1,17 @@
 <template>
 <div class="full-width">
-  <img v-if="currentRoutePath !== '/'" class="price-list-img responsive" src="../assets/kocka.jpg" alt="">
+      <div class="image-blog-cover" v-if="currentRoutePath !== '/'">
+      <div class="image-blog-cover-text col-lg-7">
+        <h1>Blog</h1>
+          <p>
+            Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati
+            potrebama Vašeg poslovanja.
+          </p>
+      </div>
+      <img v-if="currentRoutePath !== '/'" class="responsive" src="../assets/kocka.jpg" alt="" style="visibility: hidden;">
+    </div>
     <div class="blog-component">
-
-
       <div class="blog col-lg-7 m-auto">
-       
-          
       <h1 class="title">Blog</h1>
         <div class="circles">
             <div class="krug blog-circle col-lg-12" style="">
@@ -50,6 +55,19 @@ export default {
 }
 </script>
 <style >
+.image-blog-cover{
+  background: url('../assets/kocka.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.384);
+  position:relative;
+}
+.image-blog-cover-text{
+  color: white;
+  position: absolute;
+  z-index: 10;
+  margin:  4% 0% 0% 21%!important;
+}
 .blog-img{
   margin-bottom: 0px;
 }
@@ -110,35 +128,70 @@ export default {
     .circles{
     display: inherit !important;
   }
-  .blog-img{
-  margin-bottom: -126px;
-}
+    .blog-img{
+    margin-bottom: -126px;
+  }
+  .image-blog-cover-text{
+    margin:  4% 4%!important;
+  }
 }
 
 @media only screen and (max-width: 540px){
-.blog-img{
-  margin-bottom: -88px;
-}
+  .blog-img{
+    margin-bottom: -88px;
+  }
 }
 @media only screen and (max-width: 414px){
-.blog-img{
-  margin-bottom: -68px;
-}
+  .blog-img{
+    margin-bottom: -68px;
+  }
+  .image-blog-cover-text{
+    margin:  4% 4%!important;
+  }
+  .image-blog-cover-text h1{
+    font-size: 17px;
+  }
+  .image-blog-cover-text p{
+    font-size: 12px;
+  }
 }
 @media only screen and (max-width: 375px){
-.blog-img{
-  margin-bottom: -62px;
-}
+  .blog-img{
+    margin-bottom: -62px;
+  }
 }
 @media only screen and (max-width: 360px){
-.blog-img{
-  margin-bottom: -59px;
-}
+  .blog-img{
+    margin-bottom: -59px;
+  }
+  .image-blog-cover-text{
+    margin:  4% 0% 0% 2%!important;
+  }
 }
 @media only screen and (max-width: 320px){
-.blog-img{
-  margin-bottom: -53px;
-}
+  .blog-img{
+    margin-bottom: -53px;
+  }
+  .image-blog-cover-text{
+    color: white;
+    position: absolute;
+    z-index: 10;
+    margin:  4% 0% 0% 21%!important;
+  }
+  .image-blog-cover-text{
+    margin:  4% 4%!important;
+  }
 
+}
+@media only screen and (max-width: 280px){
+  .image-blog-cover-text{
+    margin:  4% 0% 0% 2%!important;
+  }
+  .image-blog-cover-text h1{
+    font-size: 15px;
+  }
+  .image-blog-cover-text p{
+    font-size: 10px;
+  }
 }
 </style>

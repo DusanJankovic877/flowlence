@@ -1,6 +1,13 @@
 <template>
 <div class="col-lg-4 m-auto form-div">
 
+<p v-if="selectedFormOption === 'new ent'">Tek planiram da se registrujem kao preduzetnik</p>
+<p v-else-if="selectedFormOption === 'already ent'">Već poslujem u formi preduzetnika</p>
+<p v-else-if="selectedFormOption === 'new doo'">Tek planiram da se registrujem kao doo</p>
+<p v-else-if="selectedFormOption === 'already doo'">Već poslujem u formi doo</p>
+<p v-else-if="selectedFormOption === 'new assoc'">Tek planiram registraciju Udruženja</p>
+<p v-else-if="selectedFormOption === 'already assoc'">Već postojeće Udruženje</p>
+
     <form @submit.prevent class="form-sections">
         <div v-for="data in formData.data" :key="data.id">
             <h5>{{data.question_text}}</h5>

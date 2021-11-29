@@ -1,6 +1,18 @@
 <template>
   <div class="price-list-view col-lg-12">
-    <img class="price-list-img responsive" src="../assets/hands.jpg" alt="">
+    <div class="image-p-list-cover" v-if="currentRouteName !== '/'">
+      <div class="image-p-list-cover-text col-lg-7">
+        <h1>Procena cene usluga</h1>
+        <p v-if="!hideButtons">
+          Da saznate više o cenama popunite upitnik.
+        </p>
+          <p v-else-if="selectedButton">
+            Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati
+            potrebama Vašeg poslovanja.
+          </p>
+      </div>
+      <img class=" responsive"  src="../assets/hands.jpg" alt="" style="visibility: hidden;">
+    </div>
     <price-list-component-three-buttons
       :class="hideButtons ? 'hide' : '' " 
       :hideButtons="hideButtons" 
@@ -16,7 +28,6 @@
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
       <FormComponent :class="showForm ? '' : 'hide'" :errors="errors" :formData="formData" :formValues="formValues" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
-      {{validateReCaptcha}}
       <div class="col-lg-7 m-auto">
         <div v-if="emailFormMessage" class="error-message m-auto">
           {{emailFormMessage}}
@@ -38,7 +49,7 @@ import DooComponent from '../components/DooComponent.vue'
 import AssociationComponent from '../components/AssociationComponent.vue'
 import FormComponent from '../components/FormComponent.vue'
 import ReCaptcha from '../components/ReCaptcha.vue'
-
+// import store from '../store'
 
 export default {
   components:{
@@ -506,7 +517,10 @@ export default {
     }
   },
   created(){
-    
+    if(this.$route.params.selectedOption){
+      this.selectedButton = this.$route.params.selectedOption
+      this.hideButtons = true
+    }
     if(this.$route.params.from === 'home'){
     this.selectedButton = this.$route.params.selectedButton
     }
@@ -514,10 +528,27 @@ export default {
   beforeDestroy(){
     this.deleteErrors();
     this.deleteEmailFormMessage()
+    if(this.$route.params.selectedOption){
+      this.selectedButton = ''
+      this.hideButtons = false
+    }
   }
 }
 </script>
 <style>
+  .image-p-list-cover{
+    background: url('../assets/hands.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.384);
+    position:relative;
+  }
+  .image-p-list-cover-text{
+    color: white;
+    position: absolute;
+    z-index: 10;
+    margin:  4% 0% 0% 21%!important;
+  }
 .title{
   color: #404040;
 }
@@ -571,6 +602,9 @@ export default {
   .captcha{
     margin-left: 25% !important;
   }
+  .image-p-list-cover-text{
+    margin:  2% 0% 0% 20%!important;
+  }
 }
 @media only screen and (max-width: 768px){
   .price-list-img{
@@ -579,6 +613,15 @@ export default {
   .captcha{
     margin-left: 30% !important;
   }
+  .image-p-list-cover-text{
+    margin:  4% 0% 0% 28%!important;
+  }
+  .image-p-list-cover-text h1{
+    font-size: 23px;
+  }
+  .image-p-list-cover-text p {
+    font-size: 16px;
+  }
 }
 @media only screen and (max-width: 540px){
   .price-list-img{
@@ -586,6 +629,9 @@ export default {
   }
   .captcha{
     margin-left: 22% !important;
+  }
+  .image-p-list-cover-text{
+    margin:  4% 0% 0% 22%!important;
   }
 }
 
@@ -599,6 +645,15 @@ export default {
   .captcha{
     margin-left: 13% !important;
   }
+  .image-p-list-cover-text{
+    margin:  4% 0% 0% 21%!important;
+  }
+  .image-p-list-cover-text h1{
+    font-size: 19px;
+  }
+  .image-p-list-cover-text p {
+    font-size: 12px;
+  }
 }
 @media only screen and (max-width: 375px){
   .price-list-img{
@@ -607,10 +662,19 @@ export default {
   .captcha{
     margin-left: 8% !important;
   }
+  .image-p-list-cover-text{
+    margin:  4% 0% 0% 18%!important;
+  }
 }
 @media only screen and (max-width: 360px){
   .price-list-img{
     margin-bottom: 131px;
+  }
+  .image-p-list-cover-text h1{
+    font-size: 17px;
+  }
+  .image-p-list-cover-text p {
+    font-size: 10px;
   }
 }
 @media only screen and (max-width: 320px){
@@ -620,12 +684,30 @@ export default {
   .captcha{
   margin-left: 3% !important;
   }
+
 }
-@media only screen and (max-width: 320px){
+@media only screen and (max-width: 280px){
   .captcha{
     margin-left: 0% !important;
     transform:scale(0.925);
     transform-origin:0 0;
+  }
+  .image-p-list-cover-text{
+    margin:  4% 0% 0% 1%!important;
+  }
+  .image-p-list-cover-text h1{
+    font-size: 15px;
+  }
+  .image-p-list-cover-text p {
+    font-size: 8px;
+  }
+  .entrepreneur-krug{
+    height: 280px;
+    width: 280px;
+  }
+  .entrepreneur-card-body{
+    height: 280px;
+    width: 280px;
   }
 
 }

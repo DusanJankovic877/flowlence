@@ -1,19 +1,6 @@
 <template>
-    <div class="form col-lg-8 m-auto">
-        <div class="col-lg-4 left">
-        <div class="contact-text col-lg-12">
-          <h2>KONTAKTIRAJTE NAS</h2>
-          <p>
-            Za upite ili pitanja, koristite obrazac za kontakt ili nas pozovite na +381 63 466 371
-          </p>
-          <p>Flowlence</p>
-          <p>Tihomira Ostojića 10</p>
-          <p>21000 Novi Sad</p>
-          <p>flowlence@gmail.com</p>
-          <p>+381 63 466 371</p>
-        </div>
-        </div>
-      <div class="col-lg-8 right">
+    <div class="form col-lg-7 m-auto">
+      <div class="col-lg-12">
         <form @submit.prevent class="contact-form">
           <!-- NAME -->
              <div class="input-group contact-input-height">
@@ -110,6 +97,9 @@ export default {
 }
 </script>
 <style>
+form{
+  margin-top: 10px;
+}
   .contact-text, .input-group{
     color: #404040 ;
     text-align: left !important;

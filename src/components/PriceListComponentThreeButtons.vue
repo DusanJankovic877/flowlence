@@ -3,8 +3,6 @@
       <div class="menu-circles">
         <div class="price-info ">
           <div class="price-circle-content col-lg-7 m-auto">
-            <h1 class="title">Procena cene usluga</h1>
-            <p>Da saznate više o cenama popunite upitnik</p>
             <div class="price-row">
              
               <button class="krug prices-link"  @click="handleHideButtons('entrepreneur')">

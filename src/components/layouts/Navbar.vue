@@ -84,9 +84,9 @@
             <router-link :class="this.$route.name == 'price-list'  ? 'nav-link active' :  'nav-link' " to="/price-list">
               Procena cena usluge   
               <b-dropdown id="dropdown-1"  right class="m-2">
-                <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">Preduzetnik</router-link></b-dropdown-item>
-                <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur" style="width: 100px !important">DOO</router-link></b-dropdown-item>
-                <b-dropdown-item><router-link class="prices-link" to="/price-list/entrepreneur">Udruženje</router-link></b-dropdown-item>
+                <b-dropdown-item class="drop-down-li"><router-link class="prices-link drop-down-link" :to="{name: 'price-list', params:{selectedOption:'entrepreneur'}}" >Preduzetnik</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link class="prices-link drop-down-link" :to="{name: 'price-list', params:{selectedOption:'doo'}}" style="width: 100px !important">DOO</router-link></b-dropdown-item>
+                <b-dropdown-item><router-link class="prices-link drop-down-link" :to="{name: 'price-list', params:{selectedOption:'association'}}">Udruženje</router-link></b-dropdown-item>
               </b-dropdown> 
               </router-link>
           </li>
@@ -128,6 +128,12 @@ export default {
 
 </script>
 <style>
+.drop-down-link{
+  color:#404040;
+}
+.drop-down-link:hover{
+  color: white;
+}
 .phone-mail, .phone-mail li a, .right-links, .container .logo{
   padding: 0!important;
 }
