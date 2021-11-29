@@ -20,7 +20,7 @@
     text-align: center !important;
     height: 310px;
     padding-top: 55px !important;
-    background-color: #e6e6e6;
+    background-color: #bfbfbf;
     color: #404040;
 }
 @media only screen and (max-width: 1024px){

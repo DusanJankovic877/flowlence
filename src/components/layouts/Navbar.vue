@@ -143,7 +143,7 @@ export default {
 }
 nav {
   display: block !important;
-  background-color: #e6e6e6 !important;
+  background-color: #bfbfbf !important;
 
 }
 .nav-links, .navbar-brand{

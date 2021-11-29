@@ -46,7 +46,6 @@
             </div>
             <div v-else></div>
         </div>
-        <p style="color:red;">treba napraviti proveru za comment i email</p>
         <div class="comment">
             <h5>Dodatni komentar:</h5>
             <div class="form-group">
@@ -57,7 +56,7 @@
         </div>  <!-- end of form-comment --> 
         <hr>
         <div class="email">
-            <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu: <span class="red"> *</span></h5>
+            <h5>Vaša mail adresa na koju želite da Vam pošaljemo <span class="red">*</span> ponudu:</h5>
             <div class="form-group">
                 <label for="email">Email adresa: </label>
                 <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
