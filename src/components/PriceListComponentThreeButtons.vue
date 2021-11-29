@@ -8,24 +8,29 @@
               <button class="krug prices-link"  @click="handleHideButtons('entrepreneur')">
                 <div class="price-card-body">
                 <h1>Preduzetnik</h1>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <p><b>pošaljite upitnik</b></p>
+                  <p class="card-text">Upitnik se odnosi na pitanja koja se tiču da li već aktivno poslujete ili tek planirate da se registrujete
+kao preduzetnik, da li imate zaposlena lica...</p>
+                  <p><b>popunite upitnik</b></p>
                 </div>
               </button>
                   
               <button class="krug prices-link" @click="handleHideButtons('doo')">
                   <div class="price-card-body">
                   <h1>DOO</h1>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <p><b>pošaljite upitnik</b></p>
+                    <p class="card-text">Upitnik se bavi pitanjem da li su osnivači domaća ili strana lica, da li ste trenutno ili planirate da
+budete u sistemu pdv-a...</p>
+                    <p><b>popunite upitnik</b></p>
+
                   </div>
               </button>
        
               <button class="krug prices-link" @click="handleHideButtons('association')">
                 <div class="price-card-body">
                 <h1>Udruženje</h1>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <p><b>pošaljite upitnik</b></p>
+                  <p class="card-text">Upitnik se odnosi na pitanja da li su osnivači udruženja fizička ili pravna lica, da li je udruženje
+registrovano za obavljanje privredne aktivnosti...</p>
+                  <p><b>popunite upitnik</b></p>
+
                 </div>
               </button>
        
