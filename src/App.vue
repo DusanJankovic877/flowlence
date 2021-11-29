@@ -36,7 +36,7 @@ export default{
   text-align: center;
 
 }
-p, a, label{
+p, a, label, .alert, button, .error-message{
   font-family: 'RobotoSlab-Medium', sans-serif !important; 
 }
 h1, h2, h3, h4, h5{

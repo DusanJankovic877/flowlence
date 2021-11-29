@@ -66,7 +66,7 @@
         <div v-else></div>
             <div class="col-lg-12 contact-input-button mt-5">
                 <re-captcha :class="showForm ? 'captcha-contact' : 'hide captcha-contact'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
-                <b-button class="col-lg-3 contact-form-button" @click="handleSubmit" >Pošaljite</b-button>
+                <button class="contact-form-button col-lg-2 btn btn-success" @click="handleSubmit" >Pošalji</button>
             </div>
         </form>
       </div>
@@ -134,16 +134,15 @@ export default {
   }
   .contact-form-button{
     float:right;
-    background-color: #C9C9C9;
     border: none !important;
-    color:#5E5E5E;
     margin-top: -39px;
     margin-bottom: 25px;
     margin-left: auto;
     border-radius: 0;
   }
   .contact-form-button:hover {
-    background-color: black;
+    background-color: #055831;
+    color: black;
     border: none !important;
   }
   .contact-text p{
@@ -153,12 +152,14 @@ export default {
     height: 104px;
   }
   .contact-input-button{
-    margin-top: -10px;
+  
+    margin-top: 50px !important;
   }
   .captcha-contact{
     margin-top:35px;
   }
   .alert{
+    
     height: 35px;
     margin: 0;
     padding: 5px ;

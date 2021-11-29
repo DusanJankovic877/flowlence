@@ -43,16 +43,20 @@ export default {
 
       async handleSubmit(form){
         this.deleteErrors()
-        await this.getContactFormData(form)
+        if (this.validateReCaptcha) {
+          await this.getContactFormData(form)
+        }
 
       },
       validate(response){
         this.getCaptchaValidate(response);
       }
     },
+    created(){
+    },
     beforeDestroy(){
       this.deleteErrors();
-      this.deleteEmailFormMessage()
+      this.deleteEmailFormMessage();
     }
 }
 </script>
