@@ -110,6 +110,9 @@ export default {
     z-index: 1;
     ;
   }
+   .services-margin h1{
+     color: #404040;
+   }
 @media only screen and (max-width: 1280px){
     .services-margin{
     margin-top: 150px;

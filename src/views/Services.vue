@@ -1,12 +1,16 @@
 <template>
 <div>
+  <div class="services-image-cover">
+    <div class="services-cover-text">
 
-  <img class=" responsive" src="../assets/lisce.jpg" alt="">
-  
-        <div class="services col-lg-7 m-auto">
-  
-          <h1>Usluge</h1>
-
+      <h1>Usluge</h1>
+      <p>
+        Osnivanje, Knjigovodstvene usluge, Obračun zarada / Kardovske usluge
+      </p>
+    </div>
+    <img class=" responsive"  src="../assets/lisce.jpg" alt="" style="visibility: hidden;">
+  </div>
+  <div class="services col-lg-7 m-auto">
     <div :class="hide ? 'circles hide' : 'circles'">
       <button  class="prices-link krug"  @click="foundationService">
         <div class="price-card-body">
@@ -186,6 +190,19 @@ export default {
   margin-top: 50px !important;
   padding-bottom: 156px;
 }
+.services-cover-text{
+  color: white;
+  position: absolute;
+  z-index: 10;
+  margin: 5% 34%  !important;
+}
+.services-image-cover{
+    background: url('../assets/lisce.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.226);
+    position:relative;
+}
 .services h1 {
   color: #404040;
 }
@@ -245,30 +262,51 @@ export default {
   .services-row{
     display: flex;
   }
+  .services-cover-text{
+    margin: 2% 25% !important;
+  }
 }
 @media only screen and (max-width: 768px){
   .services-row{
-  display: flex;
+    display: flex;
+  }
+
 }
 @media only screen and (max-width: 600px){
   .services-row{
   display: inline;
-}
-.krug{
-    background-color: #f2f2f2;
-    height: 280px;
-    width: 280px;
-    border-radius: 25em;
-    padding: 0;
-    margin:5px auto !important;
-}
-.price-card-body {
-    height: 280px;
-    width: 280px;
-  padding: 45px 10px 0 10px;
+  }
+  .krug{
+      background-color: #f2f2f2;
+      height: 280px;
+      width: 280px;
+      border-radius: 25em;
+      padding: 0;
+      margin:5px auto !important;
+  }
+  .price-card-body {
+      height: 280px;
+      width: 280px;
+    padding: 45px 10px 0 10px;
 
+  }
+  .services-cover-text{
+    margin: 5% 0%  0 0%!important;
+  }
+  
 }
+@media only screen and (max-width: 280px){
+  .services-cover-text{
+    margin: 2% 4%!important;
+  }
+  .services-cover-text h1{
+    font-size: 13px;
+  }
+  .services-cover-text p{
+    font-size: 8px;
+
+  }
 }
-}
+
 
 </style>

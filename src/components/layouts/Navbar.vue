@@ -47,28 +47,30 @@
   </nav>
   <nav class="navbar navbar-expand-lg navbar-light  sticky-top" v-else>
       <div class="col-lg-7 m-auto">
-        <div class="info-row">
-          <div class="col-lg-2 info-mail">
-            <p>
-            <img src="../../assets/svg/telephone-fill.svg" alt="phone">
-              &nbsp;flowlence@gmail.com
-            </p>
-          </div>
-          <div class="info-phone col-lg-2 ">
-            <p>
-              <img src="../../assets/svg/envelope-fill.svg" alt="phone"> 
-              &nbsp;+38163466371
-              </p>
-          </div>
+          <ul class="navbar-nav nav-links phone-mail">
+            <li class="nav-item">
+              <a  class="nav-link" href="mailto:flowlence@gmail.com">
+                <img src="../../assets/svg/telephone-fill.svg" alt="phone">
+                flowlence@gmail.com
+              </a>
+            </li>
+            &nbsp;
+            <li class="nav-item">
+              <a  class="nav-link" href="tel:+38163466371">
+                <img src="../../assets/svg/envelope-fill.svg" alt="phone"> 
+                +38163466371
+              </a>
+            </li>
+          </ul>
         </div>
-      </div>
+
     <div class="container links-container col-lg-7 m-auto">
-      <router-link class="navbar-brand"  to="/">Logo</router-link>
+      <router-link class="navbar-brand logo"  to="/">Logo</router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav nav-links">
+        <ul class="navbar-nav nav-links right-links">
           <li class="nav-item">
             <router-link  :class="this.$route.name == '/'  ? 'nav-link active' :  'nav-link' "  to="/">Početna</router-link>
           </li>
@@ -126,6 +128,9 @@ export default {
 
 </script>
 <style>
+.phone-mail, .phone-mail li a, .right-links, .container .logo{
+  padding: 0!important;
+}
 
 .active{
     text-decoration: underline;
