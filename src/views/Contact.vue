@@ -1,7 +1,7 @@
 <template>
 
 <div class="full-width-contact">
-    <div class="image-contact-cover" v-if="currentRoutePath !== '/'">
+    <div class="image-contact-cover">
       <div class="image-contact-cover-text col-lg-7">
         <h1>KONTAKTIRAJTE NAS</h1>
           <p>
