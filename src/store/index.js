@@ -60,7 +60,7 @@ export default new Vuex.Store({
     async getContactFormData(state, payload){
       const response = await contactServices.getContactFormData(payload);
       state.commit('setFormEmailMessage', response)
-      console.log('store', response);
+      // console.log('store', response);
     },
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
@@ -87,7 +87,7 @@ export default new Vuex.Store({
     },
     startLoading({commit, state}){
       if(state.apiWaitingCount === 0){
-        NProgress.start()
+         NProgress.start()
         commit('setApiWaitingCountIncrement')
       }
     },

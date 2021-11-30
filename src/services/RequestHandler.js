@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import store from '../store';
 
 // import router from '../router'
@@ -11,7 +12,7 @@ export class RequestHandler {
         this.apiClient = axios.create({
         baseURL: 'http://127.0.0.1:8000/api',
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        Bearer: 'token'
         });
         // async function delay(delayInms) {
         //     return new Promise(resolve  => {
@@ -29,6 +30,7 @@ export class RequestHandler {
         this.apiClient.interceptors.response.use(  response =>  {
             // await delay(3000);
             // console.log('response', response );
+     
             store.dispatch('doneLoading')
             return response;
 
@@ -42,10 +44,27 @@ export class RequestHandler {
             //     return Promise.reject(error);
             // }
           }, async error =>  {
-              if( error.response.status === 422){
-                  store.dispatch('doneLoading')
-                  store.dispatch('setErrors', error.response.data.errors)
-                //   return Promise.reject(error);
+              if(error.response.status === 401){
+                
+                if(error.response.data.message){
+                    await store.dispatch('AdminModule/setAuthError', error.response.data.message)
+                }
+                else if(error.response.data.error){
+                    await store.dispatch('AdminModule/setAuthError', error.response.data.error)
+                }
+                await store.dispatch('doneLoading')
+
+                console.log('dispatch reset token',error.response);
+              }
+              else if( error.response.status === 422){
+                  console.log(error.response.data);
+                    if(error.response.config.url === '/auth/login'){
+                        await store.dispatch('AdminModule/setAuthError', error.response.data.message)
+                        await store.dispatch('AdminModule/setAuthErrors', error.response.data.errors)
+                    }else {
+                        await  store.dispatch('setErrors', error.response.data.errors)
+                    }
+                  await  store.dispatch('doneLoading')
                   return Promise.resolve();
               }else{
                   return Promise.reject(error);

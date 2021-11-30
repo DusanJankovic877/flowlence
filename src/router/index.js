@@ -49,8 +49,8 @@ const routes = [
 
   },
   {
-    path: '/admin',
-    name: 'admin',
+    path: '/jolanda',
+    name: 'jolanda',
     component: Admin
 
   },

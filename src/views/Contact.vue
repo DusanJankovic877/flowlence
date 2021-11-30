@@ -21,7 +21,7 @@
           :errors="errors" 
           :form="form" 
           :validateReCaptcha="validateReCaptcha"
-      :emailFormMessage="emailFormMessage"
+          :emailFormMessage="emailFormMessage"
           @handle-submit="handleSubmit" 
           @handle-validate="validate"
           :siteKey="siteKey"

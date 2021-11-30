@@ -4,7 +4,7 @@
         {{loggedUser}}
         <h1>admin</h1>
         <div v-if="!isLogged">
-            <login-compoenent :form="form" @submit="submit"/>
+            <login-compoenent :form="form" @submit="submit" @handle-inputs="handleInputs" :authError="authError" :authErrors="authErrors"/>
         </div>
     </div>
 </template>
@@ -25,10 +25,11 @@ export default {
         }
     },
     computed:{
-        ...mapGetters({isLogged: 'AdminModule/isLogged', loggedUser: 'AdminModule/loggedUser'})
+        ...mapGetters({isLogged: 'AdminModule/isLogged', loggedUser: 'AdminModule/loggedUser', authError: 'AdminModule/authError',authErrors: 'AdminModule/authErrors'})
     },
+
     methods:{
-        ...mapActions({login: 'AdminModule/login'}),
+        ...mapActions({login: 'AdminModule/login', emptyAuthError: 'AdminModule/emptyAuthError',emptyAuthErrors: 'AdminModule/emptyAuthErrors'}),
         async submit(form){
            await this.login(form)
             // console.log( form);
@@ -36,7 +37,16 @@ export default {
             
             //treba namestiti reset token
 
-        }
+        },
+        handleInputs(val){
+            if(val){
+                this.emptyAuthError()
+                this.emptyAuthErrors();
+            }
+        },
+
+
+      
     }
 }
 </script>

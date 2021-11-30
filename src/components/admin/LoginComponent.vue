@@ -3,16 +3,35 @@
         <form @submit.prevent class="col-lg-9 m-auto">
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" v-model="form.email">
+                <input type="email" class="form-control" id="email" v-model="form.email" @input="handleInputs(form.email)">
+            <div v-if="authErrors.email" class="alert alert-danger col-lg-12 " role="alert" >
+                <p class="col-lg-5 m-auto">
+                    {{authErrors.email[0]}}
+                </p>
+            </div>
+            <div v-else></div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" v-model="form.password">
+                <input type="password" class="form-control" id="password" v-model="form.password" @input="handleInputs(form.password)">
+            <div v-if="authErrors.password" class="alert alert-danger col-lg-12 " role="alert" >
+                <p class="col-lg-5 m-auto">
+                    {{authErrors.password[0]}}
+                </p>
+            </div>
+            <div v-else></div>
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="check" v-model="form.rememberMe">
                 <label class="form-check-label" for="check">zapamti me</label>
             </div>
+     
+            <div v-if="authError" class="alert alert-danger col-lg-12 " role="alert" >
+                <p class="col-lg-5 m-auto">
+                    {{authError}}
+                </p>
+            </div>
+            <div v-else></div>
             <button type="submit" class="btn btn-primary login-button" @click="submit">Submit</button>
      
         </form>
@@ -22,15 +41,30 @@
 import { mapActions } from 'vuex'
 export default {
     props:{
-        form: Object
+        form: Object,
+        authError: String,
+        authErrors: Object
     },
     methods:{
 
-        ...mapActions(['login']),
+        ...mapActions({emptyAuthErrors: 'AdminModule/emptyAuthErrors'}),
         submit(){
             this.$emit('submit', this.form)
+        },
+        handleInputs(val){
+            this.$emit('handle-inputs', val)
         }
+    },
+    beforeDestroy: function(){
+        this.form.email = '';
+        this.form.password = '';
+        this.form.rememberMe = false;
+        this.emptyAuthErrors();
+
     }
+    
+
+
 }
 </script>
 <style scoped>
