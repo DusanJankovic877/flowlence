@@ -1,5 +1,4 @@
 <template>
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="isLogged">
     <div class="container-fluid">
         <router-link class="navbar-brand" to="/">Admin Panel</router-link> 
@@ -17,17 +16,6 @@
           <li class="nav-item">
               <router-link class="nav-link" to="/create-post">Kreiraj Post</router-link>
           </li>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li> -->
         </ul>
         <ul class="navbar-nav pt-3">
           <li class="nav-item">
@@ -35,13 +23,8 @@
           </li>
           <li class="nav-item">
             <button class="nav-link" style="border:none; background-color: #F8F9FA;" @click="logout">Odjavi se</button>
-              <!-- <router-link class="nav-link" to="" @click="logout">Odjavi se</router-link> -->
           </li>
         </ul>
-        <!-- <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
       </div>
     </div>
   </nav>
