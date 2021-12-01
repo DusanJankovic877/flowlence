@@ -32,9 +32,12 @@ const adminModule = {
     actions:{
         async login(state,payload){
          const response =  await adminService.login(payload);
-            state.commit('setLogin', response.user)
-            localStorage.setItem('token', response.token.original.access_token)
-            localStorage.setItem('user', JSON.stringify(response.user.original))
+         if(response){
+             state.commit('setLogin', response.user)
+             localStorage.setItem('token', response.token.original.access_token)
+             localStorage.setItem('user', JSON.stringify(response.user.original))
+
+         }
         },
         async getLogout(state,payload){
             console.log('token', payload);
@@ -44,8 +47,7 @@ const adminModule = {
             state.commit('setLogout');
         },
         async setAuthError(state, payload){
-            console.log('AM', payload);
-           await state.commit('setAuthError', payload)
+                await state.commit('setAuthError', payload)
         },
         emptyAuthError(state){
             state.commit('emptyAuthError')

@@ -59,7 +59,9 @@ export default new Vuex.Store({
     },
     async getContactFormData(state, payload){
       const response = await contactServices.getContactFormData(payload);
-      state.commit('setFormEmailMessage', response)
+      if(response){
+        state.commit('setFormEmailMessage', response)
+      }
       // console.log('store', response);
     },
     async getFormData(state, payload){
@@ -83,7 +85,9 @@ export default new Vuex.Store({
     },
     async setMailFormData(state,payload){
      const response = await entrepreneurService.setMailFormData(payload)
-      state.commit('setFormEmailMessage', response);
+     if(response){
+       state.commit('setFormEmailMessage', response);
+     }
     },
     startLoading({commit, state}){
       if(state.apiWaitingCount === 0){

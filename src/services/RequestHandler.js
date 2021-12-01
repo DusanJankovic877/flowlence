@@ -44,6 +44,7 @@ export class RequestHandler {
             //     return Promise.reject(error);
             // }
           }, async error =>  {
+            //   console.log(error);
               if(error.response.status === 401){
                 
                 if(error.response.data.message){
@@ -57,7 +58,7 @@ export class RequestHandler {
                 console.log('dispatch reset token',error.response);
               }
               else if( error.response.status === 422){
-                  console.log(error.response.data);
+                //   console.log('422 true');
                     if(error.response.config.url === '/auth/login'){
                         await store.dispatch('AdminModule/setAuthError', error.response.data.message)
                         await store.dispatch('AdminModule/setAuthErrors', error.response.data.errors)
@@ -66,7 +67,8 @@ export class RequestHandler {
                     }
                   await  store.dispatch('doneLoading')
                   return Promise.resolve();
-              }else{
+              }
+            else{
                   return Promise.reject(error);
 
               }

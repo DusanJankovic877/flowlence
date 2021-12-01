@@ -6,7 +6,7 @@
              <div class="input-group contact-input-height">
                 <div class=" col-lg-12">
                   <label for="name" class="form-label">Vaše Ime:</label>
-                  <input type="text" class="form-control" id="name" v-model="form.name" placeholder="Petar" required>
+                  <input type="text" class="form-control" id="name" v-model="form.name" placeholder="Petar" >
                 </div>
                 <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.name">
                   {{errors.name[0]}}
@@ -17,7 +17,7 @@
             <div class="input-group contact-input-height">
                 <div class=" col-lg-12">
                   <label for="emial" class="form-label">Vaš Email:</label>
-                  <input type="email" class="form-control" id="email" v-model="form.email" placeholder="email@gmail.com" required>
+                  <input type="email" class="form-control" id="email" v-model="form.email" placeholder="email@gmail.com" >
                 </div>
                 <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.email">
                   {{errors.email[0]}}
@@ -28,7 +28,7 @@
             <div class="input-group contact-input-height">
                 <div class=" col-lg-12">
                   <label for="telephone" class="form-label">Vaš Telefon:</label>
-                  <input type="text" class="form-control" id="telephone" v-model="form.telephone" placeholder="+38163123456" required>
+                  <input type="text" class="form-control" id="telephone" v-model="form.telephone" placeholder="+38163123456" >
                 </div>
                 <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.telephone">
                   {{errors.telephone[0]}}
@@ -39,7 +39,7 @@
             <div class="input-group contact-input-height mb-3">
               <div class=" col-lg-12">
               <label for="textarea" class="form-label">Poruka:</label>
-              <textarea class="form-control" id="textarea" v-model="form.message" placeholder="Unesite poruku" required rows="3" ></textarea>
+              <textarea class="form-control" id="textarea" v-model="form.message" placeholder="Unesite poruku"  rows="3" ></textarea>
               </div>
               <div class="alert alert-danger col-lg-12 " role="alert" v-if="errors.message">
                 {{errors.message[0]}}
