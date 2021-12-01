@@ -27,7 +27,7 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :class="showForm ? '' : 'hide'" :errors="errors" :formData="formData" :formValues="formValues" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
+      <FormComponent :class="showForm ? '' : 'hide'" @handle-inputs="handleInputs" :errors="errors" :formData="formData" :formValues="formValues" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
       <div class="col-lg-7 m-auto">
         <div v-if="emailFormMessage" class="error-message m-auto">
           {{emailFormMessage}}
@@ -514,6 +514,14 @@ export default {
           }
           await this.setMailFormData(submittedFormData)
         }
+    },
+    handleInputs(val){
+      console.log(val);
+      if(val){
+
+        this.deleteErrors();
+        this.deleteEmailFormMessage()
+      }
     }
   },
   created(){

@@ -24,6 +24,7 @@
           :emailFormMessage="emailFormMessage"
           @handle-submit="handleSubmit" 
           @handle-validate="validate"
+          @handle-inputs="handleInputs"
           :siteKey="siteKey"
           />
     </div>
@@ -63,6 +64,12 @@ export default {
       },
       validate(response){
         this.getCaptchaValidate(response);
+      },
+      handleInputs(val){
+        if(val){
+          this.deleteErrors();
+          this.deleteEmailFormMessage();
+        }
       }
     },
     created(){

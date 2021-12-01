@@ -19,6 +19,7 @@
                         :id="question_o.id" 
                         v-model="formValues[data.name]"
                         :name="data.name"
+                        
                         >
                     <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
                 </div>
@@ -37,6 +38,7 @@
                                 :id="option.id"
                                 v-model="formValues.ninthQuestion"
                                 name="questionNine"
+                                
                             />
                             <label  class="form-check-label"  :key="option.id" :for="option.id">{{option.option_text}}</label>
                         </div>
@@ -59,7 +61,7 @@
             <h5>Vaša mail adresa na koju želite da Vam pošaljemo <span class="red">*</span> ponudu:</h5>
             <div class="form-group">
                 <label for="email">Email adresa: </label>
-                <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
+                <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com" required @input="handleInputs(formValues.email)">
             </div>
             <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.email">
                 {{errors.email[0]}}
@@ -83,6 +85,12 @@ export default {
         selectedFormOption: String,
         questionsForQNine: Object,
         errors:Object
+    },
+    methods:{
+        handleInputs(val){
+            console.log(val);
+            this.$emit('handle-inputs', val)
+        }
     }
 }
 </script>
