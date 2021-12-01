@@ -7,7 +7,7 @@
 
         <h1>Flowlence</h1>
             </div>
-        <h4>Agencija za knjigovotstvene usluge i konsalting</h4>
+        <h4>Agencija za knjigovodstvene usluge i konsalting</h4>
         <p>Tihomira Ostojića 10</p>
         <p>+38163466371</p>
         <p>flowlence@gmail.com</p>

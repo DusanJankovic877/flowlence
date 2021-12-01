@@ -516,11 +516,12 @@ export default {
         }
     },
     handleInputs(val){
-      console.log(val);
       if(val){
-
         this.deleteErrors();
         this.deleteEmailFormMessage()
+      }
+      else if(this.isActive === false){
+        this.isActive = true
       }
     }
   },

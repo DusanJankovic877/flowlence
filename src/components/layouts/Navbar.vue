@@ -31,7 +31,7 @@
         </ul>
         <ul class="navbar-nav pt-3">
           <li class="nav-item">
-              <p class="nav-link">ulogovani korisnik</p>
+              <p class="nav-link">{{loggedUser.name}}</p>
           </li>
           <li class="nav-item">
             <button class="nav-link" style="border:none; background-color: #F8F9FA;" @click="logout">Odjavi se</button>

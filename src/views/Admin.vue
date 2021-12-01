@@ -1,8 +1,7 @@
 <template>
     <div>
-        {{isLogged}}
-        {{loggedUser}}
         <h1>admin</h1>
+        <h2>all posts</h2>
         <div v-if="!isLogged">
             <login-compoenent :form="form" @submit="submit" @handle-inputs="handleInputs" :authError="authError" :authErrors="authErrors"/>
         </div>

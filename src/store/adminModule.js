@@ -33,7 +33,8 @@ const adminModule = {
         async login(state,payload){
          const response =  await adminService.login(payload);
          if(response){
-             state.commit('setLogin', response.user)
+             console.log(response.user);
+             state.commit('setLogin', response.user.original)
              localStorage.setItem('token', response.token.original.access_token)
              localStorage.setItem('user', JSON.stringify(response.user.original))
 

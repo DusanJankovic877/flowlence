@@ -7,6 +7,8 @@ import PriceList from '../views/PriceList.vue'
 import Blog from '../views/Blog.vue'
 import Contact from '../views/Contact.vue'
 import Admin from '../views/Admin.vue'
+import CreatePostComponent from '../components/admin/CreatePostComponent.vue'
+import PostsComponent from '../components/admin/PostsComponent'
 
 
 
@@ -53,6 +55,16 @@ const routes = [
     name: 'jolanda',
     component: Admin
 
+  },
+  {
+    path: '/create-post',
+    name: 'admin-c-post',
+    component: CreatePostComponent
+  },  
+  {
+    path: '/posts',
+    name: 'admin-posts',
+    component: PostsComponent
   },
 
 ]
