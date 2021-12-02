@@ -5,8 +5,8 @@ import contactServices from '../services/contactServices'
 import recaptchaValidate from '../services/recaptchaValidate'
 import  NProgress  from 'nprogress';
 import AdminModule from './adminModule'
+import BlogModule from './blogModule'
 Vue.use(Vuex)
-
 export default new Vuex.Store({
   state: {
     apiWaitingCount: 0,
@@ -120,6 +120,7 @@ export default new Vuex.Store({
     errors: (state) => state.errors
   },
   modules: {
-    AdminModule
+    AdminModule,
+    BlogModule
   },
 });

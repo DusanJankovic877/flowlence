@@ -3,7 +3,7 @@
         <h1>Dopunski rad - Mogućnosti, obaveze i troškovi</h1> 
         <img class="responsive" src="../../assets/kocka.jpg" alt="">
         <h3>Ko ima pravo na dopunski rad?</h3>
-            <p>
+    <p>
         Dopunski rad je čest i vrlo koristan način angažovanja i predstavlja ugovor van
         radnog odnosa. Treba imati u vidu da ukoliko želite da angažujete određeno lice
         putem Ugovora o dopunskom radu, to lice mora biti zaposleno sa punim radnim
@@ -28,8 +28,10 @@
         drugog poslodavca ali na nepuno radno vreme, nije ispunjen gore naveden uslov
         tj. sa takvim licem nije moguće sklopiti ugovor o dopunskom radu. Isto se
         odnosi na nezaposlena lica, preduzetnike, korisnike penzije, nerezidente ili lice
-        koje je u radnom odnosu u inostranstvu.</p>
-        <p>Često se javlja nedoumica u praksi šta se podrazumeva pod ograničenjem da se
+        koje je u radnom odnosu u inostranstvu.
+    </p>
+    <p>
+        Često se javlja nedoumica u praksi šta se podrazumeva pod ograničenjem da se
         ugovor o dopunskom radu može zaključiti najviše do jedne trećine punog radnog
         vremena. Ukoliko pođemo od toga da puno radno vreme podrazumeva 40 sati
         nedeljno, dopunski rad bi smeo da iznosi maksimalno 13,33 sati nedeljno.

@@ -1,68 +1,95 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
     <form @submit.prevent>
-                      <input type="text" 
-                        v-model="img" 
-                       
-                        id="imageUrl" 
-                        aria-describedby="imageUrl" 
-                        placeholder="Enter picture path"
-                />
-        <div class="mb-3">
-        <label for="formFile" class="form-label">Default file input example</label>
-        <input name="img" @change="previewFiles" class="form-control"  ref="myFiles" type="file" id="1" accept="image/*">
-        <input name="img" @change="previewFiles" class="form-control" ref="myFiles" type="file" id="2" accept="image/*">
-        <button @submit="handleCreatePost">sadasdsad</button>
+        <div class="mb-3 file-inputs">
+            <label for="formFileOne" class="form-label"><p>Prva slika</p></label>
+            <input name="img" @change="previewFiles" class="form-control" type="file" id="formFileOne" accept="image/*">
         </div>
+        <div class="mb-3 file-inputs">
+            <label for="formFileTwo" class="form-label">Druga slika</label>
+            <input name="img" @change="previewFiles" class="form-control" type="file" id="formFileTwo" accept="image/*">
+        </div>
+        <div class="mb-3" v-for="(textarea, k) in blog.textareas" :key="k">
+            <label for="exampleFormControlTextarea1" class="form-label">Textarea{{k}}</label>
+            <textarea v-model="blog.textareas[k].text" class="form-control col-lg-3" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <div v-if="textarea.id !== 0">
+            <button @click="handleDeleteTextarea(k)">Obrisi text areu</button>
+            </div>
+            <div v-else></div>
+        </div>
+   {{blog}}
+            <button @click="handleAddTextarea(blog.textareas.length)">Dodaj novu text areu</button>
+        <button @submit="handleCreatePost">Pošalji</button>
     </form>
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
     data() {
         return{
-            images: [
-                {
-                id: 1,
-                name: ''
-                }
-            ]
+            counter: 1,
+            blog:{
+                images: [
+                    {
+                        id: 1,
+                        name: ''
+                    },
+                    {
+                        id:2,
+                        name:''
+                    }
+                ],
+                textareas: [
+                    {
+                        id:0,
+                        text: ''
+                    }
+                ]
+
+            }
         }
     },
+    computed:{
+        // ...mapGetters({blog: 'BlogModule/blog'})
+    },
     methods:{
+        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', }),
         previewFiles(e){
             e.target.files.forEach(file => {
-                this.images.id = +1;
-                this.images.name = file.name
-                console.log(this.images );
-
+                this.images.forEach(image => {
+                    if(image.id === 1 && image.name === ''){
+                        image.name = file.name
+                    }else if(image.id === 2){
+                        image.name = file.name
+                    }
+                });
             });
-            // console.log(e.target.files[0]);
+           
         },
-        submit(){
+        handleAddTextarea(length){
+            console.log('click', length);
+         
+            // this.addNewTextArea(length)
+            this.blog.textareas.push({id: this.counter++, text: ''})
+        },
+        handleDeleteTextarea(k){
+            // this.deleteTextArea(k)
+            this.blog.textareas.splice(k, 1);
+        },
+        handleCreatePost(){
             
         }
     }
 }
 </script>
 <style >
-  .responsive{
-    width: 100%;
-    height: auto;
-  }
-.image{
-    height: 50vh;
-    width: 100%; 
-    background-image: url('../../assets/blog/cubes.jpg');
-    background-size: cover;
+.file-inputs{
+    text-align: left;
 }
-.post{
-    background-color: rgba(255, 248, 220, 0.479);
-}
-.post span{
-    text-decoration: underline;
-}
-.post p{
-    line-height: 30px;
+.file-inputs input{
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid  black;
 }
 </style>
