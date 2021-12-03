@@ -14,10 +14,27 @@
             <input name="img" @change="previewFiles" class="form-control" type="file" id="formFileTwo" accept="image/*">
         </div>
         <!-- section title -->
-        <div class="mb-3 file-inputs row" v-for="sectionTitle in blog.sectionTitles" :key="sectionTitle.id">
-            <label for="blog-section-title" class="form-label col-lg-10">Naslov sekcije posta koji treba dinamicki generisati i  povezati sa text reonima koji mu pripadaju</label>
+        <div class="mb-3 file-inputs row" v-for="(sectionTitle, k) in blog.sectionTitles" :key="k">
+            <label for="blog-section-title" class="form-label col-lg-9">Naslov sekcije posta koji treba dinamicki generisati i  povezati sa text reonima koji mu pripadaju</label>
             <input type="text" class="form-control" id="blog-section-title">
-            <button @click="handleAddTextarea(blog.textareas.length)" style="float:right" class="col-lg-2">Dodaj nov naslov</button>
+
+
+            <div v-if="blog.sectionTitles.length === k+1"  class="section-title-button col-lg-2">
+                <button @click="handleAddSectionTitle(blog.sectionTitles.length)" class="btn btn-success col-lg-12">
+                    Dodaj nov naslov
+                </button>
+            </div>
+            <div v-else class="col-lg-2">Naslov sekcije {{sectionTitle.id}}</div>
+            <div class=" col-lg-1" v-if="k !== 0">
+                <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(k)">Obrisi</button>
+            </div>
+            <div v-else class="col-lg-1">
+                <div v-if="blog.sectionTitles.length === 1">
+                    Naslov sekcije {{sectionTitle.id}}
+                </div>
+            </div>
+         
+
         </div>
         <!-- text area -->
         <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="(textarea, k) in blog.textareas" :key="k">
@@ -81,27 +98,29 @@ export default {
         return{
             //napraviti generisanje slika i generisanje naslova za odredjenu sekciju posta, i povezati text reone sa ti naslovom
             counter: 1,
-            texAreaButton: 0,
+            sectionTitleCounter: 1,
             blog:{
                 blogTitle: '',
                 sectionTitles:[
                     {
-                        id: 0,
+                        id: 0,//duplicate key here 
                         title: ''    
-                    }
+                    },
+                    
                 ],
                 images: [
                     {
-                        id: 1,
+                        id: 0,//duplicate key here 
                         name: ''
                     }
 
                 ],
                 textareas: [
                     {
-                        id:0,
+                        id:0,//duplicate key here 
                         text: ''
-                    }
+                    },
+
                 ]
 
             },
@@ -130,14 +149,19 @@ export default {
                 });
             });
         },
-        handleAddTextarea(length){
-            this.texAreaButton = length
-            // this.addNewTextArea(length)
+        handleAddTextarea(){
             this.blog.textareas.push({id: this.counter++, text: ''})
+            
         },
         handleDeleteTextarea(k){
             // this.deleteTextArea(k)
             this.blog.textareas.splice(k, 1);
+        },
+        handleAddSectionTitle(){
+            this.blog.sectionTitles.push({id: this.sectionTitleCounter++, title: ''})
+        },
+        handleDeleteSecetionTitle(k){
+            this.blog.sectionTitles.splice(k, 1);
         },
         handleMoveUp(textarea){
            this.move(textarea, -1);
@@ -152,6 +176,20 @@ export default {
 }
 </script>
 <style >
+.arrows{
+    width: 22px;
+
+    height: 10px;
+    padding: 0;
+
+}
+.arrows button{
+    width: 22px;
+    height: 20px;
+
+    background-color: red;
+    padding: 0;
+}
 .create-post-form{
     padding:15px;
     background: rgba(209, 209, 209, 0.37) !important;
@@ -159,6 +197,15 @@ export default {
 .file-inputs {
     text-align: left !important;
 }
+#blog-section-title{
+    margin-left: 13px !important;
+    width: 67.8%;
+}
+/* .section-title-button{
+ 
+    margin-left: 10px;
+    padding: 0 0 !important;
+} */
 .text-area{
     width:70% ;
 }
@@ -171,9 +218,7 @@ export default {
     padding: 5px 0 10px 20px;
     color: white;
 }
-.text-areas{
-    width: 80%;
-}
+
 .buttons-up-down{
     margin: 0 !important;
 }
