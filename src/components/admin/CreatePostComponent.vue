@@ -64,7 +64,7 @@
                     </div>
                     <div v-else></div>
                 </div>
-                <div class="delete-button  col-lg-1" v-if="textarea.id !== 0">
+                <div class="delete-button  col-lg-1" v-if="k !== 0">
                     <button class="btn btn-danger" @click="handleDeleteTextarea(k)">Obrisi</button>
                 </div>
                 <div v-else></div>
