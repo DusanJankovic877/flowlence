@@ -5,46 +5,50 @@
             <label for="blog-title" class="form-label">Naslov posta</label>
             <input type="text" class="form-control" id="blog-title">
         </div>
-        <div class="mb-3 file-inputs">
-            <label for="formFileOne" class="form-label"><p>Prva slika</p></label>
-            <input name="img" @change="previewFiles" class="form-control" type="file" id="formFileOne" accept="image/*">i slike treba vezati za naslove sekcija
+        {{blog.images}}
+        <div class="mb-3 file-inputs row" v-for="(image, imageId) in blog.images" :key="'image_'+imageId">
+            <label for="formFileOne" class="form-label"><p>Slika br: {{image.imageId}}</p></label>
+            <input name="img" @change="previewFiles($event, imageId)" class="form-control" type="file" id="formFileOne" accept="image/*">
+                <div v-if="blog.images.length === imageId+1" class="section-image-button col-lg-2">
+                <button @click="handleAddImage(blog.images.length)" class="btn btn-success image-button col-lg-12">
+                    Dodaj novu sliku
+                </button>
+                </div>
+                <div v-else class="col-lg-2"></div>
+                <div class=" col-lg-1" v-if="imageId !== 0">
+                    <button class="btn btn-danger col-lg-12" @click="handleDeleteImage(imageId)">Obrisi</button>
+                </div>
+                <div v-else class="col-lg-1"></div>
         </div>
-        <div class="mb-3 file-inputs">
-            <label for="formFileTwo" class="form-label">Druga slika</label>
-            <input name="img" @change="previewFiles" class="form-control" type="file" id="formFileTwo" accept="image/*">
-        </div>
+
         <!-- section title -->
-        <div class="mb-3 file-inputs row" v-for="(sectionTitle, k) in blog.sectionTitles" :key="k">
-            <label for="blog-section-title" class="form-label col-lg-9">Naslov sekcije posta koji treba dinamicki generisati i  povezati sa text reonima koji mu pripadaju</label>
+        <div class="mb-3 file-inputs row" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'sectionTitle_'+sectionTId">
+            <label for="blog-section-title" class="form-label col-lg-9">Naslov sekcije br:{{sectionTitle.sectionTId}} i  povezati sa text reonima koji mu pripadaju</label>
             <input type="text" class="form-control" id="blog-section-title">
 
 
-            <div v-if="blog.sectionTitles.length === k+1"  class="section-title-button col-lg-2">
-                <button @click="handleAddSectionTitle(blog.sectionTitles.length)" class="btn btn-success col-lg-12">
+            <div v-if="blog.sectionTitles.length === sectionTId+1"  class="section-title-button col-lg-2">
+                <button @click="handleAddSectionTitle(blog.sectionTitles.length)" class="btn btn-success s-title-button col-lg-12">
                     Dodaj nov naslov
                 </button>
             </div>
-            <div v-else class="col-lg-2">Naslov sekcije {{sectionTitle.id}}</div>
-            <div class=" col-lg-1" v-if="k !== 0">
-                <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(k)">Obrisi</button>
+            <div v-else class="col-lg-2"></div>
+            <div class=" col-lg-1" v-if="sectionTId !== 0">
+                <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(sectionTId)">Obrisi</button>
             </div>
-            <div v-else class="col-lg-1">
-                <div v-if="blog.sectionTitles.length === 1">
-                    Naslov sekcije {{sectionTitle.id}}
-                </div>
-            </div>
+            <div v-else class="col-lg-1"></div>
          
 
         </div>
         <!-- text area -->
-        <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="(textarea, k) in blog.textareas" :key="k">
+        <div :class="textarea.textareaId % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="(textarea, textareaId) in blog.textareas" :key="'textarea_'+textareaId">
             <div class="row">
-                <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.id}}</label>
+                <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.textareaId}}</label>
             </div>
             <div class="div-text col-lg-12 row">
-            <textarea v-model="blog.textareas[k].text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea v-model="blog.textareas[textareaId].text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
                 <div class="col-lg-2 buttons-up-down">
-                    <div class="col-lg-5" v-if="k !== 0">
+                    <div class="col-lg-5" v-if="textareaId !== 0">
                         <button class="btn btn-light ml-auto col-lg-12" @click="handleMoveUp(textarea)">
                             <svg id="i-chevron-top" 
                                 xmlns="http://www.w3.org/2000/svg" 
@@ -60,7 +64,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="col-lg-5" v-if="blog.textareas.length !== k+1">
+                    <div class="col-lg-5" v-if="blog.textareas.length !== textareaId+1">
                         <button class="btn btn-dark col-lg-12" @click="handleMoveDown(textarea)">
                             <svg id="i-chevron-bottom" 
                                 xmlns="http://www.w3.org/2000/svg" 
@@ -76,13 +80,13 @@
                             </svg>
                         </button>
                     </div>
-                    <div v-if="blog.textareas.length === k+1">
+                    <div v-if="blog.textareas.length === textareaId+1">
                         <button class="btn btn-success" @click="handleAddTextarea(blog.textareas.length)">Dodaj novu text areu</button>
                     </div>
                     <div v-else></div>
                 </div>
-                <div class="delete-button  col-lg-1" v-if="k !== 0">
-                    <button class="btn btn-danger" @click="handleDeleteTextarea(k)">Obrisi</button>
+                <div class="delete-button  col-lg-1" v-if="textareaId !== 0">
+                    <button class="btn btn-danger" @click="handleDeleteTextarea(textareaId)">Obrisi</button>
                 </div>
                 <div v-else></div>
             </div>
@@ -99,26 +103,29 @@ export default {
             //napraviti generisanje slika i generisanje naslova za odredjenu sekciju posta, i povezati text reone sa ti naslovom
             counter: 1,
             sectionTitleCounter: 1,
+            imageCounter:1,
             blog:{
                 blogTitle: '',
+                images: [
+                    {
+                        imageId: 0,//duplicate key here 
+                        name: '',
+                        belongsTo:''//belong to what section title ID GOES THERE
+                    }
+
+                ],
                 sectionTitles:[
                     {
-                        id: 0,//duplicate key here 
+                        sectionTId: 0,//duplicate key here 
                         title: ''    
                     },
                     
                 ],
-                images: [
-                    {
-                        id: 0,//duplicate key here 
-                        name: ''
-                    }
-
-                ],
                 textareas: [
                     {
-                        id:0,//duplicate key here 
-                        text: ''
+                        textareaId:0,//duplicate key here 
+                        text: '',
+                        belongsTo:''//belong to what section title ID GOES THERE
                     },
 
                 ]
@@ -133,24 +140,19 @@ export default {
             },
         }
     },
-    computed:{
-
-    },
     methods:{
         ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', }),
-        previewFiles(e){
+        previewFiles(e, id){
             e.target.files.forEach(file => {
-                this.images.forEach(image => {
-                    if(image.id === 1 && image.name === ''){
-                        image.name = file.name
-                    }else if(image.id === 2){
+                this.blog.images.forEach(image => {
+                    if(image.imageId === id){
                         image.name = file.name
                     }
                 });
             });
         },
         handleAddTextarea(){
-            this.blog.textareas.push({id: this.counter++, text: ''})
+            this.blog.textareas.push({textareaId: this.counter++, text: ''})
             
         },
         handleDeleteTextarea(k){
@@ -158,10 +160,16 @@ export default {
             this.blog.textareas.splice(k, 1);
         },
         handleAddSectionTitle(){
-            this.blog.sectionTitles.push({id: this.sectionTitleCounter++, title: ''})
+            this.blog.sectionTitles.push({sectionTId: this.sectionTitleCounter++, title: ''})
         },
         handleDeleteSecetionTitle(k){
             this.blog.sectionTitles.splice(k, 1);
+        },
+        handleAddImage(){
+            this.blog.images.push({imageId: this.imageCounter++, name: ''})
+        },
+        handleDeleteImage(k){
+            this.blog.images.splice(k, 1);
         },
         handleMoveUp(textarea){
            this.move(textarea, -1);
@@ -197,6 +205,7 @@ export default {
 .file-inputs {
     text-align: left !important;
 }
+
 #blog-section-title{
     margin-left: 13px !important;
     width: 67.8%;
