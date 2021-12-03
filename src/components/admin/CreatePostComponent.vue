@@ -13,57 +13,63 @@
             <label for="formFileTwo" class="form-label">Druga slika</label>
             <input name="img" @change="previewFiles" class="form-control" type="file" id="formFileTwo" accept="image/*">
         </div>
-        <div class="mb-3 file-inputs">
-            <label for="blog-section-title" class="form-label">Naslov sekcije posta koji treba dinamicki generisati i  povezati sa text reonima koji mu pripadaju</label>
+        <!-- section title -->
+        <div class="mb-3 file-inputs row" v-for="sectionTitle in blog.sectionTitles" :key="sectionTitle.id">
+            <label for="blog-section-title" class="form-label col-lg-10">Naslov sekcije posta koji treba dinamicki generisati i  povezati sa text reonima koji mu pripadaju</label>
             <input type="text" class="form-control" id="blog-section-title">
+            <button @click="handleAddTextarea(blog.textareas.length)" style="float:right" class="col-lg-2">Dodaj nov naslov</button>
         </div>
+        <!-- text area -->
         <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="(textarea, k) in blog.textareas" :key="k">
             <div class="row">
                 <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.id}}</label>
             </div>
             <div class="div-text col-lg-12 row">
             <textarea v-model="blog.textareas[k].text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
-    
                 <div class="col-lg-2 buttons-up-down">
-                    <button class="btn btn-light ml-auto col-lg-5" @click="handleMoveUp(textarea)">
-                        <svg id="i-chevron-top" 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            viewBox="0 0 32 32" 
-                            width="14" 
-                            height="15" 
-                            fill="none" 
-                            stroke="currentcolor" 
-                            stroke-linecap="round" 
-                            stroke-linejoin="round" 
-                            stroke-width="4">
-                            <path d="M30 20 L16 8 2 20" />
-                        </svg>
-                    </button>
-                    <button class="btn btn-dark col-lg-5" @click="handleMoveDown(textarea)">
-                        <svg id="i-chevron-bottom" 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            viewBox="0 0 32 32" 
-                            width="14" 
-                            height="15" 
-                            fill="none" 
-                            stroke="currentcolor" 
-                            stroke-linecap="round" 
-                            stroke-linejoin="round" 
-                            stroke-width="4">
-                            <path d="M30 12 L16 24 2 12" />
-                        </svg>
-                    </button>
+                    <div class="col-lg-5" v-if="k !== 0">
+                        <button class="btn btn-light ml-auto col-lg-12" @click="handleMoveUp(textarea)">
+                            <svg id="i-chevron-top" 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 32 32" 
+                                width="14" 
+                                height="15" 
+                                fill="none" 
+                                stroke="currentcolor" 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round" 
+                                stroke-width="4">
+                                <path d="M30 20 L16 8 2 20" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col-lg-5" v-if="blog.textareas.length !== k+1">
+                        <button class="btn btn-dark col-lg-12" @click="handleMoveDown(textarea)">
+                            <svg id="i-chevron-bottom" 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 32 32" 
+                                width="14" 
+                                height="15" 
+                                fill="none" 
+                                stroke="currentcolor" 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round" 
+                                stroke-width="4">
+                                <path d="M30 12 L16 24 2 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div v-if="blog.textareas.length === textarea.id +1">
+                        <button class="btn btn-success" @click="handleAddTextarea(blog.textareas.length)">Dodaj novu text areu</button>
+                    </div>
+                    <div v-else></div>
                 </div>
                 <div class="delete-button  col-lg-1" v-if="textarea.id !== 0">
-                <button class="btn btn-danger" @click="handleDeleteTextarea(k)">Obrisi</button>
+                    <button class="btn btn-danger" @click="handleDeleteTextarea(k)">Obrisi</button>
                 </div>
                 <div v-else></div>
-
-       
-
             </div>
         </div>
-            <button @click="handleAddTextarea(blog.textareas.length)">Dodaj novu text areu</button>
         <button @submit="handleCreatePost">Pošalji</button>
     </form>
     </div>
@@ -75,16 +81,21 @@ export default {
         return{
             //napraviti generisanje slika i generisanje naslova za odredjenu sekciju posta, i povezati text reone sa ti naslovom
             counter: 1,
+            texAreaButton: 0,
             blog:{
+                blogTitle: '',
+                sectionTitles:[
+                    {
+                        id: 0,
+                        title: ''    
+                    }
+                ],
                 images: [
                     {
                         id: 1,
                         name: ''
-                    },
-                    {
-                        id:2,
-                        name:''
                     }
+
                 ],
                 textareas: [
                     {
@@ -104,7 +115,7 @@ export default {
         }
     },
     computed:{
-       
+
     },
     methods:{
         ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', }),
@@ -118,11 +129,9 @@ export default {
                     }
                 });
             });
-           
         },
         handleAddTextarea(length){
-            console.log('click', length);
-         
+            this.texAreaButton = length
             // this.addNewTextArea(length)
             this.blog.textareas.push({id: this.counter++, text: ''})
         },

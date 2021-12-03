@@ -43,6 +43,10 @@ h1, h2, h3, h4, h5{
   font-family: 'RobotoSlab-Bold', sans-serif !important;
 
 }
+button{
+  border: none !important;
+  border-radius: 0 !important;
+}
 
 
 
