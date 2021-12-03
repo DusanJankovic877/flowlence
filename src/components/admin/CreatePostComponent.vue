@@ -17,7 +17,7 @@
             <label for="blog-section-title" class="form-label">Naslov sekcije posta koji treba dinamicki generisati i  povezati sa text reonima koji mu pripadaju</label>
             <input type="text" class="form-control" id="blog-section-title">
         </div>
-        <div class="mb-3 text-areas" v-for="(textarea, k) in blog.textareas" :key="k">
+        <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="(textarea, k) in blog.textareas" :key="k">
             <div class="row">
                 <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.id}}</label>
             </div>
@@ -63,7 +63,6 @@
 
             </div>
         </div>
-   {{blog}}
             <button @click="handleAddTextarea(blog.textareas.length)">Dodaj novu text areu</button>
         <button @submit="handleCreatePost">Pošalji</button>
     </form>
@@ -95,13 +94,6 @@ export default {
                 ]
 
             },
-            // move: function(textarea, delta){
-            //     var index = this.blog.textareas.indexOf(textarea);
-            //     var newIndex = index + delta;
-            //     if(newIndex < 0 || newIndex === this.blog.textareas.length)return;
-            //     var indexes = [index, newIndex].sort((a, b) => a - b);
-            //     this.blog.textareas.splice(indexes[0], 2, this.blog.textareas[indexes[1]], this.blog.textareas[indexes[0]])
-            // },
             move: function(textarea, delta){
             var index = this.blog.textareas.indexOf(textarea);
             var newIndex = index + delta;
@@ -112,7 +104,7 @@ export default {
         }
     },
     computed:{
-        // ...mapGetters({blog: 'BlogModule/blog'})
+       
     },
     methods:{
         ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', }),
@@ -154,44 +146,34 @@ export default {
 .create-post-form{
     padding:15px;
     background: rgba(209, 209, 209, 0.37) !important;
-
 }
 .file-inputs {
     text-align: left !important;
 }
 .text-area{
     width:70% ;
-
+}
+.odd-text-areas{
+    background: rgba(128, 128, 128, 0.815);
+    padding: 5px 0 10px 20px;
+}
+.even-text-areas{
+    background: rgba(48, 48, 48, 0.781) !important;
+    padding: 5px 0 10px 20px;
+    color: white;
 }
 .text-areas{
     width: 80%;
-}
-.text-areas:nth-child(odd) {
-
-    padding: 5px 0 10px 20px;
-  background: rgba(128, 128, 128, 0.815) !important;
-}
-.text-areas:nth-child(even) {
-    color: white;
- background: rgba(48, 48, 48, 0.781) !important;
-    padding: 5px 0 10px 20px;
-
-}
-.div-text:nth-child(){
-    padding: 5px 0 10px 20px;
-    
 }
 .buttons-up-down{
     margin: 0 !important;
 }
 .delete-button{
-   /* padding: 0; */
-   border-radius: 0;
-   border: none;
+    border-radius: 0;
+    border: none;
 }
 .file-inputs input{
     width:70%;
-    /* float: left; */
     margin:0 !important;
     border: none;
     border-radius: 0;
