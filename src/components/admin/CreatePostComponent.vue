@@ -59,7 +59,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div v-if="blog.textareas.length === textarea.id +1">
+                    <div v-if="blog.textareas.length === k+1">
                         <button class="btn btn-success" @click="handleAddTextarea(blog.textareas.length)">Dodaj novu text areu</button>
                     </div>
                     <div v-else></div>
