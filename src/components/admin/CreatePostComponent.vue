@@ -1,6 +1,10 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
     <form @submit.prevent>
+        <pre>
+
+        {{blog}}
+        </pre>
         <h1>Povezati slike i teks reone sa odredjenim naslovom sekcije posta</h1>
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
@@ -180,7 +184,7 @@ export default {
             });
         },
         handleAddTextarea(){
-            this.blog.textareas.push({textareaId: this.counter++, text: ''})
+            this.blog.textareas.push({textareaId: this.counter++, text: '', belongsTo: ''})
             
         },
         handleDeleteTextarea(k){
@@ -194,7 +198,7 @@ export default {
             this.blog.sectionTitles.splice(k, 1);
         },
         handleAddImage(){
-            this.blog.images.push({imageId: this.imageCounter++, name: ''})
+            this.blog.images.push({imageId: this.imageCounter++, name: '',imagePath:'', belongsTo: ''})
         },
         handleDeleteImage(k){
             this.blog.images.splice(k, 1);
