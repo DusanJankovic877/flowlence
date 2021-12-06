@@ -4,7 +4,7 @@
         <h1>Povezati slike i teks reone sa odredjenim naslovom sekcije posta</h1>
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
-            <input type="text" class="form-control" id="blog-title">
+            <input type="text" class="form-control" id="blog-title" v-model="blog.blogTitle">
         </div>
         <!-- section title -->
         <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'sectionTitle_'+sectionTId">
@@ -37,11 +37,11 @@
             <!-- section titles to bind to -->
             <div class="col-lg-2">
                 <div class="form-check" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'imageSecionT_'+sectionTId">
-                    <input class="form-check-input" type="radio" name="radio" id="radio">
-                    <label v-if="sectionTitle.title" class="form-check-label" for="radio">
+                    <input class="form-check-input" type="radio" :name="'radio-input'+imageId" :id="'radio-input-'+imageId+sectionTId" :value="sectionTId" v-model="image.belongsTo">
+                    <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+imageId+sectionTId">
                         {{sectionTitle.title}}
                     </label>
-                    <label for="radio" v-else>
+                    <label class="form-check-label" :for="'radio-input-'+imageId+sectionTId" v-else>
                         Naslov sekcije
                     </label>
                 </div>
@@ -103,9 +103,12 @@
                 <!-- section titles to bind to -->
                 <div class="col-lg-2">
                     <div class="form-check" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'imageSecionT_'+sectionTId">
-                        <input class="form-check-input" type="radio" name="radio" id="radio">
-                        <label class="form-check-label" for="radio">
+                        <input class="form-check-input" type="radio" :name="'radio-text-area'+textareaId" :id="'radio-text-area'+textareaId+sectionTId" :value="sectionTId" v-model="textarea.belongsTo">
+                        <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-text-area'+textareaId+sectionTId">
                             {{sectionTitle.title}}
+                        </label>
+                        <label :for="'radio-text-area'+textareaId+sectionTId" v-else>
+                            Naslov sekcije
                         </label>
                     </div>
                 </div>
@@ -115,7 +118,7 @@
             </div>
             <div v-else></div>
         </div>
-        <button @submit="handleCreatePost">Pošalji</button>
+        <button @click="handleCreatePost">Pošalji</button>
     </form>
     </div>
 </template>
@@ -133,6 +136,7 @@ export default {
                 images: [
                     {
                         imageId: 0,//duplicate key here 
+                        imagePath: '',
                         name: '',
                         belongsTo:''//belong to what section title ID GOES THERE
                     }
@@ -202,7 +206,7 @@ export default {
            this.move(textarea, 1);
         },
         handleCreatePost(){
-            
+            console.log(this.blog);
         }
     }
 }
