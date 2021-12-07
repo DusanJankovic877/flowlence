@@ -1,4 +1,4 @@
-// import blogService from '../services/blogService'
+import blogService from '../services/blogService'
 const blogModule = {
     namespaced: true,
     state:{
@@ -21,6 +21,9 @@ const blogModule = {
         },
         deleteTextArea(){
 
+        },
+        async setCreatePost(state, payload){
+            await blogService.createPost(payload)
         }
     },
     getters:{

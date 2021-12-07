@@ -1,14 +1,14 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
-    <form @submit.prevent>
-        <pre>
+    <form @submit.prevent enctype="multipart/form-data">
+        <!-- <pre>
 
         {{blog}}
-        </pre>
+        </pre> -->
         <h1>Povezati slike i teks reone sa odredjenim naslovom sekcije posta</h1>
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
-            <input type="text" class="form-control" id="blog-title" v-model="blog.blogTitle">
+            <input type="text" class="form-control" id="blog-title" v-model="blog.postTitle">
         </div>
         <!-- section title -->
         <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'sectionTitle_'+sectionTId">
@@ -122,7 +122,7 @@
             </div>
             <div v-else></div>
         </div>
-        <button @click="handleCreatePost">Pošalji</button>
+        <button @click="handleCreatePost" >Pošalji</button>
     </form>
     </div>
 </template>
@@ -131,17 +131,20 @@ import { mapActions } from 'vuex';
 export default {
     data() {
         return{
+            image:'',
             //napraviti generisanje slika i generisanje naslova za odredjenu sekciju posta, i povezati text reone sa ti naslovom
             counter: 1,
             sectionTitleCounter: 1,
             imageCounter:1,
+            submitClicked: false,
             blog:{
-                blogTitle: '',
+                postTitle: '',
                 images: [
                     {
                         imageId: 0,//duplicate key here 
-                        imagePath: '',
+                        size: '',
                         name: '',
+                        data: '',
                         belongsTo:''//belong to what section title ID GOES THERE
                     }
 
@@ -149,7 +152,8 @@ export default {
                 sectionTitles:[
                     {
                         sectionTId: 0,//duplicate key here 
-                        title: ''    
+                        title: ''   ,
+                        belongsTo: '' 
                     },
                     
                 ],
@@ -173,15 +177,34 @@ export default {
         }
     },
     methods:{
-        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', }),
+        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost'}),
         previewFiles(e, id){
             e.target.files.forEach(file => {
                 this.blog.images.forEach(image => {
                     if(image.imageId === id){
-                        image.name = file.name
+                        image.name = file.name;
+                        image.size = file.size;
                     }
                 });
             });
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+            this.createImage(files[0], id);
+
+        },
+        createImage(file, id){
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                vm.image = e.target.result;
+                this.blog.images.forEach(image => {
+                    if(image.imageId === id){
+                        image.data = e.target.result
+                    }
+                });
+                };
+                    reader.readAsDataURL(file);
         },
         handleAddTextarea(){
             this.blog.textareas.push({textareaId: this.counter++, text: '', belongsTo: ''})
@@ -192,13 +215,15 @@ export default {
             this.blog.textareas.splice(k, 1);
         },
         handleAddSectionTitle(){
-            this.blog.sectionTitles.push({sectionTId: this.sectionTitleCounter++, title: ''})
+            this.blog.sectionTitles.push({sectionTId: this.sectionTitleCounter++, title: '', belongsTo: ''})
         },
         handleDeleteSecetionTitle(k){
             this.blog.sectionTitles.splice(k, 1);
         },
         handleAddImage(){
-            this.blog.images.push({imageId: this.imageCounter++, name: '',imagePath:'', belongsTo: ''})
+           
+                
+            this.blog.images.push({imageId: this.imageCounter++, name: '',data:'', belongsTo: '', size: ''})
         },
         handleDeleteImage(k){
             this.blog.images.splice(k, 1);
@@ -209,8 +234,15 @@ export default {
         handleMoveDown(textarea){
            this.move(textarea, 1);
         },
-        handleCreatePost(){
-            console.log(this.blog);
+        async handleCreatePost(){
+            this.submitClicked = true
+            this.blog.sectionTitles.forEach(sectionTitle => {
+                sectionTitle.belongsTo = this.blog.blogTitle
+            });
+                        console.log(this.blog);
+          
+            await this.setCreatePost(this.blog)
+        
         }
     }
 }

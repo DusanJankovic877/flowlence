@@ -12,7 +12,8 @@ export class RequestHandler {
         this.apiClient = axios.create({
         baseURL: 'http://127.0.0.1:8000/api',
         Accept: 'application/json',
-        Bearer: 'token'
+        Bearer: 'token',
+        enctype: 'multipart/form-data'
         });
         // async function delay(delayInms) {
         //     return new Promise(resolve  => {
@@ -44,7 +45,8 @@ export class RequestHandler {
             //     return Promise.reject(error);
             // }
           }, async error =>  {
-            //   console.log(error);
+              console.log(error.response);
+
               if(error.response.status === 401){
                 
                 if(error.response.data.message){
