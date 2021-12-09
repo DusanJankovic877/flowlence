@@ -1,6 +1,6 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
-    <form @submit.prevent enctype="multipart/form-data">
+    <form @submit.prevent="handleFormSubmit" method="POST" enctype="multipart/form-data">
         <!-- <pre>
 
         {{blog}}
@@ -29,6 +29,13 @@
             <div v-else class="col-lg-2"></div>
         </div>
         <!-- IMAGE -->
+        <!-- <div class="mb-3  row" v-for="(image, imageId) in images" :key="'image_'+imageId">
+
+              <label for="formFileOne" class="form-label"><p>Slika br: {{image.imageId}}</p></label>
+            <div class="col-lg-7 file-inputs">
+                <input name="img" @change="previewFiles($event, imageId)" class="form-control " type="file" id="formFileOne" accept="image/*">
+            </div>
+        </div> -->
         <div class="mb-3  row" v-for="(image, imageId) in blog.images" :key="'image_'+imageId">
             <label for="formFileOne" class="form-label"><p>Slika br: {{image.imageId}}</p></label>
             <div class="col-lg-7 file-inputs">
@@ -38,6 +45,7 @@
                 <button class="btn btn-danger col-lg-12" @click="handleDeleteImage(imageId)">Obrisi</button>
             </div>
             <div v-else class="col-lg-1"></div>
+
             <!-- section titles to bind to -->
             <div class="col-lg-2">
                 <div class="form-check" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'imageSecionT_'+sectionTId">
@@ -57,6 +65,9 @@
                 </button>
                 </div>
                 <div v-else class="col-lg-12"></div>
+            </div>
+            <div v-if="imagePreview" class="row mt-3">
+                <img :src="imagePreview" alt="" style="width: 200px;">
             </div>
         </div>
         <!-- text area -->
@@ -122,7 +133,7 @@
             </div>
             <div v-else></div>
         </div>
-        <button @click="handleCreatePost" >Pošalji</button>
+        <button>Pošalji</button>
     </form>
     </div>
 </template>
@@ -131,7 +142,15 @@ import { mapActions } from 'vuex';
 export default {
     data() {
         return{
-            image:'',
+            image:null,
+            imagePreview: null,
+                // images: [
+                //     {
+                //         // imageId: 0,//duplicate key here 
+                //         // belongsTo:''//belong to what section title ID GOES THERE
+                //     }
+
+                // ],
             //napraviti generisanje slika i generisanje naslova za odredjenu sekciju posta, i povezati text reone sa ti naslovom
             counter: 1,
             sectionTitleCounter: 1,
@@ -139,16 +158,6 @@ export default {
             submitClicked: false,
             blog:{
                 postTitle: '',
-                images: [
-                    {
-                        imageId: 0,//duplicate key here 
-                        size: '',
-                        name: '',
-                        data: '',
-                        belongsTo:''//belong to what section title ID GOES THERE
-                    }
-
-                ],
                 sectionTitles:[
                     {
                         sectionTId: 0,//duplicate key here 
@@ -156,6 +165,13 @@ export default {
                         belongsTo: '' 
                     },
                     
+                ],
+                images: [
+                    {
+                        // imageId: 0,//duplicate key here 
+                        // belongsTo:''//belong to what section title ID GOES THERE
+                    }
+
                 ],
                 textareas: [
                     {
@@ -180,35 +196,36 @@ export default {
         ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost'}),
         previewFiles(e, id){
             e.target.files.forEach(file => {
-                this.blog.images.forEach(image => {
-                    if(image.imageId === id){
-                        image.name = file.name;
-                        image.size = file.size;
-                    }
-                });
-            });
-            let files = e.target.files || e.dataTransfer.files;
-            if (!files.length)
-                return;
-            this.createImage(files[0], id);
-
-        },
-        createImage(file, id){
+                this.image = file;
                 let reader = new FileReader();
-                let vm = this;
-                reader.onload = (e) => {
-                vm.image = e.target.result;
-                this.blog.images.forEach(image => {
-                    if(image.imageId === id){
-                        image.data = e.target.result
-                    }
-                });
-                };
-                    reader.readAsDataURL(file);
+                reader.readAsDataURL(this.image); 
+        reader.onload = e =>{
+                        this.imagePreview = e.target.result;
+                }
+                // this.blog.images[id] = file;
+                // let reader = new FileReader();
+                // reader.readAsDataURL(this.blog.images[id]);
+                // reader.onload = e =>{
+                //         this.imagePreview = e.target.result;
+                // }
+                //         console.log('for each blog ',this.blog.images);
+            });
+            // let files = e.target.files || e.dataTransfer.files;
+            // if (!files.length)
+            //     return;
+            // this.createImage(files[0], id);
+console.log(id);
+        },
+        async handleFormSubmit(){
+            console.log('image',this.image);
+            let data = new FormData();
+            data.append('image',this.image);
+            const blog = JSON.stringify(this.blog);
+            data.append('blog',blog);
+            await this.setCreatePost(data)
         },
         handleAddTextarea(){
-            this.blog.textareas.push({textareaId: this.counter++, text: '', belongsTo: ''})
-            
+            this.blog.textareas.push({textareaId: this.counter++, text: '', belongsTo: ''})        
         },
         handleDeleteTextarea(k){
             // this.deleteTextArea(k)
@@ -221,29 +238,18 @@ export default {
             this.blog.sectionTitles.splice(k, 1);
         },
         handleAddImage(){
-           
-                
-            this.blog.images.push({imageId: this.imageCounter++, name: '',data:'', belongsTo: '', size: ''})
+            // this.blog.images.push({imageId: this.imageCounter++, name: '',data:'', belongsTo: '', size: ''})
+            this.blog.images.push({})
         },
         handleDeleteImage(k){
             this.blog.images.splice(k, 1);
         },
         handleMoveUp(textarea){
-           this.move(textarea, -1);
+            this.move(textarea, -1);
         },
         handleMoveDown(textarea){
            this.move(textarea, 1);
         },
-        async handleCreatePost(){
-            this.submitClicked = true
-            this.blog.sectionTitles.forEach(sectionTitle => {
-                sectionTitle.belongsTo = this.blog.blogTitle
-            });
-                        console.log(this.blog);
-          
-            await this.setCreatePost(this.blog)
-        
-        }
     }
 }
 </script>

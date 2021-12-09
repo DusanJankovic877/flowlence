@@ -13,7 +13,7 @@ export class RequestHandler {
         baseURL: 'http://127.0.0.1:8000/api',
         Accept: 'application/json',
         Bearer: 'token',
-        enctype: 'multipart/form-data'
+        enctype: 'multipart/form-data',
         });
         // async function delay(delayInms) {
         //     return new Promise(resolve  => {
