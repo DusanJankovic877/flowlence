@@ -5,13 +5,17 @@ const blogModule = {
         counter: 1,
         blog: null,
         textareasToCreate: [],
-        textareasToDelete: []
+        textareasToDelete: [],
+        image: ''
     },
     mutations:{
         setNewTextArea(state, payload){
             var counter = state.blog.textareas.length;
             state.blog.textareas.push({id: counter++})
             state.textareasToCreate.push({id: payload})
+        },
+        setImage(state,payload){
+            state.image = payload;
         }
     },
     actions:{
@@ -24,11 +28,17 @@ const blogModule = {
         },
         async setCreatePost(state, payload){
             await blogService.createPost(payload)
+        },
+        async getImage(state){
+            const response = await blogService.getImage();
+            console.log('state', response);
+            state.commit('setImage', response);
         }
     },
     getters:{
         textareasToDelete: (state) => state.textareasToDelete,
-        blog: (state) => state.blog
+        blog: (state) => state.blog,
+        image: (state) => state.image
     }
 
 }

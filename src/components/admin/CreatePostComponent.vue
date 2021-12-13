@@ -1,6 +1,8 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
     <form @submit.prevent="handleFormSubmit" method="POST" enctype="multipart/form-data">
+    <!-- <img src="http://127.0.0.1:8000/api/get-image/1639049836_elena-putina-WuSzNJpys_4-unsplash.jpg" alt=""> i ruta na api za ovo -->
+    <!-- {{imagee}} -->
         <!-- <pre>
 
         {{blog}}
@@ -36,7 +38,7 @@
                 <input name="img" @change="previewFiles($event, imageId)" class="form-control " type="file" id="formFileOne" accept="image/*">
             </div>
         </div> -->
-        <div class="mb-3  row" v-for="(image, imageId) in blog.images" :key="'image_'+imageId">
+        <div class="mb-3  row" v-for="(image, imageId) in images" :key="'image_'+imageId">
             <label for="formFileOne" class="form-label"><p>Slika br: {{image.imageId}}</p></label>
             <div class="col-lg-7 file-inputs">
                 <input name="img" @change="previewFiles($event, imageId)" class="form-control " type="file" id="formFileOne" accept="image/*">
@@ -59,8 +61,8 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                <div v-if="blog.images.length === imageId+1" class="">
-                <button @click="handleAddImage(blog.images.length)" class="btn btn-success  ">
+                <div v-if="images.length === imageId+1" class="">
+                <button @click="handleAddImage(images.length)" class="btn btn-success  ">
                     Dodaj novu sliku
                 </button>
                 </div>
@@ -138,11 +140,13 @@
     </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
     data() {
         return{
-            image:null,
+            images:[
+                {}
+            ],
             imagePreview: null,
                 // images: [
                 //     {
@@ -192,16 +196,19 @@ export default {
             },
         }
     },
+    computed:{
+        ...mapGetters({imagee: 'BlogModule/image'})
+    },
     methods:{
-        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost'}),
+        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost', getImage: 'BlogModule/getImage'}),
         previewFiles(e, id){
             e.target.files.forEach(file => {
-                this.image = file;
-                let reader = new FileReader();
-                reader.readAsDataURL(this.image); 
-        reader.onload = e =>{
-                        this.imagePreview = e.target.result;
-                }
+                    this.images[id]= file;
+                // let reader = new FileReader();
+                // reader.readAsDataURL(this.image); 
+                // reader.onload = e =>{
+                //         this.imagePreview = e.target.result;
+                // }
                 // this.blog.images[id] = file;
                 // let reader = new FileReader();
                 // reader.readAsDataURL(this.blog.images[id]);
@@ -217,12 +224,15 @@ export default {
 console.log(id);
         },
         async handleFormSubmit(){
-            console.log('image',this.image);
+            console.log('image',this.images);
             let data = new FormData();
-            data.append('image',this.image);
+            this.images.forEach((image) => {
+                data.append('images[]', image);
+            });
             const blog = JSON.stringify(this.blog);
             data.append('blog',blog);
             await this.setCreatePost(data)
+            // await this.getImage();
         },
         handleAddTextarea(){
             this.blog.textareas.push({textareaId: this.counter++, text: '', belongsTo: ''})        
@@ -239,7 +249,7 @@ console.log(id);
         },
         handleAddImage(){
             // this.blog.images.push({imageId: this.imageCounter++, name: '',data:'', belongsTo: '', size: ''})
-            this.blog.images.push({})
+            this.images.push({})
         },
         handleDeleteImage(k){
             this.blog.images.splice(k, 1);
