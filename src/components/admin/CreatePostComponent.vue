@@ -229,10 +229,9 @@ console.log(id);
             this.images.forEach((image) => {
                 data.append('images[]', image);
             });
-            const blog = JSON.stringify(this.blog);
-            data.append('blog',blog);
-            await this.setCreatePost(data)
-            // await this.getImage();
+            const blog = this.blog;
+            await this.setCreatePost({data, blog})
+
         },
         handleAddTextarea(){
             this.blog.textareas.push({textareaId: this.counter++, text: '', belongsTo: ''})        
