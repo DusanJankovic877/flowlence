@@ -51,7 +51,7 @@
             <!-- section titles to bind to -->
             <div class="col-lg-2">
                 <div class="form-check" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'imageSecionT_'+sectionTId">
-                    <input class="form-check-input" type="radio" :name="'radio-input'+imageId" :id="'radio-input-'+imageId+sectionTId" :value="sectionTId" v-model="image.belongsTo">
+                    <input class="form-check-input" type="radio" :name="'radio-input'+imageId" :id="'radio-input-'+imageId+sectionTId" :value="sectionTId" v-model="blog.images[imageId].belongsTo">
                     <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+imageId+sectionTId">
                         {{sectionTitle.title}}
                     </label>
@@ -148,13 +148,6 @@ export default {
                 {}
             ],
             imagePreview: null,
-                // images: [
-                //     {
-                //         // imageId: 0,//duplicate key here 
-                //         // belongsTo:''//belong to what section title ID GOES THERE
-                //     }
-
-                // ],
             //napraviti generisanje slika i generisanje naslova za odredjenu sekciju posta, i povezati text reone sa ti naslovom
             counter: 1,
             sectionTitleCounter: 1,
@@ -164,22 +157,22 @@ export default {
                 postTitle: '',
                 sectionTitles:[
                     {
-                        sectionTId: 0,//duplicate key here 
-                        title: ''   ,
-                        belongsTo: '' 
+                        sectionTId: 0,
+                        title: '' 
                     },
                     
                 ],
                 images: [
                     {
-                        // imageId: 0,//duplicate key here 
-                        // belongsTo:''//belong to what section title ID GOES THERE
+                        imageId: 0,
+                        belongsTo:'',//belong to what section title ID GOES THERE
+                        file: null
                     }
 
                 ],
                 textareas: [
                     {
-                        textareaId:0,//duplicate key here 
+                        textareaId:0,
                         text: '',
                         belongsTo:''//belong to what section title ID GOES THERE
                     },
@@ -203,7 +196,13 @@ export default {
         ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost', getImage: 'BlogModule/getImage'}),
         previewFiles(e, id){
             e.target.files.forEach(file => {
+                const data = new FormData();
+                data.append('file', file);
+                
+
                     this.images[id]= file;
+                    this.blog.images[id].file= data;
+
                 // let reader = new FileReader();
                 // reader.readAsDataURL(this.image); 
                 // reader.onload = e =>{
@@ -225,12 +224,13 @@ console.log(id);
         },
         async handleFormSubmit(){
             console.log('image',this.images);
-            let data = new FormData();
-            this.images.forEach((image) => {
-                data.append('images[]', image);
-            });
-            const blog = this.blog;
-            await this.setCreatePost({data, blog})
+            // let data = new FormData();
+            // this.images.forEach((image) => {
+            //     data.append('images[]', image);
+            // });
+            console.log('blog', this.blog);
+            // const blog = this.blog;
+            await this.setCreatePost(this.blog)
 
         },
         handleAddTextarea(){
@@ -247,11 +247,12 @@ console.log(id);
             this.blog.sectionTitles.splice(k, 1);
         },
         handleAddImage(){
-            // this.blog.images.push({imageId: this.imageCounter++, name: '',data:'', belongsTo: '', size: ''})
+            this.blog.images.push({imageId: this.imageCounter++, belongsTo: ''})
             this.images.push({})
         },
         handleDeleteImage(k){
             this.blog.images.splice(k, 1);
+            this.images.splice(k, 1);
         },
         handleMoveUp(textarea){
             this.move(textarea, -1);

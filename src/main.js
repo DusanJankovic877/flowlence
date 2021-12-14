@@ -12,6 +12,8 @@ import router from './router'
 import store from './store'
 import VueDropdown from 'vue-dynamic-dropdown'
 import'nprogress/nprogress.css'
+
+
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)

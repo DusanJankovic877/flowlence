@@ -31,11 +31,6 @@ export default {
         ...mapActions({login: 'AdminModule/login', emptyAuthError: 'AdminModule/emptyAuthError',emptyAuthErrors: 'AdminModule/emptyAuthErrors'}),
         async submit(form){
            await this.login(form)
-            // console.log( form);
-            // this.login(form);
-            
-            //treba namestiti reset token
-
         },
         handleInputs(val){
             if(val){

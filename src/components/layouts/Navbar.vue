@@ -27,6 +27,7 @@
         </ul>
       </div>
     </div>
+    {{isLogged}}
   </nav>
   <nav class="navbar navbar-expand-lg navbar-light  sticky-top" v-else>
       <div class="col-lg-7 m-auto">
@@ -82,6 +83,7 @@
         </ul>
       </div>
     </div>
+ 
   </nav>
        
 
