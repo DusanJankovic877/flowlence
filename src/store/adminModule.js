@@ -13,7 +13,7 @@ const adminModule = {
     mutations:{
         SET_TOKEN(state, token){
             state.token = token;
-            console.log('state.token', state.token);
+            console.log('token setted', state.token);
         },
         SET_USER(state, data){
             state.user = data
@@ -38,11 +38,13 @@ const adminModule = {
             state.authErrors = {}
         }
     },
+    //STORE SUBSCRIBER IS NEXT
     actions:{
         async login({dispatch},credentials){
          const response =  await adminService.login(credentials);
+        //  const response =  await axios.post('/login', credentials);
        
-        //  console.log('response',response.data.token );
+         console.log('response',response.token );
          dispatch('attempt', response.token)
         //  if(response){
         //      console.log('response state ', response);
@@ -52,13 +54,16 @@ const adminModule = {
 
         //  }
         },
-        async attempt({commit}, token){
-           commit('SET_TOKEN', token);
-           console.log('token', token);
-           const response = await adminService.me(token);
-           console.log('ME TOKEN',response);
+        async attempt({commit, state}, token){
+            if(token){
+                commit('SET_TOKEN', token);
+            }
+            if(!state.token){
+                return;
+            }
            try{
-           
+               const response = await adminService.me();
+               console.log('ME TOKEN',response);
                 commit('SET_USER', response);
                
            }catch(e){
@@ -90,6 +95,7 @@ const adminModule = {
     },
     getters:{
         isLogged: (state) => {return !!state.token && !!state.user}, 
+        token: (state) => state.token,
         loggedUser: (state) => state.user,
         authError: (state) => state.authError,
         authErrors: (state) => state.authErrors

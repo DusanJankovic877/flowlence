@@ -8,11 +8,11 @@ import store from '../store';
 
 export class RequestHandler {
     constructor(){
-        
+        // const token= store
         this.apiClient = axios.create({
         baseURL: 'http://127.0.0.1:8000/api',
         Accept: 'application/json',
-        Bearer: 'token',
+        // headers: {Authorization: 'Bearer token'},
         enctype: 'multipart/form-data',
         });
         // async function delay(delayInms) {
@@ -24,6 +24,26 @@ export class RequestHandler {
         //   }
         this.apiClient.interceptors.request.use(  config => {
             store.dispatch('startLoading')
+            if(localStorage.getItem('token')){
+                config.headers.common['Authorization'] = `Bearer ${store.state.AdminModule.token}`
+            }
+            store.subscribe((mutation)=>{
+                // console.log('mutation.payload',mutation);
+                switch(mutation.type){
+                    case 'AdminModule/SET_TOKEN':
+                        if(mutation.payload){
+                            this.apiClient.defaults.headers.common['Authorization'] = `Bearer ${store.state.AdminModule.token}`
+                            localStorage.setItem('token', mutation.payload)
+                        }else{
+                            this.apiClient.defaults.headers.common['Authorization'] = null
+                            localStorage.removeItem('token')
+
+                        }
+
+                            
+                    break;
+                }
+            }) 
             // if()
             // console.log('request', this.apiClient.interceptors);
             return config;
@@ -31,7 +51,7 @@ export class RequestHandler {
         this.apiClient.interceptors.response.use(  response =>  {
             // await delay(3000);
             // console.log('response', response );
-     
+       
             store.dispatch('doneLoading')
             return response;
 

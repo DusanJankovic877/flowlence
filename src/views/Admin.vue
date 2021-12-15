@@ -2,12 +2,13 @@
     <div>
         <h1>admin</h1>
         <h2>all posts</h2>
-        <div v-if="!isLogged">
+        <div v-if="!token">
             <login-compoenent :form="form" @submit="submit" @handle-inputs="handleInputs" :authError="authError" :authErrors="authErrors"/>
         </div>
     </div>
 </template>
 <script>
+import store from '../store'
 import { mapActions, mapGetters } from 'vuex'
 import LoginCompoenent from '../components/admin/LoginComponent.vue'
 export default {
@@ -24,13 +25,13 @@ export default {
         }
     },
     computed:{
-        ...mapGetters({isLogged: 'AdminModule/isLogged', loggedUser: 'AdminModule/loggedUser', authError: 'AdminModule/authError',authErrors: 'AdminModule/authErrors'})
+        ...mapGetters({token: 'AdminModule/token',isLogged: 'AdminModule/isLogged', loggedUser: 'AdminModule/loggedUser', authError: 'AdminModule/authError',authErrors: 'AdminModule/authErrors'})
     },
 
     methods:{
         ...mapActions({login: 'AdminModule/login', emptyAuthError: 'AdminModule/emptyAuthError',emptyAuthErrors: 'AdminModule/emptyAuthErrors'}),
-        async submit(form){
-           await this.login(form)
+        submit(form){
+            this.login(form)
         },
         handleInputs(val){
             if(val){
@@ -41,6 +42,9 @@ export default {
 
 
       
-    }
+    },
+        created(){
+            store.dispatch('AdminModule/attempt', localStorage.getItem('token'));
+        }
 }
 </script>

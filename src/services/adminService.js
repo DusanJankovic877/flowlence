@@ -10,17 +10,13 @@ class AdminServices extends RequestHandler{
 
     }
     async getLogout(payload){
-        // const patload = JSON.stringify(payload)
-        await this.apiClient.post("/auth/logout", payload)
-    
-    }
-    async me(token){
         
-        const response = await this.apiClient.get('/auth/me', {
-            headers:{
-                'Authorization': 'Bearer ' + token
-            }
-        });
+        await this.apiClient.post("/auth/logout", payload)   
+    }
+    async me(){
+        console.log('me');
+        const response = await this.apiClient.get('/auth/me');
+        console.log('service me', response);
         return response.data;
       
     }

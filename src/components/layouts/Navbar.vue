@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="isLogged">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="token">
     <div class="container-fluid">
         <router-link class="navbar-brand" to="/">Admin Panel</router-link> 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
         </ul>
       </div>
     </div>
-    {{isLogged}}
+   
   </nav>
   <nav class="navbar navbar-expand-lg navbar-light  sticky-top" v-else>
       <div class="col-lg-7 m-auto">
@@ -100,7 +100,7 @@ export default {
       }
   },
   computed:{
-            ...mapGetters({isLogged: 'AdminModule/isLogged', loggedUser: 'AdminModule/loggedUser'})
+            ...mapGetters({token: 'AdminModule/token',isLogged: 'AdminModule/isLogged', loggedUser: 'AdminModule/loggedUser'})
   },
   methods:{
     ...mapActions({getLogout: 'AdminModule/getLogout'}),
