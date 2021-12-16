@@ -8,7 +8,7 @@
     </div>
 </template>
 <script>
-import store from '../store'
+// import store from '../store'
 import { mapActions, mapGetters } from 'vuex'
 import LoginCompoenent from '../components/admin/LoginComponent.vue'
 export default {
@@ -38,13 +38,8 @@ export default {
                 this.emptyAuthError()
                 this.emptyAuthErrors();
             }
-        },
-
-
-      
-    },
-        created(){
-            store.dispatch('AdminModule/attempt', localStorage.getItem('token'));
         }
+    }
+
 }
 </script>

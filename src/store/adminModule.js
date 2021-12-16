@@ -3,8 +3,6 @@ import adminService from '../services/adminService'
 const adminModule = {
     namespaced: true,
     state:{
-
-        loggedUser: JSON.parse(localStorage.getItem('user')),
         token: null,
         user: null,
         authError: '',
@@ -18,12 +16,6 @@ const adminModule = {
         SET_USER(state, data){
             state.user = data
         },
-        setLogin(state, payload){
-        state.loggedUser = payload
-        },
-        setLogout(state){
-            state.loggedUser =''
-        },
         setAuthError(state, payload){
             state.authError = payload
         },
@@ -34,25 +26,15 @@ const adminModule = {
             state.authError = ''
         },
         emptyAuthErrors(state){
-            // console.log('empty');
             state.authErrors = {}
         }
     },
-    //STORE SUBSCRIBER IS NEXT
     actions:{
         async login({dispatch},credentials){
-         const response =  await adminService.login(credentials);
-        //  const response =  await axios.post('/login', credentials);
-       
-         console.log('response',response.token );
-         dispatch('attempt', response.token)
-        //  if(response){
-        //      console.log('response state ', response);
-            //  state.commit('setLogin', response.user.original)
-            //  localStorage.setItem('token', response.token.original.access_token)
-            //  localStorage.setItem('user', JSON.stringify(response.user.original))
 
-        //  }
+         const response =  await adminService.login(credentials);
+
+         dispatch('attempt', response.token)
         },
         async attempt({commit, state}, token){
             if(token){
@@ -62,8 +44,7 @@ const adminModule = {
                 return;
             }
            try{
-               const response = await adminService.me();
-               console.log('ME TOKEN',response);
+                const response = await adminService.me();
                 commit('SET_USER', response);
                
            }catch(e){
@@ -72,15 +53,15 @@ const adminModule = {
             commit('SET_USER', null);
            }
         },
-        async getLogout(state,payload){
-            console.log('token', payload);
-            await adminService.getLogout({'token': payload})
-            localStorage.removeItem('user')
-            localStorage.removeItem('token')
-            state.commit('setLogout');
+        async getLogout({commit}){
+            return await adminService.getLogout().then(()=>{
+                commit('SET_TOKEN', null);
+                commit('SET_USER', null);
+            });
+
         },
         async setAuthError(state, payload){
-                await state.commit('setAuthError', payload)
+            await state.commit('setAuthError', payload)
         },
         emptyAuthError(state){
             state.commit('emptyAuthError')

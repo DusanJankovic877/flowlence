@@ -574,7 +574,7 @@ export default {
     background-color: #FBA922;
     height: 320px;
     width: 320px;
-    border-radius: 25em;
+    border-radius: 10em !important;
     padding: 0;
     margin:5px auto !important;
 

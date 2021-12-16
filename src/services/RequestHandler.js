@@ -8,11 +8,9 @@ import store from '../store';
 
 export class RequestHandler {
     constructor(){
-        // const token= store
         this.apiClient = axios.create({
         baseURL: 'http://127.0.0.1:8000/api',
         Accept: 'application/json',
-        // headers: {Authorization: 'Bearer token'},
         enctype: 'multipart/form-data',
         });
         // async function delay(delayInms) {
@@ -28,7 +26,6 @@ export class RequestHandler {
                 config.headers.common['Authorization'] = `Bearer ${store.state.AdminModule.token}`
             }
             store.subscribe((mutation)=>{
-                // console.log('mutation.payload',mutation);
                 switch(mutation.type){
                     case 'AdminModule/SET_TOKEN':
                         if(mutation.payload){
@@ -37,15 +34,10 @@ export class RequestHandler {
                         }else{
                             this.apiClient.defaults.headers.common['Authorization'] = null
                             localStorage.removeItem('token')
-
-                        }
-
-                            
+                        }     
                     break;
                 }
             }) 
-            // if()
-            // console.log('request', this.apiClient.interceptors);
             return config;
         });
         this.apiClient.interceptors.response.use(  response =>  {
@@ -65,8 +57,6 @@ export class RequestHandler {
             //     return Promise.reject(error);
             // }
           }, async error =>  {
-              console.log(error.response);
-
               if(error.response.status === 401){
                 
                 if(error.response.data.message){
@@ -80,7 +70,6 @@ export class RequestHandler {
                 console.log('dispatch reset token',error.response);
               }
               else if( error.response.status === 422){
-                //   console.log('422 true');
                     if(error.response.config.url === '/auth/login'){
                         await store.dispatch('AdminModule/setAuthError', error.response.data.message)
                         await store.dispatch('AdminModule/setAuthErrors', error.response.data.errors)
@@ -92,7 +81,6 @@ export class RequestHandler {
               }
             else{
                   return Promise.reject(error);
-
               }
           })
     }

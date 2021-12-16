@@ -9,7 +9,7 @@ import Contact from '../views/Contact.vue'
 import Admin from '../views/Admin.vue'
 import CreatePostComponent from '../components/admin/CreatePostComponent.vue'
 import PostsComponent from '../components/admin/PostsComponent'
-
+import store from '../store'
 
 
 
@@ -59,12 +59,25 @@ const routes = [
   {
     path: '/create-post',
     name: 'admin-c-post',
-    component: CreatePostComponent
+    component: CreatePostComponent,
+    beforeEnter(from, to, next){
+      if(!store.getters['AdminModule/isLogged']){
+        return next('/jolanda')
+      }
+      next();
+    }
   },  
   {
     path: '/posts',
     name: 'admin-posts',
-    component: PostsComponent
+    component: PostsComponent,
+    beforeEnter(from, to, next){
+      if(!store.getters['AdminModule/isLogged']){
+        return next('/jolanda')
+      }
+      next();
+    }
+    
   },
 
 ]
