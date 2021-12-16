@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <h1>admin</h1>
         <h2>all posts</h2>
         <div v-if="!token">

@@ -6,7 +6,7 @@ const blogModule = {
         blog: null,
         textareasToCreate: [],
         textareasToDelete: [],
-        image: ''
+        // image: ''
     },
     mutations:{
         setNewTextArea(state, payload){
@@ -29,16 +29,14 @@ const blogModule = {
         async setCreatePost(state, payload){
             await blogService.createPost(payload)
         },
-        async getImage(state){
-            const response = await blogService.getImage();
-            console.log('state', response);
-            state.commit('setImage', response);
+        async setCreatePostImage(state, payload){
+            await blogService.setCreatePostImage(payload)
         }
     },
     getters:{
         textareasToDelete: (state) => state.textareasToDelete,
-        blog: (state) => state.blog,
-        image: (state) => state.image
+        blog: (state) => state.blog
+
     }
 
 }

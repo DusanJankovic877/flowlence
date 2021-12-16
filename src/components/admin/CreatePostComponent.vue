@@ -1,7 +1,7 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
     <form @submit.prevent="handleFormSubmit" method="POST" enctype="multipart/form-data">
-    <!-- <img src="http://127.0.0.1:8000/api/get-image/1639049836_elena-putina-WuSzNJpys_4-unsplash.jpg" alt=""> i ruta na api za ovo -->
+    <img src="http://127.0.0.1:8000/api/get-image/1639656202_elena-putina-WuSzNJpys_4-unsplash.jpg" alt=""> i ruta na api za ovo
     <!-- {{imagee}} -->
         <!-- <pre>
 
@@ -51,7 +51,7 @@
             <!-- section titles to bind to -->
             <div class="col-lg-2">
                 <div class="form-check" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'imageSecionT_'+sectionTId">
-                    <input class="form-check-input" type="radio" :name="'radio-input'+imageId" :id="'radio-input-'+imageId+sectionTId" :value="sectionTId" v-model="blog.images[imageId].belongsTo">
+                    <input class="form-check-input" type="radio" :name="'radio-input'+imageId" :id="'radio-input-'+imageId+sectionTId" :value="sectionTId" v-model="images[imageId].belongsTo">
                     <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+imageId+sectionTId">
                         {{sectionTitle.title}}
                     </label>
@@ -145,7 +145,11 @@ export default {
     data() {
         return{
             images:[
-                {}
+                {
+                        //imageId: 0,
+                       //belongsTo:'',//belong to what section title ID GOES THERE
+                 
+                }
             ],
             imagePreview: null,
             //napraviti generisanje slika i generisanje naslova za odredjenu sekciju posta, i povezati text reone sa ti naslovom
@@ -166,7 +170,7 @@ export default {
                     {
                         imageId: 0,
                         belongsTo:'',//belong to what section title ID GOES THERE
-                        file: null
+                        name: ''
                     }
 
                 ],
@@ -193,15 +197,15 @@ export default {
         ...mapGetters({imagee: 'BlogModule/image'})
     },
     methods:{
-        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost', getImage: 'BlogModule/getImage'}),
+        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost',setCreatePostImage: 'BlogModule/setCreatePostImage', getImage: 'BlogModule/getImage'}),
         previewFiles(e, id){
             e.target.files.forEach(file => {
-                const data = new FormData();
-                data.append('file', file);
+                // const data = new FormData();
+                // data.append('file', file);
                 
-
-                    this.images[id]= file;
-                    this.blog.images[id].file= data;
+                   
+                    this.images[id]=  file;
+                    // this.blog.images[id].file= data;
 
                 // let reader = new FileReader();
                 // reader.readAsDataURL(this.image); 
@@ -224,13 +228,20 @@ console.log(id);
         },
         async handleFormSubmit(){
             console.log('image',this.images);
-            // let data = new FormData();
-            // this.images.forEach((image) => {
-            //     data.append('images[]', image);
-            // });
+            let data = new FormData();
+            this.images.forEach((image) => {
+
+                console.log('image name ', image);
+                data.append('images[]', image);
+                // this.blog.images.forEach(bImage => {
+                //     bImage.name = name
+                // });
+            });
             console.log('blog', this.blog);
             // const blog = this.blog;
-            await this.setCreatePost(this.blog)
+            await this.setCreatePostImage(data)
+
+            await this.setCreatePost(data)
 
         },
         handleAddTextarea(){

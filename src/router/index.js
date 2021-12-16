@@ -60,12 +60,12 @@ const routes = [
     path: '/create-post',
     name: 'admin-c-post',
     component: CreatePostComponent,
-    beforeEnter(from, to, next){
-      if(!store.getters['AdminModule/isLogged']){
-        return next('/jolanda')
-      }
-      next();
-    }
+    // beforeEnter(from, to, next){
+    //   if(!store.getters['AdminModule/isLogged']){
+    //     return next('/jolanda')
+    //   }
+    //   next();
+    // }
   },  
   {
     path: '/posts',

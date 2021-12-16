@@ -5,9 +5,9 @@ class BlogServices extends RequestHandler{
         const response = await this.apiClient.post('/create-post', payload)
         console.log('larvel response', response);
     }
-    async getImage(){
-        const response =  await this.apiClient.get('/get-image/1639049836_elena-putina-WuSzNJpys_4-unsplash.jpg')
-        return response.data;
+    async setCreatePostImage(payload){
+      const response = await this.apiClient.post('/save-post-image', payload)  
+      console.log('larvel image response', response);
     }
 }
 const blogServices = new BlogServices();
