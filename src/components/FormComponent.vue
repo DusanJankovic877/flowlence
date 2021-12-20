@@ -1,5 +1,6 @@
 <template>
     <div class="col-lg-4 m-auto form-div">
+        {{errors}}
         <p v-if="selectedFormOption === 'new ent'">Tek planiram da se registrujem kao preduzetnik</p>
         <p v-else-if="selectedFormOption === 'already ent'">Već poslujem u formi preduzetnika</p>
         <p v-else-if="selectedFormOption === 'new doo'">Tek planiram da se registrujem kao doo</p>
@@ -59,8 +60,9 @@
                     <label for="email">Email adresa: </label>
                     <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com" required @input="handleInputs(formValues.email)">
                 </div>
-                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors.email">
-                    {{errors.email[0]}}
+                
+                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors[0]">
+                    {{errors[0].email[0]}}
                 </div>
                 <div v-else></div>
             </div>  <!-- end of form-email --> 
@@ -75,13 +77,14 @@ export default {
         selectedButton: String,
         selectedFormOption: String,
         questionsForQNine: Object,
-        errors:Object
+        errors:Array
     },
     methods:{
         handleInputs(val){
             this.$emit('handle-inputs', val)
         }
     }
+
 }
 </script>
 <style>

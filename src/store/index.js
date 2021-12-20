@@ -15,7 +15,9 @@ export default new Vuex.Store({
     associationFormData:{},
     validateReCaptcha: false,
     emailFormMessage: '',
-    errors:{}
+    errors:[
+   
+    ]
   },
   mutations: {
     setFormData(state, payload){
@@ -42,10 +44,16 @@ export default new Vuex.Store({
       state.apiWaitingCount -= 1;
     },
     setErrors(state, payload){
-      state.errors = payload;
+      // Object.assign(state.errors, payload)
+      // console.log(state.errors);
+      state.errors.push(payload)
+      // state.errors.push(payload.email[0])
+      // state.errors.push(payload.telephone)
+      // state.errors.push(payload.name[0])
+      // state.errors.push(payload.message[0])
     },
     deleteErrors(state){
-      state.errors = {}
+      state.errors = []
     },
     setDeleteFormMessage(state){
       state.emailFormMessage =''

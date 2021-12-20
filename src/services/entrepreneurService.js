@@ -6,6 +6,7 @@ class EntrepreneurService extends RequestHandler{
     }
     async setMailFormData(payload){
         const response = await this.apiClient.post('/entrepreneur-mail', payload)
+ 
         if(response){
             return response.data.message;
         }

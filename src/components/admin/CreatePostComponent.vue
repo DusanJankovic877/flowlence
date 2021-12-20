@@ -1,12 +1,12 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
     <form @submit.prevent="handleFormSubmit" method="POST" enctype="multipart/form-data">
-    <img src="http://127.0.0.1:8000/api/get-image/1639656202_elena-putina-WuSzNJpys_4-unsplash.jpg" alt=""> i ruta na api za ovo
+    <!-- <img src="http://127.0.0.1:8000/api/get-image/1639656202_elena-putina-WuSzNJpys_4-unsplash.jpg" alt=""> i ruta na api za ovo -->
     <!-- {{imagee}} -->
         <!-- <pre>
-
         {{blog}}
         </pre> -->
+{{errors}}
         <h1>Povezati slike i teks reone sa odredjenim naslovom sekcije posta</h1>
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
@@ -51,7 +51,7 @@
             <!-- section titles to bind to -->
             <div class="col-lg-2">
                 <div class="form-check" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'imageSecionT_'+sectionTId">
-                    <input class="form-check-input" type="radio" :name="'radio-input'+imageId" :id="'radio-input-'+imageId+sectionTId" :value="sectionTId" v-model="images[imageId].belongsTo">
+                    <input class="form-check-input" type="radio" :name="'radio-input'+imageId" :id="'radio-input-'+imageId+sectionTId" :value="sectionTId" v-model="blog.images[imageId].belongsTo">
                     <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+imageId+sectionTId">
                         {{sectionTitle.title}}
                     </label>
@@ -140,7 +140,11 @@
     </div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { 
+    mapActions, 
+    mapGetters, 
+
+    } from 'vuex';
 export default {
     data() {
         return{
@@ -158,7 +162,7 @@ export default {
             imageCounter:1,
             submitClicked: false,
             blog:{
-                postTitle: '',
+                postTitle: ' ',
                 sectionTitles:[
                     {
                         sectionTId: 0,
@@ -194,15 +198,17 @@ export default {
         }
     },
     computed:{
-        ...mapGetters({imagee: 'BlogModule/image'})
+        ...mapGetters({errors: 'errors'})
     },
     methods:{
-        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost',setCreatePostImage: 'BlogModule/setCreatePostImage', getImage: 'BlogModule/getImage'}),
+        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost',setCreatePostImage: 'BlogModule/setCreatePostImage', getImage: 'BlogModule/getImage', deleteErrors: 'deleteErrors'} ),
         previewFiles(e, id){
             e.target.files.forEach(file => {
                 // const data = new FormData();
                 // data.append('file', file);
-                
+                    this.blog.images.forEach(image => {
+                        image.name = file.name
+                    });
                    
                     this.images[id]=  file;
                     // this.blog.images[id].file= data;
@@ -228,20 +234,25 @@ console.log(id);
         },
         async handleFormSubmit(){
             console.log('image',this.images);
-            let data = new FormData();
-            this.images.forEach((image) => {
+            // if(this.images[0] instanceof File){
+                let data = new FormData();
+                this.images.forEach((image) => {
+                    data.append('images[]', image);
+                });
+                const blog = this.blog;
+                await this.setCreatePostImage({data, blog})
+            // }else {
+                // let data = 'images'
+                // const blog = this.blog;
+        
+                // await this.setCreatePostImage({data, blog})
+            // }
 
-                console.log('image name ', image);
-                data.append('images[]', image);
-                // this.blog.images.forEach(bImage => {
-                //     bImage.name = name
-                // });
-            });
-            console.log('blog', this.blog);
-            // const blog = this.blog;
-            await this.setCreatePostImage(data)
+            
+            console.log('blog', this.images[0] instanceof File);
 
-            await this.setCreatePost(data)
+
+            // await this.setCreatePost(blog)
 
         },
         handleAddTextarea(){
@@ -271,7 +282,10 @@ console.log(id);
         handleMoveDown(textarea){
            this.move(textarea, 1);
         },
-    }
+    },
+     beforeDestroy(){
+        this.deleteErrors();
+     }
 }
 </script>
 <style >
