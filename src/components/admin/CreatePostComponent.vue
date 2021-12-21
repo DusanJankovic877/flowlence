@@ -276,9 +276,10 @@ export default {
             e.target.files.forEach(file => {
                 // const data = new FormData();
                 // data.append('file', file);
-                    this.blog.images.forEach(image => {
-                        image.name = file.name
-                    });
+                    // this.blog.images.forEach(image => {
+                    //     image.name = file.name
+                    // });
+                    this.blog.images[id].name = file.name
                    if(file){
 
                        this.images[id]=  file;

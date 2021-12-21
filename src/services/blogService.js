@@ -3,7 +3,7 @@ class BlogServices extends RequestHandler{
     async createPost(payload){
         console.log('paylopad',payload.blog);
         const response = await this.apiClient.post('/create-post', payload.blog)
-        // console.log('larvel response', response.data);
+        console.log('larvel response', response);
         return response;
     }
     async setCreatePostImage(payload){
