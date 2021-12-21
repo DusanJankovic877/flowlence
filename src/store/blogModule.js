@@ -35,6 +35,7 @@ const blogModule = {
             // state.commit('SET_POST_TO_CREATE', payload)
         },
         async setCreatePostImage({dispatch}, payload){
+            
             const response = await blogService.setCreatePostImage(payload.data);
             let rImageNames = [];
             if(response){

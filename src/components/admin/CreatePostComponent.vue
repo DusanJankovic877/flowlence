@@ -6,18 +6,39 @@
         <!-- <pre>
         {{blog}}
         </pre> -->
-{{errors}}
+
         <h1>Povezati slike i teks reone sa odredjenim naslovom sekcije posta</h1>
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
             <input type="text" class="form-control" id="blog-title" v-model="blog.postTitle">
+            
+            <div  v-if="errors.length">
+                <div v-for="(error, key) in errors" :key="key">
+                    <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                        <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'postTitle'">
+                        {{errorItem[0]}}
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div v-else></div>
         </div>
         <!-- section title -->
         <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'sectionTitle_'+sectionTId">
             <label for="blog-section-title"  class="form-label col-lg-9">Naslov sekcije br:{{sectionTitle.sectionTId}}</label>
             <div class="col-lg-7 file-inputs">
-
             <input type="text" class="form-control" id="blog-section-title" v-model="sectionTitle.title" placeholder="Naslov sekcije">
+
+            <div  v-if="errors.length">
+                <div v-for="(error, key) in errors" :key="key">
+                    <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                        <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'sectionTitles.'+sectionTId+'.title'">
+                        {{errorItem[0]}}
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div v-else></div>
             </div>
             <div class=" col-lg-1" v-if="sectionTId !== 0">
                 <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(sectionTId)">Obrisi</button>
@@ -41,7 +62,21 @@
         <div class="mb-3  row" v-for="(image, imageId) in images" :key="'image_'+imageId">
             <label for="formFileOne" class="form-label"><p>Slika br: {{image.imageId}}</p></label>
             <div class="col-lg-7 file-inputs">
+
                 <input name="img" @change="previewFiles($event, imageId)" class="form-control " type="file" id="formFileOne" accept="image/*">
+                <div v-if="errors.length">       
+                      <span  v-for="(error, key) in errors" :key="key">                    
+                          <div v-for="(errorItems, innerKey) in error" :key="innerKey" >
+                                <span v-if="innerKey === 'images.'+imageId">
+                                    <div v-for="errorItem in errorItems" :key="errorItem.id" class="alert alert-danger col-lg-12  mb-1" role="alert">
+                                        {{errorItem}}
+                                    </div>
+                                </span>
+                          </div>
+                      </span>
+                </div>
+
+                <div v-else></div>
             </div>
             <div class=" col-lg-1" v-if="imageId !== 0">
                 <button class="btn btn-danger col-lg-12" @click="handleDeleteImage(imageId)">Obrisi</button>
@@ -59,6 +94,17 @@
                         Naslov sekcije
                     </label>
                 </div>
+                    <div v-if="errors.length">
+                        <div v-for="(error, key) in errors" :key="key">
+                            <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                                <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'images.'+imageId+'.belongsTo'">
+                                {{errorItem[0]}}
+                                </div>
+                                <div v-else></div>
+                            </span>
+                        </div>
+                    </div>
+                    <div v-else></div>
             </div>
             <div class="col-lg-2">
                 <div v-if="images.length === imageId+1" class="">
@@ -77,7 +123,19 @@
             <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.textareaId}}</label>
             <div class="div-text row">
                 <div class="col-lg-7">
-                    <textarea v-model="blog.textareas[textareaId].text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea v-model="blog.textareas[textareaId].text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <div v-if="errors.length">
+                    <div v-for="(error, key) in errors" :key="key">
+                        <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                            <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'textareas.'+textareaId+'.text'">
+                            {{errorItem[0]}}
+                            </div>
+                            <div v-else></div>
+                        </span>
+                    </div>
+                </div>
+                <div v-else></div>
+
                 </div>
                 <div class="col-lg-1 buttons-up-down">
                     <div class="col-lg-12" v-if="textareaId !== 0">
@@ -124,10 +182,22 @@
                         <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-text-area'+textareaId+sectionTId">
                             {{sectionTitle.title}}
                         </label>
+
                         <label :for="'radio-text-area'+textareaId+sectionTId" v-else>
                             Naslov sekcije
                         </label>
                     </div>
+                    <div v-if="errors.length">
+                        <div v-for="(error, key) in errors" :key="key">
+                            <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                                <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'textareas.'+textareaId+'.belongsTo'">
+                                {{errorItem[0]}}
+                                </div>
+                                <div v-else></div>
+                            </span>
+                        </div>
+                    </div>
+                    <div v-else></div>
                 </div>
             </div>
             <div class="mt-4" v-if="blog.textareas.length === textareaId+1" style="float:right;">
@@ -209,8 +279,12 @@ export default {
                     this.blog.images.forEach(image => {
                         image.name = file.name
                     });
-                   
-                    this.images[id]=  file;
+                   if(file){
+
+                       this.images[id]=  file;
+                   }else {
+                       this.images[id] = {}
+                   }
                     // this.blog.images[id].file= data;
 
                 // let reader = new FileReader();
@@ -249,7 +323,7 @@ console.log(id);
             // }
 
             
-            console.log('blog', this.images[0] instanceof File);
+            console.log('blog', this.blog);
 
 
             // await this.setCreatePost(blog)

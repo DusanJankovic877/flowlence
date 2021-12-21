@@ -42,20 +42,9 @@ export class RequestHandler {
         });
         this.apiClient.interceptors.response.use(  response =>  {
             // await delay(3000);
-            // console.log('response', response );
-            console.log('RQ', response);
             store.dispatch('doneLoading')
             return response;
 
-            // if(error.response.status === 401 && error.config.url != '/login'){
-            //     console.log('inside interceptor error', { error });
-            //     localStorage.removeItem("token")
-                // redirect to /login
-                // router.push('/login');
-            // }
-            // else {
-            //     return Promise.reject(error);
-            // }
           }, async error =>  {
               console.log('nesto', error.response);
               if(error.response.status === 401){
@@ -83,6 +72,6 @@ export class RequestHandler {
             else{
                   return Promise.reject(error);
               }
-          })
+          });
     }
 }

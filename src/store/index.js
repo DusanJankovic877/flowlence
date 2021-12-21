@@ -42,15 +42,11 @@ export default new Vuex.Store({
     },
     setApiWaitingCountDecrement(state){
       state.apiWaitingCount -= 1;
+      console.log(state.apiWaitingCount)
     },
     setErrors(state, payload){
-      // Object.assign(state.errors, payload)
-      // console.log(state.errors);
-      state.errors.push(payload)
-      // state.errors.push(payload.email[0])
-      // state.errors.push(payload.telephone)
-      // state.errors.push(payload.name[0])
-      // state.errors.push(payload.message[0])
+      if(state.apiWaitingCount === 1)state.errors.push(payload)
+      
     },
     deleteErrors(state){
       state.errors = []

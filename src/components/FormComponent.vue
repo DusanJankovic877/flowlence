@@ -1,6 +1,5 @@
 <template>
     <div class="col-lg-4 m-auto form-div">
-        {{errors}}
         <p v-if="selectedFormOption === 'new ent'">Tek planiram da se registrujem kao preduzetnik</p>
         <p v-else-if="selectedFormOption === 'already ent'">Već poslujem u formi preduzetnika</p>
         <p v-else-if="selectedFormOption === 'new doo'">Tek planiram da se registrujem kao doo</p>
