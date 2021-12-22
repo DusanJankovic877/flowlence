@@ -268,38 +268,28 @@ export default {
         }
     },
     computed:{
-        ...mapGetters({errors: 'errors'})
+        ...mapGetters({errors: 'errors',savedImages: 'BlogModule/savedImages'})
     },
     methods:{
-        ...mapActions({addNewTextArea: 'BlogModule/addNewTextArea',deleteTextArea: 'BlogModule/deleteTextArea', setCreatePost: 'BlogModule/setCreatePost',setCreatePostImage: 'BlogModule/setCreatePostImage', getImage: 'BlogModule/getImage', deleteErrors: 'deleteErrors'} ),
+        ...mapActions({
+            addNewTextArea: 'BlogModule/addNewTextArea',
+            deleteTextArea: 'BlogModule/deleteTextArea', 
+            setCreatePost: 'BlogModule/setCreatePost',
+            setCreatePostImage: 'BlogModule/setCreatePostImage', 
+            getImage: 'BlogModule/getImage', 
+            deleteErrors: 'deleteErrors',
+            } ),
         previewFiles(e, id){
             e.target.files.forEach(file => {
-                // const data = new FormData();
-                // data.append('file', file);
-                    // this.blog.images.forEach(image => {
-                    //     image.name = file.name
-                    // });
-                    this.blog.images[id].name = file.name
+        
+                            this.blog.images[id].name = file.name
+              
+                    
                    if(file){
-
                        this.images[id]=  file;
                    }else {
                        this.images[id] = {}
                    }
-                    // this.blog.images[id].file= data;
-
-                // let reader = new FileReader();
-                // reader.readAsDataURL(this.image); 
-                // reader.onload = e =>{
-                //         this.imagePreview = e.target.result;
-                // }
-                // this.blog.images[id] = file;
-                // let reader = new FileReader();
-                // reader.readAsDataURL(this.blog.images[id]);
-                // reader.onload = e =>{
-                //         this.imagePreview = e.target.result;
-                // }
-                //         console.log('for each blog ',this.blog.images);
             });
             // let files = e.target.files || e.dataTransfer.files;
             // if (!files.length)

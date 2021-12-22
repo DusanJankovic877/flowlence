@@ -7,7 +7,8 @@ const blogModule = {
         textareasToCreate: [],
         textareasToDelete: [],
         postImages: [],
-        postToCreate:{}
+        postToCreate:{},
+        savedImages:{}
     },
     mutations:{
         setNewTextArea(state, payload){
@@ -20,6 +21,9 @@ const blogModule = {
         },
         SET_POST_TO_CREATE(state, payload){
             state.postToCreate = payload
+        },
+        SET_IMAGES_NAMES(state, payload){
+            state.savedImages = payload
         }
     },
     actions:{
@@ -47,13 +51,23 @@ const blogModule = {
                 rImageNames.forEach(rImageNamee => {
                     const found = payload.blog.images.find(x => x.name === rImageNamee);
                     if(found){
-                        foundCheck = true; 
+                        foundCheck = true;
+                        dispatch('SET_IMAGES_NAMES', response.data.images) 
                     }else{
                         foundCheck = false;
                     }
                 });
                 if(foundCheck === true){
-                    console.log('Blog service module call');
+                    console.log('Blog service module call', response.data.images);
+                    payload.blog.images.forEach(blogImage => {
+                        response.data.images.forEach(savedImage => {
+                            const imageName = savedImage.slice(11);
+                            if(imageName === blogImage.name){
+                                blogImage.name = savedImage
+                            }
+                        });
+                    });
+                    // console.log('sliced iamgenae', payload.blog)
                     dispatch('setCreatePost', {blog: payload.blog})
                 }else {
                     return;
@@ -68,7 +82,8 @@ const blogModule = {
     getters:{
         textareasToDelete: (state) => state.textareasToDelete,
         blog: (state) => state.blog,
-        postImages: (state) => state.postImages
+        postImages: (state) => state.postImages,
+        savedImages: (state) => state.savedImages
 
     }
 
