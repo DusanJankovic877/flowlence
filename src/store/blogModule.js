@@ -8,7 +8,8 @@ const blogModule = {
         textareasToDelete: [],
         postImages: [],
         postToCreate:{},
-        savedImages:{}
+        savedImages:{},
+        posts:{}
     },
     mutations:{
         setNewTextArea(state, payload){
@@ -24,6 +25,11 @@ const blogModule = {
         },
         SET_IMAGES_NAMES(state, payload){
             state.savedImages = payload
+        },
+        SET_POSTS(state, payload){
+            console.log('post', payload)
+
+            state.posts =  payload
         }
     },
     actions:{
@@ -36,7 +42,6 @@ const blogModule = {
         },
         async setCreatePost(_, payload){
             await blogService.createPost(payload)
-            // state.commit('SET_POST_TO_CREATE', payload)
         },
         async setCreatePostImage({dispatch}, payload){
             
@@ -77,13 +82,20 @@ const blogModule = {
                 dispatch('setCreatePost', {blog: payload.blog})
                 return
             }
+        },
+        async getPosts({commit}){
+            const response = await blogService.getPosts();
+            // if(response.data){
+                commit('SET_POSTS', response.data)
+            // }
         }
     },
     getters:{
         textareasToDelete: (state) => state.textareasToDelete,
         blog: (state) => state.blog,
         postImages: (state) => state.postImages,
-        savedImages: (state) => state.savedImages
+        savedImages: (state) => state.savedImages,
+        posts: (state) => state.posts
 
     }
 

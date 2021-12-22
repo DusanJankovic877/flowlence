@@ -268,7 +268,8 @@ export default {
         }
     },
     computed:{
-        ...mapGetters({errors: 'errors',savedImages: 'BlogModule/savedImages'})
+        ...mapGetters({errors: 'errors',savedImages: 'BlogModule/savedImages'}),
+
     },
     methods:{
         ...mapActions({
@@ -281,10 +282,7 @@ export default {
             } ),
         previewFiles(e, id){
             e.target.files.forEach(file => {
-        
-                            this.blog.images[id].name = file.name
-              
-                    
+                    this.blog.images[id].name = file.name
                    if(file){
                        this.images[id]=  file;
                    }else {
@@ -305,6 +303,7 @@ console.log(id);
                     data.append('images[]', image);
                 });
                 const blog = this.blog;
+
                 await this.setCreatePostImage({data, blog})
             // }else {
                 // let data = 'images'

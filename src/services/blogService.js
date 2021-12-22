@@ -11,6 +11,12 @@ class BlogServices extends RequestHandler{
       // console.log('payload', response.data);
       return response;
     }
+    async getPosts(){
+      console.log('asdasdasdasddas')
+      const response = await this.apiClient.get('/get-posts')
+      return response;
+      
+    }
 }
 const blogServices = new BlogServices();
 export default blogServices;
