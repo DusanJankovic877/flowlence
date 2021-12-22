@@ -1,11 +1,13 @@
 <template>
     <div class="col-lg-7 m-auto post" style="height: 500px;" >
         <div class="row">
-            <div v-for="post in posts" :key="'post_'+post" class="col-lg-4 krug blog-circle" style="padding-top: 35px; text-align:center;">
+
+            <div v-for="post in posts" :key="'post_'+post.post_title.id" class="col-lg-4 krug blog-circle" style="padding-top: 35px; text-align:center;">
+             
                 <div style="padding-left:40px;padding-right:40px;">
                     <h5 >{{post.post_title.post_title}}</h5>
                 </div>
-                <div v-for="image in post.section_titles.images" :key="image.id"  >
+                <div v-for="image in post.section_titles.images" :key="'image_'+image.id"  >
                     <div style="height: 100px; overflow:hidden;">
                         <img 
                         :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
