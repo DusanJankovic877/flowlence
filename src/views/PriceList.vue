@@ -571,7 +571,7 @@ export default {
 .price-list-component{
     margin-top: 0px;
 }
-.krug{border: none;color:#404040; border-radius: 10em !important;}
+.krug{border: none;color:#404040; border-radius: 10em !important; text-decoration: none;}
 .entrepreneur-krug{
     color: #404040;
     border: none;

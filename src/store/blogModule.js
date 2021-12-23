@@ -9,7 +9,8 @@ const blogModule = {
         postImages: [],
         postToCreate:{},
         savedImages:{},
-        posts:{}
+        posts:{},
+        post:{}
     },
     mutations:{
         setNewTextArea(state, payload){
@@ -27,14 +28,20 @@ const blogModule = {
             state.savedImages = payload
         },
         SET_POSTS(state, payload){
-            console.log('post', payload)
-
             state.posts =  payload
+        },
+        SET_POST(state, payload){
+            state.post = payload
+        },
+        EMPTY_POST(state){
+            state.post = {}
+        },
+        EMPTY_POSTS(state){
+            state.posts = {}
         }
     },
     actions:{
         addNewTextArea(state, payload){
-            console.log('blog module',payload);
             state.commit('setNewTextArea', payload)
         },
         deleteTextArea(){
@@ -63,7 +70,6 @@ const blogModule = {
                     }
                 });
                 if(foundCheck === true){
-                    console.log('Blog service module call', response.data.images);
                     payload.blog.images.forEach(blogImage => {
                         response.data.images.forEach(savedImage => {
                             const imageName = savedImage.slice(11);
@@ -72,7 +78,6 @@ const blogModule = {
                             }
                         });
                     });
-                    // console.log('sliced iamgenae', payload.blog)
                     dispatch('setCreatePost', {blog: payload.blog})
                 }else {
                     return;
@@ -85,9 +90,21 @@ const blogModule = {
         },
         async getPosts({commit}){
             const response = await blogService.getPosts();
-            // if(response.data){
+            if(response.data){
                 commit('SET_POSTS', response.data)
-            // }
+            }
+        },
+        emptyPosts({commit}){
+            commit('EMPTY_POSTS')
+        },
+        async getPost({commit},payload){
+            const response = await blogService.getPost(payload);
+            if(response.data){
+                commit('SET_POST', response.data)
+            }
+        },
+        emptyPost({commit}){
+            commit('EMPTY_POST')
         }
     },
     getters:{
@@ -95,7 +112,8 @@ const blogModule = {
         blog: (state) => state.blog,
         postImages: (state) => state.postImages,
         savedImages: (state) => state.savedImages,
-        posts: (state) => state.posts
+        posts: (state) => state.posts,
+        post: (state) => state.post
 
     }
 

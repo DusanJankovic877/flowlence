@@ -11,7 +11,6 @@ const adminModule = {
     mutations:{
         SET_TOKEN(state, token){
             state.token = token;
-            console.log('token setted', state.token);
         },
         SET_USER(state, data){
             state.user = data

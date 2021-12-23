@@ -1,23 +1,23 @@
 <template>
-    <div class="col-lg-7 m-auto post" style="height: 500px;" >
+    <div class="col-lg-7 m-auto post">
         <div class="row">
-
-            <div v-for="post in posts" :key="'post_'+post.post_title.id" class="col-lg-4 krug blog-circle" style="padding-top: 35px; text-align:center;">
-             
-                <div style="padding-left:40px;padding-right:40px;">
-                    <h5 >{{post.post_title.post_title}}</h5>
-                </div>
-                <div v-for="image in post.section_titles.images" :key="'image_'+image.id"  >
-                    <div style="height: 100px; overflow:hidden;">
-                        <img 
-                        :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
-                        alt="picture" 
-                        style="width:100%;">
+            <div v-for="post in posts" :key="'post_'+post.post_title.id" class="col-lg-4 krug blog-circle">
+                <router-link class="krug"  :to="{'name': 'admin-post', params:{id: post.post_title.id}}">
+                    <div class="post-title" style="">
+                        <h5 >{{post.post_title.post_title}}</h5>
                     </div>
-                    <div class="mt-3">
-                        <p>{{post.section_titles.title}}</p>
+                    <div v-for="image in post.section_titles.images" :key="'image_'+image.id"  >
+                        <div class="blog-image">
+                            <img 
+                            :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
+                            alt="picture" 
+                            >
+                        </div>
+                        <div class="mt-3">
+                            <p>{{post.section_titles.title}}</p>
+                        </div>
                     </div>
-                </div>
+                </router-link>   
             </div>
         </div>
     </div>
@@ -26,20 +26,17 @@
 
 import { mapActions, mapGetters } from 'vuex'
 export default {
-    data() {
-        return{
-
-        }
-    },
     computed:{
         ...mapGetters({posts: 'BlogModule/posts'})
     },
     methods:{
-        ...mapActions({getPosts: 'BlogModule/getPosts'})
+        ...mapActions({getPosts: 'BlogModule/getPosts',  emptyPosts: 'BlogModule/emptyPosts'})
     },
-
     created(){
         this.getPosts()
+    },
+    destroyed(){
+        this.emptyPosts()
     }
 }
 </script>
@@ -48,17 +45,26 @@ export default {
         width: 100%;
         height: auto;
     }
-    .second-image{
-
-        overflow: hidden;
-        max-height: 43vh !important;
-        width: 100%;
-        background-size: auto;
+    .blog-circle{
+        padding-top: 35px; text-align:center;
     }
-
+    .blog-image{
+        height: 100px; overflow:hidden;
+    }
     .post{
+        /* height: 580px; */
+        margin-bottom: 50px !important;
+        padding-top: 100px;
+        padding-bottom: 100px;
         background-color: rgba(255, 248, 220, 0.479);
         text-align:left;
+    }
+    .post-title{
+        padding-left:40px;
+        padding-right:40px;
+    }
+    a:hover{
+        color: #404040;
     }
     .post span{
         text-decoration: underline;

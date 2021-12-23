@@ -35,18 +35,15 @@ export default new Vuex.Store({
     },
     setFormEmailMessage(state, payload){
       state.emailFormMessage = payload
-      console.log(state.emailFormMessage);
     },
     setApiWaitingCountIncrement(state){
       state.apiWaitingCount += 1
     },
     setApiWaitingCountDecrement(state){
       state.apiWaitingCount -= 1;
-      console.log(state.apiWaitingCount)
     },
     setErrors(state, payload){
       if(state.apiWaitingCount === 1)state.errors.push(payload)
-      
     },
     deleteErrors(state){
       state.errors = []
