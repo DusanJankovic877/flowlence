@@ -10,7 +10,9 @@ const blogModule = {
         postToCreate:{},
         savedImages:{},
         posts:{},
-        post:{}
+        post:{},
+        postToEdit:{},
+        imagesForPost:[]
     },
     mutations:{
         setNewTextArea(state, payload){
@@ -32,13 +34,19 @@ const blogModule = {
         },
         SET_POST(state, payload){
             state.post = payload
+           
         },
         EMPTY_POST(state){
             state.post = {}
+
         },
         EMPTY_POSTS(state){
             state.posts = {}
+        },
+        SET_IMAGES_FOR_POST(state,payload){
+            state.imagesForPost.push(payload)
         }
+
     },
     actions:{
         addNewTextArea(state, payload){
@@ -99,13 +107,28 @@ const blogModule = {
         },
         async getPost({commit},payload){
             const response = await blogService.getPost(payload);
+            //take images and send to 
+            // console.log(response.data);
+            // '/get-image/{filename}'
             if(response.data){
                 commit('SET_POST', response.data)
+                response.data.section_titles.forEach(section_title => {
+                    section_title.images.forEach(async image => {
+                       const imageResponse = await blogService.getImage(image.name);
+                        console.log(imageResponse);
+                        commit('SET_IMAGES_FOR_POST', imageResponse.data)
+
+                    });
+                });
             }
+          
+        },
+        getImage(){
+
         },
         emptyPost({commit}){
             commit('EMPTY_POST')
-        }
+        },
     },
     getters:{
         textareasToDelete: (state) => state.textareasToDelete,
@@ -113,7 +136,8 @@ const blogModule = {
         postImages: (state) => state.postImages,
         savedImages: (state) => state.savedImages,
         posts: (state) => state.posts,
-        post: (state) => state.post
+        post: (state) => state.post,
+        imagesForPost: (state) => state.imagesForPost
 
     }
 

@@ -10,6 +10,7 @@ import Admin from '../views/Admin.vue'
 import CreatePostComponent from '../components/admin/CreatePostComponent.vue'
 import PostsComponent from '../components/admin/PostsComponent'
 import PostComponent from '../components/admin/PostComponent'
+import EditPost from '../components/admin/EditPost'
 // import store from '../store'
 
 
@@ -81,17 +82,29 @@ const routes = [
     
   },
   {
-  path: '/posts/:id',
-  name: 'admin-post',
-  component: PostComponent,
-  // beforeEnter(from, to, next){
-  //   if(!store.getters['AdminModule/isLogged']){
-  //     return next('/jolanda')
-  //   }
-  //   next();
-  // }
-  
-},
+    path: '/posts/:id',
+    name: 'admin-post',
+    component: PostComponent,
+    // beforeEnter(from, to, next){
+    //   if(!store.getters['AdminModule/isLogged']){
+    //     return next('/jolanda')
+    //   }
+    //   next();
+    // }
+    
+  },
+  {
+    path: '/edit-post/:id',
+    name: 'edit-post',
+    component: EditPost,
+    // beforeEnter(from, to, next){
+    //   if(!store.getters['AdminModule/isLogged']){
+    //     return next('/jolanda')
+    //   }
+    //   next();
+    // }
+    
+  },
 
 ]
 

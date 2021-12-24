@@ -16,7 +16,15 @@
             <p>{{textarea.text}}</p>
         </div>
     </div>
-    <button class="col-lg-2 btn btn-danger" @click="goBack">idi nazad</button>
+    <div class="row">
+{{routeParam}}
+    <button class="col-lg-2 btn btn-danger m-auto" @click="goBack">idi nazad</button>
+
+    <router-link class="col-lg-2 btn btn-success m-auto" style="border-radius:0;"  :to="{'name': 'edit-post', params:{id: routeParam}}">uredi objavu
+
+
+    </router-link>
+    </div>
 </div>
 </template>
 <script>
@@ -24,12 +32,16 @@ import { mapGetters } from 'vuex'
 import store from '../../store'
 export default {
     computed:{
-        ...mapGetters({post: 'BlogModule/post'})
+        ...mapGetters({post: 'BlogModule/post'}),
+        routeParam(){
+            return this.$route.params.id
+        }
     },
     methods:{
         goBack(){
             this.$router.push('/posts');
         }
+
     },
     beforeRouteEnter(from, to, next){
     store.dispatch('BlogModule/getPost', from.params.id)

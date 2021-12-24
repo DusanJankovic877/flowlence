@@ -1,12 +1,6 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
     <form @submit.prevent="handleFormSubmit" method="POST" enctype="multipart/form-data">
-    <!-- <img src="http://127.0.0.1:8000/api/get-image/1639656202_elena-putina-WuSzNJpys_4-unsplash.jpg" alt=""> i ruta na api za ovo -->
-    <!-- {{imagee}} -->
-        <!-- <pre>
-        {{blog}}
-        </pre> -->
-
         <h1>Povezati slike i teks reone sa odredjenim naslovom sekcije posta</h1>
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
@@ -220,9 +214,7 @@ export default {
         return{
             images:[
                 {
-                        //imageId: 0,
-                       //belongsTo:'',//belong to what section title ID GOES THERE
-                 
+
                 }
             ],
             imagePreview: null,
@@ -269,6 +261,9 @@ export default {
     },
     computed:{
         ...mapGetters({errors: 'errors',savedImages: 'BlogModule/savedImages'}),
+        routeParam(){
+            return this.$route.params.id
+        }
 
     },
     methods:{
@@ -305,20 +300,9 @@ console.log(id);
                 const blog = this.blog;
 
                 await this.setCreatePostImage({data, blog})
-            // }else {
-                // let data = 'images'
-                // const blog = this.blog;
-        
-                // await this.setCreatePostImage({data, blog})
-            // }
-
-            
             console.log('blog', this.blog);
-
-
-            // await this.setCreatePost(blog)
-
         },
+
         handleAddTextarea(){
             this.blog.textareas.push({textareaId: this.counter++, text: '', belongsTo: ''})        
         },

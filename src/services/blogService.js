@@ -17,6 +17,10 @@ class BlogServices extends RequestHandler{
       const response = await this.apiClient.get(`get-posts/${id}`);
       return response;
     }
+    async getImage(name){
+      const response = await this.apiClient.get(`/get-image/${name}`) ;
+      return response;
+    }
 }
 const blogServices = new BlogServices();
 export default blogServices;
