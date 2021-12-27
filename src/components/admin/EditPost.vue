@@ -21,7 +21,7 @@
             <!-- <div v-else></div> --> 
         </div>
                 <!-- section title -->
-        <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in post.section_titles" :key="'sectionTitle_'+sectionTId">
+        <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in sectionTitles" :key="'sectionTitle_'+sectionTId">
             <label for="blog-section-title"  class="form-label col-lg-9">Naslov sekcije br:{{sectionTId}}</label>
             <div class="col-lg-7 file-inputs">
 
@@ -42,9 +42,9 @@
                 <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(sectionTId)">Obrisi</button>
             </div>
             <div v-else class="col-lg-1"></div>
-            <div v-if="post.section_titles.length === sectionTId+1"  class="section-title-button col-lg-2">
+            <div v-if="sectionTitles.length === sectionTId+1"  class="section-title-button col-lg-2">
                 
-                <button @click="handleAddSectionTitle(post.section_titles.length)" class="btn btn-success s-title-button col-lg-12">
+                <button @click="handleAddSectionTitle(sectionTitles.length)" class="btn btn-success s-title-button col-lg-12">
                     Dodaj nov naslov
                 </button>
             </div>
@@ -106,7 +106,7 @@
 
                 <!-- section titles to bind to -->
                 <div class="col-lg-2">
-                    <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'imageSecionT_'+sectionTitle.id">
+                    <div class="form-check" v-for="(sectionTitle) in sectionTitles" :key="'imageSecionT_'+sectionTitle.id">
                         <!-- {{sectionTitle.images}} -->
 
                         <input class="form-check-input" type="radio" :name="'radio-input'+image.id+''+sectionTitle.id" :id="'radio-input-'+image.id+''+sectionTitle.id" :value="sectionTitle.id" v-model="image.section_title_id">
@@ -165,45 +165,19 @@ export default {
        } 
     },
     computed:{
-        ...mapGetters({post: 'BlogModule/post', imagesForPost: 'BlogModule/imagesForPost', imagesE: 'BlogModule/imagesE', post_title: 'BlogModule/post_title'}),
-        // imagesToShow(){
-        //    if(this.imagesE.length === 0){
-
-        //        console.log('true');
-        //        this.post.section_titles.forEach(sectionTitle => {
-        //            sectionTitle.images.forEach(image => {
-        //               this.imagesE.push(image);
-        //            });
-        //        });
-               
-        //    }
-        //    return this.imagesE
-        // }
-        // imagesToEdit(){
-        //     const imagesToE = []
-        //     this.post.section_titles.forEach(section_title => {
-        //         section_title.images.forEach(image => {
-        //             imagesToE.push(image);
-        //         });
-        //     });
-        //     console.log(imagesToE);
-        //     return imagesToE;
-
-        // }
+        ...mapGetters({post: 'BlogModule/post', imagesForPost: 'BlogModule/imagesForPost', imagesE: 'BlogModule/imagesE', post_title: 'BlogModule/post_title',sectionTitles: 'BlogModule/sectionTitles'}),
     },
     methods:{
         previewFiles(e, id){
-            this.post.section_titles.forEach(sectionTitle => {
+            this.sectionTitles.forEach(sectionTitle => {
                 sectionTitle.images.forEach(image => {
                     this.empty = image
                         this.imagesEE.push()
-                        this.empty = ''
-                     
+                        this.empty = ''   
                 });
             });
                   
             e.target.files.forEach(file => {
-                // this.imagesE[id - 1] = URL.createObjectURL(file);
                 const fileUrl = URL.createObjectURL(file)
                 this.imagesEE[id - 1] = fileUrl;
             });
@@ -222,8 +196,7 @@ export default {
             this.post.section_titles.splice(k, 1);
         },
         handleAddImage(imagesLength){
-            // console.log('imagesLength '+imagesLength, 'IP '+this.imagesForPost);
-            // this.imagesForPost.push({imageId: this.imageCounter++, belongsTo: ''})
+            this.imagesForPost.push({imageId: this.imageCounter++, belongsTo: ''})
             this.imagesE.push({})
             console.log('imagesE '+this.imagesE, imagesLength);
 

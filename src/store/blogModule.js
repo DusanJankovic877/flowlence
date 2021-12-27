@@ -13,6 +13,7 @@ const blogModule = {
         post:{},
         postToEdit:{},
         post_title: '',
+        sectionTitles:{},
         imagesForPost:[],
         imagesE:[],
     },
@@ -42,8 +43,9 @@ const blogModule = {
                 });
 
             });
-            state.post_title = state.post.post_title.post_title
-            // console.log(state.post.post_title.post_title);
+            state.post_title = payload.post_title.post_title
+            state.sectionTitles = payload.section_titles
+            console.log(payload);
            
         },
         EMPTY_POST(state){
@@ -149,7 +151,8 @@ const blogModule = {
         post: (state) => state.post,
         imagesForPost: (state) => state.imagesForPost,
         imagesE: (state) => state.imagesE,
-        post_title: (state) => state.post_title
+        post_title: (state) => state.post_title,
+        sectionTitles: (state) => state.sectionTitles
 
     }
 
