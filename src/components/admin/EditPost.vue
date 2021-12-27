@@ -148,12 +148,12 @@
 </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import store from '../../store'
 export default {
     data() {
        return{
-    
+           imagesToEdit:[],
            imagesEE: [
                
                ],
@@ -164,6 +164,7 @@ export default {
         ...mapGetters({post: 'BlogModule/post', imagesE: 'BlogModule/imagesE', post_title: 'BlogModule/post_title',sectionTitles: 'BlogModule/sectionTitles'}),
     },
     methods:{
+        ...mapActions({setEditPostImage: 'BlogModule/setEditPostImage'}),
         previewFiles(e, id){
             this.sectionTitles.forEach(sectionTitle => {
                 sectionTitle.images.forEach(image => {
@@ -176,11 +177,18 @@ export default {
             e.target.files.forEach(file => {
                 const fileUrl = URL.createObjectURL(file)
                 this.imagesEE[id - 1] = fileUrl;
+                this.imagesToEdit[id - 1] = file
             });
 
         },
-        handleEditPost(){
+        async handleEditPost(){
             console.log('edit');
+            let data = new FormData();
+            this.imagesToEdit.forEach((image) => {
+                data.append('images[]', image);
+            });
+                await this.setEditPostImage(data)
+
         },
         goBackToPost(){
             this.$router.push(`/posts/${this.$route.params.id}`);

@@ -120,6 +120,10 @@ const blogModule = {
         emptyPost({commit}){
             commit('EMPTY_POST')
         },
+        async setEditPostImage(_,payload){
+            const response = await blogService.setEditPostImage(payload);
+            console.log('EDIT IMAGES LOG', response);
+        }
     },
     getters:{
         textareasToDelete: (state) => state.textareasToDelete,
@@ -131,7 +135,6 @@ const blogModule = {
         imagesE: (state) => state.imagesE,
         post_title: (state) => state.post_title,
         sectionTitles: (state) => state.sectionTitles
-
     }
 
 }
