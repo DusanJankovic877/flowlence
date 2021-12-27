@@ -7,7 +7,7 @@
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
             
-            <input type="text" class="form-control " id="blog-title" v-model="post.post_title.post_title">
+            <input type="text" class="form-control " id="blog-title" v-model="post_title">
             
             <!-- <div  v-if="errors.length">
                 <div v-for="(error, key) in errors" :key="key">
@@ -57,98 +57,95 @@
                 <input name="img" @change="previewFiles(imageP, imageId)" class="form-control " type="file" id="formFileOne" accept="image/*">
         </div> -->
 
-        <div v-for="section_title in post.section_titles" :key="section_title.id">
+        <!-- <div v-for="section_title in post.section_titles" :key="section_title.id"> -->
 
-        <div class="mb-3  row" v-for="(image, imageId) in section_title.images" :key="'image_'+imageId">
+            <div class="mb-3  row" v-for="(image, imageId) in imagesE" :key="'image_'+imageId">
 
-   
-            <label for="formFileOne" class="form-label"><p>Slika br: {{image.id}}</p></label>
-            <div class="col-lg-7 file-inputs">
-                <!-- {{image}} -->
-                <input name="img" :filename="`http://127.0.0.1:8000/api/get-image/${image.name}`" @change="previewFiles($event, image.id)" class="form-control " type="file" id="formFileOne" accept="image/*">
+    
+                <label for="formFileOne" class="form-label"><p>Slika br: {{image.id}}</p></label>
+                <div class="col-lg-7 file-inputs">
+                    <!-- {{image}} -->
+                    <!-- <div v-for="imagesForPost"></div> -->
+                    <input name="img" @change="previewFiles($event, image.id)" class="form-control " type="file" id="formFileOne" accept="image/*">
 
-         
-            <!-- <div v-for="imageE in imagesE" :key="'imageE_'+imageE.id"> -->
-                <div class="row">
+            
+                <!-- <div v-for="imageE in imagesE" :key="'imageE_'+imageE.id"> -->
+                    <div class="row">
 
-                    <div class="col-lg-6">
-                    <p class="col-lg-2">
-                        old image
-                    </p>
-                    <img 
-                        :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
-                        alt="No image to display" 
-                        style="width:70%;"
-                    >
-                    </div>
-                                    <div class="col-lg-6">
-                    <p class="col-lg-2">
-                        new image
-                    </p>
-                    <img 
-                        :src="imagesE[image.id - 1]" 
-                        alt="No image to display" 
-                        style="width:70%;"
-                    >
-                    </div>
-                </div>
-            <!-- </div> -->
-                <!-- <div v-if="errors.length">       
-                      <span  v-for="(error, key) in errors" :key="key">                    
-                          <div v-for="(errorItems, innerKey) in error" :key="innerKey" >
-                                <span v-if="innerKey === 'images.'+imageId">
-                                    <div v-for="errorItem in errorItems" :key="errorItem.id" class="alert alert-danger col-lg-12  mb-1" role="alert">
-                                        {{errorItem}}
-                                    </div>
-                                </span>
-                          </div>
-                      </span>
-                </div>
-
-                <div v-else></div> -->
-            </div>
-            <!-- <div class=" col-lg-1" v-if="imageId !== 0">
-                <button class="btn btn-danger col-lg-12" @click="handleDeleteImage(imageId)">Obrisi</button>
-            </div>
-            <div v-else class="col-lg-1"></div> -->
-
-            <!-- section titles to bind to -->
-            <!-- <div class="col-lg-2">
-                <div class="form-check" v-for="(sectionTitle, sectionTId) in blog.sectionTitles" :key="'imageSecionT_'+sectionTId">
-                    <input class="form-check-input" type="radio" :name="'radio-input'+imageId" :id="'radio-input-'+imageId+sectionTId" :value="sectionTId" v-model="blog.images[imageId].belongsTo">
-                    <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+imageId+sectionTId">
-                        {{sectionTitle.title}}
-                    </label>
-                    <label class="form-check-label" :for="'radio-input-'+imageId+sectionTId" v-else>
-                        Naslov sekcije
-                    </label>
-                </div>
-                    <div v-if="errors.length">
-                        <div v-for="(error, key) in errors" :key="key">
-                            <span v-for="(errorItem, innerKey) in error" :key="innerKey">
-                                <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'images.'+imageId+'.belongsTo'">
-                                {{errorItem[0]}}
-                                </div>
-                                <div v-else></div>
-                            </span>
+                        <div class="col-lg-6">
+                        <p :class="imagesEE[image.id - 1] ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
+                            {{imagesEE[image.id - 1] ? 'new image' : 'old image'}}
+                        </p>
+                        <img 
+                            :src="imagesEE[image.id - 1] ? imagesEE[image.id - 1] : `http://127.0.0.1:8000/api/get-image/${image.name}`" 
+                            alt="No image to display" 
+                            style="width:70%;"
+                        >
                         </div>
+                                 
                     </div>
-                    <div v-else></div>
-            </div> -->
-            <!-- <div class="col-lg-2">
-                <div v-if="images.length === imageId+1" class="">
-                <button @click="handleAddImage(images.length)" class="btn btn-success  ">
-                    Dodaj novu sliku
-                </button>
+                <!-- </div> -->
+                    <!-- <div v-if="errors.length">       
+                        <span  v-for="(error, key) in errors" :key="key">                    
+                            <div v-for="(errorItems, innerKey) in error" :key="innerKey" >
+                                    <span v-if="innerKey === 'images.'+imageId">
+                                        <div v-for="errorItem in errorItems" :key="errorItem.id" class="alert alert-danger col-lg-12  mb-1" role="alert">
+                                            {{errorItem}}
+                                        </div>
+                                    </span>
+                            </div>
+                        </span>
+                    </div>
+
+                    <div v-else></div> -->
                 </div>
-                <div v-else class="col-lg-12"></div>
-            </div> -->
-            <!-- <div v-if="imagePreview" class="row mt-3">
-                <img :src="imagePreview" alt="" style="width: 200px;">
-            </div> -->
-        
-        </div>
-        </div>
+                <div class=" col-lg-1" v-if="image.id - 1 !== 0">
+                    <button class="btn btn-danger col-lg-12" @click="handleDeleteImage(image.id)">Obrisi</button>
+                </div>
+                <div v-else class="col-lg-1"></div>
+
+                <!-- section titles to bind to -->
+                <div class="col-lg-2">
+                    <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'imageSecionT_'+sectionTitle.id">
+                        <!-- {{sectionTitle.images}} -->
+
+                        <input class="form-check-input" type="radio" :name="'radio-input'+image.id+''+sectionTitle.id" :id="'radio-input-'+image.id+''+sectionTitle.id" :value="sectionTitle.id" v-model="image.section_title_id">
+                        <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id">
+                    
+                            {{sectionTitle.title}}
+                        </label>
+                        <label class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id" v-else>
+                            Naslov sekcije
+                        </label>
+                    </div>
+                    <!--    <div v-if="errors.length">
+                            <div v-for="(error, key) in errors" :key="key">
+                                <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                                    <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'images.'+imageId+'.belongsTo'">
+                                    {{errorItem[0]}}
+                                    </div>
+                                    <div v-else></div>
+                                </span>
+                            </div>
+                        </div>
+                        <div v-else></div>-->
+                </div> 
+               
+                <div class="col-lg-2">
+                    <!-- {{imagesToShow.length}} -->
+                    <div v-if="imagesE.length === image.id" class="">
+                    <button @click="handleAddImage(imagesE.length)" class="btn btn-success  ">
+                        Dodaj novu sliku
+                    </button>
+                    </div>
+                    <div v-else class="col-lg-12"></div>
+                </div>
+                <!-- <div v-if="imagePreview" class="row mt-3">
+                    <img :src="imagePreview" alt="" style="width: 200px;">
+                </div> -->
+            </div>
+            
+        <!-- </div> -->
         <button>Pošalji</button>
         <button class="col-lg-2 btn btn-danger m-auto" @click="goBackToPost">idi nazad</button>
     </form>
@@ -160,35 +157,55 @@ import store from '../../store'
 export default {
     data() {
        return{
-           imagesE: [
-        
-               ]
+    
+           imagesEE: [
+               
+               ],
+               empty: ''
        } 
     },
     computed:{
-        ...mapGetters({post: 'BlogModule/post', imagesForPost: 'BlogModule/imagesForPost'}),
-        imagesToEdit(){
-            const imagesToE = []
-            this.post.section_titles.forEach(section_title => {
-                section_title.images.forEach(image => {
-                    imagesToE.push(image);
-                });
-            });
-            console.log(imagesToE);
-            return imagesToE;
+        ...mapGetters({post: 'BlogModule/post', imagesForPost: 'BlogModule/imagesForPost', imagesE: 'BlogModule/imagesE', post_title: 'BlogModule/post_title'}),
+        // imagesToShow(){
+        //    if(this.imagesE.length === 0){
 
-        }
+        //        console.log('true');
+        //        this.post.section_titles.forEach(sectionTitle => {
+        //            sectionTitle.images.forEach(image => {
+        //               this.imagesE.push(image);
+        //            });
+        //        });
+               
+        //    }
+        //    return this.imagesE
+        // }
+        // imagesToEdit(){
+        //     const imagesToE = []
+        //     this.post.section_titles.forEach(section_title => {
+        //         section_title.images.forEach(image => {
+        //             imagesToE.push(image);
+        //         });
+        //     });
+        //     console.log(imagesToE);
+        //     return imagesToE;
+
+        // }
     },
     methods:{
         previewFiles(e, id){
             this.post.section_titles.forEach(sectionTitle => {
                 sectionTitle.images.forEach(image => {
-                    console.log(image);
-                    this.imagesE.push({})
+                    this.empty = image
+                        this.imagesEE.push()
+                        this.empty = ''
+                     
                 });
             });
+                  
             e.target.files.forEach(file => {
-                this.imagesE[id - 1] = URL.createObjectURL(file);
+                // this.imagesE[id - 1] = URL.createObjectURL(file);
+                const fileUrl = URL.createObjectURL(file)
+                this.imagesEE[id - 1] = fileUrl;
             });
 
         },
@@ -204,10 +221,18 @@ export default {
         handleDeleteSecetionTitle(k){
             this.post.section_titles.splice(k, 1);
         },
+        handleAddImage(imagesLength){
+            // console.log('imagesLength '+imagesLength, 'IP '+this.imagesForPost);
+            // this.imagesForPost.push({imageId: this.imageCounter++, belongsTo: ''})
+            this.imagesE.push({})
+            console.log('imagesE '+this.imagesE, imagesLength);
+
+        },
     },
     beforeRouteEnter(from, to, next){
         store.dispatch('BlogModule/getPost', from.params.id)
         next();
+        
     },
     destroyed(){
         store.dispatch('BlogModule/emptyPost')

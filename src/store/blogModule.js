@@ -12,7 +12,9 @@ const blogModule = {
         posts:{},
         post:{},
         postToEdit:{},
-        imagesForPost:[]
+        post_title: '',
+        imagesForPost:[],
+        imagesE:[],
     },
     mutations:{
         setNewTextArea(state, payload){
@@ -34,6 +36,14 @@ const blogModule = {
         },
         SET_POST(state, payload){
             state.post = payload
+            state.post.section_titles.forEach(section_title => {
+                section_title.images.forEach(image => {
+                    state.imagesE.push(image)
+                });
+
+            });
+            state.post_title = state.post.post_title.post_title
+            // console.log(state.post.post_title.post_title);
            
         },
         EMPTY_POST(state){
@@ -115,7 +125,7 @@ const blogModule = {
                 response.data.section_titles.forEach(section_title => {
                     section_title.images.forEach(async image => {
                        const imageResponse = await blogService.getImage(image.name);
-                        console.log(imageResponse);
+                        // console.log(imageResponse);
                         commit('SET_IMAGES_FOR_POST', imageResponse.data)
 
                     });
@@ -137,7 +147,9 @@ const blogModule = {
         savedImages: (state) => state.savedImages,
         posts: (state) => state.posts,
         post: (state) => state.post,
-        imagesForPost: (state) => state.imagesForPost
+        imagesForPost: (state) => state.imagesForPost,
+        imagesE: (state) => state.imagesE,
+        post_title: (state) => state.post_title
 
     }
 
