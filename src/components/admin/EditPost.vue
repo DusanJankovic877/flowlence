@@ -2,7 +2,6 @@
 <div class="col-lg-7 m-auto create-post-form">
     <h1>editPost</h1>
     <form @submit.prevent="handleEditPost" method="POST" enctype="multipart/form-data">
-<!-- {{imagesForPost}} -->
 
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
@@ -21,7 +20,7 @@
             <!-- <div v-else></div> --> 
         </div>
                 <!-- section title -->
-        <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in sectionTitles" :key="'sectionTitle_'+sectionTId">
+        <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in this.post.section_titles" :key="'sectionTitle_'+sectionTId">
             <label for="blog-section-title"  class="form-label col-lg-9">Naslov sekcije br:{{sectionTId}}</label>
             <div class="col-lg-7 file-inputs">
 
@@ -52,10 +51,7 @@
         </div>
         <!-- IMAGE -->
         <!-- {{post.section_titles.images}} -->
-        <!-- <div v-for="imageP in imagesForPost" :key="imageP.id">
 
-                <input name="img" @change="previewFiles(imageP, imageId)" class="form-control " type="file" id="formFileOne" accept="image/*">
-        </div> -->
 
         <!-- <div v-for="section_title in post.section_titles" :key="section_title.id"> -->
 
@@ -65,7 +61,7 @@
                 <label for="formFileOne" class="form-label"><p>Slika br: {{image.id}}</p></label>
                 <div class="col-lg-7 file-inputs">
                     <!-- {{image}} -->
-                    <!-- <div v-for="imagesForPost"></div> -->
+
                     <input name="img" @change="previewFiles($event, image.id)" class="form-control " type="file" id="formFileOne" accept="image/*">
 
             
@@ -165,7 +161,7 @@ export default {
        } 
     },
     computed:{
-        ...mapGetters({post: 'BlogModule/post', imagesForPost: 'BlogModule/imagesForPost', imagesE: 'BlogModule/imagesE', post_title: 'BlogModule/post_title',sectionTitles: 'BlogModule/sectionTitles'}),
+        ...mapGetters({post: 'BlogModule/post', imagesE: 'BlogModule/imagesE', post_title: 'BlogModule/post_title',sectionTitles: 'BlogModule/sectionTitles'}),
     },
     methods:{
         previewFiles(e, id){
@@ -196,19 +192,18 @@ export default {
             this.post.section_titles.splice(k, 1);
         },
         handleAddImage(imagesLength){
-            this.imagesForPost.push({imageId: this.imageCounter++, belongsTo: ''})
+          console.log(imagesLength);
             this.imagesE.push({})
-            console.log('imagesE '+this.imagesE, imagesLength);
-
         },
     },
     beforeRouteEnter(from, to, next){
         store.dispatch('BlogModule/getPost', from.params.id)
         next();
-        
     },
-    destroyed(){
+    beforeRouteLeave(from, to, next){
         store.dispatch('BlogModule/emptyPost')
+        next();
+
     }
 }
 </script>

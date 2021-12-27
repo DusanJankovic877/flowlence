@@ -14,7 +14,6 @@ const blogModule = {
         postToEdit:{},
         post_title: '',
         sectionTitles:{},
-        imagesForPost:[],
         imagesE:[],
     },
     mutations:{
@@ -41,31 +40,26 @@ const blogModule = {
                 section_title.images.forEach(image => {
                     state.imagesE.push(image)
                 });
-
             });
             state.post_title = payload.post_title.post_title
             state.sectionTitles = payload.section_titles
-            console.log(payload);
-           
         },
         EMPTY_POST(state){
             state.post = {}
+            state.post_title = ''
+            state.sectionTitles = {}
+            state.imagesE = []
 
         },
         EMPTY_POSTS(state){
             state.posts = {}
-        },
-        SET_IMAGES_FOR_POST(state,payload){
-            state.imagesForPost.push(payload)
         }
+
 
     },
     actions:{
         addNewTextArea(state, payload){
             state.commit('setNewTextArea', payload)
-        },
-        deleteTextArea(){
-
         },
         async setCreatePost(_, payload){
             await blogService.createPost(payload)
@@ -119,24 +113,9 @@ const blogModule = {
         },
         async getPost({commit},payload){
             const response = await blogService.getPost(payload);
-            //take images and send to 
-            // console.log(response.data);
-            // '/get-image/{filename}'
             if(response.data){
                 commit('SET_POST', response.data)
-                response.data.section_titles.forEach(section_title => {
-                    section_title.images.forEach(async image => {
-                       const imageResponse = await blogService.getImage(image.name);
-                        // console.log(imageResponse);
-                        commit('SET_IMAGES_FOR_POST', imageResponse.data)
-
-                    });
-                });
             }
-          
-        },
-        getImage(){
-
         },
         emptyPost({commit}){
             commit('EMPTY_POST')
@@ -149,7 +128,6 @@ const blogModule = {
         savedImages: (state) => state.savedImages,
         posts: (state) => state.posts,
         post: (state) => state.post,
-        imagesForPost: (state) => state.imagesForPost,
         imagesE: (state) => state.imagesE,
         post_title: (state) => state.post_title,
         sectionTitles: (state) => state.sectionTitles
