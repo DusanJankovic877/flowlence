@@ -69,11 +69,13 @@ const blogModule = {
             const response = await blogService.setCreatePostImage(payload.data);
             let rImageNames = [];
             if(response){
+                //slice date time stamp from image name
                 response.data.images.forEach(rImage => {
                     const rImageName = rImage.slice(11);
                     rImageNames.push(rImageName);
                 });
                 let foundCheck = null;
+                //check sliced image name with image name in blog object
                 rImageNames.forEach(rImageNamee => {
                     const found = payload.blog.images.find(x => x.name === rImageNamee);
                     if(found){
@@ -121,8 +123,31 @@ const blogModule = {
             commit('EMPTY_POST')
         },
         async setEditPostImage(_,payload){
-            const response = await blogService.setEditPostImage(payload);
-            console.log('EDIT IMAGES LOG', response);
+            const imageResponse = await blogService.setEditPostImage(payload.data);
+            let sameNames = false;
+            imageResponse.images.forEach(savedImage => {
+                const imageName = savedImage.slice(11);
+                console.log('payload.imagesToEdit', payload.imagesToEdit);
+                payload.imagesToEdit.forEach(imageToEdit => {
+                    console.log(imageName === imageToEdit.imageName, imageName+' '+imageToEdit.imageName);
+                        if(imageName === imageToEdit.imageName){
+                            imageToEdit.imageName = savedImage
+                            // console.log(imageToEdit);
+                            sameNames = true
+                        } else{
+                            sameNames = false
+                        }
+                });
+            });
+            if(sameNames){
+                console.log('imagesToEdit', payload.imagesToEdit);
+                const postResponse = await blogService.saveEditPost({post: payload.post, images_to_edit: payload.imagesToEdit})
+                console.log(postResponse);
+            }
+            // if(response){
+
+            // }
+            // console.log('EDIT IMAGES LOG', response);
         }
     },
     getters:{

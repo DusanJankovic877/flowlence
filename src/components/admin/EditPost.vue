@@ -5,8 +5,10 @@
 
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
-            
-            <input type="text" class="form-control " id="blog-title" v-model="post_title">
+
+
+            <input type="text" class="form-control " id="blog-title"  v-model="post.post_title">
+       
             
             <!-- <div  v-if="errors.length">
                 <div v-for="(error, key) in errors" :key="key">
@@ -54,26 +56,19 @@
 
 
         <!-- <div v-for="section_title in post.section_titles" :key="section_title.id"> -->
-
             <div class="mb-3  row" v-for="(image, imageId) in imagesE" :key="'image_'+imageId">
-
-    
-                <label for="formFileOne" class="form-label"><p>Slika br: {{image.id}}</p></label>
+                <label for="formFileOne" class="form-label"><p>Slika br: {{image.id ? image.id : image.formImageId}}</p></label>
                 <div class="col-lg-7 file-inputs">
-                    <!-- {{image}} -->
-
-                    <input name="img" @change="previewFiles($event, image.id)" class="form-control " type="file" id="formFileOne" accept="image/*">
-
-            
-                <!-- <div v-for="imageE in imagesE" :key="'imageE_'+imageE.id"> -->
+                    <input name="img" @change="previewFiles($event, image.id ? image.id : image.formImageId, image.section_title_id)" class="form-control " type="file" id="formFileOne" accept="image/*">
                     <div class="row">
 
                         <div class="col-lg-6">
-                        <p :class="imagesEE[image.id - 1] ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
-                            {{imagesEE[image.id - 1] ? 'new image' : 'old image'}}
+                        <p :class="imagesEE[image.id ? image.id - 1 : image.formImageId - 1] ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
+                            {{imagesEE[image.id ? image.id - 1 : image.formImageId - 1] ? 'new image' : 'old image'}}
+                          
                         </p>
                         <img 
-                            :src="imagesEE[image.id - 1] ? imagesEE[image.id - 1] : `http://127.0.0.1:8000/api/get-image/${image.name}`" 
+                            :src="imagesEE[image.id ? image.id - 1 : image.formImageId - 1] ? imagesEE[image.id ? image.id - 1 : image.formImageId - 1] : `http://127.0.0.1:8000/api/get-image/${image.name}`" 
                             alt="No image to display" 
                             style="width:70%;"
                         >
@@ -95,6 +90,7 @@
 
                     <div v-else></div> -->
                 </div>
+    
                 <div class=" col-lg-1" v-if="image.id - 1 !== 0">
                     <button class="btn btn-danger col-lg-12" @click="handleDeleteImage(image.id)">Obrisi</button>
                 </div>
@@ -104,7 +100,11 @@
                 <div class="col-lg-2">
                     <div class="form-check" v-for="(sectionTitle) in sectionTitles" :key="'imageSecionT_'+sectionTitle.id">
                         <!-- {{sectionTitle.images}} -->
-
+                        <div v-if="sectionTitle.images.length">
+                            {{image.section_title_id}}
+                            <p>nije 0</p>
+                        </div>
+                        <div v-else> jeste 0</div>
                         <input class="form-check-input" type="radio" :name="'radio-input'+image.id+''+sectionTitle.id" :id="'radio-input-'+image.id+''+sectionTitle.id" :value="sectionTitle.id" v-model="image.section_title_id">
                         <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id">
                     
@@ -128,11 +128,13 @@
                 </div> 
                
                 <div class="col-lg-2">
-                    <!-- {{imagesToShow.length}} -->
-                    <div v-if="imagesE.length === image.id" class="">
-                    <button @click="handleAddImage(imagesE.length)" class="btn btn-success  ">
+              
+                    <!-- {{imagesE.length === image.id - 1}} -->
+                    <div v-if="imagesE.length === image.id - 1" class="">
+                    <button @click="handleAddImage(image.id)" class="btn btn-success  ">
                         Dodaj novu sliku
                     </button>
+                    <!-- {{imagesE}} -->
                     </div>
                     <div v-else class="col-lg-12"></div>
                 </div>
@@ -153,6 +155,7 @@ import store from '../../store'
 export default {
     data() {
        return{
+         
            imagesToEdit:[],
            imagesEE: [
                
@@ -161,11 +164,12 @@ export default {
        } 
     },
     computed:{
-        ...mapGetters({post: 'BlogModule/post', imagesE: 'BlogModule/imagesE', post_title: 'BlogModule/post_title',sectionTitles: 'BlogModule/sectionTitles'}),
+        ...mapGetters({post: 'BlogModule/post', imagesE: 'BlogModule/imagesE', postTitle: 'BlogModule/post_title',sectionTitles: 'BlogModule/sectionTitles'}),
     },
     methods:{
         ...mapActions({setEditPostImage: 'BlogModule/setEditPostImage'}),
-        previewFiles(e, id){
+        previewFiles(e, id, sectionTitleId){
+            console.log(e.target.files);
             this.sectionTitles.forEach(sectionTitle => {
                 sectionTitle.images.forEach(image => {
                     this.empty = image
@@ -177,17 +181,33 @@ export default {
             e.target.files.forEach(file => {
                 const fileUrl = URL.createObjectURL(file)
                 this.imagesEE[id - 1] = fileUrl;
-                this.imagesToEdit[id - 1] = file
+                this.imagesToEdit[id - 1] = {file: file, id :id, sId: sectionTitleId}
             });
+            console.log('images to edit ', this.imagesToEdit[id - 1]);
 
         },
         async handleEditPost(){
-            console.log('edit');
+            // console.log('edit', this.post)
             let data = new FormData();
             this.imagesToEdit.forEach((image) => {
-                data.append('images[]', image);
+            
+                data.append('images[]', image.file);
             });
-                await this.setEditPostImage(data)
+            // console.log('images to edit ', this.imagesToEdit, 'post images ', this.post);
+            
+            // const post = this.post
+            const imagesToEdit = []
+
+            this.imagesToEdit.forEach(imageToEdit => {
+                console.log('imageToEdit', imageToEdit, this.imagesE);
+                const sectionId = this.imagesE.find(x => x.id === imageToEdit.formImageId)
+                console.log('sectionId', sectionId);
+                const sectionTitleId = imageToEdit.sId ? imageToEdit.sId : sectionId.section_title_id;
+                // const imageToReplaceId = '';
+                imagesToEdit.push({imageName: imageToEdit.file.name, imageToReplaceId: imageToEdit.id ? imageToEdit.id : '', sectionTitleId: sectionTitleId})
+            });
+                console.log('imagesToEdit', imagesToEdit, 'imagese', this.imagesE);
+            // await this.setEditPostImage({data, post, imagesToEdit})
 
         },
         goBackToPost(){
@@ -201,7 +221,7 @@ export default {
         },
         handleAddImage(imagesLength){
           console.log(imagesLength);
-            this.imagesE.push({})
+            this.imagesE.push({formImageId: imagesLength + 1 })
         },
     },
     beforeRouteEnter(from, to, next){

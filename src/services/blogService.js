@@ -25,6 +25,10 @@ class BlogServices extends RequestHandler{
       const response = await this.apiClient.post('/save-edited-images', images)
       return response.data;
     }
+    async saveEditPost(payload){
+      const response = await this.apiClient.post('/save-edited-post', payload)
+      return response.data;
+    }
 }
 const blogServices = new BlogServices();
 export default blogServices;
