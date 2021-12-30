@@ -15,6 +15,7 @@ class BlogServices extends RequestHandler{
     }
     async getPost(id){
       const response = await this.apiClient.get(`get-posts/${id}`);
+      console.log('p[ost', response.data);
       return response;
     }
     async getImage(name){
@@ -26,6 +27,7 @@ class BlogServices extends RequestHandler{
       return response.data;
     }
     async saveEditPost(payload){
+      console.log('service payload ', payload);
       const response = await this.apiClient.post('/save-edited-post', payload)
       return response.data;
     }

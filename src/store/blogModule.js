@@ -15,6 +15,7 @@ const blogModule = {
         post_title: '',
         sectionTitles:{},
         imagesE:[],
+        textareas:[],
     },
     mutations:{
         setNewTextArea(state, payload){
@@ -33,16 +34,22 @@ const blogModule = {
         },
         SET_POSTS(state, payload){
             state.posts =  payload
+
         },
         SET_POST(state, payload){
+            // console.log('mutation set post', payload);
             state.post = payload
             state.post.section_titles.forEach(section_title => {
                 section_title.images.forEach(image => {
                     state.imagesE.push(image)
                 });
+                section_title.textareas.forEach(textarea => {
+                    state.textareas.push(textarea)
+                });
             });
-            state.post_title = payload.post_title.post_title
-            state.sectionTitles = payload.section_titles
+
+            // state.post_title = payload.post_title.post_title
+            // state.sectionTitles = payload.section_titles
         },
         EMPTY_POST(state){
             state.post = {}
@@ -123,27 +130,35 @@ const blogModule = {
             commit('EMPTY_POST')
         },
         async setEditPostImage(_,payload){
-            const imageResponse = await blogService.setEditPostImage(payload.data);
-            let sameNames = false;
-            imageResponse.images.forEach(savedImage => {
-                const imageName = savedImage.slice(11);
-                console.log('payload.imagesToEdit', payload.imagesToEdit);
-                payload.imagesToEdit.forEach(imageToEdit => {
-                    console.log(imageName === imageToEdit.imageName, imageName+' '+imageToEdit.imageName);
-                        if(imageName === imageToEdit.imageName){
-                            imageToEdit.imageName = savedImage
-                            // console.log(imageToEdit);
-                            sameNames = true
-                        } else{
-                            sameNames = false
-                        }
-                });
-            });
-            if(sameNames){
-                console.log('imagesToEdit', payload.imagesToEdit);
+            console.log('setEditPostImage', payload.imagesToEdit.length === 0);
+            if(payload.imagesToEdit.length === 0){
                 const postResponse = await blogService.saveEditPost({post: payload.post, images_to_edit: payload.imagesToEdit})
                 console.log(postResponse);
+            }else{
+
+                const imageResponse = await blogService.setEditPostImage(payload.data);
+                let sameNames = false;
+                imageResponse.images.forEach(savedImage => {
+                    const imageName = savedImage.slice(11);
+                    console.log('payload.imagesToEdit', payload.imagesToEdit);
+                    payload.imagesToEdit.forEach(imageToEdit => {
+                        console.log(imageName === imageToEdit.imageName, imageName+' '+imageToEdit.imageName);
+                            if(imageName === imageToEdit.imageName){
+                                imageToEdit.imageName = savedImage
+                                // console.log(imageToEdit);
+                                sameNames = true
+                            } else{
+                                sameNames = false
+                            }
+                    });
+                });
+                if(sameNames){
+                    console.log('imagesToEdit', payload.imagesToEdit);
+                    const postResponse = await blogService.saveEditPost({post: payload.post, images_to_edit: payload.imagesToEdit})
+                    console.log(postResponse);
+                }
             }
+
             // if(response){
 
             // }
@@ -159,7 +174,8 @@ const blogModule = {
         post: (state) => state.post,
         imagesE: (state) => state.imagesE,
         post_title: (state) => state.post_title,
-        sectionTitles: (state) => state.sectionTitles
+        sectionTitles: (state) => state.sectionTitles,
+        textareas: (state) => state.textareas
     }
 
 }
