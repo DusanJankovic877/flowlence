@@ -13,9 +13,10 @@ const blogModule = {
         post:{},
         postToEdit:{},
         post_title: '',
-        sectionTitles:{},
+        sectionTitles:[],
         imagesE:[],
         textareas:[],
+        deletetPost:''
     },
     mutations:{
         setNewTextArea(state, payload){
@@ -39,7 +40,9 @@ const blogModule = {
         SET_POST(state, payload){
             // console.log('mutation set post', payload);
             state.post = payload
+            state.sectionTitles = state.post.section_titles
             state.post.section_titles.forEach(section_title => {
+         
                 section_title.images.forEach(image => {
                     state.imagesE.push(image)
                 });
@@ -56,10 +59,14 @@ const blogModule = {
             state.post_title = ''
             state.sectionTitles = {}
             state.imagesE = []
+            state.textareas = []
 
         },
         EMPTY_POSTS(state){
             state.posts = {}
+        },
+        SET_DELETED_POST(state, payload){
+            state.deletetPost = payload;
         }
 
 
@@ -71,7 +78,7 @@ const blogModule = {
         async setCreatePost(_, payload){
             await blogService.createPost(payload)
         },
-        async setCreatePostImage({dispatch}, payload){
+        async setCreatePostImage({dispatch, commit}, payload){
             
             const response = await blogService.setCreatePostImage(payload.data);
             let rImageNames = [];
@@ -87,7 +94,7 @@ const blogModule = {
                     const found = payload.blog.images.find(x => x.name === rImageNamee);
                     if(found){
                         foundCheck = true;
-                        dispatch('SET_IMAGES_NAMES', response.data.images) 
+                        commit('SET_IMAGES_NAMES', response.data.images) 
                     }else{
                         foundCheck = false;
                     }
@@ -163,7 +170,12 @@ const blogModule = {
 
             // }
             // console.log('EDIT IMAGES LOG', response);
-        }
+        },
+        async deletePost({commit}, payload){
+            const response = await blogService.deletePost(payload);
+            commit('SET_DELETED_POST', response.data)
+            // console.log('delete response ', response);
+          }
     },
     getters:{
         textareasToDelete: (state) => state.textareasToDelete,
@@ -175,7 +187,8 @@ const blogModule = {
         imagesE: (state) => state.imagesE,
         post_title: (state) => state.post_title,
         sectionTitles: (state) => state.sectionTitles,
-        textareas: (state) => state.textareas
+        textareas: (state) => state.textareas,
+        deletetPost: (state) => state.deletetPost
     }
 
 }

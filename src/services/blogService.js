@@ -31,6 +31,13 @@ class BlogServices extends RequestHandler{
       const response = await this.apiClient.post('/save-edited-post', payload)
       return response.data;
     }
+
+    async deletePost(payload){
+      const response =  await this.apiClient.get(`/delete-post/${payload}`);
+      
+
+      return response;
+    }
 }
 const blogServices = new BlogServices();
 export default blogServices;

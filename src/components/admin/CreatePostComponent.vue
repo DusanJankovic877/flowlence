@@ -300,6 +300,7 @@ console.log(id);
                 const blog = this.blog;
 
                 await this.setCreatePostImage({data, blog})
+                this.$router.push('/jolanda/posts')
             console.log('blog', this.blog);
         },
 

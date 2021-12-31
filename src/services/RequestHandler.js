@@ -43,6 +43,10 @@ export class RequestHandler {
         this.apiClient.interceptors.response.use(  response =>  {
             // await delay(3000);
             store.dispatch('doneLoading')
+            if(response.status === 200 && response.data.message){
+
+                store.dispatch('setPostMessage', response.data.message);
+            }
             return response;
 
           }, async error =>  {

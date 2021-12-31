@@ -15,6 +15,7 @@ export default new Vuex.Store({
     associationFormData:{},
     validateReCaptcha: false,
     emailFormMessage: '',
+    postMessage: '',
     errors:[
    
     ]
@@ -50,7 +51,14 @@ export default new Vuex.Store({
     },
     setDeleteFormMessage(state){
       state.emailFormMessage =''
+    },
+    SET_POST_MESSAGE(state, payload){
+      state.postMessage = payload
+    },
+    EMPTY_POST_MESSAGE(state){
+      state.postMessage = ''
     }
+
 
   },
   actions: {
@@ -103,6 +111,9 @@ export default new Vuex.Store({
 
       }
     },
+    setPostMessage({commit}, payload){
+      commit('SET_POST_MESSAGE', payload)
+    },
     setErrors(state,payload){
       state.commit('setErrors', payload)
     },
@@ -111,6 +122,9 @@ export default new Vuex.Store({
     },
     deleteEmailFormMessage(state){
       state.commit('setDeleteFormMessage')
+    },
+    emptyPostMessage({commit}){
+      commit('EMPTY_POST_MESSAGE');
     }
   },
   getters: {
@@ -118,7 +132,9 @@ export default new Vuex.Store({
 
     validateReCaptcha: (state) => state.validateReCaptcha,
     emailFormMessage: (state) => state.emailFormMessage,
-    errors: (state) => state.errors
+    errors: (state) => state.errors,
+    apiWaitingCount: (state) => state.apiWaitingCount,
+    postMessage: (state) => state.postMessage
   },
   modules: {
     AdminModule,

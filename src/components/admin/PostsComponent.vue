@@ -20,23 +20,36 @@
                 </router-link>   
             </div>
         </div>
+        <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage">
+           <p style="margin-left: 40%;margin-right: 40%;">
+               {{postMessage}}
+            </p> 
+        </div>
     </div>
 </template>
 <script>
 
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+import store from '../../store'
 export default {
     computed:{
-        ...mapGetters({posts: 'BlogModule/posts'})
+        ...mapGetters({posts: 'BlogModule/posts', postMessage: 'postMessage'})
     },
-    methods:{
-        ...mapActions({getPosts: 'BlogModule/getPosts',  emptyPosts: 'BlogModule/emptyPosts'})
+    beforeRouteEnter(from, to, next){
+        store.dispatch('BlogModule/getPosts')
+        next();
     },
-    created(){
-        this.getPosts()
-    },
-    destroyed(){
-        this.emptyPosts()
+    beforeRouteLeave(from, to, next){
+        store.dispatch('BlogModule/emptyPosts')
+        if(this.$router.path === '/blog/'+this.$route.params.id){
+            console.log('sadasdsadasdasdasdasd');
+        store.dispatch('emptyPostMessage')
+        }
+        store.dispatch('emptyPostMessage')
+
+        next();
+
+
     }
 }
 </script>

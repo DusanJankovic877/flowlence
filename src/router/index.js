@@ -47,6 +47,11 @@ const routes = [
     component: Blog
   },
   {
+    path: '/blog/:id',
+    name: 'post',
+    component: PostComponent
+  },
+  {
     path: '/contact',
     name: 'contact',
     component: Contact
@@ -59,7 +64,7 @@ const routes = [
 
   },
   {
-    path: '/create-post',
+    path: '/jolanda/create-post',
     name: 'admin-c-post',
     component: CreatePostComponent,
     // beforeEnter(from, to, next){
@@ -70,7 +75,7 @@ const routes = [
     // }
   },  
   {
-    path: '/posts',
+    path: '/jolanda/posts',
     name: 'admin-posts',
     component: PostsComponent,
     // beforeEnter(from, to, next){
@@ -82,7 +87,7 @@ const routes = [
     
   },
   {
-    path: '/posts/:id',
+    path: '/jolanda/posts/:id',
     name: 'admin-post',
     component: PostComponent,
     // beforeEnter(from, to, next){
@@ -94,7 +99,7 @@ const routes = [
     
   },
   {
-    path: '/edit-post/:id',
+    path: '/jolanda/edit-post/:id',
     name: 'edit-post',
     component: EditPost,
     // beforeEnter(from, to, next){

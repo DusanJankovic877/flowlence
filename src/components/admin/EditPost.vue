@@ -97,7 +97,7 @@
 
                     <div v-else></div> -->
                 </div>
-    
+  
                 <div class=" col-lg-1">
                     <button class="btn btn-danger col-lg-12" @click="deleteEditImage(imageId)">Obrisi</button>
                 </div>
@@ -129,21 +129,22 @@
                
                 <div class="col-lg-2">
               
-                   
-                    <div v-if="imagesE.length === image.id ? image.id - 1 : image.formImageId" class="">
+                   {{imagesLastCount.id +' '+ image.id}}
+                    <!-- <div v-if="imagesE.length === image.id ? image.id - 1 : image.formImageId" class=""> -->
+                    <div v-if="imagesLastCount.id === image.id ? image.id : image.formImageId" class="">
                     <button @click="handleAddImage(imagesE.length)" class="btn btn-success  ">
                         Dodaj novu sliku
                     </button>
-                    <!-- {{imagesE}} -->
+            
                     </div>
                     <div v-else class="col-lg-12"></div>
                 </div>
+                        {{imagesE}}
                 <!-- <div v-if="imagePreview" class="row mt-3">
                     <img :src="imagePreview" alt="" style="width: 200px;">
                 </div> -->
             </div>
-           
-        <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="textarea in textareas" :key="'textarea_'+textarea.id">
+        <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="textarea in textareas" :key="'textarea_edit_'+textarea.id">
             <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.id}}</label>
             <div class="div-text row">
                 <div class="col-lg-7">
@@ -166,7 +167,7 @@
                 <div v-else class="col-lg-1"></div>
                 <!-- section titles to bind to -->
             <div class="col-lg-2">
-                <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'imageSecionT_'+sectionTitle.id">
+                <div class="form-check" v-for="(sectionTitle) in sectionTitles" :key="'textareaSecionT_'+sectionTitle.id">
                     <input class="form-check-input" type="radio" :name="'radio-text-area'+textarea.id" :id="'radio-text-area'+textarea.id+sectionTitle.id" :value="sectionTitle.id" v-model="textarea.section_title_id">
                     <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-text-area'+textarea.id+sectionTitle.id">
                         {{sectionTitle.title}}
@@ -189,18 +190,24 @@
                 <div v-else></div> -->
             </div>
             </div>
-          <!-- {{textareas.length}} -->
-            <!-- <div class="mt-4" v-if="textareas.length === textarea.id" style="float:right;">
+            <div class="row">
+
+            <div class="col-lg-3 mt-4" v-if="textareasLastCount.id === textarea.id" style="margin-left: auto !important;">
                 <button class="btn btn-success" @click="handleAddTextarea(textareas.length)">Dodaj novu text areu</button>
             </div>
-            <div v-else></div> -->
+            <div v-else></div>
+            </div>
                             <!-- section titles to bind to -->
         </div>
+    <!-- </div>        -->
 
             
         <!-- </div> -->
-        <button>Pošalji</button>
-        <button class="col-lg-2 btn btn-danger m-auto" @click="goBackToPost">idi nazad</button>
+        <div class="row">
+
+            <button class="col-lg-2 btn btn-success m-auto">Pošalji</button>
+            <button class="col-lg-2 btn btn-danger m-auto" @click="goBackToPost">idi nazad</button>
+        </div>
     </form>
 </div>
 </template>
@@ -219,12 +226,23 @@ export default {
        } 
     },
     computed:{
-        ...mapGetters({post: 'BlogModule/post', imagesE: 'BlogModule/imagesE', postTitle: 'BlogModule/post_title',sectionTitles: 'BlogModule/sectionTitles', textareas: 'BlogModule/textareas'}),
+        textareasLastCount(){
+            return this.textareas[this.textareas.length - 1]
+        },
+        imagesLastCount(){
+            return this.imagesE[this.imagesE.length - 1]
+        },
+        ...mapGetters({
+            post: 'BlogModule/post', 
+            imagesE: 'BlogModule/imagesE', 
+            sectionTitles: 'BlogModule/sectionTitles', 
+            textareas: 'BlogModule/textareas',
+            apiWaitingCount: 'apiWaitingCount'
+        }),
     },
     methods:{
         ...mapActions({setEditPostImage: 'BlogModule/setEditPostImage'}),
         previewFiles(e, id, sectionTitleId){
-            console.log(e.target.files);
             this.sectionTitles.forEach(sectionTitle => {
                 sectionTitle.images.forEach(image => {
                     this.empty = image
@@ -243,48 +261,38 @@ export default {
                     });
                 });
             });
-            // console.log('images to edit ', this.imagesToEdit[id - 1]);
-
         },
         async handleEditPost(){
-            // console.log('edit', this.post)
             let data = new FormData();
             this.imagesToEdit.forEach((image) => {
                 data.append('images[]', image.file);
             });
-            // console.log('images to edit ', this.imagesToEdit, 'post images ', this.post);
-            
             const post = this.post
             const imagesToEdit = []
-            console.log('asdasdasd', this.post);
             this.imagesToEdit.forEach(imageToEdit => {
-                // console.log('imageToEdit', imageToEdit, this.imagesE);
                 const sectionId = this.imagesE.find(x => x.id === imageToEdit.formImageId)
-                // console.log('sectionId', sectionId);
                 const sectionTitleId = imageToEdit.sId ? imageToEdit.sId : sectionId.section_title_id;
-                // const imageToReplaceId = '';
                 imagesToEdit.push({imageName: imageToEdit.file.name, imageToReplaceId: imageToEdit.id ? imageToEdit.id : '', sectionTitleId: sectionTitleId})
             });
-                // console.log('imagesToEdit', imagesToEdit, 'imagesE', this.imagesE);
             await this.setEditPostImage({data, post, imagesToEdit})
+            if(this.apiWaitingCount === 0){
+                this.$router.push('/jolanda/posts')
+            }
 
         },
         goBackToPost(){
-            this.$router.push(`/posts/${this.$route.params.id}`);
+            this.$router.push(`/jolanda/posts/${this.$route.params.id}`);
         },
         handleAddSectionTitle(id){
-            console.log('asdd title',id);
             this.post.section_titles.push({sectionTId: id++, title: '', belongsTo: ''})
         },
         handleDeleteSecetionTitle(k){
             this.post.section_titles.splice(k, 1);
         },
         handleAddImage(imagesLength){
-          console.log('length',imagesLength);
             this.imagesE.push({formImageId: imagesLength + 1 })
         },
         deleteEditImage(k){
-            console.log('delete', k, this.imagesE);
             this.imagesE.forEach(imageE => {
                 if(imageE.id === k){
                     this.imagesE.splice(k, 1)
@@ -294,8 +302,8 @@ export default {
             });
         },
         handleAddTextarea(k){
+            console.log(this.textareas);
             this.textareas.push({id: k + 1})
-            console.log('tarea', this.textareas);
         },
         handleDeleteTextarea(k){
             this.textareas.splice(k -1 , 1)
@@ -307,6 +315,7 @@ export default {
     },
     beforeRouteLeave(from, to, next){
         store.dispatch('BlogModule/emptyPost')
+        // store.dispatch('BlogModule/emptyPost')
         next();
 
     }
