@@ -2,9 +2,10 @@
 <div class="col-lg-7 m-auto create-post-form">
     <h1>editPost</h1>
     <form @submit.prevent="handleEditPost" method="POST" enctype="multipart/form-data">
-   
-      <!-- {{post.post_title}} -->
-        <div v-for="postOne in post" :key="'post_title_'+postOne.id">
+   <!-- {{post_title}} -->
+    <!-- <label for="blog-title" class="form-label">Naslov posta</label>
+    <input type="text" class="form-control " id="blog-title"  v-model="post_title"> -->
+        <div v-for="(postOne, id) in post" :key="'post_title_'+id">
             <div class="mb-3 col-lg-9 file-inputs" v-if="postOne.post_title">
                 <label for="blog-title" class="form-label">Naslov posta</label>
                 <input type="text" class="form-control " id="blog-title"  v-model="postOne.post_title">
@@ -29,6 +30,7 @@
         <!-- </div> -->
                 <!-- section title -->
         <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in this.post.section_titles" :key="'sectionTitle_'+sectionTId">
+
             <label for="blog-section-title"  class="form-label col-lg-9">Naslov sekcije br:{{sectionTId}}</label>
             <div class="col-lg-7 file-inputs">
 
@@ -63,8 +65,60 @@
 
 
         <!-- <div v-for="section_title in post.section_titles" :key="section_title.id"> -->
-            <div class="mb-3  row" v-for="(image, imageId) in imagesE" :key="'image_'+imageId">
-                <label for="formFileOne" class="form-label"><p>Slika br: {{image.id ? image.id : image.formImageId}}</p></label>
+            {{post.images}}
+            <div class="mb-3  row" v-for="(image, i) in post.images" :key="'image_'+image.formId">
+                {{i}}
+                <label for="formFileOne" class="form-label"><p>Slika br: {{image.formId}}</p></label>
+                
+                <div class="col-lg-7 file-inputs">
+                    <input name="img" @change="previewEditedFiles($event, image.id, image.section_title_id)" class="form-control " type="file" id="formFileOne" accept="image/*">
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                        <p :class="image.id ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
+                            {{image.id ? 'old image' : 'new image'}}
+                          
+                        </p>
+                        <img 
+                            :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
+                            alt="No image to display" 
+                            style="width:70%;"
+                        >
+                        </div>
+                                 
+                    </div> 
+
+                </div>
+                <div class=" col-lg-1" v-if="image.formId !== 0">
+                    <button class="btn btn-danger col-lg-12" @click="deleteEditImage(image.formId)">Obrisi</button>
+                </div>
+                <div class="col-lg-2" style="float:right !important;" >
+                <button @click="handleAddImage(post.images.length)" class="btn btn-success" v-if="post.images.length - 1 === i">
+                    Dodaj novu sliku
+                </button>
+
+                </div>
+                <!-- section titles to bind to -->
+                <div class="col-lg-2">
+                    <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'imageSecionT_'+sectionTitle.id">
+                        <!-- {{sectionTitle}} -->
+                        <input class="form-check-input" type="radio" :name="'radio-input'+image.formId+''+sectionTitle.id" :id="'radio-input-'+image.formId+''+sectionTitle.id" :value="sectionTitle.id" v-model="image.section_title_id">
+                        <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id">
+                            {{sectionTitle.title}}
+                        </label>
+                        <label class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id" v-else>
+                            Naslov sekcije
+                        
+                        </label>
+                    </div>
+                </div>
+            </div>
+      
+
+            <!-- <div class="col-lg-10 mb-5"> -->
+            <!-- </div> -->
+            <!-- <div class="mb-3  row" v-for="(image, imageId) in imagesE" :key="'image_'+imageId"> -->
+                <!-- <label for="formFileOne" class="form-label"><p>Slika br: {{image.id ? image.id : image.formImageId}}</p></label>
                 <div class="col-lg-7 file-inputs">
                     <input name="img" @change="previewFiles($event, image.id ? image.id : image.formImageId, image.section_title_id)" class="form-control " type="file" id="formFileOne" accept="image/*">
                     <div class="row">
@@ -81,7 +135,7 @@
                         >
                         </div>
                                  
-                    </div>
+                    </div> -->
                 <!-- </div> -->
                     <!-- <div v-if="errors.length">       
                         <span  v-for="(error, key) in errors" :key="key">                    
@@ -96,16 +150,16 @@
                     </div>
 
                     <div v-else></div> -->
-                </div>
-  
+                <!-- </div> -->
+<!--   
                 <div class=" col-lg-1">
                     <button class="btn btn-danger col-lg-12" @click="deleteEditImage(imageId)">Obrisi</button>
-                </div>
+                </div> -->
                 <!-- <div v-else class="col-lg-1"></div> -->
 
                 <!-- section titles to bind to -->
-                <div class="col-lg-2">
-                    <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'imageSecionT_'+sectionTitle.id">
+                <!-- <div class="col-lg-2"> -->
+                    <!-- <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'imageSecionT_'+sectionTitle.id">
                         <input class="form-check-input" type="radio" :name="'radio-input'+image.id+''+sectionTitle.id" :id="'radio-input-'+image.id+''+sectionTitle.id" :value="sectionTitle.id" v-model="image.section_title_id">
                         <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id">
                             {{sectionTitle.title}}
@@ -113,7 +167,7 @@
                         <label class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id" v-else>
                             Naslov sekcije
                         </label>
-                    </div>
+                    </div> -->
                     <!--    <div v-if="errors.length">
                             <div v-for="(error, key) in errors" :key="key">
                                 <span v-for="(errorItem, innerKey) in error" :key="innerKey">
@@ -125,12 +179,12 @@
                             </div>
                         </div>
                         <div v-else></div>-->
-                </div> 
+                <!-- </div>  -->
                
-                <div class="col-lg-2">
-              
-                   {{imagesLastCount.id +' '+ image.id}}
-                    <!-- <div v-if="imagesE.length === image.id ? image.id - 1 : image.formImageId" class=""> -->
+                <!-- <div class="col-lg-2"> -->
+<!--               
+                   {{imagesLastCount.id +' '+ image.id}} -->
+                    <!-- <div v-if="imagesE.length === image.id ? image.id - 1 : image.formImageId" class="">
                     <div v-if="imagesLastCount.id === image.id ? image.id : image.formImageId" class="">
                     <button @click="handleAddImage(imagesE.length)" class="btn btn-success  ">
                         Dodaj novu sliku
@@ -138,12 +192,12 @@
             
                     </div>
                     <div v-else class="col-lg-12"></div>
-                </div>
-                        {{imagesE}}
+                </div> -->
+                        <!-- {{imagesE}} -->
                 <!-- <div v-if="imagePreview" class="row mt-3">
                     <img :src="imagePreview" alt="" style="width: 200px;">
                 </div> -->
-            </div>
+            <!-- </div> -->
         <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="textarea in textareas" :key="'textarea_edit_'+textarea.id">
             <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.id}}</label>
             <div class="div-text row">
@@ -203,11 +257,14 @@
 
             
         <!-- </div> -->
+   
+
         <div class="row">
 
             <button class="col-lg-2 btn btn-success m-auto">Pošalji</button>
             <button class="col-lg-2 btn btn-danger m-auto" @click="goBackToPost">idi nazad</button>
         </div>
+     
     </form>
 </div>
 </template>
@@ -233,7 +290,8 @@ export default {
             return this.imagesE[this.imagesE.length - 1]
         },
         ...mapGetters({
-            post: 'BlogModule/post', 
+            post: 'BlogModule/postToEdit', 
+            post_title: 'BlogModule/post_title',
             imagesE: 'BlogModule/imagesE', 
             sectionTitles: 'BlogModule/sectionTitles', 
             textareas: 'BlogModule/textareas',
@@ -267,17 +325,17 @@ export default {
             this.imagesToEdit.forEach((image) => {
                 data.append('images[]', image.file);
             });
-            const post = this.post
+            // const post = this.post
             const imagesToEdit = []
             this.imagesToEdit.forEach(imageToEdit => {
                 const sectionId = this.imagesE.find(x => x.id === imageToEdit.formImageId)
                 const sectionTitleId = imageToEdit.sId ? imageToEdit.sId : sectionId.section_title_id;
                 imagesToEdit.push({imageName: imageToEdit.file.name, imageToReplaceId: imageToEdit.id ? imageToEdit.id : '', sectionTitleId: sectionTitleId})
             });
-            await this.setEditPostImage({data, post, imagesToEdit})
-            if(this.apiWaitingCount === 0){
-                this.$router.push('/jolanda/posts')
-            }
+            // await this.setEditPostImage({data, post, imagesToEdit})
+            // if(this.apiWaitingCount === 0){
+            //     this.$router.push('/jolanda/posts')
+            // }
 
         },
         goBackToPost(){
@@ -290,16 +348,46 @@ export default {
             this.post.section_titles.splice(k, 1);
         },
         handleAddImage(imagesLength){
-            this.imagesE.push({formImageId: imagesLength + 1 })
+            // this.imagesE.push({formImageId: imagesLength + 1 })
+                console.log('ADD IMAGE ', this.post.images);
+
+            this.post.images.push({formId: imagesLength})
         },
-        deleteEditImage(k){
-            this.imagesE.forEach(imageE => {
-                if(imageE.id === k){
-                    this.imagesE.splice(k, 1)
-                }else if(imageE.formImageId === k){
-                    this.imagesE.splice(k, 1)
-                }
-            });
+        deleteEditImage(formId){
+       const iterator = this.post.images.keys()
+       for(const key of iterator){
+           console.log('asdasdasddas ', this.post.images[key].formId === formId);
+           if(this.post.images[key].formId === formId){
+            this.post.images.splice(key, 1)
+
+           }
+       }
+
+            const imageTR = this.post.images.map(x=> x)
+
+            // this.post.images.splice(formId, 1)
+                // this.post.images.splice(formId, 1)
+        
+
+                    console.log('formID ', this.post.images, imageTR);
+        //  this.post.images.forEach(image => {
+            //  console.log('imnage', image.indexOf(formId));
+             
+        //      if(image.formId === formId){
+        //         // const imageFID = formId
+        //         this.post.images.splice(image.formId, 1)
+
+       
+          
+             
+        //  });
+            // this.imagesE.forEach(imageE => {
+            //     if(imageE.id === k){
+            //         this.imagesE.splice(k, 1)
+            //     }else if(imageE.formImageId === k){
+            //         this.imagesE.splice(k, 1)
+            //     }
+            // });
         },
         handleAddTextarea(k){
             console.log(this.textareas);
@@ -310,7 +398,7 @@ export default {
         }
     },
     beforeRouteEnter(from, to, next){
-        store.dispatch('BlogModule/getPost', from.params.id)
+        store.dispatch('BlogModule/getPostToEdit', from.params.id)
         next();
     },
     beforeRouteLeave(from, to, next){

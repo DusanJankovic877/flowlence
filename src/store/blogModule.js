@@ -54,6 +54,11 @@ const blogModule = {
             // state.post_title = payload.post_title.post_title
             // state.sectionTitles = payload.section_titles
         },
+        SET_POST_TO_EDIT(state, payload){
+            state.postToEdit = payload;
+            state.post_title = payload.post_title.post_title
+            // console.log('post to edit', payload);
+        },
         EMPTY_POST(state){
             state.post = {}
             state.post_title = ''
@@ -133,6 +138,13 @@ const blogModule = {
                 commit('SET_POST', response.data)
             }
         },
+        //POST TO EDIT
+        async getPostToEdit({commit}, payload){
+            const response = await blogService.getPostToEdit(payload);
+            if(response.data){
+                commit('SET_POST_TO_EDIT', response.data)
+            }
+        },
         emptyPost({commit}){
             commit('EMPTY_POST')
         },
@@ -184,6 +196,7 @@ const blogModule = {
         savedImages: (state) => state.savedImages,
         posts: (state) => state.posts,
         post: (state) => state.post,
+        postToEdit: (state) => state.postToEdit,
         imagesE: (state) => state.imagesE,
         post_title: (state) => state.post_title,
         sectionTitles: (state) => state.sectionTitles,

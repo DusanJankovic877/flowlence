@@ -1,5 +1,7 @@
 <template>
+<!-- TREBA PREPRAVITI ISPIS ERRORA -->
     <div class="form col-lg-7 m-auto">
+      {{errors}}
       <div class="col-lg-12">
         <form @submit.prevent class="contact-form">
           <!-- NAME -->
@@ -8,10 +10,13 @@
                   <label for="name" class="form-label">Vaše Ime:</label>
                   <input type="text" class="form-control" id="name" v-model="form.name" placeholder="Petar" @input="handleInputs(form.name)">
                 </div>
-                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors[0].name">
-                  {{errors[0].name[0]}}
+                <div v-for="error in errors" :key="error.id">
+                <div class="alert alert-danger col-lg-12" role="alert" v-if="error.name">
+                  {{error.name[0]}}
                 </div>
                 <div v-else></div>
+
+                </div>
              </div>
             <!-- EMAIL -->
             <div class="input-group contact-input-height">
@@ -19,7 +24,7 @@
                   <label for="emial" class="form-label">Vaš Email:</label>
                   <input type="email" class="form-control" id="email" v-model="form.email" placeholder="email@gmail.com" @input="handleInputs(form.email)">
                 </div>
-                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors[0].email">
+                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors[0]">
                   {{errors[0].email[0]}}
                 </div>
                 <div v-else></div>
@@ -30,12 +35,12 @@
                   <label for="telephone" class="form-label">Vaš Telefon:</label>
                   <input type="text" class="form-control" id="telephone" v-model="form.telephone" placeholder="+38163123456" @input="handleInputs(form.telephone)">
                 </div>
-                <div  v-if="errors[0].telephone" class="col-lg-12">
+                <!-- <div  v-if="errors[0].telephone" class="col-lg-12">
                  <div class="alert alert-danger col-lg-12" role="alert" v-for="telephone in errors[0].telephone" :key="telephone.id">
                    {{telephone}}
                  </div>
                 </div>
-                <div v-else></div>
+                <div v-else></div> -->
             </div>
             <!-- MESSAGE -->
             <div class="input-group contact-input-height mb-3">
@@ -43,21 +48,21 @@
               <label for="textarea" class="form-label">Poruka:</label>
               <textarea class="form-control" id="textarea" v-model="form.message" placeholder="Unesite poruku"  rows="3" @input="handleInputs(form.message)"></textarea>
               </div>
-              <div class="alert alert-danger col-lg-12 " role="alert" v-if="errors[0].message">
+              <!-- <div class="alert alert-danger col-lg-12 " role="alert" v-if="errors[0].message">
                 {{errors[0].message[0]}}
-              </div>
-              <div v-else></div>
+              </div> -->
+              <!-- <div v-else></div> -->
             </div>
          
         <div v-if="emailFormMessage" class="error-message m-auto">
-          {{emailFormMessage}}
+          <!-- {{emailFormMessage}} -->
         </div>
         <div v-else></div>
             <div class="col-lg-12 contact-input-button mt-5">
                 <re-captcha :class="showForm ? 'captcha-contact' : 'hide captcha-contact'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
                 <button class="contact-form-button col-lg-2 btn btn-success" @click="handleSubmit" >Pošalji</button>
             </div>
-            {{errors[0].email}}
+            <!-- {{errors[0].email}} -->
         </form>
       </div>
        
@@ -76,7 +81,7 @@ export default {
         ReCaptcha
   },
     props:{
-      errors: Object,
+      errors: Array,
       form: Object,
       siteKey: String,
       validateReCaptcha: Boolean,

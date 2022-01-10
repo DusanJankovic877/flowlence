@@ -18,6 +18,11 @@ class BlogServices extends RequestHandler{
       console.log('p[ost', response.data);
       return response;
     }
+    async getPostToEdit(id){
+      const response = await this.apiClient.get(`edit-posts/${id}`);
+      console.log('p[ost', response.data);
+      return response;
+    }
     async getImage(name){
       const response = await this.apiClient.get(`/get-image/${name}`) ;
       return response;
