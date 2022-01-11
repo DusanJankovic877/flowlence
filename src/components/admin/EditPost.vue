@@ -66,33 +66,12 @@
             <label for="formFileOne" class="form-label"><p>Slika br: {{image.formId}}</p></label>
             
             <div class="col-lg-7 file-inputs">
-                <input name="img" @change="previewEditedFiles($event, i, image.section_title_id)" class="form-control " type="file" id="formFileOne" accept="image/*">
+                <input name="img" @change="previewEditedFiles($event, i)" class="form-control " type="file" id="formFileOne" accept="image/*">
                 <div class="row">
-
-                    <!-- <div class="col-lg-6">
-                    <div :class="image.new_image_name ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
-                        <p v-if="!image.new_image_name && image.id">old image</p>
-                        <p v-else-if="!image.new_image_name && !image.id">no image</p>
-                        
-                        <p v-else>new image</p>
-                   
-                        {{image.new_image_name? 'new image' : ''}}
-                    </div>
-                    <img 
-                        :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
-                        alt="No image to display" 
-                        style="width:70%;"
-                    >
-                    </div> -->
                     <div class="col-lg-6">
                         <p :class="newImages[i]? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger' ">
                             {{newImages[i]  === undefined ? 'old image' : 'new image' }}
                         </p>
-                        <!-- <p :class="imagesEE[image.id ? image.id - 1 : image.formImageId - 1] ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
-                            {{imagesEE[image.id ? image.id - 1 : image.formImageId - 1] ? 'new image' : 'old image'}}
-                          
-                        </p> -->
-                  
                         <img 
                             :src="newImages[i] ? newImages[i] : `http://127.0.0.1:8000/api/get-image/${image.name}`" 
                             alt="No image to display" 
@@ -349,22 +328,19 @@ export default {
     },
     methods:{
         ...mapActions({setEditPostImage: 'BlogModule/setEditPostImage'}),
-        previewEditedFiles(e, i, sectionTitleId){
+        previewEditedFiles(e, i){
             e.target.files.forEach(file => {
-                console.log(this.post.images);
-                this.post.images[i].new_image_name = file.name
-                // this.newImages.push()
+                const fileUrl = URL.createObjectURL(file)
+                this.newImages[i] = fileUrl;
                 if(file){
-                    const fileUrl = URL.createObjectURL(file)
-                    this.newImages[i] = fileUrl;
+                    this.post.images[i].new_image = file
                     this.newImages.push()
                 }else {
                     this.newImages[i] = {}
                 }
                 
             });
-            console.log('post iamges ', this.post.images, 'new iamges ', this.newImages, 'stitle ', sectionTitleId);
-                    
+            console.log(this.post.images);
             // this.post.images.forEach(image =>{
 
             // });
@@ -391,17 +367,21 @@ export default {
         },
         async handleEditPost(){
             let data = new FormData();
-            this.imagesToEdit.forEach((image) => {
-                data.append('images[]', image.file);
+            this.post.images.forEach((image) => {
+                data.append('images[]', image.file)
             });
+            console.log(data);
+            // this.imagesToEdit.forEach((image) => {
+            //     data.append('images[]', image.file);
+            // });
             // const post = this.post
-            const imagesToEdit = []
-            this.imagesToEdit.forEach(imageToEdit => {
-                const sectionId = this.imagesE.find(x => x.id === imageToEdit.formImageId)
-                const sectionTitleId = imageToEdit.sId ? imageToEdit.sId : sectionId.section_title_id;
-                imagesToEdit.push({imageName: imageToEdit.file.name, imageToReplaceId: imageToEdit.id ? imageToEdit.id : '', sectionTitleId: sectionTitleId})
-            });
-            // await this.setEditPostImage({data, post, imagesToEdit})
+            // const imagesToEdit = []
+            // this.imagesToEdit.forEach(imageToEdit => {
+            //     const sectionId = this.imagesE.find(x => x.id === imageToEdit.formImageId)
+            //     const sectionTitleId = imageToEdit.sId ? imageToEdit.sId : sectionId.section_title_id;
+            //     imagesToEdit.push({imageName: imageToEdit.file.name, imageToReplaceId: imageToEdit.id ? imageToEdit.id : '', sectionTitleId: sectionTitleId})
+            // });
+            await this.setEditPostImage({data})
             // if(this.apiWaitingCount === 0){
             //     this.$router.push('/jolanda/posts')
             // }
