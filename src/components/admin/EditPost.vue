@@ -31,7 +31,7 @@
                 <!-- section title -->
         <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in this.post.section_titles" :key="'sectionTitle_'+sectionTId">
 
-            <label for="blog-section-title"  class="form-label col-lg-9">Naslov sekcije br:{{sectionTId}}</label>
+            <label for="blog-section-title"  class="form-label col-lg-9">Naslov sekcije br:{{sectionTitle.formId}}</label>
             <div class="col-lg-7 file-inputs">
 
             <input type="text" class="form-control" id="blog-section-title" v-model="sectionTitle.title" placeholder="Naslov sekcije">
@@ -47,11 +47,11 @@
             </div>
             <div v-else></div> -->
             </div>
-            <div class=" col-lg-1" v-if="sectionTId !== 0">
+            <div class=" col-lg-1" v-if="sectionTitle.formId !== 1">
                 <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(sectionTId)">Obrisi</button>
             </div>
             <div v-else class="col-lg-1"></div>
-        <!-- {{'post '+post.section_titles.length}} -->
+
             
             <div v-if="post.section_titles.length === sectionTId +1"  class="section-title-button col-lg-2">
                 <button @click="handleAddSectionTitle(post.section_titles.length)" class="btn btn-success s-title-button col-lg-12">
@@ -61,58 +61,86 @@
             <div v-else class="col-lg-2"></div>
         </div>
         <!-- IMAGE -->
-        <!-- {{post.section_titles.images}} -->
+        <div class="mb-3  row" v-for="(image, i) in post.images" :key="'image_'+image.formId">
+    
+            <label for="formFileOne" class="form-label"><p>Slika br: {{image.formId}}</p></label>
+            
+            <div class="col-lg-7 file-inputs">
+                <input name="img" @change="previewEditedFiles($event, image.id, image.section_title_id)" class="form-control " type="file" id="formFileOne" accept="image/*">
+                <div class="row">
 
+                    <div class="col-lg-6">
+                    <p :class="image.id ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
+                        {{image.id ? 'old image' : 'new image'}}
+                    </p>
+                    <img 
+                        :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
+                        alt="No image to display" 
+                        style="width:70%;"
+                    >
+                    </div>
+                </div> 
 
-        <!-- <div v-for="section_title in post.section_titles" :key="section_title.id"> -->
-            {{post.images}}
-            <div class="mb-3  row" v-for="(image, i) in post.images" :key="'image_'+image.formId">
-                {{i}}
-                <label for="formFileOne" class="form-label"><p>Slika br: {{image.formId}}</p></label>
-                
-                <div class="col-lg-7 file-inputs">
-                    <input name="img" @change="previewEditedFiles($event, image.id, image.section_title_id)" class="form-control " type="file" id="formFileOne" accept="image/*">
-                    <div class="row">
+            </div>
+            <div class=" col-lg-1" v-if="image.formId !== 1">
+                <button class="btn btn-danger col-lg-12" @click="deleteEditImage(image.formId)">Obrisi</button>
+            </div>
+            <div v-else class="col-lg-1"></div>
 
-                        <div class="col-lg-6">
-                        <p :class="image.id ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
-                            {{image.id ? 'old image' : 'new image'}}
-                          
+            <!-- section titles to bind to -->
+            <div class="col-lg-2">
+                <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'imageSecionT_'+sectionTitle.formId">
+    
+                    <input class="form-check-input" type="radio" :name="'image-radio-input-'+image.formId+''+sectionTitle.formId" :id="'image-radio-input-'+image.formId+''+sectionTitle.formId" :value="sectionTitle.id ? sectionTitle.id : sectionTitle.formId" v-model="image.section_title_id">
+                    <label class="form-check-label" :for="'image-radio-input-'+image.formId+''+sectionTitle.formId">
+                        <p v-if="sectionTitle.title">
+                            {{sectionTitle.title}}
                         </p>
-                        <img 
-                            :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
-                            alt="No image to display" 
-                            style="width:70%;"
-                        >
-                        </div>
-                                 
-                    </div> 
-
+                        <p v-else>Naslov sekcije</p>
+                    </label>
                 </div>
-                <div class=" col-lg-1" v-if="image.formId !== 0">
-                    <button class="btn btn-danger col-lg-12" @click="deleteEditImage(image.formId)">Obrisi</button>
-                </div>
-                <div class="col-lg-2" style="float:right !important;" >
+            </div>
+            <div class="col-lg-2" style="float:right !important;" >
                 <button @click="handleAddImage(post.images.length)" class="btn btn-success" v-if="post.images.length - 1 === i">
                     Dodaj novu sliku
                 </button>
+            </div>
 
+        </div>
+        <!-- textarea -->
+        <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="(textarea, i) in post.textareas" :key="'textarea_edit_'+textarea.formId">
+            <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.formId}}</label>
+            <div class="div-text row">
+
+                <div class="col-lg-7">
+                    <textarea v-model="textarea.text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
+        
+                <div class="delete-button  col-lg-1" v-if="textarea.formId !== 1">
+                    <button class="btn btn-danger" @click="handleDeleteTextarea(textarea.formId)">Obrisi</button>
+                </div>
+                <div v-else class="col-lg-1"></div>
+
                 <!-- section titles to bind to -->
                 <div class="col-lg-2">
-                    <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'imageSecionT_'+sectionTitle.id">
-                        <!-- {{sectionTitle}} -->
-                        <input class="form-check-input" type="radio" :name="'radio-input'+image.formId+''+sectionTitle.id" :id="'radio-input-'+image.formId+''+sectionTitle.id" :value="sectionTitle.id" v-model="image.section_title_id">
-                        <label v-if="sectionTitle.title" class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id">
-                            {{sectionTitle.title}}
-                        </label>
-                        <label class="form-check-label" :for="'radio-input-'+image.id+''+sectionTitle.id" v-else>
-                            Naslov sekcije
-                        
+                    <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'textareaSecionT_'+sectionTitle.formId">
+        
+                        <input class="form-check-input" type="radio" :name="'textarea-radio-input-'+textarea.formId+''+sectionTitle.formId" :id="'textarea-radio-input-'+textarea.formId+''+sectionTitle.formId" :value="sectionTitle.id ? sectionTitle.id : sectionTitle.formId" v-model="textarea.section_title_id">
+                        <label class="form-check-label" :for="'textarea-radio-input-'+textarea.formId+''+sectionTitle.formId">
+                            <p v-if="sectionTitle.title">
+                                {{sectionTitle.title}}
+                            </p>
+                            <p v-else>Naslov sekcije</p>
                         </label>
                     </div>
                 </div>
+                <div v-if="post.textareas.length -1 === i" class="col-lg-2">
+                    <button class="btn btn-success" @click="handleAddTextarea(post.textareas.length)">Dodaj novo polje</button>
+                </div>
+                <div v-else class="col-lg-2"></div>
             </div>
+        </div>
+
       
 
             <!-- <div class="col-lg-10 mb-5"> -->
@@ -198,8 +226,9 @@
                     <img :src="imagePreview" alt="" style="width: 200px;">
                 </div> -->
             <!-- </div> -->
+
         <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="textarea in textareas" :key="'textarea_edit_'+textarea.id">
-            <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.id}}</label>
+            <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.formId}}</label>
             <div class="div-text row">
                 <div class="col-lg-7">
                     <textarea v-model="textarea.text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -216,7 +245,7 @@
                     <div v-else></div> -->
                 </div>
                 <div class="delete-button  col-lg-1" v-if="textarea.id !== 1">
-                    <button class="btn btn-danger" @click="handleDeleteTextarea(textarea.id)">Obrisi</button>
+                    <button class="btn btn-danger" @click="handleDeleteTextarea(textarea.formId)">Obrisi</button>
                 </div>
                 <div v-else class="col-lg-1"></div>
                 <!-- section titles to bind to -->
@@ -242,7 +271,7 @@
                     </div>
                 </div>
                 <div v-else></div> -->
-            </div>
+                </div>
             </div>
             <div class="row">
 
@@ -341,8 +370,8 @@ export default {
         goBackToPost(){
             this.$router.push(`/jolanda/posts/${this.$route.params.id}`);
         },
-        handleAddSectionTitle(id){
-            this.post.section_titles.push({sectionTId: id++, title: '', belongsTo: ''})
+        handleAddSectionTitle(length){
+            this.post.section_titles.push({formId: length+1, title: '', belongsTo: ''})
         },
         handleDeleteSecetionTitle(k){
             this.post.section_titles.splice(k, 1);
@@ -351,25 +380,25 @@ export default {
             // this.imagesE.push({formImageId: imagesLength + 1 })
                 console.log('ADD IMAGE ', this.post.images);
 
-            this.post.images.push({formId: imagesLength})
+            this.post.images.push({formId: imagesLength+1, section_title_id: ''})
         },
         deleteEditImage(formId){
-       const iterator = this.post.images.keys()
-       for(const key of iterator){
-           console.log('asdasdasddas ', this.post.images[key].formId === formId);
-           if(this.post.images[key].formId === formId){
-            this.post.images.splice(key, 1)
+            const iterator = this.post.images.keys()
+            for(const key of iterator){
+                console.log('asdasdasddas ', this.post.images[key].formId === formId);
+                if(this.post.images[key].formId === formId){
+                    this.post.images.splice(key, 1)
 
-           }
-       }
+                }
+            }
 
-            const imageTR = this.post.images.map(x=> x)
+      
 
             // this.post.images.splice(formId, 1)
                 // this.post.images.splice(formId, 1)
         
 
-                    console.log('formID ', this.post.images, imageTR);
+           
         //  this.post.images.forEach(image => {
             //  console.log('imnage', image.indexOf(formId));
              
@@ -389,12 +418,20 @@ export default {
             //     }
             // });
         },
-        handleAddTextarea(k){
+        handleAddTextarea(length){
             console.log(this.textareas);
-            this.textareas.push({id: k + 1})
+            this.post.textareas.push({formId: length + 1, section_title_id: ''})
         },
-        handleDeleteTextarea(k){
-            this.textareas.splice(k -1 , 1)
+        handleDeleteTextarea(formId){
+            // this.post.textareas.splice(formId, 1)
+            const iterator = this.post.textareas.keys()
+            for(const key of iterator){
+                console.log('asdasdasddas ', this.post.textareas[key].formId === formId);
+                if(this.post.textareas[key].formId === formId){
+                    this.post.textareas.splice(key, 1)
+
+                }
+            }
         }
     },
     beforeRouteEnter(from, to, next){
