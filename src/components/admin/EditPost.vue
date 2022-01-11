@@ -66,18 +66,38 @@
             <label for="formFileOne" class="form-label"><p>Slika br: {{image.formId}}</p></label>
             
             <div class="col-lg-7 file-inputs">
-                <input name="img" @change="previewEditedFiles($event, image.id, image.section_title_id)" class="form-control " type="file" id="formFileOne" accept="image/*">
+                <input name="img" @change="previewEditedFiles($event, i, image.section_title_id)" class="form-control " type="file" id="formFileOne" accept="image/*">
                 <div class="row">
 
-                    <div class="col-lg-6">
-                    <p :class="image.id ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
-                        {{image.id ? 'old image' : 'new image'}}
-                    </p>
+                    <!-- <div class="col-lg-6">
+                    <div :class="image.new_image_name ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
+                        <p v-if="!image.new_image_name && image.id">old image</p>
+                        <p v-else-if="!image.new_image_name && !image.id">no image</p>
+                        
+                        <p v-else>new image</p>
+                   
+                        {{image.new_image_name? 'new image' : ''}}
+                    </div>
                     <img 
                         :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
                         alt="No image to display" 
                         style="width:70%;"
                     >
+                    </div> -->
+                    <div class="col-lg-6">
+                        <p :class="newImages[i]? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger' ">
+                            {{newImages[i]  === undefined ? 'old image' : 'new image' }}
+                        </p>
+                        <!-- <p :class="imagesEE[image.id ? image.id - 1 : image.formImageId - 1] ? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger'">
+                            {{imagesEE[image.id ? image.id - 1 : image.formImageId - 1] ? 'new image' : 'old image'}}
+                          
+                        </p> -->
+                  
+                        <img 
+                            :src="newImages[i] ? newImages[i] : `http://127.0.0.1:8000/api/get-image/${image.name}`" 
+                            alt="No image to display" 
+                            style="width:70%;"
+                        >
                     </div>
                 </div> 
 
@@ -303,7 +323,7 @@ import store from '../../store'
 export default {
     data() {
        return{
-         
+           newImages: [],
            imagesToEdit:[],
            imagesEE: [
                
@@ -329,6 +349,26 @@ export default {
     },
     methods:{
         ...mapActions({setEditPostImage: 'BlogModule/setEditPostImage'}),
+        previewEditedFiles(e, i, sectionTitleId){
+            e.target.files.forEach(file => {
+                console.log(this.post.images);
+                this.post.images[i].new_image_name = file.name
+                // this.newImages.push()
+                if(file){
+                    const fileUrl = URL.createObjectURL(file)
+                    this.newImages[i] = fileUrl;
+                    this.newImages.push()
+                }else {
+                    this.newImages[i] = {}
+                }
+                
+            });
+            console.log('post iamges ', this.post.images, 'new iamges ', this.newImages, 'stitle ', sectionTitleId);
+                    
+            // this.post.images.forEach(image =>{
+
+            // });
+        },
         previewFiles(e, id, sectionTitleId){
             this.sectionTitles.forEach(sectionTitle => {
                 sectionTitle.images.forEach(image => {
@@ -378,18 +418,23 @@ export default {
         },
         handleAddImage(imagesLength){
             // this.imagesE.push({formImageId: imagesLength + 1 })
-                console.log('ADD IMAGE ', this.post.images);
-
             this.post.images.push({formId: imagesLength+1, section_title_id: ''})
         },
         deleteEditImage(formId){
+            const imageToCompare = this.post.images.find(x => x.formId === formId)
+            this.newImages.forEach(newImage => {
+                if(newImage.name === imageToCompare.new_image_name){
+                    const index = this.newImages.indexOf(newImage)
+                    this.newImages.splice(index, 1);
+                }
+            });
             const iterator = this.post.images.keys()
             for(const key of iterator){
-                console.log('asdasdasddas ', this.post.images[key].formId === formId);
                 if(this.post.images[key].formId === formId){
                     this.post.images.splice(key, 1)
-
+                    this.newImages.splice(key, 1)
                 }
+                console.log(this.newImages);
             }
 
       
