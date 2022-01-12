@@ -5,6 +5,7 @@
    <!-- {{post_title}} -->
     <!-- <label for="blog-title" class="form-label">Naslov posta</label>
     <input type="text" class="form-control " id="blog-title"  v-model="post_title"> -->
+    {{post.images}}
         <div v-for="(postOne, id) in post" :key="'post_title_'+id">
             <div class="mb-3 col-lg-9 file-inputs" v-if="postOne.post_title">
                 <label for="blog-title" class="form-label">Naslov posta</label>
@@ -66,7 +67,7 @@
             <label for="formFileOne" class="form-label"><p>Slika br: {{image.formId}}</p></label>
             
             <div class="col-lg-7 file-inputs">
-                <input name="img" @change="previewEditedFiles($event, i)" class="form-control " type="file" id="formFileOne" accept="image/*">
+                <input name="img" @change="previewEditedFiles($event, i, image)" class="form-control " type="file" id="formFileOne" accept="image/*">
                 <div class="row">
                     <div class="col-lg-6">
                         <p :class="newImages[i]? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger' ">
@@ -307,7 +308,7 @@ export default {
            imagesEE: [
                
                ],
-               empty: ''
+            //    empty: ''
        } 
     },
     computed:{
@@ -328,60 +329,79 @@ export default {
     },
     methods:{
         ...mapActions({setEditPostImage: 'BlogModule/setEditPostImage'}),
-        previewEditedFiles(e, i){
+        previewEditedFiles(e, i, image){
             e.target.files.forEach(file => {
+         
                 const fileUrl = URL.createObjectURL(file)
-                this.newImages[i] = fileUrl;
+                this.newImages[i] = fileUrl ? fileUrl : null;
+                this.post.images[i].oldName = image.name ? image.name : 'no old name';
+                    this.imagesToEdit[i] = {
+                        oldName: image.name ? image.name : 'no old name',
+                        name: file.name, 
+                        id: image.id ? image.id : null ,
+                        formId: image.formId,
+                        sId: image.section_title_id ? image.section_title_id : null
+                    }
+                this.post.images[i].name = file.name;
                 if(file){
-                    this.post.images[i].new_image = file
+                    this.post.images[i].new_image = file ? file : {}
                     this.newImages.push()
                 }else {
                     this.newImages[i] = {}
                 }
-                
-            });
-            console.log(this.post.images);
-            // this.post.images.forEach(image =>{
+              
 
-            // });
-        },
-        previewFiles(e, id, sectionTitleId){
-            this.sectionTitles.forEach(sectionTitle => {
-                sectionTitle.images.forEach(image => {
-                    this.empty = image
-                        this.imagesEE.push()
-                        this.empty = ''   
-                });
+                console.log('this.imagesToEdit', this.post.images);  
             });
+        },
+        // previewFiles(e, id, sectionTitleId){
+        //     this.sectionTitles.forEach(sectionTitle => {
+        //         sectionTitle.images.forEach(image => {
+        //             this.empty = image
+        //                 this.imagesEE.push()
+        //                 this.empty = ''   
+        //         });
+        //     });
                   
-            e.target.files.forEach(file => {
-                this.sectionTitles.forEach(sectionTitle => {
-                    sectionTitle.images.forEach(image => {
-                        const foundImage = image.id === id
-                        const fileUrl = URL.createObjectURL(file)
-                        this.imagesEE[id - 1] = fileUrl;
-                        this.imagesToEdit[id - 1] = {file: file, id: foundImage ? id : null, sId: sectionTitleId}
-                    });
-                });
-            });
-        },
+        //     e.target.files.forEach(file => {
+        //         this.sectionTitles.forEach(sectionTitle => {
+        //             sectionTitle.images.forEach(image => {
+        //                 const foundImage = image.id === id
+        //                 const fileUrl = URL.createObjectURL(file)
+        //                 this.imagesEE[id - 1] = fileUrl;
+        //                 this.imagesToEdit[id - 1] = {file: file, id: foundImage ? id : null, sId: sectionTitleId}
+        //             });
+        //         });
+        //     });
+        // },
         async handleEditPost(){
             let data = new FormData();
             this.post.images.forEach((image) => {
-                data.append('images[]', image.file)
+                data.append('images[]', image.new_image)
+            console.log(image);
             });
-            console.log(data);
             // this.imagesToEdit.forEach((image) => {
             //     data.append('images[]', image.file);
             // });
-            // const post = this.post
+            const post = this.post
             // const imagesToEdit = []
             // this.imagesToEdit.forEach(imageToEdit => {
             //     const sectionId = this.imagesE.find(x => x.id === imageToEdit.formImageId)
             //     const sectionTitleId = imageToEdit.sId ? imageToEdit.sId : sectionId.section_title_id;
             //     imagesToEdit.push({imageName: imageToEdit.file.name, imageToReplaceId: imageToEdit.id ? imageToEdit.id : '', sectionTitleId: sectionTitleId})
             // });
-            await this.setEditPostImage({data})
+            this.imagesToEdit.forEach(imageToEdit => {
+                this.post.images.forEach(image => {
+                    
+                    if(image.formId === imageToEdit.formId && image.section_title_id === null){
+                        imageToEdit.sId = image.section_title_id
+                        }
+                })
+                
+            });
+            const imagesToEdit = this.imagesToEdit
+            console.log('ITE ',this.imagesToEdit,'Post', this.post.images);
+            await this.setEditPostImage({data, images_to_edit: imagesToEdit, post})
             // if(this.apiWaitingCount === 0){
             //     this.$router.push('/jolanda/posts')
             // }
