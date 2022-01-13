@@ -150,9 +150,9 @@ const blogModule = {
         },
         async setEditPostImage({dispatch},payload){
       
+            console.log('imageresponse  ', payload.post.images);
             const imageResponse = await blogService.setEditPostImage(payload.data);
-            // console.log('imageresponse  ', payload.post.images);
-            let sameNames = null;
+            let sameNames = true;
              imageResponse.images.forEach(savedImage => {
                 const imageName = savedImage.slice(11);
                 payload.post.images.forEach(image => {

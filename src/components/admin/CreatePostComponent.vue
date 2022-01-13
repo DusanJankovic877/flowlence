@@ -260,7 +260,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters({errors: 'errors',savedImages: 'BlogModule/savedImages'}),
+        ...mapGetters({errors: 'errors',savedImages: 'BlogModule/savedImages', postMessage: 'postMessage'}),
         routeParam(){
             return this.$route.params.id
         }
@@ -284,31 +284,22 @@ export default {
                        this.images[id] = {}
                    }
             });
-            // let files = e.target.files || e.dataTransfer.files;
-            // if (!files.length)
-            //     return;
-            // this.createImage(files[0], id);
-console.log(id);
         },
         async handleFormSubmit(){
             console.log('image',this.images);
-            // if(this.images[0] instanceof File){
                 let data = new FormData();
                 this.images.forEach((image) => {
                     data.append('images[]', image);
                 });
                 const blog = this.blog;
-
                 await this.setCreatePostImage({data, blog})
                 this.$router.push('/jolanda/posts')
-            console.log('blog', this.blog);
         },
 
         handleAddTextarea(){
             this.blog.textareas.push({textareaId: this.counter++, text: '', belongsTo: ''})        
         },
         handleDeleteTextarea(k){
-            // this.deleteTextArea(k)
             this.blog.textareas.splice(k, 1);
         },
         handleAddSectionTitle(){
@@ -359,19 +350,6 @@ console.log(id);
 .file-inputs {
     text-align: left !important;
 }
-
-#blog-section-title{
-    /* margin-left: 13px !important; */
-    /* width: 67.8%; */
-}
-/* .section-title-button{
- 
-    margin-left: 10px;
-    padding: 0 0 !important;
-} */
-.text-area{
-    /* width:70% ; */
-}
 .odd-text-areas{
     background: rgba(128, 128, 128, 0.815);
     padding: 5px 0 10px 20px;
@@ -390,7 +368,6 @@ console.log(id);
     border: none;
 }
 .file-inputs input{
-    /* width:70%; */
     margin:0 !important;
     border: none;
     border-radius: 0;

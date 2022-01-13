@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage">
-           <p style="margin-left: 40%;margin-right: 40%;">
+           <p style="text-align: center;">
                {{postMessage}}
             </p> 
         </div>
@@ -42,14 +42,10 @@ export default {
     beforeRouteLeave(from, to, next){
         store.dispatch('BlogModule/emptyPosts')
         if(this.$router.path === '/blog/'+this.$route.params.id){
-            console.log('sadasdsadasdasdasdasd');
         store.dispatch('emptyPostMessage')
         }
         store.dispatch('emptyPostMessage')
-
         next();
-
-
     }
 }
 </script>

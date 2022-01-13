@@ -377,41 +377,21 @@ export default {
         async handleEditPost(){
             let data = new FormData();
             this.post.images.forEach((image) => {
-                data.append('images[]', image.new_image)
-            console.log(image);
+                if(image.new_image){
+                    data.append('images[]', image.new_image)
+                }
             });
-            // this.imagesToEdit.forEach((image) => {
-            //     data.append('images[]', image.file);
-            // });
             const post = this.post
-            // const imagesToEdit = []
-            // this.imagesToEdit.forEach(imageToEdit => {
-            //     const sectionId = this.imagesE.find(x => x.id === imageToEdit.formImageId)
-            //     const sectionTitleId = imageToEdit.sId ? imageToEdit.sId : sectionId.section_title_id;
-            //     imagesToEdit.push({imageName: imageToEdit.file.name, imageToReplaceId: imageToEdit.id ? imageToEdit.id : '', sectionTitleId: sectionTitleId})
-            // });
-            this.imagesToEdit.forEach(imageToEdit => {
-                this.post.images.forEach(image => {
-                    
-                    if(image.formId === imageToEdit.formId && image.section_title_id === null){
-                        imageToEdit.sId = image.section_title_id
-                        }
-                })
-                
-            });
             const imagesToEdit = this.imagesToEdit
             console.log('ITE ',this.imagesToEdit,'Post', this.post.images);
             await this.setEditPostImage({data, images_to_edit: imagesToEdit, post})
-            // if(this.apiWaitingCount === 0){
-            //     this.$router.push('/jolanda/posts')
-            // }
-
+            this.$router.push('/jolanda/posts')
         },
         goBackToPost(){
             this.$router.push(`/jolanda/posts/${this.$route.params.id}`);
         },
         handleAddSectionTitle(length){
-            this.post.section_titles.push({formId: length+1, title: '', belongsTo: ''})
+            this.post.section_titles.push({formId: length+1, title: '', id: ''})
         },
         handleDeleteSecetionTitle(k){
             //za svaki delete dela posta ako postoji id prebaci u niz toDelete
@@ -436,38 +416,11 @@ export default {
                     this.post.images.splice(key, 1)
                     this.newImages.splice(key, 1)
                 }
-                console.log(this.newImages);
             }
-
-      
-
-            // this.post.images.splice(formId, 1)
-                // this.post.images.splice(formId, 1)
-        
-
-           
-        //  this.post.images.forEach(image => {
-            //  console.log('imnage', image.indexOf(formId));
-             
-        //      if(image.formId === formId){
-        //         // const imageFID = formId
-        //         this.post.images.splice(image.formId, 1)
-
-       
-          
-             
-        //  });
-            // this.imagesE.forEach(imageE => {
-            //     if(imageE.id === k){
-            //         this.imagesE.splice(k, 1)
-            //     }else if(imageE.formImageId === k){
-            //         this.imagesE.splice(k, 1)
-            //     }
-            // });
         },
         handleAddTextarea(length){
             console.log(this.textareas);
-            this.post.textareas.push({formId: length + 1, section_title_id: ''})
+            this.post.textareas.push({formId: length + 1, section_title_id: '', id:''})
         },
         handleDeleteTextarea(formId){
             //za svaki delete dela posta ako postoji id prebaci u niz toDelete
@@ -477,7 +430,6 @@ export default {
                 console.log('asdasdasddas ', this.post.textareas[key].formId === formId);
                 if(this.post.textareas[key].formId === formId){
                     this.post.textareas.splice(key, 1)
-
                 }
             }
         }
@@ -488,7 +440,6 @@ export default {
     },
     beforeRouteLeave(from, to, next){
         store.dispatch('BlogModule/emptyPost')
-        // store.dispatch('BlogModule/emptyPost')
         next();
 
     }
