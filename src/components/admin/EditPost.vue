@@ -414,6 +414,7 @@ export default {
             this.post.section_titles.push({formId: length+1, title: '', belongsTo: ''})
         },
         handleDeleteSecetionTitle(k){
+            //za svaki delete dela posta ako postoji id prebaci u niz toDelete
             this.post.section_titles.splice(k, 1);
         },
         handleAddImage(imagesLength){
@@ -421,6 +422,7 @@ export default {
             this.post.images.push({formId: imagesLength+1, section_title_id: ''})
         },
         deleteEditImage(formId){
+            //za svaki delete dela posta ako postoji id prebaci u niz toDelete
             const imageToCompare = this.post.images.find(x => x.formId === formId)
             this.newImages.forEach(newImage => {
                 if(newImage.name === imageToCompare.new_image_name){
@@ -468,6 +470,7 @@ export default {
             this.post.textareas.push({formId: length + 1, section_title_id: ''})
         },
         handleDeleteTextarea(formId){
+            //za svaki delete dela posta ako postoji id prebaci u niz toDelete
             // this.post.textareas.splice(formId, 1)
             const iterator = this.post.textareas.keys()
             for(const key of iterator){

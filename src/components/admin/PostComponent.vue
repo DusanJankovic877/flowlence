@@ -19,9 +19,10 @@
         </div>
     </div>
     <div class="row">
-    <button class="col-lg-2 btn btn-danger m-auto" @click="goBack">idi nazad</button>
-
-    <router-link class="col-lg-2 btn btn-success m-auto" style="border-radius:0;"  :to="{'name': 'edit-post', params:{id: routeParam}}">uredi objavu</router-link>
+    <button class="col-lg-2 btn  m-auto" style="background-color: #e6b800; color: #808080;" @click="goBack">idi nazad</button>
+    <div class="col-lg-3 m-auto" v-if="routeName !== '/blog/'+routeParam">
+    <router-link class="col-lg-12 btn btn-success m-auto" style="border-radius:0;"  :to="{'name': 'edit-post', params:{id: routeParam}}">uredi objavu</router-link>
+    </div>
     <div class="col-lg-2 m-auto" v-if="routeName !== '/blog/'+routeParam">
     <button class="col-lg-12 btn btn-danger " @click="deletePost(post[0].id)">Obriši</button>{{deletetPost}}
     </div>

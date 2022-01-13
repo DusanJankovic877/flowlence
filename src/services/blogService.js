@@ -39,7 +39,7 @@ class BlogServices extends RequestHandler{
 
     async deletePost(payload){
       const response =  await this.apiClient.get(`/delete-post/${payload}`);
-      
+      console.log(';detele ', response);
 
       return response;
     }
