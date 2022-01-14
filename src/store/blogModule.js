@@ -149,25 +149,30 @@ const blogModule = {
             commit('EMPTY_POST')
         },
         async setEditPostImage({dispatch},payload){
-      
-            console.log('imageresponse  ', payload.post.images);
-            const imageResponse = await blogService.setEditPostImage(payload.data);
-            let sameNames = true;
-             imageResponse.images.forEach(savedImage => {
-                const imageName = savedImage.slice(11);
-                payload.post.images.forEach(image => {
-                    // console.log('image ', image.name === imageName);
-                    if(image.name === imageName){
-                        image.name = savedImage
-                        sameNames = true
-                    }else {
-                        sameNames = false
-                    }
+
+            if(payload.data === null){
+                console.log('imageresponse  ', payload);
+                dispatch('saveEditPost', payload)
+            }else{
+
+                const imageResponse = await blogService.setEditPostImage(payload.data);
+                let sameNames = true;
+                 imageResponse.images.forEach(savedImage => {
+                    const imageName = savedImage.slice(11);
+                    payload.post.images.forEach(image => {
+                        // console.log('image ', image.name === imageName);
+                        if(image.name === imageName){
+                            image.name = savedImage
+                            sameNames = true
+                        }else {
+                            sameNames = false
+                        }
+                    });
+                    // console.log('same name', sameNames);
+                    if(sameNames)dispatch('saveEditPost', payload)
+                    
                 });
-                // console.log('same name', sameNames);
-                if(sameNames)dispatch('saveEditPost', payload)
-                
-            });
+            }
             //if there is no images to edit
             // if(payload.imagesToEdit.length === 0){
             //     const postResponse = await blogService.saveEditPost({post: payload.post, images_to_edit: payload.imagesToEdit})
