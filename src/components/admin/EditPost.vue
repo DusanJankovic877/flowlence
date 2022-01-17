@@ -1,7 +1,7 @@
 <template>
 <div class="col-lg-7 m-auto create-post-form">
     <h1>editPost</h1>
-    <form @submit.prevent="handleEditPost" method="POST" enctype="multipart/form-data">
+    <form @submit.prevent="handleEditPost('submitted')" method="POST" enctype="multipart/form-data">
    <!-- {{post_title}} -->
     <!-- <label for="blog-title" class="form-label">Naslov posta</label>
     <input type="text" class="form-control " id="blog-title"  v-model="post_title"> -->
@@ -49,7 +49,7 @@
             <div v-else></div> -->
             </div>
             <div class=" col-lg-1" v-if="sectionTitle.formId !== 1">
-                <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(sectionTId)">Obrisi</button>
+                <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(sectionTId, sectionTitle.id)">Obrisi</button>
             </div>
             <div v-else class="col-lg-1"></div>
 
@@ -73,17 +73,18 @@
                         <p :class="newImages[i]? 'col-lg-6 alert  alert-success' : 'col-lg-6 alert alert-danger' ">
                             {{newImages[i]  === undefined ? 'old image' : 'new image' }}
                         </p>
-                        <img 
+                        <img v-if="image.name"
                             :src="newImages[i] ? newImages[i] : `http://127.0.0.1:8000/api/get-image/${image.name}`" 
                             alt="No image to display" 
                             style="width:70%;"
                         >
+                        <img v-else src="http://placehold.it/300x200" alt="" style="width:70%;">
                     </div>
                 </div> 
 
             </div>
             <div class=" col-lg-1" v-if="image.formId !== 1">
-                <button class="btn btn-danger col-lg-12" @click="deleteEditImage(image.formId)">Obrisi</button>
+                <button class="btn btn-danger col-lg-12" @click="deleteEditImage(image.formId, image.id)">Obrisi</button>
             </div>
             <div v-else class="col-lg-1"></div>
 
@@ -100,6 +101,7 @@
                     </label>
                 </div>
             </div>
+        
             <div class="col-lg-2" style="float:right !important;" >
                 <button @click="handleAddImage(post.images.length)" class="btn btn-success" v-if="post.images.length - 1 === i">
                     Dodaj novu sliku
@@ -107,6 +109,10 @@
             </div>
 
         </div>
+        
+                <button @click="handleAddImage(post.images.length)" class="btn btn-success" v-if="!post.images === false && post.images.length === 0">
+                    Dodaj novu sliku
+                </button>
         <!-- textarea -->
         <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="(textarea, i) in post.textareas" :key="'textarea_edit_'+textarea.formId">
             <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.formId}}</label>
@@ -117,7 +123,7 @@
                 </div>
         
                 <div class="delete-button  col-lg-1" v-if="textarea.formId !== 1">
-                    <button class="btn btn-danger" @click="handleDeleteTextarea(textarea.formId)">Obrisi</button>
+                    <button class="btn btn-danger" @click="handleDeleteTextarea(textarea.formId, textarea.id)">Obrisi</button>
                 </div>
                 <div v-else class="col-lg-1"></div>
 
@@ -158,30 +164,23 @@ export default {
        return{
            newImages: [],
            imagesToEdit:[],
-           imagesEE: [
-               
-               ],
-            //    empty: ''
        } 
     },
     computed:{
-        textareasLastCount(){
-            return this.textareas[this.textareas.length - 1]
-        },
-        imagesLastCount(){
-            return this.imagesE[this.imagesE.length - 1]
-        },
         ...mapGetters({
             post: 'BlogModule/postToEdit', 
             post_title: 'BlogModule/post_title',
-            imagesE: 'BlogModule/imagesE', 
             sectionTitles: 'BlogModule/sectionTitles', 
             textareas: 'BlogModule/textareas',
             apiWaitingCount: 'apiWaitingCount'
         }),
     },
     methods:{
-        ...mapActions({setEditPostImage: 'BlogModule/setEditPostImage'}),
+        ...mapActions({
+            setEditPostImage: 'BlogModule/setEditPostImage',
+            deleteImage: 'BlogModule/deleteImage', 
+            deleteSectionTitle: 'BlogModule/deleteSectionTitle',
+            deleteTextarea: 'BlogModule/deleteTextarea' }),
         previewEditedFiles(e, i, image){
             e.target.files.forEach(file => {
          
@@ -202,47 +201,25 @@ export default {
                 }else {
                     this.newImages[i] = {}
                 }
-              
-
-                console.log('this.imagesToEdit', this.post.images);  
             });
         },
-        // previewFiles(e, id, sectionTitleId){
-        //     this.sectionTitles.forEach(sectionTitle => {
-        //         sectionTitle.images.forEach(image => {
-        //             this.empty = image
-        //                 this.imagesEE.push()
-        //                 this.empty = ''   
-        //         });
-        //     });
-                  
-        //     e.target.files.forEach(file => {
-        //         this.sectionTitles.forEach(sectionTitle => {
-        //             sectionTitle.images.forEach(image => {
-        //                 const foundImage = image.id === id
-        //                 const fileUrl = URL.createObjectURL(file)
-        //                 this.imagesEE[id - 1] = fileUrl;
-        //                 this.imagesToEdit[id - 1] = {file: file, id: foundImage ? id : null, sId: sectionTitleId}
-        //             });
-        //         });
-        //     });
-        // },
         async handleEditPost(){
-            let data = new FormData();
-            // let emtyData = ''
-            this.post.images.forEach((image) => {
-                if(image.new_image){
-                    data.append('images[]', image.new_image)
-                }
-            });
+            const answer = confirm('Da li želite da pošaljete editovanu formu?')
+            if(answer === true){
 
-            let bool = !!data.entries().next().value
-            console.log('data', bool);
-            const post = this.post
-            const imagesToEdit = this.imagesToEdit
-            console.log('ITE ',this.imagesToEdit,'Post', this.post.images);
-            await this.setEditPostImage({data: bool ? data : null, images_to_edit: imagesToEdit, post})
-            this.$router.push('/jolanda/posts')
+                let data = new FormData();
+                this.post.images.forEach((image) => {
+                    if(image.new_image){
+                        data.append('images[]', image.new_image)
+                    }
+                });
+                //checking if data is empty
+                let bool = !!data.entries().next().value
+                const post = this.post
+                const imagesToEdit = this.imagesToEdit
+                await this.setEditPostImage({data: bool ? data : null, images_to_edit: imagesToEdit, post})
+                this.$router.push('/jolanda/posts')
+            }
         },
         goBackToPost(){
             this.$router.push(`/jolanda/posts/${this.$route.params.id}`);
@@ -250,44 +227,65 @@ export default {
         handleAddSectionTitle(length){
             this.post.section_titles.push({formId: length+1, title: '', id: ''})
         },
-        handleDeleteSecetionTitle(k){
+        async handleDeleteSecetionTitle(k, sTId){
             //za svaki delete dela posta ako postoji id prebaci u niz toDelete
-            this.post.section_titles.splice(k, 1);
-        },
-        handleAddImage(imagesLength){
-            // this.imagesE.push({formImageId: imagesLength + 1 })
-            this.post.images.push({formId: imagesLength+1, section_title_id: '', id: ''})
-        },
-        deleteEditImage(formId){
-            //za svaki delete dela posta ako postoji id prebaci u niz toDelete
-            const imageToCompare = this.post.images.find(x => x.formId === formId)
-            this.newImages.forEach(newImage => {
-                if(newImage.name === imageToCompare.new_image_name){
-                    const index = this.newImages.indexOf(newImage)
-                    this.newImages.splice(index, 1);
-                }
-            });
-            const iterator = this.post.images.keys()
-            for(const key of iterator){
-                if(this.post.images[key].formId === formId){
-                    this.post.images.splice(key, 1)
-                    this.newImages.splice(key, 1)
+            const answer = confirm('Da li ste sigurni da hoćete da obrišete naslov sekcije?')
+            if(answer === true){
+                this.post.section_titles.splice(k, 1);
+                if(sTId !== ''){
+                    console.log('section title, ', sTId);
+                    await this.deleteSectionTitle(sTId);
+                    this.$router.push(`/jolanda/edit-post/${this.post.post_title.id}`);
                 }
             }
+        },
+        handleAddImage(imagesLength){
+            this.post.images.push({formId: imagesLength+1, section_title_id: '', id: ''})
+        },
+        async deleteEditImage(formId, imageId){
+            const answer = confirm('Da li ste sigurni da hoćete da obrišete sliku?')
+            if(answer === true){
+                const imageToCompare = this.post.images.find(x => x.formId === formId)
+                this.newImages.forEach(newImage => {
+                    if(newImage.name === imageToCompare.new_image_name){
+                        const index = this.newImages.indexOf(newImage)
+                        this.newImages.splice(index, 1);
+                    }
+                });
+                const iterator = this.post.images.keys()
+                for(const key of iterator){
+                    if(this.post.images[key].formId === formId){
+                        this.post.images.splice(key, 1)
+                        this.newImages.splice(key, 1)
+                    }
+                }
+                if(imageId !== ''){
+                    await  this.deleteImage(imageId);
+                }
+            }
+            
+            //za svaki delete dela posta ako postoji id prebaci u niz toDelete
         },
         handleAddTextarea(length){
             console.log(this.textareas);
             this.post.textareas.push({formId: length + 1, section_title_id: '', id:''})
         },
-        handleDeleteTextarea(formId){
+        async handleDeleteTextarea(formId, textareaId){
             //za svaki delete dela posta ako postoji id prebaci u niz toDelete
             // this.post.textareas.splice(formId, 1)
-            const iterator = this.post.textareas.keys()
-            for(const key of iterator){
-                console.log('asdasdasddas ', this.post.textareas[key].formId === formId);
-                if(this.post.textareas[key].formId === formId){
-                    this.post.textareas.splice(key, 1)
+            const answer = confirm('Da li ste sigurni da hoćete da obrišete tekst polje?')
+            if(answer === true){
+                const iterator = this.post.textareas.keys()
+                for(const key of iterator){
+                    console.log('asdasdasddas ', this.post.textareas[key].formId === formId);
+                    if(this.post.textareas[key].formId === formId){
+                        this.post.textareas.splice(key, 1)
+                    }
                 }
+                if(textareaId !== ''){
+                    await  this.deleteTextarea(textareaId);
+                }
+
             }
         }
     },

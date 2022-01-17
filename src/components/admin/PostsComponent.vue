@@ -9,8 +9,8 @@
                     <div v-for="image in post.section_titles.images" :key="'image_'+image.id"  >
                         <div class="blog-image">
                             <img 
-                            :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
-                            alt="picture" 
+                                :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
+                                alt="picture" 
                             >
                         </div>
                         <div class="mt-3">

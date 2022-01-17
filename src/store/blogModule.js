@@ -14,7 +14,6 @@ const blogModule = {
         postToEdit:{},
         post_title: '',
         sectionTitles:[],
-        imagesE:[],
         textareas:[],
         deletetPost:''
     },
@@ -43,9 +42,6 @@ const blogModule = {
             state.sectionTitles = state.post.section_titles
             state.post.section_titles.forEach(section_title => {
          
-                section_title.images.forEach(image => {
-                    state.imagesE.push(image)
-                });
                 section_title.textareas.forEach(textarea => {
                     state.textareas.push(textarea)
                 });
@@ -63,7 +59,6 @@ const blogModule = {
             state.post = {}
             state.post_title = ''
             state.sectionTitles = {}
-            state.imagesE = []
             state.textareas = []
 
         },
@@ -149,13 +144,17 @@ const blogModule = {
             commit('EMPTY_POST')
         },
         async setEditPostImage({dispatch},payload){
-
+            console.log('answer payload', payload);
+            if(payload.answer === false){
+                return false;
+            }
             if(payload.data === null){
                 console.log('imageresponse  ', payload);
                 dispatch('saveEditPost', payload)
             }else{
 
                 const imageResponse = await blogService.setEditPostImage(payload.data);
+                
                 let sameNames = true;
                  imageResponse.images.forEach(savedImage => {
                     const imageName = savedImage.slice(11);
@@ -215,7 +214,19 @@ const blogModule = {
             const response = await blogService.deletePost(payload);
             commit('SET_DELETED_POST', response.data)
             // console.log('delete response ', response);
+          },
+          async deleteImage(_, payload){
+              console.log('delete image, ', payload);
+              await blogService.deleteImage(payload)
+          },
+          async deleteSectionTitle(_, payload){
+            await blogService.deleteSectionTitle(payload)
+
+          },
+          async deleteTextarea(_, payload){
+            await blogService.deleteTextarea(payload)
           }
+
     },
     getters:{
         textareasToDelete: (state) => state.textareasToDelete,
@@ -225,7 +236,7 @@ const blogModule = {
         posts: (state) => state.posts,
         post: (state) => state.post,
         postToEdit: (state) => state.postToEdit,
-        imagesE: (state) => state.imagesE,
+
         post_title: (state) => state.post_title,
         sectionTitles: (state) => state.sectionTitles,
         textareas: (state) => state.textareas,

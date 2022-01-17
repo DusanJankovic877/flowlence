@@ -43,6 +43,16 @@ class BlogServices extends RequestHandler{
 
       return response;
     }
+    async deleteImage(imageId){
+      await this.apiClient.get(`delete-image/${imageId}`)
+    }
+    async deleteSectionTitle(sectionTitleId){
+      await this.apiClient.get(`delete-section-title/${sectionTitleId}`)
+
+    }
+    async deleteTextarea(textareaId){
+      await this.apiClient.get(`delete-textarea/${textareaId}`)
+    }
 }
 const blogServices = new BlogServices();
 export default blogServices;
