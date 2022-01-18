@@ -1,59 +1,49 @@
 <template>
 <div class="col-lg-7 m-auto create-post-form">
     <h1>editPost</h1>
+    <pre>
+        {{errors}}
+    </pre>
     <form @submit.prevent="handleEditPost('submitted')" method="POST" enctype="multipart/form-data">
-   <!-- {{post_title}} -->
-    <!-- <label for="blog-title" class="form-label">Naslov posta</label>
-    <input type="text" class="form-control " id="blog-title"  v-model="post_title"> -->
-    {{post.images}}
         <div v-for="(postOne, id) in post" :key="'post_title_'+id">
-            <div class="mb-3 col-lg-9 file-inputs" v-if="postOne.post_title">
+            <div class=" col-lg-9 file-inputs" v-if="postOne.post_title">
                 <label for="blog-title" class="form-label">Naslov posta</label>
                 <input type="text" class="form-control " id="blog-title"  v-model="postOne.post_title">
             </div>
         </div>
-        <!-- <div class="mb-3 col-lg-9 file-inputs">
-           
-
-            <input type="text" class="form-control " id="blog-title"  v-model="post.post_title"> -->
-       
-            
-            <!-- <div  v-if="errors.length">
-                <div v-for="(error, key) in errors" :key="key">
-                    <span v-for="(errorItem, innerKey) in error" :key="innerKey">
-                        <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'postTitle'">
-                        {{errorItem[0]}}
+        <div  v-if="errors.length">
+            <div v-for="(error, key) in errors" :key="key">
+                <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                    <div  v-if="innerKey === `post.post_title.post_title`">
+                        <div class="alert alert-danger col-lg-9 mb-3" role="alert" v-for="error in errorItem" :key="error.id">
+                        {{error}}
                         </div>
-                    </span>
-                </div>
-             </div> -->
-            <!-- <div v-else></div> --> 
-        <!-- </div> -->
-                <!-- section title -->
+                    </div>
+                </span>
+            </div>
+        </div>
+        <!-- section title -->
         <div class="mb-3 row" v-for="(sectionTitle, sectionTId) in this.post.section_titles" :key="'sectionTitle_'+sectionTId">
-
             <label for="blog-section-title"  class="form-label col-lg-9">Naslov sekcije br:{{sectionTitle.formId}}</label>
             <div class="col-lg-7 file-inputs">
-
             <input type="text" class="form-control" id="blog-section-title" v-model="sectionTitle.title" placeholder="Naslov sekcije">
-
-            <!-- <div  v-if="errors.length">
+            <div  v-if="errors.length">
                 <div v-for="(error, key) in errors" :key="key">
                     <span v-for="(errorItem, innerKey) in error" :key="innerKey">
-                        <div class="alert alert-danger col-lg-12" role="alert" v-if="innerKey === 'sectionTitles.'+sectionTId+'.title'">
-                        {{errorItem[0]}}
+                        <div  v-if="innerKey === 'post.section_titles.'+sectionTId+'.title'">
+                            <div class="alert alert-danger col-lg-12" role="alert" v-for="error in errorItem" :key="error.id">
+                                {{error}}
+                            </div>
                         </div>
                     </span>
                 </div>
             </div>
-            <div v-else></div> -->
+            <div v-else></div>
             </div>
             <div class=" col-lg-1" v-if="sectionTitle.formId !== 1">
                 <button class="btn btn-danger col-lg-12" @click="handleDeleteSecetionTitle(sectionTId, sectionTitle.id)">Obrisi</button>
             </div>
             <div v-else class="col-lg-1"></div>
-
-            
             <div v-if="post.section_titles.length === sectionTId +1"  class="section-title-button col-lg-2">
                 <button @click="handleAddSectionTitle(post.section_titles.length)" class="btn btn-success s-title-button col-lg-12">
                     Dodaj nov naslov
@@ -63,9 +53,7 @@
         </div>
         <!-- IMAGE -->
         <div class="mb-3  row" v-for="(image, i) in post.images" :key="'image_'+image.formId">
-    
             <label for="formFileOne" class="form-label"><p>Slika br: {{image.formId}}</p></label>
-            
             <div class="col-lg-7 file-inputs">
                 <input name="img" @change="previewEditedFiles($event, i, image)" class="form-control " type="file" id="formFileOne" accept="image/*">
                 <div class="row">
@@ -81,7 +69,6 @@
                         <img v-else src="http://placehold.it/300x200" alt="" style="width:70%;">
                     </div>
                 </div> 
-
             </div>
             <div class=" col-lg-1" v-if="image.formId !== 1">
                 <button class="btn btn-danger col-lg-12" @click="deleteEditImage(image.formId, image.id)">Obrisi</button>
@@ -99,9 +86,9 @@
                         </p>
                         <p v-else>Naslov sekcije</p>
                     </label>
+
                 </div>
             </div>
-        
             <div class="col-lg-2" style="float:right !important;" >
                 <button @click="handleAddImage(post.images.length)" class="btn btn-success" v-if="post.images.length - 1 === i">
                     Dodaj novu sliku
@@ -109,19 +96,27 @@
             </div>
 
         </div>
-        
-                <button @click="handleAddImage(post.images.length)" class="btn btn-success" v-if="!post.images === false && post.images.length === 0">
-                    Dodaj novu sliku
-                </button>
+        <button @click="handleAddImage(post.images.length)" class="btn btn-success" v-if="!post.images === false && post.images.length === 0">
+            Dodaj novu sliku
+        </button>
         <!-- textarea -->
         <div :class="textarea.id % 2 === 0? 'mb-3  odd-text-areas' : 'mb-3  even-text-areas'" v-for="(textarea, i) in post.textareas" :key="'textarea_edit_'+textarea.formId">
             <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.formId}}</label>
             <div class="div-text row">
-
                 <div class="col-lg-7">
                     <textarea v-model="textarea.text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div  v-if="errors.length">
+                        <div v-for="(error, key) in errors" :key="key">
+                            <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                                <div  v-if="innerKey === `post.textareas.${textarea.formId-1}.text`">
+                                    <div class="alert alert-danger col-lg-12" role="alert" v-for="error in errorItem" :key="error.id">
+                                    {{error}}
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-        
                 <div class="delete-button  col-lg-1" v-if="textarea.formId !== 1">
                     <button class="btn btn-danger" @click="handleDeleteTextarea(textarea.formId, textarea.id)">Obrisi</button>
                 </div>
@@ -130,7 +125,6 @@
                 <!-- section titles to bind to -->
                 <div class="col-lg-2">
                     <div class="form-check" v-for="(sectionTitle) in post.section_titles" :key="'textareaSecionT_'+sectionTitle.formId">
-        
                         <input class="form-check-input" type="radio" :name="'textarea-radio-input-'+textarea.formId+''+sectionTitle.formId" :id="'textarea-radio-input-'+textarea.formId+''+sectionTitle.formId" :value="sectionTitle.id ? sectionTitle.id : sectionTitle.formId" v-model="textarea.section_title_id">
                         <label class="form-check-label" :for="'textarea-radio-input-'+textarea.formId+''+sectionTitle.formId">
                             <p v-if="sectionTitle.title">
@@ -139,6 +133,18 @@
                             <p v-else>Naslov sekcije</p>
                         </label>
                     </div>
+                    <div  v-if="errors.length">
+                        <div v-for="(error, key) in errors" :key="key">
+                            <span v-for="(errorItem, innerKey) in error" :key="innerKey">
+                                <div  v-if="innerKey === `post.textareas.${textarea.formId-1}.section_title_id`">
+                                    <!-- {{errorItem}} -->
+                                    <div class="alert alert-danger col-lg-12" role="alert" v-for="errorr in errorItem" :key="errorr">
+                                    {{errorr}}
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div v-if="post.textareas.length -1 === i" class="col-lg-2">
                     <button class="btn btn-success" @click="handleAddTextarea(post.textareas.length)">Dodaj novo polje</button>
@@ -146,9 +152,7 @@
                 <div v-else class="col-lg-2"></div>
             </div>
         </div>
-
         <div class="row">
-
             <button class="col-lg-2 btn btn-success m-auto">Pošalji</button>
             <button class="col-lg-2 btn btn-danger m-auto" @click="goBackToPost">idi nazad</button>
         </div>
@@ -169,18 +173,21 @@ export default {
     computed:{
         ...mapGetters({
             post: 'BlogModule/postToEdit', 
-            post_title: 'BlogModule/post_title',
-            sectionTitles: 'BlogModule/sectionTitles', 
-            textareas: 'BlogModule/textareas',
+            errors: 'errors',
+            // post_title: 'BlogModule/post_title',
+            // sectionTitles: 'BlogModule/sectionTitles', 
+            // textareas: 'BlogModule/textareas',
             apiWaitingCount: 'apiWaitingCount'
         }),
+ 
     },
     methods:{
         ...mapActions({
             setEditPostImage: 'BlogModule/setEditPostImage',
-            deleteImage: 'BlogModule/deleteImage', 
-            deleteSectionTitle: 'BlogModule/deleteSectionTitle',
-            deleteTextarea: 'BlogModule/deleteTextarea' }),
+            // deleteImage: 'BlogModule/deleteImage', 
+            // deleteSectionTitle: 'BlogModule/deleteSectionTitle',
+            // deleteTextarea: 'BlogModule/deleteTextarea' 
+            }),
         previewEditedFiles(e, i, image){
             e.target.files.forEach(file => {
          
@@ -218,7 +225,7 @@ export default {
                 const post = this.post
                 const imagesToEdit = this.imagesToEdit
                 await this.setEditPostImage({data: bool ? data : null, images_to_edit: imagesToEdit, post})
-                this.$router.push('/jolanda/posts')
+                // this.$router.push(`/jolanda/posts/${this.post.post_title.id}`)
             }
         },
         goBackToPost(){
@@ -294,7 +301,9 @@ export default {
         next();
     },
     beforeRouteLeave(from, to, next){
+        store.dispatch('BlogModule/emptyPostToEdit')
         store.dispatch('BlogModule/emptyPost')
+        console.log('empty post', this.post);
         next();
 
     }

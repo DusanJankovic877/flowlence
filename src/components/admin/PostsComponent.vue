@@ -20,11 +20,7 @@
                 </router-link>   
             </div>
         </div>
-        <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage">
-           <p style="text-align: center;">
-               {{postMessage}}
-            </p> 
-        </div>
+
     </div>
 </template>
 <script>
@@ -33,7 +29,7 @@ import { mapGetters } from 'vuex'
 import store from '../../store'
 export default {
     computed:{
-        ...mapGetters({posts: 'BlogModule/posts', postMessage: 'postMessage'})
+        ...mapGetters({posts: 'BlogModule/posts'})
     },
     beforeRouteEnter(from, to, next){
         store.dispatch('BlogModule/getPosts')

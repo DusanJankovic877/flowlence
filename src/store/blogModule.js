@@ -39,13 +39,13 @@ const blogModule = {
         SET_POST(state, payload){
             // console.log('mutation set post', payload);
             state.post = payload
-            state.sectionTitles = state.post.section_titles
-            state.post.section_titles.forEach(section_title => {
+            // state.sectionTitles = state.post.section_titles
+            // state.post.section_titles.forEach(section_title => {
          
-                section_title.textareas.forEach(textarea => {
-                    state.textareas.push(textarea)
-                });
-            });
+            //     section_title.textareas.forEach(textarea => {
+            //         state.textareas.push(textarea)
+            //     });
+            // });
 
             // state.post_title = payload.post_title.post_title
             // state.sectionTitles = payload.section_titles
@@ -64,6 +64,9 @@ const blogModule = {
         },
         EMPTY_POSTS(state){
             state.posts = {}
+        },
+        EMPTY_POST_TO_EDIT(state){
+            state.postToEdit = {}
         },
         SET_DELETED_POST(state, payload){
             state.deletetPost = payload;
@@ -126,6 +129,9 @@ const blogModule = {
         },
         emptyPosts({commit}){
             commit('EMPTY_POSTS')
+        },
+        emptyPostToEdit({commit}){
+            commit('EMPTY_POST_TO_EDIT')
         },
         async getPost({commit},payload){
             const response = await blogService.getPost(payload);
@@ -237,9 +243,9 @@ const blogModule = {
         post: (state) => state.post,
         postToEdit: (state) => state.postToEdit,
 
-        post_title: (state) => state.post_title,
-        sectionTitles: (state) => state.sectionTitles,
-        textareas: (state) => state.textareas,
+        // post_title: (state) => state.post_title,
+        // sectionTitles: (state) => state.sectionTitles,
+        // textareas: (state) => state.textareas,
         deletetPost: (state) => state.deletetPost
     }
 

@@ -1,5 +1,10 @@
 <template>
 <div class="col-lg-5 m-auto post">
+        <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage">
+           <p style="text-align: center;">
+               {{postMessage}}
+            </p> 
+        </div>
             <div v-for="postOne in post" :key="'post_title_'+postOne.id">
                 <div class="mb-3 col-lg-9 file-inputs" v-if="postOne.post_title">
                     <h1>{{postOne.post_title}}</h1>
@@ -28,6 +33,7 @@
             <button class="col-lg-12 btn btn-danger " @click="deletePost(post[0].id)">Obriši</button>{{deletetPost}}
         </div>
         <div class="col-lg-2 m-auto" v-else></div>
+        
     </div>
 </div>
 </template>
@@ -36,7 +42,7 @@ import { mapActions, mapGetters } from 'vuex'
 import store from '../../store'
 export default {
     computed:{
-        ...mapGetters({post: 'BlogModule/post',deletetPost: 'BlogModule/deletetPost'}),
+        ...mapGetters({post: 'BlogModule/post',deletetPost: 'BlogModule/deletetPost', postMessage: 'postMessage'}),
         routeParam(){
             return this.$route.params.id
         },
@@ -59,14 +65,17 @@ export default {
         }
 
     },
+    created(){
+        store.dispatch('BlogModule/emptyPost')
+        },
     beforeRouteEnter(from, to, next){
-    store.dispatch('BlogModule/getPost', from.params.id)
+        store.dispatch('BlogModule/getPost', from.params.id)
         next();
     },
     beforeRouteLeave(from, to, next){
         store.dispatch('BlogModule/emptyPost')
+        store.dispatch('emptyPostMessage')
         next();
-
     }
 }
 </script>
