@@ -293,6 +293,7 @@ export default {
         next();
     },
     beforeRouteLeave(from, to, next){
+        store.dispatch('deleteErrors')
         store.dispatch('BlogModule/emptyPostToEdit')
         store.dispatch('BlogModule/emptyPost')
         next();

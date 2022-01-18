@@ -53,6 +53,7 @@
                 </div>
             </div>  <!-- end of form-comment --> 
             <hr>
+            {{errors}}
             <div class="email">
                 <h5>Vaša mail adresa na koju želite da Vam pošaljemo <span class="red">*</span> ponudu:</h5>
                 <div class="form-group">

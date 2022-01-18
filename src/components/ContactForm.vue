@@ -9,7 +9,6 @@
                 <div class=" col-lg-12">
                   <label for="name" class="form-label">Vaše Ime:</label>
                   <input type="text" class="form-control" id="name" v-model="form.name" placeholder="Petar" @input="handleInputs(form.name)">
-                </div>
                 <div v-for="error in errors" :key="error.id">
                 <div class="alert alert-danger col-lg-12" role="alert" v-if="error.name">
                   {{error.name[0]}}
@@ -17,52 +16,53 @@
                 <div v-else></div>
 
                 </div>
+                </div>
              </div>
             <!-- EMAIL -->
             <div class="input-group contact-input-height">
                 <div class=" col-lg-12">
                   <label for="emial" class="form-label">Vaš Email:</label>
                   <input type="email" class="form-control" id="email" v-model="form.email" placeholder="email@gmail.com" @input="handleInputs(form.email)">
+                  <div v-for="error in errors" :key="error.id">
+                    <div class="alert alert-danger col-lg-12" role="alert" v-if="error.email">
+                      {{error.email[0]}}
+                    </div>
+                  <div v-else></div>
                 </div>
-                <div class="alert alert-danger col-lg-12" role="alert" v-if="errors[0]">
-                  {{errors[0].email[0]}}
                 </div>
-                <div v-else></div>
             </div>
             <!-- TELEPHONE -->
-            <div class="input-group contact-input-height">
+            <div class="input-group contact-input-height" :style="errors.length ? 'margin-bottom: 80px !important;' : ''">
                 <div class=" col-lg-12">
                   <label for="telephone" class="form-label">Vaš Telefon:</label>
                   <input type="text" class="form-control" id="telephone" v-model="form.telephone" placeholder="+38163123456" @input="handleInputs(form.telephone)">
+                <div v-for="error in errors" :key="error.id">
+                  <div v-if="error.telephone" >
+                    <div v-for="telephoneE in error.telephone" :key="telephoneE.id" class="alert alert-danger col-lg-12" role="alert">
+                    {{telephoneE}}
+                    </div>
+                   
+                  </div>
                 </div>
-                <!-- <div  v-if="errors[0].telephone" class="col-lg-12">
-                 <div class="alert alert-danger col-lg-12" role="alert" v-for="telephone in errors[0].telephone" :key="telephone.id">
-                   {{telephone}}
-                 </div>
                 </div>
-                <div v-else></div> -->
+                
             </div>
             <!-- MESSAGE -->
-            <div class="input-group contact-input-height mb-3">
+            <div class="input-group contact-input-height mb-3 ">
               <div class=" col-lg-12">
-              <label for="textarea" class="form-label">Poruka:</label>
-              <textarea class="form-control" id="textarea" v-model="form.message" placeholder="Unesite poruku"  rows="3" @input="handleInputs(form.message)"></textarea>
+                <label for="textarea" class="form-label">Poruka:</label>
+                <textarea class="form-control" id="textarea" v-model="form.message" placeholder="Unesite poruku"  rows="3" @input="handleInputs(form.message)"></textarea>
+                <div v-for="error in errors" :key="error.id">
+                  <div v-if="error.message" class="alert alert-danger col-lg-12" role="alert">
+                    {{error.message[0]}}
+                  </div>
+                </div>
               </div>
-              <!-- <div class="alert alert-danger col-lg-12 " role="alert" v-if="errors[0].message">
-                {{errors[0].message[0]}}
-              </div> -->
-              <!-- <div v-else></div> -->
             </div>
-         
-        <div v-if="emailFormMessage" class="error-message m-auto">
-          <!-- {{emailFormMessage}} -->
-        </div>
-        <div v-else></div>
             <div class="col-lg-12 contact-input-button mt-5">
                 <re-captcha :class="showForm ? 'captcha-contact' : 'hide captcha-contact'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
                 <button class="contact-form-button col-lg-2 btn btn-success" @click="handleSubmit" >Pošalji</button>
             </div>
-            <!-- {{errors[0].email}} -->
         </form>
       </div>
        
