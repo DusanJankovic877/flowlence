@@ -18,20 +18,20 @@ const blogModule = {
         deletetPost:''
     },
     mutations:{
-        setNewTextArea(state, payload){
-            var counter = state.blog.textareas.length;
-            state.blog.textareas.push({id: counter++})
-            state.textareasToCreate.push({id: payload})
-        },
+        // setNewTextArea(state, payload){
+        //     var counter = state.blog.textareas.length;
+        //     state.blog.textareas.push({id: counter++})
+        //     state.textareasToCreate.push({id: payload})
+        // },
         SET_POST_IMAGE(state,payload){
             state.postImages = payload;
         },
         SET_POST_TO_CREATE(state, payload){
             state.postToCreate = payload
         },
-        SET_IMAGES_NAMES(state, payload){
-            state.savedImages = payload
-        },
+        // SET_IMAGES_NAMES(state, payload){
+        //     state.savedImages = payload
+        // },
         SET_POSTS(state, payload){
             state.posts =  payload
         },
@@ -62,9 +62,9 @@ const blogModule = {
 
     },
     actions:{
-        addNewTextArea(state, payload){
-            state.commit('setNewTextArea', payload)
-        },
+        // addNewTextArea(state, payload){
+        //     state.commit('setNewTextArea', payload)
+        // },
         async setCreatePost(_, payload){
             await blogService.createPost(payload)
         },
@@ -117,6 +117,9 @@ const blogModule = {
         emptyPosts({commit}){
             commit('EMPTY_POSTS')
         },
+        emptyPost({commit}){
+            commit('EMPTY_POST')
+        },
         emptyPostToEdit({commit}){
             commit('EMPTY_POST_TO_EDIT')
         },
@@ -132,9 +135,6 @@ const blogModule = {
             if(response.data){
                 commit('SET_POST_TO_EDIT', response.data)
             }
-        },
-        emptyPost({commit}){
-            commit('EMPTY_POST')
         },
         async setEditPostImage({dispatch},payload){
 
@@ -188,7 +188,7 @@ const blogModule = {
         textareasToDelete: (state) => state.textareasToDelete,
         blog: (state) => state.blog,
         postImages: (state) => state.postImages,
-        savedImages: (state) => state.savedImages,
+        // savedImages: (state) => state.savedImages,
         posts: (state) => state.posts,
         post: (state) => state.post,
         postToEdit: (state) => state.postToEdit,

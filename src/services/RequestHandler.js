@@ -42,16 +42,13 @@ export class RequestHandler {
         });
         this.apiClient.interceptors.response.use(  response =>  {
             // await delay(3000);
-            
             store.dispatch('doneLoading')
             if(response.status === 200 && response.data.message){
-
                 store.dispatch('setPostMessage', response.data.message);
             }
             return response;
 
           }, async error =>  {
-              console.log('nesto', error.response);
               if(error.response.status === 401){
                 
                 if(error.response.data.message){
@@ -61,15 +58,12 @@ export class RequestHandler {
                     await store.dispatch('AdminModule/setAuthError', error.response.data.error)
                 }
                 await store.dispatch('doneLoading')
-
-                console.log('dispatch reset token',error.response);
               }
               else if( error.response.status === 422){
                   if(error.response.config.url === '/auth/login'){
                       await store.dispatch('AdminModule/setAuthError', error.response.data.message)
                       await store.dispatch('AdminModule/setAuthErrors', error.response.data.errors)
                     }else {
-                        console.log('settingf errors', error.response);
                         await  store.dispatch('setErrors', error.response.data.errors)
                     }
                   await  store.dispatch('doneLoading')

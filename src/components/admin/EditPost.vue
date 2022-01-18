@@ -153,7 +153,6 @@
             <button class="col-lg-2 btn btn-success m-auto">Pošalji</button>
             <button class="col-lg-2 btn btn-danger m-auto" @click="goBackToPost">idi nazad</button>
         </div>
-     
     </form>
 </div>
 </template>
@@ -222,7 +221,7 @@ export default {
                 const post = this.post
                 const imagesToEdit = this.imagesToEdit
                 await this.setEditPostImage({data: bool ? data : null, images_to_edit: imagesToEdit, post})
-                this.$router.push(`/jolanda/posts/${this.post.post_title.id}`)
+                if(!this.errors)this.$router.push(`/jolanda/posts/${this.post.post_title.id}`)
             }
         },
         goBackToPost(){

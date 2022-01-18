@@ -21,35 +21,35 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    setFormData(state, payload){
+    SET_FORM_DATA(state, payload){
       state.formData = payload;
 
     },
-    setEmptyFormData(state){
+    SET_EMPTY_FORM_DATA(state){
       state.formData = {}
     },
-    setEmptyEmailFormMessage(state){
+    SET_EMPTY_EMAIL_FORM_MESSAGE(state){
       state.emailFormMessage = '';
     },
-    setCaptchaValidate(state, payload){
+    SET_CAPTCHA_VALIDATE(state, payload){
      state.validateReCaptcha = payload
     },
-    setFormEmailMessage(state, payload){
+    SET_FORM_EMAIL_MESSAGE(state, payload){
       state.emailFormMessage = payload
     },
-    setApiWaitingCountIncrement(state){
+    SET_API_WAITING_COUNT_INCREMENT(state){
       state.apiWaitingCount += 1
     },
-    setApiWaitingCountDecrement(state){
+    SET_API_WAITING_COUNT_DECREMENT(state){
       state.apiWaitingCount -= 1;
     },
-    setErrors(state, payload){
+    SET_ERRORS(state, payload){
       if(state.apiWaitingCount === 1)state.errors.push(payload)
     },
-    deleteErrors(state){
+    DELETE_ERRORS(state){
       state.errors = []
     },
-    setDeleteFormMessage(state){
+    SET_DELETE_FORM_MESSAGE(state){
       state.emailFormMessage =''
     },
     SET_POST_MESSAGE(state, payload){
@@ -69,43 +69,43 @@ export default new Vuex.Store({
     async getContactFormData(state, payload){
       const response = await contactServices.getContactFormData(payload);
       if(response){
-        state.commit('setFormEmailMessage', response)
+        state.commit('SET_FORM_EMAIL_MESSAGE', response)
       }
       // console.log('store', response);
     },
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
-       state.commit('setFormData', response)  
+       state.commit('SET_FORM_DATA', response)  
     },
     setEmptyFormData(state){
-       state.commit('setEmptyFormData');
+       state.commit('SET_EMPTY_FORM_DATA');
     },
     setEmptyEmailFormMessage(state){
-      state.commit('setEmptyEmailFormMessage');
+      state.commit('SET_EMPTY_EMAIL_FORM_MESSAGE');
     },
     //at contact us when you leave it validateReCaptcha is reseted to false
     emptyCaptchaValidate(state, payload){
-      state.commit('setCaptchaValidate', payload)
+      state.commit('SET_CAPTCHA_VALIDATE', payload)
     },
     async getCaptchaValidate(state,payload){
       const response = await recaptchaValidate.validate(payload)
-      state.commit('setCaptchaValidate', response.success); 
+      state.commit('SET_CAPTCHA_VALIDATE', response.success); 
       
     },
     async setMailFormData(state,payload){
      const response = await entrepreneurService.setMailFormData(payload)
      if(response){
-       state.commit('setFormEmailMessage', response);
+       state.commit('SET_FORM_EMAIL_MESSAGE', response);
      }
     },
     startLoading({commit, state}){
       if(state.apiWaitingCount === 0){
          NProgress.start()
-        commit('setApiWaitingCountIncrement')
+        commit('SET_API_WAITING_COUNT_INCREMENT')
       }
     },
     doneLoading({commit, state}){
-      commit('setApiWaitingCountDecrement')
+      commit('SET_API_WAITING_COUNT_DECREMENT')
       if(state.apiWaitingCount === 0){
         NProgress.done()
 
@@ -115,13 +115,13 @@ export default new Vuex.Store({
       commit('SET_POST_MESSAGE', payload)
     },
     setErrors(state,payload){
-      state.commit('setErrors', payload)
+      state.commit('SET_ERRORS', payload)
     },
     deleteErrors(state){
-      state.commit('deleteErrors')
+      state.commit('DELETE_ERRORS')
     },
     deleteEmailFormMessage(state){
-      state.commit('setDeleteFormMessage')
+      state.commit('SET_DELETE_FORM_MESSAGE')
     },
     emptyPostMessage({commit}){
       commit('EMPTY_POST_MESSAGE');
@@ -129,7 +129,6 @@ export default new Vuex.Store({
   },
   getters: {
     formData: (state) => state.formData,
-
     validateReCaptcha: (state) => state.validateReCaptcha,
     emailFormMessage: (state) => state.emailFormMessage,
     errors: (state) => state.errors,

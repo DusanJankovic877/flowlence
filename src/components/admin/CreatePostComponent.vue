@@ -260,7 +260,11 @@ export default {
         }
     },
     computed:{
-        ...mapGetters({errors: 'errors',savedImages: 'BlogModule/savedImages', postMessage: 'postMessage'}),
+        ...mapGetters({
+                errors: 'errors',
+                // savedImages: 'BlogModule/savedImages', 
+                postMessage: 'postMessage'
+        }),
         routeParam(){
             return this.$route.params.id
         }
