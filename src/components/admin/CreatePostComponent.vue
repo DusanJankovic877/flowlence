@@ -1,7 +1,7 @@
 <template>
     <div class="col-lg-7 m-auto create-post-form">
     <form @submit.prevent="handleFormSubmit" method="POST" enctype="multipart/form-data">
-        <h1>Povezati slike i teks reone sa odredjenim naslovom sekcije posta</h1>
+        <h1>Kreiranje Članka</h1>
         <div class="mb-3 col-lg-9 file-inputs">
             <label for="blog-title" class="form-label">Naslov posta</label>
             <input type="text" class="form-control" id="blog-title" v-model="blog.postTitle">
@@ -199,7 +199,7 @@
             </div>
             <div v-else></div>
         </div>
-        <button>Pošalji</button>
+        <button class="btn btn-success">Pošalji</button>
     </form>
     </div>
 </template>

@@ -1,5 +1,6 @@
 <template>
     <div class="col-lg-7 m-auto post">
+        <h1>Članak</h1>
         <div class="row">
             <div v-for="post in posts" :key="'post_'+post.post_title.id" class="col-lg-4 krug blog-circle">
                 <router-link class="krug"  :to="{'name': 'admin-post', params:{id: post.post_title.id}}">
@@ -62,7 +63,7 @@ export default {
         padding-top: 100px;
         padding-bottom: 100px;
         background-color: rgba(255, 248, 220, 0.479);
-        text-align:left;
+        
     }
     .post-title{
         padding-left:40px;

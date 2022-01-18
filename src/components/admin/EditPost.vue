@@ -1,9 +1,6 @@
 <template>
-<div class="col-lg-7 m-auto create-post-form">
-    <h1>editPost</h1>
-    <pre>
-        {{errors}}
-    </pre>
+<div class="col-lg-7 m-auto create-post-form" >
+    <h1>Uređivanje članka</h1>
     <form @submit.prevent="handleEditPost('submitted')" method="POST" enctype="multipart/form-data">
         <div v-for="(postOne, id) in post" :key="'post_title_'+id">
             <div class=" col-lg-9 file-inputs" v-if="postOne.post_title">
@@ -225,7 +222,7 @@ export default {
                 const post = this.post
                 const imagesToEdit = this.imagesToEdit
                 await this.setEditPostImage({data: bool ? data : null, images_to_edit: imagesToEdit, post})
-                // this.$router.push(`/jolanda/posts/${this.post.post_title.id}`)
+                this.$router.push(`/jolanda/posts/${this.post.post_title.id}`)
             }
         },
         goBackToPost(){
@@ -235,7 +232,6 @@ export default {
             this.post.section_titles.push({formId: length+1, title: '', id: ''})
         },
         async handleDeleteSecetionTitle(k, sTId){
-            //za svaki delete dela posta ako postoji id prebaci u niz toDelete
             const answer = confirm('Da li ste sigurni da hoćete da obrišete naslov sekcije?')
             if(answer === true){
                 this.post.section_titles.splice(k, 1);
@@ -270,16 +266,12 @@ export default {
                     await  this.deleteImage(imageId);
                 }
             }
-            
-            //za svaki delete dela posta ako postoji id prebaci u niz toDelete
         },
         handleAddTextarea(length){
             console.log(this.textareas);
             this.post.textareas.push({formId: length + 1, section_title_id: '', id:''})
         },
         async handleDeleteTextarea(formId, textareaId){
-            //za svaki delete dela posta ako postoji id prebaci u niz toDelete
-            // this.post.textareas.splice(formId, 1)
             const answer = confirm('Da li ste sigurni da hoćete da obrišete tekst polje?')
             if(answer === true){
                 const iterator = this.post.textareas.keys()
@@ -303,7 +295,6 @@ export default {
     beforeRouteLeave(from, to, next){
         store.dispatch('BlogModule/emptyPostToEdit')
         store.dispatch('BlogModule/emptyPost')
-        console.log('empty post', this.post);
         next();
 
     }

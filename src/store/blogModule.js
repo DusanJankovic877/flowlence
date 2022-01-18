@@ -34,26 +34,13 @@ const blogModule = {
         },
         SET_POSTS(state, payload){
             state.posts =  payload
-
         },
         SET_POST(state, payload){
-            // console.log('mutation set post', payload);
             state.post = payload
-            // state.sectionTitles = state.post.section_titles
-            // state.post.section_titles.forEach(section_title => {
-         
-            //     section_title.textareas.forEach(textarea => {
-            //         state.textareas.push(textarea)
-            //     });
-            // });
-
-            // state.post_title = payload.post_title.post_title
-            // state.sectionTitles = payload.section_titles
         },
         SET_POST_TO_EDIT(state, payload){
             state.postToEdit = payload;
             state.post_title = payload.post_title.post_title
-            // console.log('post to edit', payload);
         },
         EMPTY_POST(state){
             state.post = {}
@@ -150,12 +137,11 @@ const blogModule = {
             commit('EMPTY_POST')
         },
         async setEditPostImage({dispatch},payload){
-            console.log('answer payload', payload);
+
             if(payload.answer === false){
                 return false;
             }
             if(payload.data === null){
-                console.log('imageresponse  ', payload);
                 dispatch('saveEditPost', payload)
             }else{
 
@@ -165,7 +151,6 @@ const blogModule = {
                  imageResponse.images.forEach(savedImage => {
                     const imageName = savedImage.slice(11);
                     payload.post.images.forEach(image => {
-                        // console.log('image ', image.name === imageName);
                         if(image.name === imageName){
                             image.name = savedImage
                             sameNames = true
@@ -173,56 +158,21 @@ const blogModule = {
                             sameNames = false
                         }
                     });
-                    // console.log('same name', sameNames);
                     if(sameNames)dispatch('saveEditPost', payload)
                     
                 });
             }
-            //if there is no images to edit
-            // if(payload.imagesToEdit.length === 0){
-            //     const postResponse = await blogService.saveEditPost({post: payload.post, images_to_edit: payload.imagesToEdit})
-            //     console.log(postResponse);
-            // }else{
-            //     const imageResponse = await blogService.setEditPostImage(payload.data);
-            //     let sameNames = false;
-            //     imageResponse.images.forEach(savedImage => {
-            //         const imageName = savedImage.slice(11);
-            //         console.log('payload.imagesToEdit', payload.imagesToEdit);
-            //         payload.imagesToEdit.forEach(imageToEdit => {
-            //             console.log(imageName === imageToEdit.imageName, imageName+' '+imageToEdit.imageName);
-            //                 if(imageName === imageToEdit.imageName){
-            //                     imageToEdit.imageName = savedImage
-            //                     // console.log(imageToEdit);
-            //                     sameNames = true
-            //                 } else{
-            //                     sameNames = false
-            //                 }
-            //         });
-            //     });
-            //     if(sameNames){
-            //         console.log('imagesToEdit', payload.imagesToEdit);
-            //         const postResponse = await blogService.saveEditPost({post: payload.post, images_to_edit: payload.imagesToEdit})
-            //         console.log(postResponse);
-            //     }
-            // }
-
-            // if(response){
-
-            // }
-            // console.log('EDIT IMAGES LOG', response);
         },
-        async saveEditPost(_, payload){
-            console.log('posrt response');
+        async saveEditPost({commit}, payload){
             const postResponse = await blogService.saveEditPost({post: payload.post, images_to_edit: payload.images_to_edit})
-            console.log('postResponse', postResponse);
+            commit('SET_POST', postResponse.post)
         },
         async deletePost({commit}, payload){
             const response = await blogService.deletePost(payload);
             commit('SET_DELETED_POST', response.data)
-            // console.log('delete response ', response);
+
           },
           async deleteImage(_, payload){
-              console.log('delete image, ', payload);
               await blogService.deleteImage(payload)
           },
           async deleteSectionTitle(_, payload){

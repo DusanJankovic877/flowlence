@@ -1,13 +1,13 @@
 <template>
 <div class="col-lg-5 m-auto post">
-        <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage">
-           <p style="text-align: center;">
+        <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage" >
+           <p>
                {{postMessage}}
             </p> 
         </div>
             <div v-for="postOne in post" :key="'post_title_'+postOne.id">
-                <div class="mb-3 col-lg-9 file-inputs" v-if="postOne.post_title">
-                    <h1>{{postOne.post_title}}</h1>
+                <div class="mb-3 col-lg-12 file-inputs" v-if="postOne.post_title">
+                    <h1 style="text-align: center;">{{postOne.post_title}}</h1>
                 </div>
             </div>
     <div v-for="section_title in post.section_titles" :key="'sectionTitle_'+section_title.id">
@@ -65,10 +65,8 @@ export default {
         }
 
     },
-    created(){
-        store.dispatch('BlogModule/emptyPost')
-        },
     beforeRouteEnter(from, to, next){
+        //  store.dispatch('BlogModule/emptyPost')
         store.dispatch('BlogModule/getPost', from.params.id)
         next();
     },
