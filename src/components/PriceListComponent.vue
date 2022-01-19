@@ -45,7 +45,8 @@ export default{
 
   methods:{
     handleReRoute(val){
-      this.$router.push({name: 'price-list', params: {hideAll: false, selectedButton: val, from: 'home'}})
+      this.$router.push({name: 'price-list', params: {hideButtons: true, selectedButton: val, from: 'home'}})
+      
     }
   }
 }
