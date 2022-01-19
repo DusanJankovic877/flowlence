@@ -66,8 +66,8 @@ export default {
       defaultValue: {option_text: '/', price: 0, question_text: ''},
       defaultFQ: [ {option_text: '/', price: 0, question_text: ''}],
       siteKey: process.env.VUE_APP_RECAPTCHA_PUBLIC_KEY,
-      hideButtons: true,
-      selectedButton: '',
+      hideButtons: this.$route.params.from === 'home' ? this.$route.params.hideButtons : false,
+      selectedButton: this.$route.params.from === 'home' ? this.$route.params.selectedButton : '',
       selectedFormOption: '',
       hideSelectedButtons: false,
       showForm: false,
@@ -122,7 +122,6 @@ export default {
       return this.$route.path;
     },
     routeParams(){
-      // console.log(this.$router);
       return this.$route.params
     },
     fromRoute() {
