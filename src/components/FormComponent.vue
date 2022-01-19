@@ -11,25 +11,50 @@
         <p v-else-if="selectedFormOption === 'new assoc'">Tek planiram registraciju Udruženja</p>
         <p v-else-if="selectedFormOption === 'already assoc'">Već postojeće Udruženje</p>
         <form @submit.prevent class="form-sections">
+            {{formValues}}
             <div v-for="data in formData.data" :key="data.id">
-                <h5>{{data.question_text}}</h5>
-
-                <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
-                    <div class="form-check">
-                        <input class="form-check-input" 
-                            :type="data.question_type.type" 
-                            :value="question_o.id" 
-                            :id="question_o.id" 
-                            v-model="formValues[data.name]"
-                            :name="data.name"
-                            >
-                        <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
+                <div v-if="data.name !== 'fourthQuestion' ">
+                    <h5>{{data.question_text}}</h5>
+                    <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                    :type="data.question_type.type" 
+                                    :value="question_o.id" 
+                                    :id="question_o.id" 
+                                    v-model="formValues[data.name]"
+                                    :name="data.name"
+                                    >
+                                <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
+                            </div>
+                    </div>
+                    <hr>
+                </div>
+                <transition name="fade" appear>
+                <div v-if="data.q_id === 7 || data.q_id === 8" :style="formValues.thirdQuestion === 9 ? newStyle : oldStyle">
+                    <div v-if="formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11">
+                        <h5>{{data.question_text}}</h5>
+                        <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
+                                <div class="form-check">
+                                    <input class="form-check-input" 
+                                        :type="data.question_type.type" 
+                                        :value="question_o.id" 
+                                        :id="question_o.id" 
+                                        v-model="formValues[data.name]"
+                                        :name="data.name"
+                                        >
+                                    <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
+                                </div>
+                        </div>
+                        <hr>
                     </div>
                 </div>
-                <hr>
+                <div v-else></div>
+                </transition>
+              
+               <!-- {{data.name}} -->
 
                 <!-- EXTRA FIELD  WILL SHOW IF YOU SELECT CERTAIN OPTION -->
-                <!-- <div  v-if="data.q_id === 42 || data.q_id === 41 || data.q_id === 5 || data.q_id === 6 ">
+              <!-- <div  v-if="data.q_id === 42 || data.q_id === 41 || data.q_id === 5 || data.q_id === 6 ">
                     <div  v-if="formValues.thirdQuestion === 65 || formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11">
                         <h5>{{questionsForQNine.question_text}}</h5>
                         <div class="input-group" v-for="option in questionsForQNine.question_options" :key="option.id">
@@ -47,19 +72,18 @@
                         <hr>
                     </div>
                 </div>
-                <div v-else></div>
+                <div v-else></div> -->
             </div>
-            <div class="comment">
+           <div class="comment">
                 <h5>Dodatni komentar:</h5>
                 <div class="form-group">
                     <textarea v-model="formValues.comment" class="form-control" id="exampleFormControlTextarea1" rows="3" 
                     :placeholder=" selectedFormOption === 'newEntrepreneur' ? 'Ovde možete opisati ukratko Vašu delatnost kojom planirate da se bavite, dati dodatne informacije koje smatrate da su bitne ili postaviti pitanje' : 'Ovde možete opisati ukratko Vašu delatnost kojom se bavite, dati dodatne informacije koje smatrate da su bitne ili postaviti pitanje:'"
                     ></textarea>
                 </div>
-            </div>   -->
+            </div> 
             <!-- end of form-comment --> 
-            <!-- <hr>
-            {{errors}}
+            <br>
             <div class="email">
                 <h5>Vaša mail adresa na koju želite da Vam pošaljemo <span class="red">*</span> ponudu:</h5>
                 <div class="form-group">
@@ -70,7 +94,7 @@
                 <div class="alert alert-danger col-lg-12" role="alert" v-if="errors[0]">
                     {{errors[0].email[0]}}
                 </div>
-                <div v-else></div>-->
+                <div v-else></div>
             </div>   
             <!-- end of form-email --> 
         </form>
@@ -78,6 +102,18 @@
 </template>
 <script>
 export default {
+    data(){
+        return {
+            showFormPart: true,
+            oldStyle:{
+                backgroundColor: 'white'
+            },
+            newStyle:{
+                backgroundColor: 'gray'
+            },
+          
+        }
+    },
     props:{
         formData: Object,
         formValues: Object,

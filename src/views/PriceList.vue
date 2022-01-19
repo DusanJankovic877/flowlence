@@ -93,6 +93,7 @@ export default {
       removedQuestionOption: {},
       removedPdv:{},
       removedCashRegister:{},
+      removedflatRateOption: {},
       ternaryStatement: '',
       //selected data for summing
         selectedFirstQuestions:[], 
@@ -163,8 +164,8 @@ export default {
       //HANDLING FORM DATA SO THEY CAN PROPERLY DISPLAYED
       //ENTREPRENEUR
       if(this.selectedButton === 'entrepreneur') {
-        const lupmS = this.formData.data.splice(8, 1);
-        this.questionsForQNine = lupmS[0];
+
+        console.log('this.questionsForQNine ' );
       }
       //ASSOCIATION
       else if(this.selectedButton === 'association'){
@@ -185,13 +186,15 @@ export default {
         this.questionsForQNine = income[0];
       }
       //ALREADY ENTREPRENEUR
-      // if(val === 'already ent'){
-      //   this.removedQuestionOption = this.questionsForQNine.question_options.pop();
-      //   const pdvs = this.formData.data.find(x => x.q_id === 8);
-      //   this.removedPdv = pdvs.question_options.pop();
-      //   const cashRegister = this.formData.data.find(x => x.q_id === 14);
-      //   this.removedCashRegister = cashRegister.question_options.pop();
-      // }
+      if(val === 'already ent'){
+        // this.removedQuestionOption = this.questionsForQNine.question_options.pop();
+        const flatRateTaxed = this.formData.data.find(x => x.q_id === 8);
+        this.removedflatRateOption = flatRateTaxed.question_options.pop();
+        const pdvs = this.formData.data.find(x => x.q_id === 10);
+        this.removedPdv = pdvs.question_options.pop();
+        const cashRegister = this.formData.data.find(x => x.q_id === 14);
+        this.removedCashRegister = cashRegister.question_options.pop();
+      }
       //ALREADY DOO
       else if(val === 'already doo'){
         const pdvs = this.formData.data.find(x => x.q_id === 28);
