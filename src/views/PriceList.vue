@@ -28,7 +28,7 @@
         <div v-else-if="selectedButton === 'doo'"><DooComponent @handle-selected-option="handleSelectedOption"/></div>
         <div v-else-if="selectedButton === 'association'"><AssociationComponent @handle-selected-option="handleSelectedOption"/></div>
       </div>
-      <FormComponent :class="showForm ? '' : 'hide'" @handle-inputs="handleInputs" :errors="errors" :formData="formData" :formValues="formValues" :questionsForQNine="questionsForQNine" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
+      <FormComponent :class="showForm ? '' : 'hide'" @handle-inputs="handleInputs" :errors="errors" :formData="formData" :formValues="formValues" :selectedButton="selectedButton" :selectedFormOption="selectedFormOption"/>
       <div class="col-lg-7 m-auto">
         <div v-if="emailFormMessage" class="error-message m-auto">
           {{emailFormMessage}}
@@ -163,56 +163,43 @@ export default {
       this.selectedFormOption = val;
       //HANDLING FORM DATA SO THEY CAN PROPERLY DISPLAYED
       //ENTREPRENEUR
-      if(this.selectedButton === 'entrepreneur') {
+      // if(this.selectedButton === 'entrepreneur') {
 
-        console.log('this.questionsForQNine ' );
-      }
-      //ASSOCIATION
-      else if(this.selectedButton === 'association'){
-        if(this.selectedFormOption === 'newAssociation'){
-          const eBank = this.formData.data.find(x => x.q_id === 53)
-           eBank.name ="eighthQuestion"
-          const cashReg = this.formData.data.find(x => x.q_id === 51)
-          cashReg.name = 'fourthQuestion'
-         }else if(this.selectedFormOption === 'alreadyAssociation'){
-           const eBank = this.formData.data.find(x => x.q_id === 54)
-           eBank.name ="eighthQuestion"
-           const cashReg = this.formData.data.find(x => x.q_id === 52)
-          cashReg.name = 'fourthQuestion'
-         }
-        
-        const income = this.formData.data.splice(3, 1);
-        // income.name ="fourthQuestion"
-        this.questionsForQNine = income[0];
-      }
+      //   console.log('this.questionsForQNine ' );
+      // }
       //ALREADY ENTREPRENEUR
       if(val === 'already ent'){
         // this.removedQuestionOption = this.questionsForQNine.question_options.pop();
-        const flatRateTaxed = this.formData.data.find(x => x.q_id === 8);
+        const flatRateTaxed = this.formData.data.find(x => x.q_id === 24);
         this.removedflatRateOption = flatRateTaxed.question_options.pop();
-        const pdvs = this.formData.data.find(x => x.q_id === 10);
+        const pdvs = this.formData.data.find(x => x.q_id === 26);
         this.removedPdv = pdvs.question_options.pop();
-        const cashRegister = this.formData.data.find(x => x.q_id === 14);
+        const cashRegister = this.formData.data.find(x => x.q_id === 32);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
       //ALREADY DOO
       else if(val === 'already doo'){
-        const pdvs = this.formData.data.find(x => x.q_id === 28);
+        const pdvs = this.formData.data.find(x => x.q_id === 44);
         this.removedPdv = pdvs.question_options.pop();
-        const cashRegister = this.formData.data.find(x => x.q_id === 34);
+        const cashRegister = this.formData.data.find(x => x.q_id === 50);
         this.removedCashRegister = cashRegister.question_options.pop();
       }
-      //ALREADY ASSOCIATION
-      else if(val === 'already assoc'){
-        const pdvs = this.formData.data.find(x => x.q_id === 48);
-        this.removedPdv = pdvs.question_options.pop();
-        const cashRegister = this.formData.data.find(x => x.q_id === 52);
-        this.removedCashRegister = cashRegister.question_options.pop();
+        //ASSOCIATION
+      if(this.selectedButton === 'association'){
+          if(this.selectedFormOption === 'new assoc'){
+            const PersonNumForEmploy = this.formData.data.find(x => x.q_id === 61)
+            PersonNumForEmploy.question_options.splice(1,1);
+          }else if(this.selectedFormOption === 'already assoc'){
+            const PersonNumForEmploy = this.formData.data.find(x => x.q_id === 62)
+            PersonNumForEmploy.question_options.shift();
+            const pdvs = this.formData.data.find(x => x.q_id === 64)
+            this.removedPdv = pdvs.question_options.pop();
+            const cashReg = this.formData.data.find(x => x.q_id === 68)
+            this.removedCashRegister = cashReg.question_options.pop();
+          }
       }
       this.hideSelectedButtons = true;
-
-        this.showForm = true;
-
+      this.showForm = true;
     },
     async handleHideForm(val){
       // await this.getStuff()

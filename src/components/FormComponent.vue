@@ -1,7 +1,7 @@
 <template>
     <div class="col-lg-4 m-auto form-div">
         <pre>
-
+{{selectedButton}}
         
         </pre>
         <p v-if="selectedFormOption === 'new ent'">Tek planiram da se registrujem kao preduzetnik</p>
@@ -13,7 +13,7 @@
         <form @submit.prevent class="form-sections">
             {{formValues}}
             <div v-for="data in formData.data" :key="data.id">
-                <div v-if="data.name !== 'fourthQuestion' ">
+                <div v-if="selectedButton === 'doo' ? true : data.name !== 'fourthQuestion' ">
                     <h5>{{data.question_text}}</h5>
                     <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
                             <div class="form-check">
@@ -30,8 +30,8 @@
                     <hr>
                 </div>
                 <transition name="fade" appear>
-                <div v-if="data.q_id === 7 || data.q_id === 8" :style="formValues.thirdQuestion === 9 ? newStyle : oldStyle">
-                    <div v-if="formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11">
+                <div v-if="data.q_id === 23 || data.q_id === 24 || data.q_id === 59 || data.q_id === 60" :style="formValues.thirdQuestion === 9 ? newStyle : oldStyle">
+                    <div v-if="formValues.thirdQuestion === 36 || formValues.thirdQuestion === 37 || formValues.thirdQuestion === 38 || formValues.thirdQuestion === 92">
                         <h5>{{data.question_text}}</h5>
                         <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
                                 <div class="form-check">
