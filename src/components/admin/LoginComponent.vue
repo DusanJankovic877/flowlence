@@ -71,14 +71,15 @@ export default {
         },
         reCaptchaReset() {
             this.emptyCaptchaValidate(false)
-            this.$refs.ReCaptcha.reset();
+            // this.$refs.ReCaptcha.reset();
         },
     },
-    beforeDestroy: function(){
+    beforeDestroy(){
         this.form.email = '';
         this.form.password = '';
         this.form.rememberMe = false;
         this.reCaptchaReset()
+       
     }
 }
 </script>

@@ -15,8 +15,8 @@ import EditPost from '../components/admin/EditPost'
 
 
 
-Vue.use(VueRouter)
 
+Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
@@ -111,11 +111,14 @@ const routes = [
     
   },
 
-]
 
+]
 const router = new VueRouter({
   routes,
   mode: 'history'
 })
-
+router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0)
+  next();
+})
 export default router

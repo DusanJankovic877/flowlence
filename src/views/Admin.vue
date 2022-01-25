@@ -1,8 +1,6 @@
 <template>
     <div>
-
         <h1>admin</h1>
-        {{validateReCaptcha}}
         <h2>all posts</h2>
         <div v-if="!token">
             <login-compoenent :showForm="showForm" :siteKey="siteKey" :form="form" @submit="submit" @handle-inputs="handleInputs" @validate="validate" :authError="authError" :authErrors="authErrors"/>

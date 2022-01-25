@@ -1,6 +1,5 @@
 <template>
   <div class="price-list-view col-lg-12">
-{{validateReCaptcha}}
     <div class="image-p-list-cover" v-if="currentRouteName !== '/'">
       <div class="image-p-list-cover-text col-lg-7">
         <h1>Procena cene usluga</h1>
