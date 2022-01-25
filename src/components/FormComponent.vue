@@ -1,9 +1,5 @@
 <template>
     <div class="col-lg-4 m-auto form-div">
-        <pre>
-{{selectedButton}}
-        
-        </pre>
         <p v-if="selectedFormOption === 'new ent'">Tek planiram da se registrujem kao preduzetnik</p>
         <p v-else-if="selectedFormOption === 'already ent'">Već poslujem u formi preduzetnika</p>
         <p v-else-if="selectedFormOption === 'new doo'">Tek planiram da se registrujem kao doo</p>
@@ -11,7 +7,6 @@
         <p v-else-if="selectedFormOption === 'new assoc'">Tek planiram registraciju Udruženja</p>
         <p v-else-if="selectedFormOption === 'already assoc'">Već postojeće Udruženje</p>
         <form @submit.prevent class="form-sections">
-            {{formValues}}
             <div v-for="data in formData.data" :key="data.id">
                 <div v-if="selectedButton === 'doo' ? true : data.name !== 'fourthQuestion' ">
                     <h5>{{data.question_text}}</h5>
@@ -50,29 +45,6 @@
                 </div>
                 <div v-else></div>
                 </transition>
-              
-               <!-- {{data.name}} -->
-
-                <!-- EXTRA FIELD  WILL SHOW IF YOU SELECT CERTAIN OPTION -->
-              <!-- <div  v-if="data.q_id === 42 || data.q_id === 41 || data.q_id === 5 || data.q_id === 6 ">
-                    <div  v-if="formValues.thirdQuestion === 65 || formValues.thirdQuestion === 9 || formValues.thirdQuestion === 10 || formValues.thirdQuestion === 11">
-                        <h5>{{questionsForQNine.question_text}}</h5>
-                        <div class="input-group" v-for="option in questionsForQNine.question_options" :key="option.id">
-                            <div class="form-check">
-                                <input class="form-check-input"
-                                    type="radio"
-                                    :value="option.id"
-                                    :id="option.id"
-                                    v-model="formValues.ninthQuestion"
-                                    name="questionNine"
-                                />
-                                <label  class="form-check-label"  :key="option.id" :for="option.id">{{option.option_text}}</label>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div v-else></div> -->
             </div>
            <div class="comment">
                 <h5>Dodatni komentar:</h5>

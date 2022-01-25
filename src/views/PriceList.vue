@@ -162,11 +162,6 @@ export default {
       await this.getFormData({businessTypeParam: val});
       this.selectedFormOption = val;
       //HANDLING FORM DATA SO THEY CAN PROPERLY DISPLAYED
-      //ENTREPRENEUR
-      // if(this.selectedButton === 'entrepreneur') {
-
-      //   console.log('this.questionsForQNine ' );
-      // }
       //ALREADY ENTREPRENEUR
       if(val === 'already ent'){
         // this.removedQuestionOption = this.questionsForQNine.question_options.pop();
