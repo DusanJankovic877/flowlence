@@ -258,6 +258,7 @@ export default {
       if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
      
         const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
+
         this.formValues.firstQuestion.forEach(question => {
           firstQuestion.question_options.forEach(option => {
             if (question === option.id) {
@@ -270,122 +271,116 @@ export default {
           });
         });
       }
-      // else if(this.selectedButton === 'association'){
+      else if(this.selectedButton === 'association'){
        
-      //   const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
-      //   firstQuestion.question_options.forEach(option => {
-      //     const newOption = {};
-      //     if (this.formValues.firstQuestion === option.id) {
-      //       newOption.question_text = firstQuestion.question_text;
-      //       newOption.option_text = option.option_text;
-      //       newOption.price = option.price;
-      //       this.selectedFirstOption = newOption
-      //     }
-      //   });
-      // }
+        const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
+        firstQuestion.question_options.forEach(option => {
+          const newOption = {};
+          if (this.formValues.firstQuestion === option.id) {
+            newOption.question_text = firstQuestion.question_text;
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            this.selectedFirstOption = newOption
+          }
+        });
+      }
       //SECOND QUESTION
-        // const secondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
-        // secondQuestion.question_options.forEach(option => {
-        //   if (this.formValues.secondQuestion === option.id) {
-        //     const newOption = {};
-        //     newOption.option_text = option.option_text;
-        //     newOption.price = option.price;
-        //     newOption.question_text = secondQuestion.question_text;
-        //     this.selectedSecondOption = newOption;
-        // } 
-        // });
-        // THIRD QUESTION but it is 4th because i have removed 3rd question at the end of array
-        // this.selectedThirdQuestion = this.formData.data.find(x=> x.name === 'thirdQuestion');
-        // this.selectedThirdQuestion.question_options.forEach(option => {
-        //   if (this.formValues.thirdQuestion === option.id) {
-        //     const newOption = {};
-        //     newOption.id = option.id
-        //     newOption.option_text = option.option_text;
-        //     newOption.price = option.price;
-        //     newOption.question_text = this.selectedThirdQuestion.question_text;
-        //     this.selectedThirdOption = newOption;
-        //   }
-        // });
+        const secondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
+        secondQuestion.question_options.forEach(option => {
+          if (this.formValues.secondQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = secondQuestion.question_text;
+            this.selectedSecondOption = newOption;
+        } 
+        });
+        // THIRD QUESTION
+        this.selectedThirdQuestion = this.formData.data.find(x=> x.name === 'thirdQuestion');
+        this.selectedThirdQuestion.question_options.forEach(option => {
+          if (this.formValues.thirdQuestion === option.id) {
+            const newOption = {};
+            newOption.id = option.id
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = this.selectedThirdQuestion.question_text;
+            this.selectedThirdOption = newOption;
+          }
+        });
         //FOURTH QUESTION
-          // this.selectedFourthQuestion = this.selectedButton === 'doo' ? this.formData.data.find(x => x.name === 'fourthQuestion') : this.questionsForQNine;
-          // this.selectedFourthQuestion.question_options.forEach(option => {
-          //   const ternaryStatement = this.selectedButton === 'doo' ? this.formValues.fourthQuestion : this.formValues.ninthQuestion
-          //    if (ternaryStatement === option.id){
-          //     if(this.selectedButton === 'entrepreneur' || this.selectedButton === 'association'){
-          //       if(this.formValues.thirdQuestion === 9 || this.formValues.thirdQuestion === 10 || this.formValues.thirdQuestion === 11 || this.formValues.thirdQuestion === 65){
-          //         const newOption = {};
-          //         newOption.option_text = option.option_text;
-          //         newOption.price = option.price;
-          //         newOption.question_text = this.selectedFourthQuestion.question_text;
-          //         this.selectedFourthOption = newOption;
-          //        }
-          //     }else if(this.selectedButton === 'doo'){
-          //         const newOption = {};
-          //         newOption.option_text = option.option_text;
-          //         newOption.price = option.price;
-          //         newOption.question_text = this.selectedFourthQuestion.question_text;
-          //         this.selectedFourthOption = newOption;
-          //     }
-          //   }
-                
-          // });   
+          const fourthQuestion = this.formData.data.find(x=> x.name === 'fourthQuestion');
+          fourthQuestion.question_options.forEach(option => {
+              if(this.selectedButton === 'entrepreneur' || this.selectedButton === 'association'){
+                if(this.formValues.thirdQuestion === 36 || this.formValues.thirdQuestion === 37 || this.formValues.thirdQuestion === 38 || this.formValues.thirdQuestion === 92){
+                  const newOption = {};
+                  newOption.option_text = option.option_text;
+                  newOption.price = option.price;
+                  newOption.question_text = this.selectedFourthQuestion.question_text;
+                  this.selectedFourthOption = newOption;
+                 }
+              }
+          else if(this.selectedButton === 'doo'){
+                  const newOption = {};
+                  newOption.option_text = option.option_text;
+                  newOption.price = option.price;
+                  newOption.question_text = this.selectedFourthQuestion.question_text;
+                  this.selectedFourthOption = newOption;
+              }     
+          });   
         //FIFTH QUESTION
-        //   this.selectedFifthQuestion =this.selectedButton === 'entrepreneur'? this.formData.data.find(x => x.name === 'fourthQuestion'): this.formData.data.find(x => x.name === 'fifthQuestion');
-        //   this.selectedFifthQuestion.question_options.forEach (option => {
-        //   const ternaryStatement = this.selectedButton === 'entrepreneur' ? this.formValues.fourthQuestion : this.formValues.fifthQuestion;
-        //   if (ternaryStatement === option.id) {
-        //     const newOption = {};
-        //     newOption.option_text = option.option_text;
-        //     newOption.price = option.price;
-        //     newOption.question_text = this.selectedFifthQuestion.question_text;
-        //     this.selectedFifthOption = newOption;
-        //   }
-        // });
+        this.selectedFifthQuestion = this.formData.data.find(x=> x.name === 'fifthQuestion');
+          this.selectedFifthQuestion.question_options.forEach (option => {
+          if (this.formValues.fifthQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = this.selectedFifthQuestion.question_text;
+            this.selectedFifthOption = newOption;
+          }
+        });
         //SIXTH QUESTION
-        // this.selectedSixthQuestion = this.selectedButton === 'entrepreneur' ? this.formData.data.find(x => x.name === 'fifthQuestion') : this.formData.data.find(x => x.name === 'sixthQuestion')
-        // this.selectedSixthQuestion.question_options.forEach(option => {
-        //   const ternaryStatement = this.selectedButton === 'entrepreneur' ? this.formValues.fifthQuestion : this.formValues.sixthQuestion;
-        //   if (ternaryStatement === option.id) {
-        //     const newOption = {};
-        //     newOption.option_text = option.option_text;
-        //     newOption.price = option.price;
-        //     newOption.question_text = this.selectedSixthQuestion.question_text;
-        //     this.selectedSixthOption = newOption;
-        //   }
-        // });
+        this.selectedSixthQuestion = this.formData.data.find(x=> x.name === 'sixthQuestion');
+        this.selectedSixthQuestion.question_options.forEach(option => {
+          if (this.formValues.sixthQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = this.selectedSixthQuestion.question_text;
+            this.selectedSixthOption = newOption;
+          }
+        });
         //SEVENTH QUESTION
-        // this.selectedSeventhQuestion = this.selectedButton === 'entrepreneur' ? this.formData.data.find(x => x.name === 'sixthQuestion') : this.formData.data.find(x => x.name === 'seventhQuestion')
-        // this.selectedSeventhQuestion.question_options.forEach(option => {
-        //   const ternaryStatement = this.selectedButton === 'entrepreneur' ? this.formValues.sixthQuestion : this.formValues.seventhQuestion;
-        //   if (ternaryStatement === option.id) {
-        //     const newOption = {};
-        //     newOption.option_text = option.option_text;
-        //     newOption.price = option.price;
-        //     newOption.question_text = this.selectedSeventhQuestion.question_text;
-        //     this.selectedSeventhOption = newOption;
-        //   }
-        // });
+        this.selectedSeventhQuestion = this.formData.data.find(x=> x.name === 'seventhQuestion');
+        this.selectedSeventhQuestion.question_options.forEach(option => {
+          if (this.formValues.seventhQuestion === option.id) {
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = this.selectedSeventhQuestion.question_text;
+            this.selectedSeventhOption = newOption;
+          }
+        });
         //EIGHTH QUESTION
-        // if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
-        //   this.selectedEighthQuestion = this.selectedButton === 'entrepreneur' ? this.formData.data.find(x => x.name === 'seventhQuestion') : this.formData.data.find(x => x.name === 'eighthQuestion') 
-        // }else if (this.selectedButton === 'association'){
-        //   this.selectedEighthQuestion = this.formData.data.find(x => x.name === 'fourthQuestion')
-        // }
-        // this.selectedEighthQuestion.question_options.forEach(option => {
-        //   if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
-        //     this.ternaryStatement = this.selectedButton === 'entrepreneur' ? this.formValues.seventhQuestion : this.formValues.eighthQuestion;
-        //   }else if(this.selectedButton === 'association'){
-        //     this.ternaryStatement = this.formValues.fourthQuestion;
-        //   }
-        //     if (this.ternaryStatement === option.id) {
-        //       const newOption = {};
-        //       newOption.option_text = option.option_text;
-        //       newOption.price = option.price;
-        //       newOption.question_text = this.selectedEighthQuestion.question_text;
-        //       this.selectedEighthOption = newOption;
-        //     }
-          
-        // });
+        this.selectedEighthQuestion = this.formData.data.find(x=> x.name === 'eighthQuestion');
+        this.selectedEighthQuestion.question_options.forEach(option => {
+          if (this.formValues.eighthQuestion === option.id){
+            const newOption = {};
+            newOption.option_text = option.option_text;
+            newOption.price = option.price;
+            newOption.question_text = this.selectedEighthQuestion.question_text;
+            this.selectedEighthOption = newOption;
+          } 
+        });
+        this.selectedNinthQuestion = this.formData.data.find(x=> x.name === 'ninthQuestion');
+        this.selectedNinthQuestion.question_options.forEach(option => {
+          if (this.formValues.ninthQuestion === option.id){
+              const newOption = {};
+              newOption.option_text = option.option_text;
+              newOption.price = option.price;
+              newOption.question_text = this.selectedNinthQuestion.question_text;
+              this.selectedNinthOption = newOption;
+          }
+        });
         //NINTH QEUSTION is fourth in ASSOC in ENTREPRENEUR eight doo is ninth formValues
         // this.selectedNinthQuestion = this.selectedButton === 'entrepreneur' || this.selectedButton === 'association' ? this.formData.data.find(x => x.name === 'eighthQuestion') : this.formData.data.find(x => x.name === 'ninthQuestion') ;
         // this.selectedNinthQuestion.question_options.forEach(option => {
@@ -400,120 +395,120 @@ export default {
         //   });
           //SUMMING SELECTED FORM DATA
           //first question
-          // if(Object.keys(this.selectedFirstOption).length == 0){
-          //   const firsthQ = this.formData.data.find(x => x.name = 'firstQestion');
-          //   this.defaultFQ.forEach(element => {
-          //     element.question_text = firsthQ.question_text;
+          if(Object.keys(this.selectedFirstOption).length == 0){
+            const firsthQ = this.formData.data.find(x => x.name = 'firstQestion');
+            this.defaultFQ.forEach(element => {
+              element.question_text = firsthQ.question_text;
 
-          //   });
-          //   // this.defaultFQ.question_text = 
-          //   this.selectedFirstOption = this.defaultFQ
-          //   this.firstQSum = 0;
-          //   this.totalPrice.push(this.firstQSum);
-          //   }else{ 
-          //     const selectedPrice = [];
-          //     if(this.selectedButton === 'association'){
-          //       selectedPrice.push(this.selectedFirstOption.price)
-          //       }else if(this.selectedButton === 'doo' || this.selectedButton === 'entrepreneur'){
-          //       this.selectedFirstOption.forEach(option => {
-          //         selectedPrice.push(option.price);
-          //       });
-          //     this.firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
-          //     this.totalPrice.push(this.firstQSum)
-          //     }
-          //   }
+            });
+            // this.defaultFQ.question_text = 
+            this.selectedFirstOption = this.defaultFQ
+            this.firstQSum = 0;
+            this.totalPrice.push(this.firstQSum);
+            }else{ 
+              const selectedPrice = [];
+              if(this.selectedButton === 'association'){
+                selectedPrice.push(this.selectedFirstOption.price)
+                }else if(this.selectedButton === 'doo' || this.selectedButton === 'entrepreneur'){
+                this.selectedFirstOption.forEach(option => {
+                  selectedPrice.push(option.price);
+                });
+              this.firstQSum = selectedPrice.reduce((a,b) => a + b, 0);
+              this.totalPrice.push(this.firstQSum)
+              }
+            }
           //second question
-          // if (Object.keys(this.selectedSecondOption).length == 0) {
-          //   const fourthQ = this.formData.data.find(x => x.name = 'secondQestion');
-          //   this.defaultValue.question_text = fourthQ.question_text;
-          //   this.selectedSecondOption = this.defaultValue
-          //   this.totalPrice.push(this.defaultValue.price);
-          // }else{
-          //   this.totalPrice.push(this.selectedSecondOption.price);
-          // }
+          if (Object.keys(this.selectedSecondOption).length == 0) {
+            const fourthQ = this.formData.data.find(x => x.name = 'secondQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedSecondOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
+          }else{
+            this.totalPrice.push(this.selectedSecondOption.price);
+          }
           //third uqestion
-          // if (Object.keys(this.selectedThirdOption).length == 0) {
-          //   const fourthQ = this.formData.data.find(x => x.name = 'thirdQestion');
-          //   this.defaultValue.question_text = fourthQ.question_text;
-          //   this.selectedThirdOption = this.defaultValue
-          //   this.totalPrice.push(this.defaultValue.price);
-          // }else{
-          //   this.totalPrice.push(this.selectedThirdOption.price);
-          // }
+          if (Object.keys(this.selectedThirdOption).length == 0) {
+            const fourthQ = this.formData.data.find(x => x.name = 'thirdQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedThirdOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
+          }else{
+            this.totalPrice.push(this.selectedThirdOption.price);
+          }
           //fourth question
-          // if(Object.keys(this.selectedFourthOption).length === 0){
-          //   const fourthQ = this.formData.data.find(x => x.name = 'fourthQestion');
-          //   this.defaultValue.question_text = fourthQ.question_text;
-          //   this.selectedFourthOption = this.defaultValue
-          //   this.totalPrice.push(this.defaultValue.price);
-          // }else{
-          //   this.totalPrice.push(this.selectedFourthOption.price);
-          // }
+          if(Object.keys(this.selectedFourthOption).length === 0){
+            const fourthQ = this.formData.data.find(x => x.name = 'fourthQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedFourthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
+          }else{
+            this.totalPrice.push(this.selectedFourthOption.price);
+          }
           //fifth question
-          // if(Object.keys(this.selectedFifthOption).length === 0){
-          //   const fourthQ = this.formData.data.find(x => x.name = 'fifthQestion');
-          //   this.defaultValue.question_text = fourthQ.question_text;
-          //   this.selectedFifthOption = this.defaultValue
-          //   this.totalPrice.push(this.defaultValue.price);
-          // }else{
-          //   this.totalPrice.push(this.selectedFifthOption.price);
-          // }
+          if(Object.keys(this.selectedFifthOption).length === 0){
+            const fifthQ = this.formData.data.find(x => x.name = 'fifthQestion');
+            this.defaultValue.question_text = fifthQ.question_text;
+            this.selectedFifthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
+          }else{
+            this.totalPrice.push(this.selectedFifthOption.price);
+          }
           //sixth question
-          // if(Object.keys(this.selectedSixthOption).length === 0){
-          //   const fourthQ = this.formData.data.find(x => x.name = 'sixthQestion');
-          //   this.defaultValue.question_text = fourthQ.question_text;
-          //   this.selectedSixthOption = this.defaultValue
-          //   this.totalPrice.push(this.defaultValue.price);
-          // }else{
-          //   this.totalPrice.push(this.selectedSixthOption.price);
-          // }
+          if(Object.keys(this.selectedSixthOption).length === 0){
+            const sixthQ = this.formData.data.find(x => x.name = 'sixthQestion');
+            this.defaultValue.question_text = sixthQ.question_text;
+            this.selectedSixthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
+          }else{
+            this.totalPrice.push(this.selectedSixthOption.price);
+          }
           //seventh question
-          // if(Object.keys(this.selectedSeventhOption).length === 0){
-          //   const fourthQ = this.formData.data.find(x => x.name = 'seventhQestion');
-          //   this.defaultValue.question_text = fourthQ.question_text;
-          //   this.selectedSeventhOption = this.defaultValue
-          //   this.totalPrice.push(this.defaultValue.price);
-          // }else{
-          //   this.totalPrice.push(this.selectedSeventhOption.price);
-          // }
+          if(Object.keys(this.selectedSeventhOption).length === 0){
+            const fourthQ = this.formData.data.find(x => x.name = 'seventhQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedSeventhOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
+          }else{
+            this.totalPrice.push(this.selectedSeventhOption.price);
+          }
           //eighth question
-          // if(Object.keys(this.selectedEighthOption).length === 0){
-          //   const fourthQ = this.formData.data.find(x => x.name = 'eighthQestion');
-          //   this.defaultValue.question_text = fourthQ.question_text;
-          //   this.selectedEighthOption = this.defaultValue
-          //   this.totalPrice.push(this.defaultValue.price);
-          // }else{
-          //   this.totalPrice.push(this.selectedEighthOption.price);
-          // }
+          if(Object.keys(this.selectedEighthOption).length === 0){
+            const fourthQ = this.formData.data.find(x => x.name = 'eighthQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedEighthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
+          }else{
+            this.totalPrice.push(this.selectedEighthOption.price);
+          }
           //ninth question
-        //   if(Object.keys(this.selectedNinthOption).length === 0){ 
-        //     const fourthQ = this.formData.data.find(x => x.name = 'ninthQestion');
-        //     this.defaultValue.question_text = fourthQ.question_text;
-        //     this.selectedNinthOption = this.defaultValue
-        //     this.totalPrice.push(this.defaultValue.price);
-        //   }else{
-        //     this.totalPrice.push(this.selectedNinthOption.price);
-        //   }
-        //   this.realTotalPrice = this.totalPrice.reduce((a,b) => a + b, 0);
-        // if (this.validateReCaptcha) {
-        //   const submittedFormData = {
-        //     typeOfFrom: this.selectedFormOption,
-        //     firstQuestion: this.selectedFirstOption,
-        //     secondQuestion: this.selectedSecondOption,
-        //     thirdQuestion: this.selectedThirdOption,
-        //     fourthQuestion: this.selectedFourthOption,
-        //     fifthQuestion: this.selectedFifthOption,
-        //     sixthQuestion: this.selectedSixthOption,
-        //     seventhQuestion: this.selectedSeventhOption,
-        //     eighthQuestion: this.selectedEighthOption,
-        //     ninthQuestion: this.selectedNinthOption,
-        //     email: this.formValues.email,
-        //     comment: this.formValues.comment === '' ? '/' : this.formValues.comment,
-        //     totalPrice: this.realTotalPrice,
-        //     firstQSum: this.firstQSum
-        //   }
-        //   await this.setMailFormData(submittedFormData)
-        // }
+          if(Object.keys(this.selectedNinthOption).length === 0){ 
+            const fourthQ = this.formData.data.find(x => x.name = 'ninthQestion');
+            this.defaultValue.question_text = fourthQ.question_text;
+            this.selectedNinthOption = this.defaultValue
+            this.totalPrice.push(this.defaultValue.price);
+          }else{
+            this.totalPrice.push(this.selectedNinthOption.price);
+          }
+          this.realTotalPrice = this.totalPrice.reduce((a,b) => a + b, 0);
+        if (this.validateReCaptcha) {
+          const submittedFormData = {
+            typeOfFrom: this.selectedFormOption,
+            firstQuestion: this.selectedFirstOption,
+            secondQuestion: this.selectedSecondOption,
+            thirdQuestion: this.selectedThirdOption,
+            fourthQuestion: this.selectedFourthOption,
+            fifthQuestion: this.selectedFifthOption,
+            sixthQuestion: this.selectedSixthOption,
+            seventhQuestion: this.selectedSeventhOption,
+            eighthQuestion: this.selectedEighthOption,
+            ninthQuestion: this.selectedNinthOption,
+            email: this.formValues.email,
+            comment: this.formValues.comment === '' ? '/' : this.formValues.comment,
+            totalPrice: this.realTotalPrice,
+            firstQSum: this.firstQSum
+          }
+          await this.setMailFormData(submittedFormData)
+        }
     },
     handleInputs(val){
       if(val){
