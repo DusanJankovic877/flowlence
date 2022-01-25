@@ -279,13 +279,13 @@ export default {
         });
       }
       //SECOND QUESTION
-        const secondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
-        secondQuestion.question_options.forEach(option => {
+         this.selectedSecondQuestion = this.formData.data.find(x=> x.name === 'secondQuestion');
+        this.selectedSecondQuestion.question_options.forEach(option => {
           if (this.formValues.secondQuestion === option.id) {
             const newOption = {};
             newOption.option_text = option.option_text;
             newOption.price = option.price;
-            newOption.question_text = secondQuestion.question_text;
+            newOption.question_text = this.selectedSecondQuestion.question_text;
             this.selectedSecondOption = newOption;
         } 
         });
