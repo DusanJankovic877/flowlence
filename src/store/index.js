@@ -32,6 +32,7 @@ export default new Vuex.Store({
       state.emailFormMessage = '';
     },
     SET_CAPTCHA_VALIDATE(state, payload){
+      console.log('cap validate set');
      state.validateReCaptcha = payload
     },
     SET_FORM_EMAIL_MESSAGE(state, payload){
@@ -88,6 +89,7 @@ export default new Vuex.Store({
       state.commit('SET_CAPTCHA_VALIDATE', payload)
     },
     async getCaptchaValidate(state,payload){
+      console.log('action cap validate');
       const response = await recaptchaValidate.validate(payload)
       state.commit('SET_CAPTCHA_VALIDATE', response.success); 
       

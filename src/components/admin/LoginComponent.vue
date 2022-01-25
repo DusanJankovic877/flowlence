@@ -32,39 +32,54 @@
                 </p>
             </div>
             <div v-else></div>
+            <re-captcha :class="showForm ? 'captcha-contact' : 'hide captcha-contact'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
             <button type="submit" class="btn btn-primary login-button" @click="submit">Submit</button>
      
         </form>
     </div>
 </template>
 <script>
+import ReCaptcha from '../ReCaptcha.vue'
 import { mapActions } from 'vuex'
 export default {
+    data(){
+        return{
+            
+        }
+    },
     props:{
         form: Object,
         authError: String,
-        authErrors: Object
+        authErrors: Object,
+        siteKey: String,
+        showForm: Boolean
+    },
+    components:{
+        ReCaptcha
     },
     methods:{
 
-        ...mapActions({emptyAuthErrors: 'AdminModule/emptyAuthErrors'}),
+        ...mapActions({emptyAuthErrors: 'AdminModule/emptyAuthErrors', emptyCaptchaValidate:'emptyCaptchaValidate'}),
         submit(){
             this.$emit('submit', this.form)
         },
         handleInputs(val){
             this.$emit('handle-inputs', val)
-        }
+        },
+        validate(response){
+            this.$emit('validate', {response: response})
+        },
+        reCaptchaReset() {
+            this.emptyCaptchaValidate(false)
+            this.$refs.ReCaptcha.reset();
+        },
     },
     beforeDestroy: function(){
         this.form.email = '';
         this.form.password = '';
         this.form.rememberMe = false;
-        this.emptyAuthErrors();
-
+        this.reCaptchaReset()
     }
-    
-
-
 }
 </script>
 <style scoped>

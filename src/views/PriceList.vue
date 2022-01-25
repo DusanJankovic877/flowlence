@@ -1,6 +1,6 @@
 <template>
   <div class="price-list-view col-lg-12">
-
+{{validateReCaptcha}}
     <div class="image-p-list-cover" v-if="currentRouteName !== '/'">
       <div class="image-p-list-cover-text col-lg-7">
         <h1>Procena cene usluga</h1>
@@ -376,18 +376,6 @@ export default {
               this.selectedNinthOption = newOption;
           }
         });
-        //NINTH QEUSTION is fourth in ASSOC in ENTREPRENEUR eight doo is ninth formValues
-        // this.selectedNinthQuestion = this.selectedButton === 'entrepreneur' || this.selectedButton === 'association' ? this.formData.data.find(x => x.name === 'eighthQuestion') : this.formData.data.find(x => x.name === 'ninthQuestion') ;
-        // this.selectedNinthQuestion.question_options.forEach(option => {
-        //   const ternaryStatement = this.selectedButton === 'entrepreneur' || this.selectedButton === 'association' ? this.formValues.eighthQuestion : this.formValues.ninthQuestion;
-        //   if (ternaryStatement === option.id) {
-        //       const newOption = {};
-        //       newOption.option_text = option.option_text;
-        //       newOption.price = option.price;
-        //       newOption.question_text = this.selectedNinthQuestion.question_text;
-        //       this.selectedNinthOption = newOption;
-        //   }
-        //   });
           //SUMMING SELECTED FORM DATA
           //first question
           if(Object.keys(this.selectedFirstOption).length == 0){

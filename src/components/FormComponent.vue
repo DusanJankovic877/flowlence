@@ -97,7 +97,10 @@ export default {
     methods:{
         handleInputs(val){
             this.$emit('handle-inputs', val)
-        }
+        },
+        resetCaptcha(){
+            this.$refs.ReCaptcha.reCaptchaReset()
+        },
     }
 
 }
