@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Navbar/>
-    <router-view/>
+  <transition name="slide-fade" mode="out-in">
+    <router-view v-if="show"/>
+  </transition>
     <Footer/>
   </div>
 </template>
@@ -12,6 +14,11 @@ export default{
   components:{
     Navbar,
     Footer
+  },
+  data(){
+    return{
+      show:true
+    }
   }
 
   
@@ -47,6 +54,22 @@ button{
   border: none !important;
   border-radius: 0 !important;
 }
+/* .page{
+  width:100%;
+  box-sizing: border-box;
+
+} */
+.slide-fade-enter-active {
+  transition: all .5s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateY(-100px);
+  opacity: 0;
+}
+
 
 
 

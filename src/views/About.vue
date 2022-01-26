@@ -1,5 +1,5 @@
 <template>
-<div class="about"> 
+<div class="about page"> 
   <!-- <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 317">
   <path fill="#3EB2A2" fill-opacity="1" d="M0,192L360,256L720,288L1080,288L1440,256L1440,320L1080,320L720,320L360,320L0,320Z"></path>
   </svg> -->
