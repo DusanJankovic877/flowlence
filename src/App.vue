@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar/>
   <transition name="slide-fade" mode="out-in">
-    <router-view v-if="show"/>
+    <router-view/>
   </transition>
     <Footer/>
   </div>
@@ -60,10 +60,10 @@ button{
 
 } */
 .slide-fade-enter-active {
-  transition: all .5s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .slide-fade-enter, .slide-fade-leave-to {
   transform: translateY(-100px);

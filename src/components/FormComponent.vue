@@ -12,9 +12,20 @@
                     <h5>{{data.question_text}}</h5>
                     <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
                         <!-- adding click to first 3 options in 3rd question -->
-                            <div class="form-check" v-if="question_o.id === 36 || question_o.id === 37 || question_o.id === 38">
+                            <div class="form-check" v-if="question_o.id === 36 || question_o.id === 37 || question_o.id === 38 || question_o.id === 92">
                                 <input class="form-check-input" 
-                                    @click="showFourthQuestion(question_o.id)"
+                                    @click="show=true"
+                                    :type="data.question_type.type" 
+                                    :value="question_o.id" 
+                                    :id="question_o.id" 
+                                    v-model="formValues[data.name]"
+                                    :name="data.name"
+                                    >
+                                <label  class="form-check-label"  :key="question_o.id" :for="question_o.id">{{question_o.option_text}}</label>
+                            </div>
+                            <div class="form-check" v-else-if="question_o.id === 39 || question_o.id === 40 || question_o.id === 93">
+                                <input class="form-check-input" 
+                                    @click="show=false"
                                     :type="data.question_type.type" 
                                     :value="question_o.id" 
                                     :id="question_o.id" 
@@ -37,8 +48,15 @@
                     </div>
                     <hr>
                 </div>
-                <!-- <transition name="fade" appear> -->
-                <div v-if="data.q_id === 23 || data.q_id === 24 || data.q_id === 59 || data.q_id === 60" :style="formValues.thirdQuestion === 9 ? newStyle : oldStyle">
+                <transition name="slide-question">
+                <div 
+                    v-if="
+                        data.q_id === 23 ||
+                        data.q_id === 24 ||
+                        data.q_id === 59 ||
+                        data.q_id === 60" 
+                    v-show="show"
+                >
                     <div v-if="formValues.thirdQuestion === 36 || formValues.thirdQuestion === 37 || formValues.thirdQuestion === 38 || formValues.thirdQuestion === 92">
                         <h5>{{data.question_text}}</h5>
                         <div class="input-group" v-for="question_o in data.question_options" :key="question_o.id">
@@ -56,8 +74,8 @@
                         <hr>
                     </div>
                 </div>
-                <div v-else></div>
-                <!-- </transition> -->
+                <!-- <div v-else></div> -->
+                </transition>
             </div>
            <div class="comment">
                 <h5>Dodatni komentar:</h5>
@@ -89,7 +107,7 @@
 export default {
     data(){
         return {
-            showFormPart: true,
+            show: false,
             oldStyle:{
                 backgroundColor: 'white'
             },
@@ -105,7 +123,7 @@ export default {
         selectedButton: String,
         selectedFormOption: String,
         questionsForQNine: Object,
-        errors:Array
+        errors:Array,
     },
     methods:{
         handleInputs(val){
@@ -113,15 +131,23 @@ export default {
         },
         resetCaptcha(){
             this.$refs.ReCaptcha.reCaptchaReset()
-        },
-        showFourthQuestion(val){
-            console.log('question option id', val);
         }
     }
 
 }
 </script>
 <style>
+.slide-question-enter-active {
+  transition: all 0.5s ease-in-out;
+}
+.slide-question-leave-active {
+    transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-question-enter, .slide-question-leave-to {
+    background-color: rgb(253, 0, 0) !important;
+    transform: translateY(-100px);
+    opacity: 0;
+}
 .form-div{
     margin-top:50px !important;
     padding: 10px;

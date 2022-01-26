@@ -135,11 +135,11 @@ export default {
 
 
   methods:{
+    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage','getStuff', 'deleteErrors', 'deleteEmailFormMessage']),
     resetCaptcha(){
       this.$refs.ReCaptcha.reCaptchaReset()
       
     },
-    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage','getStuff', 'deleteErrors', 'deleteEmailFormMessage']),
     async handleHideButtons(val, bool){
       //val is a string
       this.hideButtons = bool;
