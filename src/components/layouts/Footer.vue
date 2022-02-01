@@ -3,11 +3,11 @@
       <!-- <svg class="footer-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="white" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg> -->
 
         <div class="footer-content col-lg-12">
-            <div class="m-auto col-lg-3">
+            <div class="m-auto col-lg-3 footer-logo">
 
-        <h1>Flowlence</h1>
+    
             </div>
-        <h4>Agencija za knjigovodstvene usluge i konsalting</h4>
+        <h4>Agencija za računovodstvene usluge i konsalting</h4>
         <p>Tihomira Ostojića 10</p>
         <p>+38163466371</p>
         <p>flowlence@gmail.com</p>
@@ -20,10 +20,15 @@
 .footer-content{
     
     text-align: center !important;
-    height: 310px;
+    height: 410px;
     padding-top: 55px !important;
     background-color: #bfbfbf;
     color: #404040;
+}
+.footer-logo{
+    height:170px;
+    background-image: url('../../assets/logos/Flowlence-1.svg');
+    background-repeat: no-repeat;
 }
 @media only screen and (max-width: 1024px){
 

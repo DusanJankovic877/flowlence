@@ -76,6 +76,10 @@ nav {
 .nav-links{
   margin-left: auto;
 }
+ul li a {
+  padding: 10px 4px 0px 4px !important;
+
+}
 .navbar-toggler{
     border: none;
     box-shadow: none !important;
@@ -115,6 +119,13 @@ nav {
   color: #4d4d4d;
 }
 @media only screen and (max-width: 1024px){
+
+  ul li a {
+    padding: 0px 4px 10px 4px !important;
+    /* font-size: 12px; */
+  }
+}
+@media only screen and (max-width: 1024px){
     nav{
     padding: 22px;
   }
@@ -122,7 +133,8 @@ nav {
     margin-right: 100px;
   }
   ul li a {
-    padding:8px 4px 0 4px !important;
+    padding: 0px 2px 10px 2px !important;
+    font-size: 12px;
   }
 }
 @media only screen and (max-width: 600px){

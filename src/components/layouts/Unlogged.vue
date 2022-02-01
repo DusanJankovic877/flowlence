@@ -19,7 +19,10 @@
         </div>
 
     <div class="container links-container col-lg-7 m-auto">
-      <router-link class="navbar-brand logo"  to="/">Logo</router-link>
+      <!-- <a href=""> -->
+<!-- <img src="../../assets/logos/Flowlence-3.svg" alt=""> -->
+      <!-- </a> -->
+      <router-link class="navbar-brand logo"  to="/"></router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,3 +59,28 @@
  
   </nav>
 </template>
+<style>
+.logo{
+  margin: 0 auto;
+  background-image: url('../../assets/logos/Flowlence-3.svg');
+  background-repeat: no-repeat;
+  width: 315px;
+  height: 30px;
+}
+@media only screen and (max-width: 1280px){
+  .logo{
+    width: 200px;
+  }
+}
+@media only screen and (max-width: 600px){
+  .logo{
+     width: 225px;
+  }
+}
+@media only screen and (max-width: 280px){
+  .logo{
+     width: 195px;
+     height: 25px;
+  }
+}
+</style>
