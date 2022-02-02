@@ -24,10 +24,10 @@
                             alt="picture" 
                             >
                         </div>
+                    </div>
                         <div class="mt-3">
                             <p>{{post.section_titles.title}}</p>
                         </div>
-                    </div>
                 </router-link>   
             </div>
         </div>

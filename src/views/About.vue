@@ -1,6 +1,5 @@
 <template>
 <div class="about page"> 
-  {{fromRoute}}
   <!-- <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 317">
   <path fill="#3EB2A2" fill-opacity="1" d="M0,192L360,256L720,288L1080,288L1440,256L1440,320L1080,320L720,320L360,320L0,320Z"></path>
   </svg> -->
@@ -16,7 +15,7 @@
     </div>
     <img class=" responsive"  src="../assets/3.jpg" alt="" style="visibility: hidden;">
   </div>
-  <div :class="currentRouteName === '/' ? 'about-content col-lg-12' : 'about-content-padding about-content col-lg-12'">
+  <div :class="currentRouteName !== '/' ? 'about-content-padding col-lg-12' : 'about-content col-lg-12'">
     <div class="about-us col-lg-7 m-auto">
       <div v-if="currentRouteName === '/'">
 
@@ -83,7 +82,7 @@ export default{
     position: relative;
   }
   .about-content-padding{
-    
+    background-color:  #dabebf;
     padding: 150px 0;
   }
   .about-content  {

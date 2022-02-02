@@ -101,7 +101,7 @@
             <label for="exampleFormControlTextarea1" class="form-label col-lg-8">Textarea{{textarea.formId}}</label>
             <div class="div-text row">
                 <div class="col-lg-7">
-                    <textarea v-model="textarea.text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea v-model="textarea.text" class="form-control text-area" id="exampleFormControlTextarea1" rows="3" style="white-space: pre-wrap !important;"></textarea>
                     <div  v-if="errors.length">
                         <div v-for="(error, key) in errors" :key="key">
                             <span v-for="(errorItem, innerKey) in error" :key="innerKey">
@@ -180,9 +180,9 @@ export default {
     methods:{
         ...mapActions({
             setEditPostImage: 'BlogModule/setEditPostImage',
-            // deleteImage: 'BlogModule/deleteImage', 
-            // deleteSectionTitle: 'BlogModule/deleteSectionTitle',
-            // deleteTextarea: 'BlogModule/deleteTextarea' 
+            deleteImage: 'BlogModule/deleteImage', 
+            deleteSectionTitle: 'BlogModule/deleteSectionTitle',
+            deleteTextarea: 'BlogModule/deleteTextarea' 
             }),
         previewEditedFiles(e, i, image){
             e.target.files.forEach(file => {
@@ -221,7 +221,8 @@ export default {
                 const post = this.post
                 const imagesToEdit = this.imagesToEdit
                 await this.setEditPostImage({data: bool ? data : null, images_to_edit: imagesToEdit, post})
-                if(!this.errors)this.$router.push(`/jolanda/posts/${this.post.post_title.id}`)
+                console.log('err', this.errors.length);
+                if(this.errors.length === 0)this.$router.push(`/jolanda/posts/${this.post.post_title.id}`)
             }
         },
         goBackToPost(){
@@ -248,6 +249,7 @@ export default {
             const answer = confirm('Da li ste sigurni da hoćete da obrišete sliku?')
             if(answer === true){
                 const imageToCompare = this.post.images.find(x => x.formId === formId)
+                console.log(imageToCompare);
                 this.newImages.forEach(newImage => {
                     if(newImage.name === imageToCompare.new_image_name){
                         const index = this.newImages.indexOf(newImage)
@@ -262,6 +264,7 @@ export default {
                     }
                 }
                 if(imageId !== ''){
+                    console.log(imageId);
                     await  this.deleteImage(imageId);
                 }
             }

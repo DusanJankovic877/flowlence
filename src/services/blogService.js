@@ -2,6 +2,7 @@ import { RequestHandler } from "./RequestHandler";
 class BlogServices extends RequestHandler{
     async createPost(payload){
         const response = await this.apiClient.post('/create-post', payload.blog)
+        console.log('response ', response.data);
         return response;
     }
     async setCreatePostImage(payload){

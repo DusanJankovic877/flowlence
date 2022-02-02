@@ -1,5 +1,6 @@
 <template>
 <div class="col-lg-5 m-auto single-post">
+    <!-- {{post.post_title.id}} -->
         <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage" >
            <p>
                {{postMessage}}
@@ -19,7 +20,7 @@
                     style="width:100%;"
                 >
         </div>
-        <div v-for="textarea in section_title.textareas" :key="'textarea_'+textarea.id">
+        <div v-for="textarea in section_title.textareas" :key="'textarea_'+textarea.id" style="white-space: pre-wrap !important;">
             <p>{{textarea.text}}</p>
         </div>
     </div>
@@ -30,7 +31,7 @@
         </div>
         <div class="col-lg-3 m-auto" v-else></div>
         <div class="col-lg-2 m-auto" v-if="routeName !== '/blog/'+routeParam">
-            <button class="col-lg-12 btn btn-danger " @click="deletePost(post[0].id)">Obriši</button>{{deletetPost}}
+            <button class="col-lg-12 btn btn-danger " @click="deletePost(post.post_title.id)">Obriši</button>{{deletetPost}}
         </div>
         <div class="col-lg-2 m-auto" v-else></div>
         
@@ -79,6 +80,7 @@ export default {
 </script>
 <style>
 .single-post{
+    padding: 0 50px;
             background-color: rgba(255, 248, 220, 0.479);
 }
 </style>

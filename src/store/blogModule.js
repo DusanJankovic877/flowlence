@@ -29,9 +29,9 @@ const blogModule = {
         SET_POST_TO_CREATE(state, payload){
             state.postToCreate = payload
         },
-        // SET_IMAGES_NAMES(state, payload){
-        //     state.savedImages = payload
-        // },
+        SET_IMAGES_NAMES(state, payload){
+            state.savedImages = payload
+        },
         SET_POSTS(state, payload){
             state.posts =  payload
         },
