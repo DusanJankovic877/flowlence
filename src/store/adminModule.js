@@ -6,7 +6,8 @@ const adminModule = {
         token: null,
         user: null,
         authError: '',
-        authErrors: {}
+        authErrors: {},
+        bool: false
     },
     mutations:{
         SET_TOKEN(state, token){
@@ -75,8 +76,9 @@ const adminModule = {
     },
     getters:{
         isLogged: (state) => {return !!state.token && !!state.user}, 
+        // isLogged: (state) => state.bool, 
         token: (state) => state.token,
-        loggedUser: (state) => state.user,
+        loggedUser: (state) => state.bool,
         authError: (state) => state.authError,
         authErrors: (state) => state.authErrors
     }

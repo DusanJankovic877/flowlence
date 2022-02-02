@@ -2,7 +2,7 @@
 <div class="contet-circles col-lg-7 m-auto">
       <h1>Usluge</h1>
     <div class="circles">
-
+     
       <button  class="prices-link krug" @click="foundationServices">
         <div class="price-card-body">
         <h3>Osnivanje</h3>
@@ -77,6 +77,7 @@ export default {
 
         }  
     },
+
       methods:{
     foundationServices(){
       this.$router.push({name: 'services', params: {hideAll: true, showFoundation: true, from: 'home'}})

@@ -2,7 +2,6 @@ import { RequestHandler } from "./RequestHandler";
 class EntrepreneurService extends RequestHandler{
     async getFormData(payload){
         const response = await  this.apiClient.post('/get-form-data', payload);
-        console.log('response form ', response.data);
         return response.data;
     }
     async setMailFormData(payload){
@@ -11,10 +10,6 @@ class EntrepreneurService extends RequestHandler{
         if(response){
             return response.data.message;
         }
-    }
-    async getStuff(){
-        const response = await this.apiClient.get('/user')
-        console.log(response.data);
     }
 }
 const entrepreneurService = new EntrepreneurService();

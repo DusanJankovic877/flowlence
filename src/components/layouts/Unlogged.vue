@@ -1,27 +1,6 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light  sticky-top" >
-      <div class="col-lg-7 m-auto">
-          <ul class="navbar-nav nav-links phone-mail">
-            <li class="nav-item">
-              <a  class="nav-link" href="mailto:flowlence@gmail.com">
-                <img src="../../assets/svg/telephone-fill.svg" alt="phone">
-                flowlence@gmail.com
-              </a>
-            </li>
-            &nbsp;
-            <li class="nav-item">
-              <a  class="nav-link" href="tel:+38163466371">
-                <img src="../../assets/svg/envelope-fill.svg" alt="phone"> 
-                +38163466371
-              </a>
-            </li>
-          </ul>
-        </div>
-
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" >
     <div class="container links-container col-lg-7 m-auto">
-      <!-- <a href=""> -->
-<!-- <img src="../../assets/logos/Flowlence-3.svg" alt=""> -->
-      <!-- </a> -->
       <router-link class="navbar-brand logo"  to="/"></router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -62,10 +41,10 @@
 <style>
 .logo{
   margin: 0 auto;
-  background-image: url('../../assets/logos/Flowlence-3.svg');
+  background-image: url('../../assets/logos/Flowlence-w-3.svg');
   background-repeat: no-repeat;
   width: 315px;
-  height: 30px;
+  height: 25px;
 }
 @media only screen and (max-width: 1280px){
   .logo{
@@ -78,7 +57,7 @@
   }
 }
 @media only screen and (max-width: 280px){
-  .logo{
+  .logo{ 
      width: 195px;
      height: 25px;
   }

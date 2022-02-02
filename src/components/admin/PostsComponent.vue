@@ -52,7 +52,8 @@ export default {
         height: auto;
     }
     .blog-circle{
-        padding-top: 35px; text-align:center;
+        /* padding-top: 35px;  */
+        text-align:center;
     }
     .blog-image{
         height: 100px; overflow:hidden;
@@ -62,7 +63,7 @@ export default {
         margin-bottom: 50px !important;
         padding-top: 100px;
         padding-bottom: 100px;
-        background-color: rgba(255, 248, 220, 0.479);
+
         
     }
     .post-title{

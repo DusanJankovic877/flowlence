@@ -1,5 +1,5 @@
 <template>
-  <Unlogged v-if="!loggedUser" />
+  <Unlogged v-if="!loggedUser" style="padding-top: 30px !important;"/>
   <Logged v-else :loggedUser="loggedUser" @get-logout="logout"/>
 </template>
 <script>
@@ -50,8 +50,10 @@ export default {
     text-decoration: underline;
 }
 nav {
+
   display: block !important;
-  background-color: #bfbfbf !important;
+  background-color: #314247!important;
+  padding: 20px 0 !important;
 
 }
 .nav-links, .navbar-brand{
@@ -78,6 +80,7 @@ nav {
 }
 ul li a {
   padding: 10px 4px 0px 4px !important;
+  color:#d9d9d9 !important;
 
 }
 .navbar-toggler{
@@ -100,7 +103,7 @@ ul li a {
   margin: 0 !important;
 }
 .dropdown-menu{
-  background-color: #e6e6e6 !important;
+  background-color: #314247 !important;
 }
 .dropdown-item:hover{
   background-color: #4d4d4d;

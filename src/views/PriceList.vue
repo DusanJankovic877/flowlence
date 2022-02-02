@@ -13,14 +13,15 @@
       </div>
       <img class=" responsive"  src="../assets/hands.jpg" alt="" style="visibility: hidden;">
     </div>
-    <price-list-component-three-buttons
-      :class="hideButtons ? 'hide' : '' " 
-      :hideButtons="hideButtons" 
-      :selectedButton="selectedButton" 
-      :currentRouteName="currentRouteName" 
-      @handle-hide-buttons="handleHideButtons" 
-      @handle-hide-form="handleHideForm"
-    />
+        <price-list-component-three-buttons
+          :class="hideButtons ? 'hide' : '' " 
+          :hideButtons="hideButtons" 
+          :selectedButton="selectedButton" 
+          :currentRouteName="currentRouteName" 
+          @handle-hide-buttons="handleHideButtons" 
+          @handle-hide-form="handleHideForm"
+
+        />
     <div :class="hideButtons ? '' : 'hide'">
       <div :class="hideSelectedButtons ? 'hide selected-buttons' : 'selected-buttons'">
         <div v-if="selectedButton === 'entrepreneur'"><EntrepreneurComponent @handle-selected-option="handleSelectedOption"/></div>
@@ -49,8 +50,6 @@ import DooComponent from '../components/DooComponent.vue'
 import AssociationComponent from '../components/AssociationComponent.vue'
 import FormComponent from '../components/FormComponent.vue'
 import ReCaptcha from '../components/ReCaptcha.vue'
-// import store from '../store'
-
 export default {
   components:{
     PriceListComponentThreeButtons,
@@ -135,7 +134,8 @@ export default {
 
 
   methods:{
-    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage','getStuff', 'deleteErrors', 'deleteEmailFormMessage']),
+    ...mapActions(['getFormData', 'setEmptyFormData','getCaptchaValidate', 'setMailFormData', 'setEmptyEmailFormMessage', 'deleteErrors', 'deleteEmailFormMessage']),
+
     resetCaptcha(){
       this.$refs.ReCaptcha.reCaptchaReset()
       
@@ -163,7 +163,6 @@ export default {
       //HANDLING FORM DATA SO THEY CAN PROPERLY DISPLAYED
       //ALREADY ENTREPRENEUR
       if(val === 'already ent'){
-        // this.removedQuestionOption = this.questionsForQNine.question_options.pop();
         const flatRateTaxed = this.formData.data.find(x => x.q_id === 24);
         this.removedflatRateOption = flatRateTaxed.question_options.pop();
         const pdvs = this.formData.data.find(x => x.q_id === 26);
@@ -196,7 +195,6 @@ export default {
       this.showForm = true;
     },
     async handleHideForm(val){
-      // await this.getStuff()
       //val is boolean
       await this.setEmptyFormData();
       await this.setEmptyEmailFormMessage()
@@ -250,9 +248,7 @@ export default {
         this.isActive = true;
       }
       if (this.selectedButton === 'entrepreneur' || this.selectedButton === 'doo') {
-     
         const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
-
         this.formValues.firstQuestion.forEach(question => {
           firstQuestion.question_options.forEach(option => {
             if (question === option.id) {
@@ -266,7 +262,6 @@ export default {
         });
       }
       else if(this.selectedButton === 'association'){
-       
         const firstQuestion = this.formData.data.find(x=> x.name === 'firstQuestion');
         firstQuestion.question_options.forEach(option => {
           const newOption = {};
@@ -381,9 +376,7 @@ export default {
             const firsthQ = this.formData.data.find(x => x.name = 'firstQestion');
             this.defaultFQ.forEach(element => {
               element.question_text = firsthQ.question_text;
-
             });
-            // this.defaultFQ.question_text = 
             this.selectedFirstOption = this.defaultFQ
             this.firstQSum = 0;
             this.totalPrice.push(this.firstQSum);
@@ -522,6 +515,10 @@ export default {
 }
 </script>
 <style>
+
+.price-list-view{
+  min-height: 1160px;
+}
   .image-p-list-cover{
     background: url('../assets/hands.jpg');
     background-repeat: no-repeat;
@@ -544,11 +541,14 @@ export default {
 .price-list-component{
     margin-top: 0px;
 }
+.selected-buttons{
+  padding-top: 100px;
+}
 .krug{border: none;color:#404040; border-radius: 10em !important; text-decoration: none;}
 .entrepreneur-krug{
     color: #404040;
     border: none;
-    background-color: #FBA922;
+    background-color: #DABEBF;
     height: 320px;
     width: 320px;
     border-radius: 10em !important;
@@ -560,7 +560,7 @@ export default {
 .entrepreneur-krug:hover{
   color: white;
   text-decoration: none;
-  background-color: #385663 ;
+  background-color: #314247 ;
   font-family: 'RobotoSlab-Medium', sans-serif !important;
   border-radius: 25em;
 } 

@@ -26,6 +26,7 @@ export default{
 </script>
 
 <style>
+
 @font-face {
   font-family: "RobotoSlab-Medium";
   src: local("RobotoSlab-Medium"),
@@ -37,17 +38,26 @@ export default{
    url(./assets/fonts/Roboto_Slab/static/RobotoSlab-SemiBold.ttf) format("truetype");
 }
 #app {
+  background-color: #F2F2F2;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+
+
+p, a, label, .alert, button, .error-message{
+
+  font-family: 'RobotoSlab-Medium', sans-serif !important; 
+  /* font-family: "Linux Libertine", Georgia, Times, serif !important;  */
 
 }
-p, a, label, .alert, button, .error-message{
-  font-family: 'RobotoSlab-Medium', sans-serif !important; 
-}
 h1, h2, h3, h4, h5{
-  font-family: 'RobotoSlab-Bold', sans-serif !important;
+
+
+  font-family: 'RobotoSlab-Medium', sans-serif !important; 
+
+  /* font-family: "Linux Libertine", Georgia, Times, serif !important;  */
 
 }
 button{

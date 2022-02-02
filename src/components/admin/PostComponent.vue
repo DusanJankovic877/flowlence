@@ -1,5 +1,5 @@
 <template>
-<div class="col-lg-5 m-auto post">
+<div class="col-lg-5 m-auto single-post">
         <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage" >
            <p>
                {{postMessage}}
@@ -77,3 +77,8 @@ export default {
     }
 }
 </script>
+<style>
+.single-post{
+            background-color: rgba(255, 248, 220, 0.479);
+}
+</style>

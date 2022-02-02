@@ -32,7 +32,6 @@ export default new Vuex.Store({
       state.emailFormMessage = '';
     },
     SET_CAPTCHA_VALIDATE(state, payload){
-      console.log('cap validate set');
      state.validateReCaptcha = payload
     },
     SET_FORM_EMAIL_MESSAGE(state, payload){
@@ -63,16 +62,11 @@ export default new Vuex.Store({
 
   },
   actions: {
-    //nista ne radi bila proba
-    async getStuff(){
-      await entrepreneurService.getStuff();
-    },
     async getContactFormData(state, payload){
       const response = await contactServices.getContactFormData(payload);
       if(response){
         state.commit('SET_FORM_EMAIL_MESSAGE', response)
       }
-      // console.log('store', response);
     },
     async getFormData(state, payload){
        const response = await entrepreneurService.getFormData(payload);
@@ -89,7 +83,6 @@ export default new Vuex.Store({
       state.commit('SET_CAPTCHA_VALIDATE', payload)
     },
     async getCaptchaValidate(state,payload){
-      console.log('action cap validate');
       const response = await recaptchaValidate.validate(payload)
       state.commit('SET_CAPTCHA_VALIDATE', response.success); 
       

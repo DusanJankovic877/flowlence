@@ -5,7 +5,6 @@ class ContactServices extends RequestHandler{
         if(response){
             return response.data.message;
         }
-        // console.log('service', response.data.message);
     }
 }
 const contactServices = new ContactServices();

@@ -1,5 +1,6 @@
 <template>
 <div class="about page"> 
+  {{fromRoute}}
   <!-- <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 317">
   <path fill="#3EB2A2" fill-opacity="1" d="M0,192L360,256L720,288L1080,288L1440,256L1440,320L1080,320L720,320L360,320L0,320Z"></path>
   </svg> -->
@@ -15,7 +16,7 @@
     </div>
     <img class=" responsive"  src="../assets/3.jpg" alt="" style="visibility: hidden;">
   </div>
-  <div class="about-content col-lg-12">
+  <div :class="currentRouteName === '/' ? 'about-content col-lg-12' : 'about-content-padding about-content col-lg-12'">
     <div class="about-us col-lg-7 m-auto">
       <div v-if="currentRouteName === '/'">
 
@@ -48,7 +49,7 @@
 
     </div> <!--end of about-us div -->
   </div>  <!--end of about-content div -->
-  <svg v-if="currentRouteName === '/'" class="down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e6e6e6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+  <svg v-if="currentRouteName === '/'" class="down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#dabebf" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
   <!-- <div v-else class="box" >sdasds</div> -->
 </div><!--end of about div -->
 
@@ -60,6 +61,7 @@ export default{
 
     }
   },
+
     computed: {
     currentRouteName() {
         return this.$route.path;
@@ -79,14 +81,18 @@ export default{
   }
   .about{
     position: relative;
-
+  }
+  .about-content-padding{
     
+    padding: 150px 0;
   }
   .about-content  {
-    padding-top: 50px;
-    background-color: #e6e6e6;
+    padding-bottom: 1px ;
+    padding-top: 50px ;
+
+    background-color:  #dabebf;
     color: #fff;
-    padding-bottom: 1px;
+
   }
   .about-us h1{
     color: #404040;
@@ -127,7 +133,7 @@ export default{
   }
   .about-us{
     margin: 0  auto!important;
-    padding-bottom: 50px;
+    padding: 50px 0;
     width: 90%;
   }
   .image-cover-text{

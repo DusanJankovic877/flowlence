@@ -1,7 +1,7 @@
 <template>
 
     <div class="price-list col-lg-12">
-        <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#e6e6e6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+        <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#dabebf" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
         <div class="price-info ">
           <div class="price-circle-content col-lg-7 m-auto">
             <h1 class="pl-content-heading">Procena cene usluga</h1>
@@ -28,7 +28,7 @@
             </div><!-- end of row -->
           </div><!-- end of col-lg-7-->
         </div> <!-- end of price-info -->
-        <svg class="down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#E6E6E6" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+        <svg class="down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 135"><path fill="#dabebf" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
 
     </div> <!-- end of price list -->
 
@@ -52,8 +52,11 @@ export default{
 }
 </script>
 <style scoped>
+.down{
+ 
+}
   .price-info{
-    background-color: #E6E6E6;
+    background-color: #dabebf;
   }
   .circle{
     z-index: 1;
@@ -67,23 +70,23 @@ export default{
     display: flex;
   }
 
- .krug{
+ /* .krug{
    border:none;
-    background-color: white;
+    background-color: #f2f2f2 ;
     height: 320px;
     width: 320px;
     border-radius: 25em;
     padding: 0;
     margin:5px auto !important;
-  } 
+  }  */
 
- .krug:hover {
+ /* .krug:hover {
   text-decoration: none;
-  background-color: #8b8b8b;
   font-family: 'RobotoSlab-Medium', sans-serif !important;
   border-radius: 25em;
+  color: white;
 
-  }
+  } */
   .price-card-body h1{
     margin-bottom: 70px;
   }

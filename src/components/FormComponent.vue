@@ -14,7 +14,7 @@
                         <!-- adding click to first 3 options in 3rd question -->
                             <div class="form-check" v-if="question_o.id === 36 || question_o.id === 37 || question_o.id === 38 || question_o.id === 92">
                                 <input class="form-check-input" 
-                                    @click="show=true"
+                                    @click="show=!show"
                                     :type="data.question_type.type" 
                                     :value="question_o.id" 
                                     :id="question_o.id" 

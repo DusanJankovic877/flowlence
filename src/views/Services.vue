@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="services-view">
   <div class="services-image-cover">
     <div class="services-cover-text">
 
@@ -185,7 +185,6 @@ export default {
 }
 </script>
 <style >
-
 .services {
   margin-top: 50px !important;
   padding-bottom: 156px;
@@ -224,7 +223,7 @@ export default {
   margin-bottom: 5px !important;
 }
 .krug{
-    background-color: #f2f2f2;
+    background-color: #d9d9d9;
     height: 320px;
     width: 320px;
     border-radius: 25em;
@@ -237,7 +236,7 @@ export default {
 
 .krug:hover {
   text-decoration: none;
-  background-color: #a6a6a6;
+  background-color: #999999;
   font-family: 'RobotoSlab-Medium', sans-serif !important;
   border-radius: 25em;
 

@@ -1,7 +1,6 @@
 <template>
 <!-- TREBA PREPRAVITI ISPIS ERRORA -->
     <div class="form col-lg-7 m-auto">
-      {{errors}}
       <div class="col-lg-12">
         <form @submit.prevent class="contact-form">
           <!-- NAME -->

@@ -63,6 +63,10 @@ export default {
 }
 </script>
 <style >
+.full-width{
+  background-color: #f2f2f2 ;
+  z-index: 100;
+}
 .image-blog-cover{
   background: url('../assets/kocka.jpg');
   background-repeat: no-repeat;
@@ -76,6 +80,7 @@ export default {
   z-index: 10;
   margin:  4% 0% 0% 21%!important;
 }
+
 .blog-img{
   margin-bottom: 0px;
 }
@@ -97,10 +102,10 @@ export default {
     display: flex;
   }
   .blog-circle{
-  overflow: hidden;
+    overflow: hidden;
   }
-  .blog-circle h4{
-    margin:20px 0;
+  .post-title{
+    padding-top: 35px !important;
   }
   .blog-circle img{
     width: 320px;

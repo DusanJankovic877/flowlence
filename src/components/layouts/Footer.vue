@@ -7,10 +7,17 @@
 
     
             </div>
-        <h4>Agencija za računovodstvene usluge i konsalting</h4>
+        <h5>Agencija za računovodstvene usluge i konsalting</h5>
         <p>Tihomira Ostojića 10</p>
-        <p>+38163466371</p>
-        <p>flowlence@gmail.com</p>
+        <a href="tel:+38163466371">
+            <img  src="../../assets/svg/envelope.svg" alt="phone" > 
+            <p>+38163466371</p>
+     
+        </a>
+        <a href="mailto:flowlence@gmail.com">
+        <img src="../../assets/svg/telephone.svg" alt="phone">
+            <p>flowlence@gmail.com</p>
+        </a>
         </div>
         
     </div>
@@ -22,18 +29,36 @@
     text-align: center !important;
     height: 410px;
     padding-top: 55px !important;
-    background-color: #bfbfbf;
-    color: #404040;
+    background-color: #314247;
+    color: #d9d9d9;
 }
 .footer-logo{
-    height:170px;
-    background-image: url('../../assets/logos/Flowlence-1.svg');
+    width:370px;
+    height:150px;
+    background-image: url('../../assets/logos/Flowlence-w-1.svg');
     background-repeat: no-repeat;
+}
+.footer-content a{
+color: #d9d9d9 !important;
+text-decoration: none;
 }
 @media only screen and (max-width: 1024px){
 
 }
 @media only screen and (max-width: 768px){}
-@media only screen and (max-width: 414px){}
+@media only screen and (max-width: 414px){
+.footer-logo{
+    width:220px;
+    height:90px;
+}
+.footer-content h5{
+    font-size: 15px;;
+ 
+}
+.footer-content p{
+    font-size: 12px;;
+ 
+}
+}
 
 </style>

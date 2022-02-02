@@ -82,6 +82,9 @@ export default {
 </script>
 
 <style>
+.full-width-contact{
+  background-color: #DABEBF;
+}
   .image-contact-cover{
     background: url('../assets/saksija.jpg');
     background-repeat: no-repeat;
@@ -91,6 +94,7 @@ export default {
     text-align: right;
   }
   .image-contact-cover-text{
+
     color: white;
     position: absolute;
     z-index: 10;
@@ -100,6 +104,7 @@ export default {
       margin-bottom: 1px;
     }
   .contact-form{
+        padding-top: 50px;
   min-height: 700px;
   }
   .responsive{

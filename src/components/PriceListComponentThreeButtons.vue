@@ -51,13 +51,13 @@ export default {
 
     data() {
         return{
-
+         
         }
     },
     props:{
         hideButtons: Boolean,
         selectedButton: String,
-        currentRouteName: String
+        currentRouteName: String,
     },
     methods:{
         handleHideButtons(val){
@@ -68,10 +68,8 @@ export default {
 }
 </script>
 <style>
-/* .{
-  color: #404040 !important;
-} */
 .price-row{
+  padding-top: 100px;
   display: inline-flex !important;
   flex-wrap: wrap;
 }
