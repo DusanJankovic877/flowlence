@@ -1,5 +1,5 @@
 <template>
-<div class="col-lg-8 m-auto">
+<div class="col-lg-8 m-auto service">
         <h2>Izračunavanje finansijskih pokazatelja, izrada biznis planova</h2>
     <div class="col-lg-9 m-auto service-height">
         <p>

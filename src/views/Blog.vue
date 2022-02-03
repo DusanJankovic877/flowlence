@@ -12,7 +12,7 @@
     </div>
     
       <div class="col-lg-7 m-auto post">
-        <div class="row">
+        <div class="circles">
             <div v-for="post in posts" :key="'post_short_'+post.post_title.id" class="col-lg-4 krug blog-circle">
                 <router-link class="krug"  :to="{'name': 'post', params:{id: post.post_title.id}}">
                   <div class="post-title" style="">

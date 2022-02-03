@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-8 m-auto">
+    <div class="col-lg-8 m-auto service">
         <h2>Knjigovodstvene usluge</h2>
         <p class="align-l">
             <b>

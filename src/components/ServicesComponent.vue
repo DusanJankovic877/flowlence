@@ -109,7 +109,6 @@ export default {
   .services-margin{
     position: relative;
     z-index: 1;
-    ;
   }
    .services-margin h1{
      color: #404040;
@@ -120,6 +119,7 @@ export default {
     margin-bottom: -40px !important; 
   }
   .contet-circles{
+  
     width: 100%;
   }
 }

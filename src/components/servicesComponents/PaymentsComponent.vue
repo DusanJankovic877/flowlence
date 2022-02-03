@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-8 m-auto">
+    <div class="col-lg-8 m-auto service">
 
         <h2>Platni promet (dinarski I devizni)</h2>
         <p class="align-l">

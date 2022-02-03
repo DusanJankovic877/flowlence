@@ -189,6 +189,9 @@ export default {
   margin-top: 50px !important;
   padding-bottom: 156px;
 }
+.service{
+    padding: 10px !important;
+}
 .services-cover-text{
   color: white;
   position: absolute;

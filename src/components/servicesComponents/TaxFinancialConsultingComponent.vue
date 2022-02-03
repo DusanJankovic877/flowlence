@@ -1,6 +1,6 @@
 <template>
 
-<div>
+<div class="col-lg-8 m-auto service">
 
             <h2 style="margin-bottom: 50px;">Poreski I finansijski konsalting</h2>
         <div class="col-lg-5 m-auto service-height">
