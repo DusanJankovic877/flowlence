@@ -10,24 +10,28 @@
       </div>
       <img v-if="currentRoutePath !== '/'" class="responsive" src="../assets/kocka.jpg" alt="" style="visibility: hidden;">
     </div>
+    
       <div class="col-lg-7 m-auto post">
         <div class="row">
-            <div v-for="post in posts" :key="'post_'+post.post_title.id" class="col-lg-4 krug blog-circle">
+            <div v-for="post in posts" :key="'post_'+post.post_title.id">
+                    {{post.images}}
+            
+              {{post.post_title.id}}
+            </div>
+            <div v-for="post in posts" :key="'post_short_'+post.post_title.id" class="col-lg-4 krug blog-circle">
                 <router-link class="krug"  :to="{'name': 'post', params:{id: post.post_title.id}}">
-                    <div class="post-title" style="">
-                        <h5 >{{post.post_title.post_title}}</h5>
-                    </div>
-                    <div v-for="image in post.section_titles.images" :key="'image_'+image.id"  >
-                        <div class="blog-image">
-                            <img 
-                            :src="`http://127.0.0.1:8000/api/get-image/${image.name}`" 
-                            alt="picture" 
-                            >
-                        </div>
-                    </div>
-                        <div class="mt-3">
-                            <p>{{post.section_titles.title}}</p>
-                        </div>
+                  <div class="post-title" style="">
+                      <h5 >{{post.post_title.post_title}}</h5>
+                  </div>
+                  <div class="blog-image">
+                      <img 
+                      :src="`http://127.0.0.1:8000/api/get-image/${post.image.name}`" 
+                      alt="picture" 
+                      >
+                  </div>
+                  <div class="mt-3">
+                      <p>{{post.section_title.title}}</p>
+                  </div> 
                 </router-link>   
             </div>
         </div>
@@ -93,6 +97,11 @@ export default {
     z-index: 1;
     margin-bottom: 70px ; 
     
+
+  }
+  .blog-image{
+    height: 100px !important;
+    overflow: hidden;
 
   }
   .blog h1{
