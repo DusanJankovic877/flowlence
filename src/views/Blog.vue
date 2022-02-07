@@ -67,10 +67,10 @@ export default {
   z-index: 100;
 }
 .image-blog-cover{
-  background: url('../assets/kocka.jpg');
+  background: url('../assets/isecene-slike/Blog-1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.384);
+  box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.411);
   position:relative;
 }
 .image-blog-cover-text{

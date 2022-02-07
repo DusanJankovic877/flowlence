@@ -8,7 +8,7 @@
         Osnivanje, Knjigovodstvene usluge, Obračun zarada / Kardovske usluge
       </p>
     </div>
-    <img class=" responsive"  src="../assets/lisce.jpg" alt="" style="visibility: hidden;">
+    <img class=" responsive"  src="../assets/isecene-slike/Usluge.jpg" alt="" style="visibility: hidden;">
   </div>
   <div class="services col-lg-7 m-auto">
     <div :class="hide ? 'circles hide' : 'circles'">
@@ -199,10 +199,10 @@ export default {
   margin: 5% 34%  !important;
 }
 .services-image-cover{
-    background: url('../assets/lisce.jpg');
+    background: url('../assets/isecene-slike/Usluge.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.226);
+    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.411);
     position:relative;
 }
 .services h1 {
