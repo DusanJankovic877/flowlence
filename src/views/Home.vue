@@ -28,7 +28,6 @@
 // @ is an alias to /src
 import Carousel from '../components/Carousel.vue'
 import About from '../views/About.vue'
-// import Services from '../views/Services.vue'
 import PriceListComponent from '../components/PriceListComponent.vue'
 import Blog from '../views/Blog.vue'
 import ServicesComponent from '../components/ServicesComponent.vue'
@@ -38,7 +37,6 @@ export default {
   components: {
     Carousel,
     About,
-    // Services,
     PriceListComponent,
     Blog,
     ServicesComponent,
@@ -59,14 +57,13 @@ export default {
   }
   .services-margin{
     margin-bottom: 100px;
-
   }
   .price-list-margin{
     margin-bottom: -160px;
   }
   .blog-margin{
     margin-top: 220px ; 
-     background-color: #f2f2f2;
+    background-color: #f2f2f2;
   }
   .blog-margin h1{
     color: #404040;
@@ -74,7 +71,6 @@ export default {
   .contact{
     margin-top: -100px;
     margin-bottom: -350px !important;
-
     z-index: -1 !important;
   }
   .contact-info {
@@ -83,12 +79,16 @@ export default {
   .contact-info{
     color: white !important;
   }
-  @media only screen and (max-width: 1280px){
-      .contact{
-  
+  .contact-info .btn{
+    border-radius: 0;
+    background-color: #314247;
+    color: #d9d9d9;
+  }
+@media only screen and (max-width: 1280px){
+  .contact{
     margin-bottom: 100px !important;
   }
-  }
+}
 @media only screen and (max-width: 1024px){
   .price-list-margin{
     margin-top: 65px;
@@ -97,7 +97,6 @@ export default {
   .blog-margin{
     margin-top: 50px !important; 
     margin-bottom: 1160px !important; 
-  
   }
   .contact{
     margin-bottom: -167px !important;
@@ -114,7 +113,6 @@ export default {
 @media only screen and (max-width: 600px){
   .blog-margin{
     margin-top: 150px !important; 
-
     margin-bottom: 60px !important; 
   }
     .contact{
