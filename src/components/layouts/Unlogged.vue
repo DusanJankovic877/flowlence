@@ -41,7 +41,7 @@
 <style>
 .logo{
   margin: 0 auto;
-  background-image: url('../../assets/logos/Flowlence-w-3.svg');
+  background-image: url('../../assets/svg/Flowlence-w-3.svg');
   background-repeat: no-repeat;
   width: 315px;
   height: 25px;

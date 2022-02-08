@@ -76,9 +76,8 @@ const adminModule = {
     },
     getters:{
         isLogged: (state) => {return !!state.token && !!state.user}, 
-        // isLogged: (state) => state.bool, 
         token: (state) => state.token,
-        loggedUser: (state) => state.bool,
+        loggedUser: (state) => state.user,
         authError: (state) => state.authError,
         authErrors: (state) => state.authErrors
     }

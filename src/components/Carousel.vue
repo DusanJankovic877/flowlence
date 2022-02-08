@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img src="../assets/isecene-slike/Pozadina-2.jpg" class="d-block w-100" alt="a">
+          <img src="../assets/Pozadina-2.jpg" class="d-block w-100" alt="a">
           <div class="carousel-caption  d-md-block">
             <h5>Blog</h5>
             <p>Detaljnije o člancima</p>

@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .logo{
   margin: 0 auto;
-  background-image: url('../../assets/logos/Flowlence-4.svg');
+  background-image: url('../../assets/svg/Flowlence-4.svg');
   background-repeat: no-repeat;
   width: 40px;
   height: 30px;

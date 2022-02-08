@@ -33,7 +33,7 @@
 .footer-logo{
     width:370px;
     height:150px;
-    background-image: url('../../assets/logos/Flowlence-w-1.svg');
+    background-image: url('../../assets/svg/Flowlence-w-1.svg');
     background-repeat: no-repeat;
 }
 .footer-content a{

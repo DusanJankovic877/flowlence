@@ -8,7 +8,7 @@
             potrebama Vašeg poslovanja.
           </p>
       </div>
-      <img v-if="currentRoutePath !== '/'" class="responsive" src="../assets/kocka.jpg" alt="" style="visibility: hidden;">
+      <img v-if="currentRoutePath !== '/'" class="responsive" src="../assets/3.jpg" alt="" style="visibility: hidden;">
     </div>
     
       <div class="col-lg-7 m-auto post">
@@ -67,7 +67,7 @@ export default {
   z-index: 100;
 }
 .image-blog-cover{
-  background: url('../assets/isecene-slike/Blog-1.jpg');
+  background: url('../assets/Blog-1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.411);

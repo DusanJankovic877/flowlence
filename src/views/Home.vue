@@ -1,33 +1,29 @@
 <template>
   <div class="home page">
-    <Carousel/>
+      <Carousel/>
     <div class="about-margin">
-
-    <About/>
+      <About/>
     </div>
     <div class="services-margin">
       <ServicesComponent />
     </div>
     <div class="price-list-margin">
-
-    <PriceListComponent/>
+      <PriceListComponent/>
     </div>
     <div class="blog-margin">
       <h1>Blog</h1>
-    <Blog/>
+      <Blog/>
     </div>
   <div class="contact">
-  <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 135"><path fill="#dabebf" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+    <svg class="up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 135"><path fill="#dabebf" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
     <div class="contact-info">
       <h1 class="title">Kontakt</h1>
       <router-link class="btn btn-secondary" to="/contact">Kontaktiraje nas</router-link>
     </div>
     <svg class="down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#dabebf" fill-opacity="1" d="M0,128L120,117.3C240,107,480,85,720,85.3C960,85,1200,107,1320,117.3L1440,128L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
-
   </div>
   </div> <!-- end of home -->
 </template>
-
 <script>
 // @ is an alias to /src
 import Carousel from '../components/Carousel.vue'
@@ -67,7 +63,6 @@ export default {
   }
   .price-list-margin{
     margin-bottom: -160px;
-
   }
   .blog-margin{
     margin-top: 220px ; 
@@ -77,7 +72,6 @@ export default {
     color: #404040;
   }
   .contact{
-    /* position: relative; */
     margin-top: -100px;
     z-index: -1 !important;
   }
@@ -90,9 +84,7 @@ export default {
 @media only screen and (max-width: 1024px){
   .price-list-margin{
     margin-top: 65px;
-
     margin-bottom: -120px;
-
   }
   .blog-margin{
     margin-top: 50px !important; 
