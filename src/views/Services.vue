@@ -280,7 +280,7 @@ export default {
   display: inline;
   }
   .krug{
-      background-color: #f2f2f2;
+      background-color: #d2d2d2;
       height: 280px;
       width: 280px;
       border-radius: 25em;

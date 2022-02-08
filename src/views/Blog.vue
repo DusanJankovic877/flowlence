@@ -23,7 +23,7 @@
                       alt="picture" 
                       >
                   </div>
-                  <div class="mt-3">
+                  <div class="blog-p">
                       <p>{{post.section_title.title}}</p>
                   </div> 
                 </router-link>   
@@ -42,9 +42,7 @@ export default {
     return{}
   },
   computed: {
-     
-        ...mapGetters({posts: 'BlogModule/posts'}),
-
+    ...mapGetters({posts: 'BlogModule/posts'}),
     currentRoutePath() {
         return this.$route.path;
     }
@@ -90,8 +88,6 @@ export default {
     position: relative;
     z-index: 1;
     margin-bottom: 70px ; 
-    
-
   }
   .blog-image{
     height: 100px !important;
@@ -99,7 +95,7 @@ export default {
 
   }
   .blog h1{
-    margin: 50px 0;
+    margin: 20px 0;
    }
   .blog-row{
     display: flex;
@@ -113,11 +109,7 @@ export default {
   .blog-circle img{
     width: 320px;
   }
-
-
-
 @media only screen and (max-width: 1280px){
-
   .blog{
     width: 100%;
     margin-top: 0 !important; 
@@ -126,15 +118,11 @@ export default {
     display: flex;
   }
   .blog-img{
-  margin-bottom: -209px !important;
-}
+    margin-bottom: -209px !important;
+  }
 
 }
-/* @media only screen and (max-width: 1024px){
-  .blog-img{
-  margin-bottom: -168px;
-} 
-} */
+
 
 @media only screen and (max-width: 768px){
 
@@ -155,6 +143,20 @@ export default {
 @media only screen and (max-width: 540px){
   .blog-img{
     margin-bottom: -88px;
+  }
+  .post-title{
+    padding-top: 5px !important;
+  }
+  .post-title h5{
+    font-size: 18px !important;
+  }
+  .blog-p {
+    margin-top: 3px;
+    padding: 0 20px !important;
+  }
+  .blog-p p{
+    line-height: 19px !important;
+    font-size: 15px !important;
   }
 }
 @media only screen and (max-width: 414px){
