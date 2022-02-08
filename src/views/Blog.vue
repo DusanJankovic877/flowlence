@@ -4,8 +4,7 @@
       <div class="image-blog-cover-text col-lg-7">
         <h1>Blog</h1>
           <p>
-            Potrebno je popuniti anketu u nastavku kako bi definisali ponudu koja će najviše odgovarati
-            potrebama Vašeg poslovanja.
+            Pročitajte naše tekstove da bi se bliže upoznali sa temama koje obrađujemo.Za sve informacije slobodno nam se obratite.
           </p>
       </div>
       <img v-if="currentRoutePath !== '/'" class="responsive" src="../assets/3.jpg" alt="" style="visibility: hidden;">

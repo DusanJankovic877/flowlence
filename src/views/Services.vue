@@ -193,10 +193,11 @@ export default {
     padding: 10px !important;
 }
 .services-cover-text{
+  padding: 0 55px;
   color: white;
   position: absolute;
   z-index: 10;
-  margin: 5% 34%  !important;
+  margin: 15% 36%  !important;
 }
 .services-image-cover{
     background: url('../assets/Usluge.jpg');
