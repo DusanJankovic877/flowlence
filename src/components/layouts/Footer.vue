@@ -19,11 +19,8 @@
     </div>
 </template>
 <style>
-.footer-links{
 
-}
 .footer-content{
-    
     text-align: center !important;
     height: 410px;
     padding-top: 55px !important;
@@ -40,7 +37,10 @@
 color: #d9d9d9 !important;
 text-decoration: none;
 }
+
+
 @media only screen and (max-width: 1024px){
+
     .footer-links{
         margin-left:1%;
     }

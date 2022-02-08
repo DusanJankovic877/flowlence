@@ -73,6 +73,8 @@ export default {
   }
   .contact{
     margin-top: -100px;
+    margin-bottom: -350px !important;
+
     z-index: -1 !important;
   }
   .contact-info {
@@ -81,6 +83,12 @@ export default {
   .contact-info{
     color: white !important;
   }
+  @media only screen and (max-width: 1280px){
+      .contact{
+  
+    margin-bottom: 100px !important;
+  }
+  }
 @media only screen and (max-width: 1024px){
   .price-list-margin{
     margin-top: 65px;
@@ -88,6 +96,8 @@ export default {
   }
   .blog-margin{
     margin-top: 50px !important; 
+    margin-bottom: 1160px !important; 
+  
   }
   .contact{
     margin-bottom: -167px !important;

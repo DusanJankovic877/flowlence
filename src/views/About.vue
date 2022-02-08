@@ -128,7 +128,7 @@ export default{
     font-size: 35px;
   }
   .about-content p{
-    font-size: 25px;
+    font-size: 20px;
   }
   .about-us{
     margin: 0  auto!important;
