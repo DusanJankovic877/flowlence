@@ -1,6 +1,6 @@
 <template>
 <div class="col-lg-5 m-auto single-post">
-    <!-- {{post.post_title.id}} -->
+    <h1>Članak</h1>
         <div class="col-lg-12 alert alert-success mt-5" v-if="postMessage" >
            <p>
                {{postMessage}}

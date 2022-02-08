@@ -1,5 +1,5 @@
 <template>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid">
         <router-link class="navbar-brand logo" to="/jolanda/posts"></router-link> 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@
               <p class="nav-link">{{loggedUser.name}}</p>
           </li>
           <li class="nav-item">
-            <button class="nav-link" style="border:none; background-color: #F8F9FA;" @click="logout">Odjavi se</button>
+            <button class="nav-link" style="border:none; background-color: #DABEBF; color:#314247;" @click="logout">Odjavi se</button>
           </li>
         </ul>
       </div>

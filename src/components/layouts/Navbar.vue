@@ -20,7 +20,6 @@ export default {
   methods:{
     ...mapActions({getLogout: 'AdminModule/getLogout'}),
       logout(){
-        
         this.getLogout().then(() => {
           if(this.$route.name !== 'jolanda'){
             this.$router.replace({

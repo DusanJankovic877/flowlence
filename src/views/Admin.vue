@@ -34,6 +34,7 @@ export default {
         ...mapActions({getCaptchaValidate:'getCaptchaValidate', login: 'AdminModule/login', emptyAuthError: 'AdminModule/emptyAuthError',emptyAuthErrors: 'AdminModule/emptyAuthErrors'}),
         submit(form){
             if(this.validateReCaptcha === true)this.login(form)
+            this.$router.push('/jolanda/posts')
         },
         validate(val){
             this.getCaptchaValidate(val.response);

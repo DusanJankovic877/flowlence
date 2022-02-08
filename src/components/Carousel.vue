@@ -47,14 +47,59 @@
         <span class="visually-hidden">Next</span>
         </div>
       </button>
-
     </div> <!-- carousel end-->  
 </template>
 <style>
+/* @media only screen and (min-width: 1281px){ */
+  .carousel-control-next-icon, .carousel-control-prev-icon{
+    background-color: rgba(0, 0, 0, 0.486);
+  }
+    .carousel-caption  p, .carousel-caption h5{
+      color:rgb(190, 190, 190) !important;
+    }
+    .carousel-caption{
+      
+      right: 0;
+      left: 0;
+      bottom: 10%;
+      background:rgba(0, 0, 0, 0.57);
+      width: 50%;
+      margin:0  auto;
+    }
+    .carousel-caption a{
+      border-radius: 0;
+      
+    }
+/* } */
+@media only screen and (max-width: 1280px){
+  .carousel-caption{
+    margin: 0 auto;
+    background:rgba(0, 0, 0, 0.57);
+    padding: 2px;
+    width:360px;
+  }
+  .carousel-caption h5{
+    font-size: 18px ;
+    margin: 5px 0;
+  }
+  .carousel-caption  p, .carousel-caption .btn{
+    font-size: 15px ;
+    margin-bottom: 5px;
+  }
+  .carousel-caption a{
+    border-radius: 0 !important;
+  }
+  .carousel .btn{
+    padding: 5px 10px;
+  }
+  .carousel-indicators{
+    margin: 0 auto 0 auto;
+    width: 90px;
+  }
+}
 @media (max-width:540px){ /*iphone5/SE*/
   .carousel-caption{
-    margin: 0 auto 0 auto;
-
+    margin: 0 auto;
     background:rgba(0, 0, 0, 0.57);
     padding: 2px;
     width:190px;
@@ -71,59 +116,11 @@
     padding: 2px;
   }
   .carousel-indicators{
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
     width: 90px;
   }
 
 }
-@media only screen and (max-width: 1280px){
-    .carousel-caption{
-    margin: 0 auto 0 auto;
-
-    background:rgba(0, 0, 0, 0.57);
-    padding: 2px;
-    width:360px;
-  }
-  .carousel-caption h5{
-    font-size: 18px ;
-    margin: 5px 0;
-  }
-  .carousel-caption  p, .carousel-caption .btn{
-    font-size: 15px ;
-    margin-bottom: 5px;
-    
-  }
-  .carousel-caption a{
-    border-radius: 0 !important;
-  }
-  .carousel .btn{
-    padding: 5px 10px;
-  }
-  .carousel-indicators{
-    margin: 0 auto 0 auto;
-    width: 90px;
-  }
-
-}
-/* @media only screen and (min-width: 1281px){ */
-
-  .carousel-caption  p, .carousel-caption h5{
-    color:rgb(190, 190, 190) !important;
-  }
-  .carousel-caption{
-    
-    right: 0;
-    left: 0;
-    bottom: 10%;
-    background:rgba(0, 0, 0, 0.57);
-    width: 50%;
-    margin:0  auto;
-  }
-  .carousel-caption a{
-    border-radius: 0;
-    
-  }
-/* } */
 
 
 
