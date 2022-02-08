@@ -62,11 +62,11 @@ export default {
     margin-bottom: -210px;
   }
   .services-margin{
-    margin-bottom: -160px;
+    margin-bottom: 100px;
 
   }
   .price-list-margin{
-    margin-bottom: -260px;
+    margin-bottom: -160px;
 
   }
   .blog-margin{
@@ -89,7 +89,9 @@ export default {
   }
 @media only screen and (max-width: 1024px){
   .price-list-margin{
-    margin-bottom: -160px;
+    margin-top: 65px;
+
+    margin-bottom: -120px;
 
   }
   .blog-margin{

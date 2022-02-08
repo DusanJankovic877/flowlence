@@ -14,7 +14,7 @@
                         <!-- adding click to first 3 options in 3rd question -->
                             <div class="form-check" v-if="question_o.id === 36 || question_o.id === 37 || question_o.id === 38 || question_o.id === 92">
                                 <input class="form-check-input" 
-                                    @click="show=!show"
+                                    @click="show=true"
                                     :type="data.question_type.type" 
                                     :value="question_o.id" 
                                     :id="question_o.id" 
@@ -88,7 +88,7 @@
             <!-- end of form-comment --> 
             <br>
             <div class="email">
-                <h5>Vaša mail adresa na koju želite da Vam pošaljemo <span class="red">*</span> ponudu:</h5>
+                <h5>Vaša mail adresa na koju želite da Vam pošaljemo ponudu:&nbsp;<span class="red">*</span></h5>
                 <div class="form-group">
                     <label for="email">Email adresa: </label>
                     <input type="email" v-model="formValues.email" name="email" class="form-control" id="email" placeholder="name@example.com" required @input="handleInputs(formValues.email)">
