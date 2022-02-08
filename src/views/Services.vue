@@ -190,21 +190,21 @@ export default {
   padding-bottom: 156px;
 }
 .service{
-    padding: 10px !important;
+  padding: 10px !important;
 }
 .services-cover-text{
   padding: 0 55px;
   color: white;
   position: absolute;
   z-index: 10;
-  margin: 15% 36%  !important;
+  margin: 15% 38%  !important;
 }
 .services-image-cover{
-    background: url('../assets/Usluge.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.411);
-    position:relative;
+  background: url('../assets/Usluge.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow:inset 0 0 0 2000px rgba(0, 0, 0, 0.411);
+  position:relative;
 }
 .services h1 {
   color: #404040;
@@ -218,7 +218,7 @@ export default {
   text-align: left;
 }
 .align-l{
-    text-align: left;
+  text-align: left;
 }
 .service-height{
   position: relative;
@@ -227,12 +227,12 @@ export default {
   margin-bottom: 5px !important;
 }
 .krug{
-    background-color: #d9d9d9;
-    height: 320px;
-    width: 320px;
-    border-radius: 25em;
-    padding: 0;
-    margin:5px auto !important;
+  background-color: #d9d9d9;
+  height: 320px;
+  width: 320px;
+  border-radius: 25em;
+  padding: 0;
+  margin:5px auto !important;
 }
 .prices-link{
   text-decoration: none;
@@ -273,30 +273,28 @@ export default {
   .services-row{
     display: flex;
   }
-
 }
 @media only screen and (max-width: 600px){
   .services-row{
-  display: inline;
+    display: inline;
   }
   .krug{
-      background-color: #d2d2d2;
-      height: 280px;
-      width: 280px;
-      border-radius: 25em;
-      padding: 0;
-      margin:5px auto !important;
+    background-color: #d2d2d2;
+    height: 280px;
+    width: 280px;
+    border-radius: 25em;
+    padding: 0;
+    margin:5px auto !important;
   }
   .price-card-body {
-      height: 280px;
-      width: 280px;
+    height: 280px;
+    width: 280px;
     padding: 45px 10px 0 10px;
 
   }
   .services-cover-text{
     margin: 5% 0%  0 0%!important;
   }
-  
 }
 @media only screen and (max-width: 280px){
   .services-cover-text{
