@@ -2,6 +2,8 @@
       <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid">
         <router-link class="navbar-brand logo" to="/jolanda/posts"></router-link> 
+              <p class="logo-text-f-slash logo-text">/</p>
+      <p class="logo-text">accounting</p>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -49,11 +51,12 @@ export default {
 </script>
 <style scoped>
 .logo{
-  margin: 0 auto;
+  margin: 0 auto 8px auto;
   background-image: url('../../assets/svg/Flowlence-4.svg');
   background-repeat: no-repeat;
   width: 40px;
   height: 30px;
+
 }
 @media only screen and (max-width: 1280px){
   .logo{

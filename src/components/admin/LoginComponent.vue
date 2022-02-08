@@ -1,5 +1,5 @@
 <template>
-    <div class="login col-lg-5 m-auto mt-5">
+    <div class="login col-lg-5 m-auto">
         <form @submit.prevent class="col-lg-9 m-auto">
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
@@ -21,10 +21,10 @@
             </div>
             <div v-else></div>
             </div>
-            <div class="mb-3 form-check">
+            <!-- <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="check" v-model="form.rememberMe">
                 <label class="form-check-label" for="check">zapamti me</label>
-            </div>
+            </div> -->
      
             <div v-if="authError" class="alert alert-danger col-lg-12 " role="alert" >
                 <p class="col-lg-5 m-auto">
@@ -33,7 +33,7 @@
             </div>
             <div v-else></div>
             <re-captcha :class="showForm ? 'captcha-contact' : 'hide captcha-contact'" :siteKey="siteKey" @validate="validate" ref="ReCaptcha"/>
-            <button type="submit" class="btn btn-primary login-button" @click="submit">Submit</button>
+            <button type="submit" class="btn login-button" @click="submit">Submit</button>
      
         </form>
     </div>
@@ -86,11 +86,14 @@ export default {
 <style scoped>
 .login{
     padding: 80px 0;
-    background-color: gray;
+    background-color: #DABEBF;
     text-align: left;
+    margin-bottom: 100px !important;
 }
 .login-button{
     margin-left: 87%;
+    color: #f2f2f2;
+    background-color: #314247;
 }
 @media only screen and (max-width: 1280px){
     .login-button{

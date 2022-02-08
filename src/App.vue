@@ -26,6 +26,11 @@ export default{
 </script>
 
 <style>
+@font-face {
+  font-family: "UbuntuLightItalic";
+  src: local("Ubuntu-LightItalic"),
+   url(./assets/fonts/Ubuntu/Ubuntu-LightItalic.ttf) format("truetype");
+}
 
 @font-face {
   font-family: "RobotoSlab-Medium";

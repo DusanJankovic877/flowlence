@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <h1>admin</h1>
-        <h2>all posts</h2>
+    <div style="margin-top: 100px !important;">
+        <h1>Admin stranica</h1>
         <div v-if="!token">
             <login-compoenent :showForm="showForm" :siteKey="siteKey" :form="form" @submit="submit" @handle-inputs="handleInputs" @validate="validate" :authError="authError" :authErrors="authErrors"/>
         </div>
@@ -50,3 +49,6 @@ export default {
 
 }
 </script>
+<style>
+
+</style>

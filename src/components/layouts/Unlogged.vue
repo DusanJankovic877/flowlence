@@ -2,6 +2,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top" >
     <div class="container links-container col-lg-7 m-auto">
       <router-link class="navbar-brand logo"  to="/"></router-link>
+      <p class="logo-text-f-slash logo-text">/</p>
+      <p class="logo-text">accounting</p>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -43,8 +45,17 @@
   margin: 0 auto;
   background-image: url('../../assets/svg/Flowlence-w-3.svg');
   background-repeat: no-repeat;
-  width: 315px;
+  width: 244px;
   height: 25px;
+}
+.logo-text{
+  margin-bottom: -6px;
+  color: #d9d9d970;
+  font-family: 'UbuntuLightItalic' !important;
+  letter-spacing: 3px;
+}
+.logo-text-f-slash{
+  margin-bottom: -1px;
 }
 @media only screen and (max-width: 1280px){
   .logo{
