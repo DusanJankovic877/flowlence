@@ -52,9 +52,6 @@ export default{
 }
 </script>
 <style scoped>
-.down{
- 
-}
   .price-info{
     background-color: #dabebf;
   }
