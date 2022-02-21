@@ -11,7 +11,7 @@ import CreatePostComponent from '../components/admin/CreatePostComponent.vue'
 import PostsComponent from '../components/admin/PostsComponent'
 import PostComponent from '../components/admin/PostComponent'
 import EditPost from '../components/admin/EditPost'
-// import store from '../store'
+import store from '../store'
 
 
 
@@ -67,47 +67,47 @@ const routes = [
     path: '/jolanda/create-post',
     name: 'admin-c-post',
     component: CreatePostComponent,
-    // beforeEnter(from, to, next){
-    //   if(!store.getters['AdminModule/isLogged']){
-    //     return next('/jolanda')
-    //   }
-    //   next();
-    // }
+    beforeEnter(from, to, next){
+      if(!store.getters['AdminModule/isLogged']){
+        return next('/jolanda')
+      }
+      next();
+    }
   },  
   {
     path: '/jolanda/posts',
     name: 'admin-posts',
     component: PostsComponent,
-    // beforeEnter(from, to, next){
-    //   if(!store.getters['AdminModule/isLogged']){
-    //     return next('/jolanda')
-    //   }
-    //   next();
-    // }
+    beforeEnter(from, to, next){
+      if(!store.getters['AdminModule/isLogged']){
+        return next('/jolanda')
+      }
+      next();
+    }
     
   },
   {
     path: '/jolanda/posts/:id',
     name: 'admin-post',
     component: PostComponent,
-    // beforeEnter(from, to, next){
-    //   if(!store.getters['AdminModule/isLogged']){
-    //     return next('/jolanda')
-    //   }
-    //   next();
-    // }
+    beforeEnter(from, to, next){
+      if(!store.getters['AdminModule/isLogged']){
+        return next('/jolanda')
+      }
+      next();
+    }
     
   },
   {
     path: '/jolanda/edit-post/:id',
     name: 'edit-post',
     component: EditPost,
-    // beforeEnter(from, to, next){
-    //   if(!store.getters['AdminModule/isLogged']){
-    //     return next('/jolanda')
-    //   }
-    //   next();
-    // }
+    beforeEnter(from, to, next){
+      if(!store.getters['AdminModule/isLogged']){
+        return next('/jolanda')
+      }
+      next();
+    }
     
   },
 

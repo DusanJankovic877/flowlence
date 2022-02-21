@@ -57,6 +57,7 @@ const adminModule = {
             return await adminService.getLogout().then(()=>{
                 commit('SET_TOKEN', null);
                 commit('SET_USER', null);
+                
             });
 
         },

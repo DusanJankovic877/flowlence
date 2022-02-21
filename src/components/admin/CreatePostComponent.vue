@@ -262,7 +262,6 @@ export default {
     computed:{
         ...mapGetters({
                 errors: 'errors',
-                // savedImages: 'BlogModule/savedImages', 
                 postMessage: 'postMessage'
         }),
         routeParam(){
@@ -343,25 +342,25 @@ export default {
 .arrows button{
     width: 22px;
     height: 20px;
-
     background-color: red;
     padding: 0;
 }
 .create-post-form{
     padding:15px;
-    background: rgba(209, 209, 209, 0.37) !important;
+    background: #DABEBF!important;
 }
 .file-inputs {
     text-align: left !important;
 }
 .odd-text-areas{
-    background: rgba(128, 128, 128, 0.815);
-    padding: 5px 0 10px 20px;
-}
-.even-text-areas{
-    background: rgba(48, 48, 48, 0.781) !important;
+    background: #314247;
     padding: 5px 0 10px 20px;
     color: white;
+}
+.even-text-areas{
+    background: #698c96;
+    padding: 5px 0 10px 20px;
+
 }
 
 .buttons-up-down{
