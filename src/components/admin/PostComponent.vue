@@ -54,20 +54,15 @@ export default {
     methods:{
         ...mapActions(['BlogModule/deletePost']),
         goBack(){
-            console.log(this.routeName !== '/blog/'+this.routeParam);
-          
             this.$router.push(this.routeName !== '/blog/'+this.routeParam ? '/jolanda/posts' : '/blog');
         },
         deletePost(id){
             store.dispatch('BlogModule/deletePost', id)
             this.$router.push('/jolanda/posts')
-            // console.log(this.post[0].id);
-            // this.deletePost(id)
         }
 
     },
     beforeRouteEnter(from, to, next){
-        //  store.dispatch('BlogModule/emptyPost')
         store.dispatch('BlogModule/getPost', from.params.id)
         next();
     },

@@ -10,12 +10,10 @@ import store from './store'
 import VueDropdown from 'vue-dynamic-dropdown'
 import'nprogress/nprogress.css'
 
-
 store.dispatch('AdminModule/attempt', localStorage.getItem('token')).then(() => {
   Vue.use(BootstrapVue)
   // Optionally install the BootstrapVue icon components plugin
   Vue.use(IconsPlugin)
-  // Vue.use(VueAxios, axios)
   Vue.config.productionTip = false
   Vue.component('vue-dropdown', VueDropdown);
   new Vue({

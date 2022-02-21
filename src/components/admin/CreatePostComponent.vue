@@ -289,7 +289,6 @@ export default {
             });
         },
         async handleFormSubmit(){
-            console.log('image',this.images);
                 let data = new FormData();
                 this.images.forEach((image) => {
                     data.append('images[]', image);

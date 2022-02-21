@@ -8,21 +8,12 @@ const blogModule = {
         textareasToDelete: [],
         postImages: [],
         postToCreate:{},
-        savedImages:{},
         posts:{},
         post:{},
         postToEdit:{},
-        post_title: '',
-        sectionTitles:[],
-        textareas:[],
         deletetPost:''
     },
     mutations:{
-        // setNewTextArea(state, payload){
-        //     var counter = state.blog.textareas.length;
-        //     state.blog.textareas.push({id: counter++})
-        //     state.textareasToCreate.push({id: payload})
-        // },
         SET_POST_IMAGE(state,payload){
             state.postImages = payload;
         },
@@ -62,9 +53,6 @@ const blogModule = {
 
     },
     actions:{
-        // addNewTextArea(state, payload){
-        //     state.commit('setNewTextArea', payload)
-        // },
         async setCreatePost(_, payload){
             await blogService.createPost(payload)
         },
@@ -188,14 +176,9 @@ const blogModule = {
         textareasToDelete: (state) => state.textareasToDelete,
         blog: (state) => state.blog,
         postImages: (state) => state.postImages,
-        // savedImages: (state) => state.savedImages,
         posts: (state) => state.posts,
         post: (state) => state.post,
         postToEdit: (state) => state.postToEdit,
-
-        // post_title: (state) => state.post_title,
-        // sectionTitles: (state) => state.sectionTitles,
-        // textareas: (state) => state.textareas,
         deletetPost: (state) => state.deletetPost
     }
 

@@ -119,7 +119,6 @@ export default new Vuex.Store({
       state.commit('SET_DELETE_FORM_MESSAGE')
     },
     emptyPostMessage({commit}){
-      console.log('emty post');
       commit('EMPTY_POST_MESSAGE');
     }
   },

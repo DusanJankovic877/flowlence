@@ -60,7 +60,6 @@ export class RequestHandler {
                 await store.dispatch('doneLoading')
               }
               else if( error.response.status === 422){
-                  console.log(error.response);
                   if(error.response.config.url === '/auth/login'){
                       await store.dispatch('AdminModule/setAuthError', error.response.data.message)
                       await store.dispatch('AdminModule/setAuthErrors', error.response.data.errors)

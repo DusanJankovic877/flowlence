@@ -221,7 +221,6 @@ export default {
                 const post = this.post
                 const imagesToEdit = this.imagesToEdit
                 await this.setEditPostImage({data: bool ? data : null, images_to_edit: imagesToEdit, post})
-                console.log('err', this.errors.length);
                 if(this.errors.length === 0)this.$router.push(`/jolanda/posts/${this.post.post_title.id}`)
             }
         },
@@ -236,7 +235,6 @@ export default {
             if(answer === true){
                 this.post.section_titles.splice(k, 1);
                 if(sTId !== ''){
-                    console.log('section title, ', sTId);
                     await this.deleteSectionTitle(sTId);
                     this.$router.push(`/jolanda/edit-post/${this.post.post_title.id}`);
                 }
@@ -249,7 +247,6 @@ export default {
             const answer = confirm('Da li ste sigurni da hoćete da obrišete sliku?')
             if(answer === true){
                 const imageToCompare = this.post.images.find(x => x.formId === formId)
-                console.log(imageToCompare);
                 this.newImages.forEach(newImage => {
                     if(newImage.name === imageToCompare.new_image_name){
                         const index = this.newImages.indexOf(newImage)
@@ -264,13 +261,11 @@ export default {
                     }
                 }
                 if(imageId !== ''){
-                    console.log(imageId);
                     await  this.deleteImage(imageId);
                 }
             }
         },
         handleAddTextarea(length){
-            console.log(this.textareas);
             this.post.textareas.push({formId: length + 1, section_title_id: '', id:''})
         },
         async handleDeleteTextarea(formId, textareaId){
@@ -278,7 +273,6 @@ export default {
             if(answer === true){
                 const iterator = this.post.textareas.keys()
                 for(const key of iterator){
-                    console.log('asdasdasddas ', this.post.textareas[key].formId === formId);
                     if(this.post.textareas[key].formId === formId){
                         this.post.textareas.splice(key, 1)
                     }
