@@ -14,7 +14,7 @@
                 </div>
                 <div class="blog-image">
                     <img 
-                    :src="`http://127.0.0.1:8000/api/get-image/${post.image.name}`" 
+                    :src="`https://rest.flowlence.rs/api/get-image/${post.image.name}`" 
                     alt="picture" 
                     >
                 </div>

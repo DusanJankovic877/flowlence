@@ -84,7 +84,8 @@ export default {
     background-color: #314247;
     color: #d9d9d9;
   }
-@media only screen and (max-width: 1280px){
+  
+@media only screen and (max-width: 1292px){
   .contact{
     margin-bottom: 100px !important;
   }
@@ -95,8 +96,8 @@ export default {
     margin-bottom: -120px;
   }
   .blog-margin{
-    margin-top: 50px !important; 
-    margin-bottom: 1160px !important; 
+    margin-top: 150px !important; 
+    margin-bottom: 100px !important; 
   }
   .contact{
     margin-bottom: -167px !important;
@@ -116,7 +117,22 @@ export default {
     margin-bottom: 60px !important; 
   }
     .contact{
-    margin-bottom: 0px !important;
+    margin-bottom: -100px !important;
+  }
+}
+@media only screen and (max-width: 449px){
+  .contact{
+    margin-bottom: -80px !important;
+  }
+}
+@media only screen and (max-width: 358px){
+    .contact{
+    margin-bottom: -70px !important;
+  }
+}
+@media only screen and (max-width: 311px){
+    .contact{
+    margin-bottom: 10px !important;
   }
 }
 </style>

@@ -59,7 +59,7 @@
                             {{newImages[i]  === undefined ? 'old image' : 'new image' }}
                         </p>
                         <img v-if="image.name"
-                            :src="newImages[i] ? newImages[i] : `http://127.0.0.1:8000/api/get-image/${image.name}`" 
+                            :src="newImages[i] ? newImages[i] : `https://rest.flowlence.rs/api/get-image/${image.name}`" 
                             alt="No image to display" 
                             style="width:70%;"
                         >

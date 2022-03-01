@@ -1,0 +1,5 @@
+PROMENITI CAPTCHA KLJUCEVE
+
+SAKRITI VUE JS .ENV
+
+kada odem na flowlwnce.rs/about ili bilo koji drugi nav link i stisnem refresh page izadje greska

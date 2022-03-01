@@ -7,11 +7,14 @@
             <div class="footer-links">
 
             <a href="tel:+38163466371">
-                <img  src="../../assets/svg/telephone.svg" alt="envelope" style=" height:25px;"> 
+                <img  src="@/assets/svg/telephone.svg" class="svg-icon" alt="envelope" style=" height:25px;"> 
                 <p>+38163466371</p>
             </a>
             <a href="mailto:flowlence@gmail.com">
-                <img src="../../assets/svg/envelope.svg" alt="phone" style="height:25px;">
+                <div class="svg-icon">
+
+                </div>
+                <img src="@/assets/svg/envelope.svg" alt="phone" style="height:25px;">
                 <p>flowlence@gmail.com</p>
             </a>
             </div>
@@ -22,8 +25,8 @@
 
 .footer-content{
     text-align: center !important;
-    height: 410px;
-    padding-top: 55px !important;
+    height: 420px;
+    padding-top: 75px !important;
     background-color: #314247;
     color: #d9d9d9;
 }
